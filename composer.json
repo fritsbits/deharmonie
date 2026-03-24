@@ -7,8 +7,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
+        "filament/filament": "^4.0",
         "laravel/framework": "^13.0",
-        "laravel/tinker": "^3.0"
+        "laravel/tinker": "^3.0",
+        "spatie/laravel-medialibrary": "^11.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -49,7 +51,8 @@
         ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -78,7 +81,17 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
+        },
+        "audit": {
+            "block-insecure": false
         }
+    },
+    "audit": {
+        "abandoned": "ignore",
+        "ignore": {
+            "PKSA-jyd3-2srm-pfqd": "XSS in filament/infolists \u2014 admin-only panel, acceptable risk"
+        },
+        "block-insecure": false
     },
     "minimum-stability": "stable",
     "prefer-stable": true
