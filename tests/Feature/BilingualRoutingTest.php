@@ -1,0 +1,45 @@
+<?php
+
+namespace Tests\Feature;
+
+use App\Models\Activiteit;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class BilingualRoutingTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_homepage_loads_in_nl(): void
+    {
+        $response = $this->get('/');
+        $response->assertStatus(200);
+        $response->assertSee('Activiteiten');
+    }
+
+    public function test_homepage_loads_in_fr(): void
+    {
+        $response = $this->get('/fr/activites');
+        $response->assertStatus(200);
+        $response->assertSee('Activités');
+    }
+
+    public function test_activity_detail_resolves_by_slug(): void
+    {
+        $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
+        $this->get('/activiteiten/' . $activiteit->slug)->assertStatus(200);
+        $this->get('/fr/activites/' . $activiteit->slug)->assertStatus(200);
+    }
+
+    public function test_nl_locale_set_on_default_routes(): void
+    {
+        $this->get('/');
+        $this->assertEquals('nl', app()->getLocale());
+    }
+
+    public function test_fr_locale_set_on_fr_routes(): void
+    {
+        $this->get('/fr/activites');
+        $this->assertEquals('fr', app()->getLocale());
+    }
+}
