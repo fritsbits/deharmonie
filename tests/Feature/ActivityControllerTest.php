@@ -63,4 +63,35 @@ class ActivityControllerTest extends TestCase
             ->assertSee($nextMonth->titel_nl)
             ->assertDontSee($thisMonth->titel_nl);
     }
+
+    public function test_activity_detail_shows_cancellation_banner(): void
+    {
+        $activiteit = Activiteit::factory()->create([
+            'status' => 'geannuleerd',
+            'notice_nl' => 'Deze activiteit gaat niet door.',
+        ]);
+        $response = $this->get('/activiteiten/' . $activiteit->slug);
+        $response->assertSee('Deze activiteit gaat niet door.');
+        $response->assertDontSee('Inschrijven');
+    }
+
+    public function test_activity_detail_shows_registration_form_for_published(): void
+    {
+        $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
+        $response = $this->get('/activiteiten/' . $activiteit->slug);
+        $response->assertStatus(200);
+        $response->assertSee('Inschrijven');
+    }
+
+    public function test_activity_detail_shows_full_message_when_at_capacity(): void
+    {
+        $activiteit = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'max_deelnemers' => 1,
+        ]);
+        \App\Models\Deelnameverzoek::factory()->create(['activiteit_id' => $activiteit->id]);
+
+        $response = $this->get('/activiteiten/' . $activiteit->slug);
+        $response->assertSee('Volzet');
+    }
 }
