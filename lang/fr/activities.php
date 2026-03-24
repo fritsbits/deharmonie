@@ -1,0 +1,20 @@
+<?php
+return [
+    'upcoming' => 'Activités à venir',
+    'no_activities' => 'Pas d\'activités en :month',
+    'cancelled' => 'Annulé',
+    'free' => 'Gratuit',
+    'full' => 'Complet',
+    'register' => 'S\'inscrire',
+    'location' => 'Lieu',
+    'date' => 'Date',
+    'time' => 'Heure',
+    'price' => 'Prix',
+    'previous_month' => 'Mois précédent',
+    'next_month' => 'Mois suivant',
+    'print' => 'Imprimer',
+    'back' => '← Retour aux activités',
+    'detail' => 'Plus d\'info',
+    'cancellation_notice' => 'Cette activité est annulée.',
+    'registration_closed' => 'Inscription fermée (activité annulée).',
+];

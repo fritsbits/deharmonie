@@ -1,0 +1,20 @@
+<?php
+return [
+    'upcoming' => 'Komende activiteiten',
+    'no_activities' => 'Geen activiteiten in :month',
+    'cancelled' => 'Geannuleerd',
+    'free' => 'Gratis',
+    'full' => 'Volzet',
+    'register' => 'Inschrijven',
+    'location' => 'Locatie',
+    'date' => 'Datum',
+    'time' => 'Uur',
+    'price' => 'Prijs',
+    'previous_month' => 'Vorige maand',
+    'next_month' => 'Volgende maand',
+    'print' => 'Afdrukken',
+    'back' => '← Terug naar alle activiteiten',
+    'detail' => 'Meer info',
+    'cancellation_notice' => 'Deze activiteit is geannuleerd.',
+    'registration_closed' => 'Inschrijving gesloten (activiteit geannuleerd).',
+];
