@@ -1,70 +1,65 @@
 <div>
-    {{-- Month navigation --}}
-    <div class="flex items-center justify-between mb-5">
-        <button wire:click="previousMonth"
-                class="text-sm font-semibold hover:underline flex items-center gap-1"
-                style="color: var(--color-brand-blue); font-family: var(--font-sans)">
-            &larr; {{ app()->getLocale() === 'fr' ? 'Mois précédent' : 'Vorige maand' }}
-        </button>
-        <span class="text-sm font-bold capitalize" style="color: var(--color-brand-muted); font-family: var(--font-sans)">
-            {{ $this->monthLabel }}
-        </span>
-        <button wire:click="nextMonth"
-                class="text-sm font-semibold hover:underline flex items-center gap-1"
-                style="color: var(--color-brand-blue); font-family: var(--font-sans)">
-            {{ app()->getLocale() === 'fr' ? 'Mois suivant' : 'Volgende maand' }} &rarr;
-        </button>
-    </div>
-
     {{-- Activity list --}}
-    <div class="divide-y" style="border-top: 1px solid var(--color-brand-gray); border-bottom: 1px solid var(--color-brand-gray)">
+    <div>
+        @php
+            $thumbColors = ['#f3dbd5','#d4e8df','#d5e0f0','#f5e8d3','#dde7d5','#e8d9ef','#d9e8f0'];
+        @endphp
         @forelse ($this->activiteiten as $activiteit)
-            <div class="py-4 flex items-start gap-4 {{ $activiteit->status === 'geannuleerd' ? 'opacity-60' : '' }}">
-                {{-- Left: date block --}}
-                <div class="flex-shrink-0 text-center w-14">
-                    <div class="text-xs font-bold uppercase" style="color: var(--color-brand-muted); font-family: var(--font-sans)">
-                        {{ $activiteit->datum->locale(app()->getLocale())->isoFormat('ddd') }}
-                    </div>
-                    <div class="text-2xl font-extrabold leading-none" style="color: var(--color-brand-dark); font-family: var(--font-sans)">
-                        {{ $activiteit->datum->format('d') }}
-                    </div>
-                    <div class="text-xs" style="color: var(--color-brand-muted)">
-                        {{ $activiteit->datum->locale(app()->getLocale())->isoFormat('MMM') }}
-                    </div>
+            @php
+                $colorIdx = abs(crc32($activiteit->slug ?? '')) % count($thumbColors);
+                $thumbColor = $thumbColors[$colorIdx];
+            @endphp
+            <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
+               style="display: flex; align-items: center; gap: 1rem; padding: 0.65rem 0; text-decoration: none; opacity: {{ $activiteit->status->value === 'geannuleerd' ? '0.5' : '1' }}; {{ !$loop->last ? 'border-bottom: 1px solid rgba(216,211,210,0.7);' : '' }}">
+
+                {{-- Thumbnail --}}
+                <div style="flex-shrink: 0; width: 48px; height: 48px; border-radius: 6px; overflow: hidden; background-color: {{ $thumbColor }};">
+                    @if ($activiteit->getFirstMediaUrl('afbeelding'))
+                        <img src="{{ $activiteit->getFirstMediaUrl('afbeelding') }}"
+                             alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    @endif
                 </div>
 
-                {{-- Divider --}}
-                <div class="w-px self-stretch flex-shrink-0" style="background-color: var(--color-brand-gray)"></div>
-
                 {{-- Content --}}
-                <div class="flex-1 min-w-0">
-                    <div class="flex items-start justify-between gap-3">
-                        <div>
-                            <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
-                               class="font-bold text-sm uppercase hover:underline"
-                               style="color: var(--color-brand-dark); font-family: var(--font-sans); letter-spacing: 0.02em">
-                                {{ $activiteit->titel }}
-                            </a>
-                            <p class="text-xs mt-1" style="color: var(--color-brand-muted)">
-                                {{ substr($activiteit->startuur, 0, 5) }}
-                                @if ($activiteit->einduur) &ndash; {{ substr($activiteit->einduur, 0, 5) }} @endif
-                                &middot; {{ $activiteit->locatie }}
-                            </p>
-                        </div>
-                        @if ($activiteit->status === 'geannuleerd')
-                            <span class="flex-shrink-0 text-xs font-bold px-2 py-0.5 rounded" style="background-color: #fde8e3; color: #c0392b">
-                                &times; {{ app()->getLocale() === 'fr' ? 'Annulé' : 'Geannuleerd' }}
+                <div style="flex: 1; min-width: 0;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <p style="font-weight: 700; font-size: 0.85rem; line-height: 1.2; color: var(--color-brand-dark); font-family: var(--font-sans); margin: 0;">
+                            {{ $activiteit->titel }}
+                        </p>
+                        @if ($activiteit->status->value === 'geannuleerd')
+                            <span style="flex-shrink: 0; font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 4px; background-color: #fde8e3; color: #c0392b;">
+                                &times;
                             </span>
                         @endif
                     </div>
+                    <p style="font-size: 0.75rem; margin: 0.1rem 0 0; color: var(--color-brand-muted);">
+                        {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('dddd')) }}
+                        {{ $activiteit->datum->format('j/n') }}
+                        om {{ substr($activiteit->startuur, 0, 5) }}
+                        @if ($activiteit->einduur)
+                            &ndash; {{ substr($activiteit->einduur, 0, 5) }}
+                        @endif
+                        &middot; {{ $activiteit->locatie }}
+                    </p>
                 </div>
-            </div>
+
+            </a>
         @empty
-            <div class="py-12 text-center text-sm" style="color: var(--color-brand-muted)">
-                {{ app()->getLocale() === 'fr'
-                    ? 'Pas d\'activités en ' . $this->monthLabel
-                    : 'Geen activiteiten in ' . $this->monthLabel }}
-            </div>
+            <p style="padding: 2rem 0; color: var(--color-brand-muted); font-size: 0.9rem;">
+                {{ app()->getLocale() === 'fr' ? 'Pas d\'activités prévues.' : 'Geen activiteiten gepland.' }}
+            </p>
         @endforelse
+    </div>
+
+    {{-- Bottom buttons / section CTA --}}
+    <div style="margin-top: 1.5rem; padding-bottom: 2rem; display: flex; gap: 0.75rem;">
+        <a href="{{ route('nl.activiteiten.index') }}"
+           style="font-size: 0.9rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 4px; background-color: var(--color-brand-green); color: white; text-decoration: none; font-family: var(--font-sans);">
+            Alle activiteiten
+        </a>
+        <a href="{{ route('fr.activiteiten.index') }}"
+           style="font-size: 0.9rem; font-weight: 600; padding: 0.5rem 1rem; border-radius: 4px; background-color: var(--color-brand-green); color: white; text-decoration: none; font-family: var(--font-sans);">
+            Toutes les activités
+        </a>
     </div>
 </div>
