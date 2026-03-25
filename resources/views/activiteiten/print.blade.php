@@ -7,7 +7,7 @@
     <div class="text-center mb-8">
         <p class="text-sm font-semibold text-gray-500 uppercase tracking-widest">De Harmonie</p>
         <h1 class="font-sans font-extrabold text-3xl mt-2">{{ $activiteit->titel }}</h1>
-        @if ($activiteit->status === 'geannuleerd')
+        @if ($activiteit->status->value === 'geannuleerd')
             <p class="mt-2 text-red-600 font-bold">{{ __('activities.cancelled') }}</p>
         @endif
     </div>

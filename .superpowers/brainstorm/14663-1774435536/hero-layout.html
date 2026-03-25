@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero Layout Preview</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,700;6..12,800;6..12,900&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --blue: #4679bc;
+    --green: #81b59c;
+    --orange: #eb6643;
+    --dark: #2c2826;
+    --muted: #706662;
+    --bg: #fbfaf9;
+    --gray: #d8d3d2;
+  }
+
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: #f0eeec;
+    color: var(--dark);
+    font-size: 16px;
+  }
+
+  .page-label {
+    text-align: center;
+    padding: 1.5rem;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+  }
+
+  /* ── Shared site chrome ── */
+  .site-nav {
+    background: var(--blue);
+    padding: 0 2rem;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .site-nav .logo {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    color: white;
+    letter-spacing: 0.04em;
+  }
+  .site-nav .nav-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+  .site-nav .nav-links a {
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    opacity: 0.9;
+    font-family: 'Nunito Sans', sans-serif;
+  }
+
+  /* ── Layout wrappers ── */
+  .layout-wrapper {
+    max-width: 860px;
+    margin: 0 auto 3rem;
+    background: var(--bg);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.12);
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .layout-wrapper:hover {
+    border-color: var(--blue);
+    box-shadow: 0 8px 48px rgba(70,121,188,0.2);
+  }
+  .layout-wrapper.selected {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 4px rgba(70,121,188,0.25);
+  }
+
+  .layout-badge {
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 20px;
+    display: inline-block;
+    margin: 1rem 0 0 1rem;
+    background: var(--blue);
+    color: white;
+  }
+  .layout-badge.recommend {
+    background: var(--orange);
+  }
+
+  /* ── Option A: Title → Strips → Bullets ── */
+
+  .hero-a {
+    background: white;
+    padding: 3rem 3rem 2.5rem;
+    text-align: left;
+  }
+  .hero-a .eyebrow {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    margin-bottom: 0.3rem;
+  }
+  .hero-a h1 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 2.6rem;
+    font-weight: 900;
+    line-height: 1.08;
+    color: var(--dark);
+    margin-bottom: 0.4rem;
+  }
+  .hero-a h2 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--green);
+    margin-bottom: 1.75rem;
+  }
+  .hero-a .bullets {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 2rem;
+    max-width: 560px;
+  }
+  .hero-a .bullet {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+  }
+  .hero-a .bullet-dot {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--green);
+    opacity: 0.25;
+    margin-top: 0.2rem;
+    position: relative;
+  }
+  .hero-a .bullet-dot::after {
+    content: '✓';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    color: var(--green);
+    opacity: 4;
+    font-weight: 900;
+  }
+  .hero-a .bullet p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--dark);
+  }
+  .hero-a .bullet p span {
+    color: var(--muted);
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--blue);
+    color: white;
+    font-family: 'Nunito Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 0.65rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+
+  /* Photo strips */
+  .strip {
+    display: flex;
+    min-height: 260px;
+  }
+  .strip.reverse {
+    flex-direction: row-reverse;
+  }
+  .strip-photo {
+    flex: 0 0 52%;
+    overflow: hidden;
+    position: relative;
+  }
+  .strip-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .strip-text {
+    flex: 1;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: white;
+  }
+  .strip-text.gray {
+    background: #f5f3f1;
+  }
+  .strip-text .eyebrow {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    margin-bottom: 0.5rem;
+  }
+  .strip-text h3 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 900;
+    color: var(--dark);
+    margin-bottom: 0.6rem;
+    line-height: 1.2;
+  }
+  .strip-text p {
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--muted);
+  }
+  .strip-text p strong {
+    color: var(--dark);
+  }
+
+  /* ── Option B: Split hero (big photo right) → two strips ── */
+
+  .hero-b {
+    background: white;
+    display: flex;
+    align-items: stretch;
+    min-height: 340px;
+  }
+  .hero-b-text {
+    flex: 0 0 52%;
+    padding: 3rem 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-b-text .eyebrow {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    margin-bottom: 0.3rem;
+  }
+  .hero-b-text h1 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1.08;
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+  }
+  .hero-b-text h2 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 900;
+    color: var(--green);
+    margin-bottom: 1.25rem;
+  }
+  .hero-b-text .bullets-b {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    margin-bottom: 1.5rem;
+  }
+  .hero-b-text .bullet-b {
+    display: flex;
+    gap: 0.5rem;
+    align-items: baseline;
+    font-size: 0.85rem;
+    color: var(--dark);
+    line-height: 1.4;
+  }
+  .hero-b-text .bullet-b::before {
+    content: '✓';
+    color: var(--green);
+    font-weight: 900;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+  }
+  .hero-b-photo {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-b-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-b-photo .orange-bar {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 8px;
+    background: var(--orange);
+  }
+
+  /* ── Agenda stub ── */
+  .agenda-stub {
+    background: #f0efed;
+    padding: 1.5rem 2.5rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .agenda-stub .agenda-label {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    margin-bottom: 0.2rem;
+  }
+  .agenda-stub .agenda-title {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    color: var(--dark);
+  }
+  .agenda-stub .lines {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+  .agenda-stub .line {
+    height: 10px;
+    background: #ddd;
+    border-radius: 4px;
+    width: 80%;
+  }
+  .agenda-stub .line:nth-child(2) { width: 60%; }
+  .agenda-stub .line:nth-child(3) { width: 70%; }
+
+  /* Pick label */
+  .pick-label {
+    text-align: center;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 2rem;
+    opacity: 0.6;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-label">Hero Redesign — Click your preferred layout</div>
+
+<!-- ══════════════════════════════════════════
+     OPTION A: Minimal hero → photo strips below
+     ══════════════════════════════════════════ -->
+
+<div class="layout-wrapper" data-choice="a" onclick="toggleSelect(this)">
+  <div class="layout-badge recommend">★ Aanbevolen</div>
+
+  <div class="site-nav">
+    <span class="logo">DE HARMONIE</span>
+    <div class="nav-links">
+      <a href="#">Activiteiten</a>
+      <a href="#">Diensten</a>
+      <a href="#">Weekmenu de la Semaine</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+  <!-- Clean title + bullets -->
+  <div class="hero-a">
+    <div class="eyebrow">Dienstencentrum · Restaurant Social</div>
+    <h1>De Harmonie<br>Quartier Noordwijk</h1>
+    <div class="bullets">
+      <div class="bullet">
+        <div class="bullet-dot"></div>
+        <p><strong>Activiteiten &amp; diensten</strong> in ons centrum en bij u thuis.<br>
+        <span>Services &amp; activités chez nous et chez vous.</span></p>
+      </div>
+      <div class="bullet">
+        <div class="bullet-dot"></div>
+        <p><strong>Dagschotels</strong> aan verminderd tarief voor senioren.<br>
+        <span>Plat du jour à un tarif réduit pour les seniors.</span></p>
+      </div>
+      <div class="bullet">
+        <div class="bullet-dot"></div>
+        <p><strong>Partner</strong> voor iedereen met een hart voor onze buurt.<br>
+        <span>Partenaire pour tout le monde avec un cœur pour notre quartier.</span></p>
+      </div>
+    </div>
+    <a class="cta-btn" href="#">Weekmenu de la Semaine</a>
+  </div>
+
+  <!-- Strip 1: Restaurant photo LEFT -->
+  <div class="strip">
+    <div class="strip-photo">
+      <img src="file:///Users/frederikvincx/Desktop/484712781_1052052070296720_2461717400715365932_n.jpg" alt="Restaurant">
+    </div>
+    <div class="strip-text">
+      <div class="eyebrow">Sociaal restaurant</div>
+      <h3>Elke dag samen<br>aan tafel</h3>
+      <p>Dagschotels aan verminderd tarief voor senioren. Afhaal en levering aan huis mogelijk.</p>
+    </div>
+  </div>
+
+  <!-- Strip 2: Laughing couple RIGHT -->
+  <div class="strip reverse">
+    <div class="strip-photo">
+      <img src="file:///Users/frederikvincx/Desktop/485299972_1053730716795522_5843328697796665950_n.jpg" alt="Samen">
+    </div>
+    <div class="strip-text gray">
+      <div class="eyebrow">Activiteiten &amp; diensten</div>
+      <h3>Bewegen, leren<br>en ontmoeten</h3>
+      <p>Creatief, cultureel, sportief — en ook hulp aan huis, vervoer en boodschappendienst.</p>
+    </div>
+  </div>
+
+  <!-- Agenda stub -->
+  <div class="agenda-stub">
+    <div>
+      <div class="agenda-label">Agenda</div>
+      <div class="agenda-title">Volgende activiteiten →</div>
+    </div>
+    <div class="lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════════════
+     OPTION B: Split hero (big photo) → strips
+     ══════════════════════════════════════════ -->
+
+<div class="layout-wrapper" data-choice="b" onclick="toggleSelect(this)">
+  <div class="layout-badge">Optie B</div>
+
+  <div class="site-nav">
+    <span class="logo">DE HARMONIE</span>
+    <div class="nav-links">
+      <a href="#">Activiteiten</a>
+      <a href="#">Diensten</a>
+      <a href="#">Weekmenu de la Semaine</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+
+  <!-- Split hero -->
+  <div class="hero-b">
+    <div class="hero-b-text">
+      <div class="eyebrow">Quartier Noordwijk · Brussel</div>
+      <h1>Dienstencentrum<br>Restaurant Social</h1>
+      <h2>De Harmonie</h2>
+      <div class="bullets-b">
+        <div class="bullet-b"><strong>Activiteiten &amp; diensten</strong>&nbsp;in ons centrum en bij u thuis.</div>
+        <div class="bullet-b"><strong>Dagschotels</strong>&nbsp;aan verminderd tarief voor senioren.</div>
+        <div class="bullet-b"><strong>Partner</strong>&nbsp;voor iedereen met een hart voor onze buurt.</div>
+      </div>
+      <a class="cta-btn" href="#">Weekmenu de la Semaine</a>
+    </div>
+    <div class="hero-b-photo">
+      <div class="orange-bar"></div>
+      <img src="file:///Users/frederikvincx/Desktop/484712781_1052052070296720_2461717400715365932_n.jpg" alt="De Harmonie">
+    </div>
+  </div>
+
+  <!-- Strip 1 -->
+  <div class="strip">
+    <div class="strip-photo">
+      <img src="file:///Users/frederikvincx/Desktop/485369508_1052052046963389_5278828856520917718_n.jpg" alt="Gezelligheid">
+    </div>
+    <div class="strip-text">
+      <div class="eyebrow">Elke dag welkom</div>
+      <h3>Een plek voor iedereen<br>in de Noordwijk</h3>
+      <p>Van maandag tot zaterdag. Kom voor een maaltijd, een activiteit, of gewoon een goed gesprek.</p>
+    </div>
+  </div>
+
+  <!-- Strip 2 -->
+  <div class="strip reverse">
+    <div class="strip-photo">
+      <img src="file:///Users/frederikvincx/Desktop/485299972_1053730716795522_5843328697796665950_n.jpg" alt="Samen">
+    </div>
+    <div class="strip-text gray">
+      <div class="eyebrow">Ook aan huis</div>
+      <h3>Hulp waar<br>u het nodig heeft</h3>
+      <p>Boodschappen, vervoer, poetswerk, kleine herstellingen — wij komen naar u toe.</p>
+    </div>
+  </div>
+
+  <!-- Agenda stub -->
+  <div class="agenda-stub">
+    <div>
+      <div class="agenda-label">Agenda</div>
+      <div class="agenda-title">Volgende activiteiten →</div>
+    </div>
+    <div class="lines">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
+  </div>
+</div>
+
+<div style="height: 2rem;"></div>
+
+<script>
+function toggleSelect(el) {
+  document.querySelectorAll('.layout-wrapper').forEach(w => w.classList.remove('selected'));
+  el.classList.add('selected');
+}
+</script>
+</body>
+</html>

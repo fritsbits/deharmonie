@@ -1,0 +1,68 @@
+<h2>How should the style guide page be organized?</h2>
+<p class="subtitle">Two different mental models — both show the same components, but grouped differently.</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">Option A — By layer (tokens → atoms → molecules)</div>
+    <div class="mockup-body" style="font-size:0.85rem; line-height:2;">
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">1. Design Tokens</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Colors &bull; Typography scales &bull; Spacing</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">2. Typography</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">H1 &bull; H2 &bull; H3 &bull; Eyebrow/label &bull; Lead text &bull; Body &bull; Small</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">3. Buttons &amp; Links</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Primary &bull; Secondary &bull; Dark &bull; Text link &bull; Back link</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">4. Form elements</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Label &bull; Input &bull; Textarea &bull; Submit &bull; Error state</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">5. Badges &amp; Status</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Gratis &bull; Geannuleerd &bull; Volzet &bull; Success</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">6. Cards &amp; Panels</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Sidebar card &bull; Service card &bull; Registration panel</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">7. Sections</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Hero &bull; Agenda list item &bull; Two-col photo section &bull; Opening hours</div>
+    </div>
+  </div>
+
+  <div class="mockup">
+    <div class="mockup-header">Option B — By page (top to bottom of the site)</div>
+    <div class="mockup-body" style="font-size:0.85rem; line-height:2;">
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">1. Global: Colors &amp; Fonts</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">All tokens displayed</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">2. Navigation</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Full nav bar preview</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">3. Hero section</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Full hero preview with all sub-elements</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">4. Agenda section</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Activity list item variants</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">5. Activity detail</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Sidebar card &bull; Badges &bull; Registration form</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">6. Static pages</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Services card &bull; Services list</div>
+      <div style="padding:6px 0; border-bottom:1px solid #eee; color:#888; font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:.05em;">7. Footer</div>
+      <div style="padding:4px 0 4px 12px; color:#555;">Full footer preview</div>
+    </div>
+  </div>
+</div>
+
+<div class="options" style="margin-top:2rem;">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>By layer — tokens first, then components</h3>
+      <p>Standard design system structure. Easier to find a specific button or badge type regardless of which page it appears on. Better for applying components to <em>new</em> pages.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>By page — mirrors how the site is built</h3>
+      <p>More intuitive if you're thinking "I want to change how the hero looks." Each section is a mini-preview of a real part of the site. Better for auditing and refining <em>existing</em> pages.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Mixed — tokens + components, then full section previews</h3>
+      <p>Tokens and small components (buttons, typography, badges) at the top. Then full section previews (hero, agenda, sidebar) below. Best of both — reusable pieces <em>and</em> full-context previews.</p>
+    </div>
+  </div>
+</div>

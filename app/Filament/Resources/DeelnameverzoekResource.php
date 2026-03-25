@@ -4,18 +4,24 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\DeelnameverzoekResource\Pages;
 use App\Models\Deelnameverzoek;
+use Filament\Actions\Action as FilamentAction;
 use Filament\Resources\Resource;
+use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Filament\Schemas\Schema;
 
 class DeelnameverzoekResource extends Resource
 {
     protected static ?string $model = Deelnameverzoek::class;
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
+
     protected static ?string $navigationLabel = 'Inschrijvingen';
+
     protected static ?string $modelLabel = 'Inschrijving';
+
     protected static ?string $pluralModelLabel = 'Inschrijvingen';
+
     protected static ?string $slug = 'deelnameverzoeken';
 
     public static function form(Schema $schema): Schema
@@ -63,7 +69,7 @@ class DeelnameverzoekResource extends Resource
                     ->relationship('activiteit', 'titel_nl'),
             ])
             ->actions([
-                Tables\Actions\Action::make('toggle_status')
+                FilamentAction::make('toggle_status')
                     ->label(fn (Deelnameverzoek $record) => $record->status === 'te_contacteren' ? 'Afgehandeld' : 'Heropenen')
                     ->action(function (Deelnameverzoek $record): void {
                         $record->update([

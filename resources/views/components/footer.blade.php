@@ -1,52 +1,64 @@
-<footer style="background-color: #1a3a5c; color: white;">
-    <div class="max-w-5xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
+<footer style="background-color: var(--color-brand-blue); color: white;">
+    <div style="max-width: 72rem; margin: 0 auto; padding: 3rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.5rem;">
+
+        {{-- Left: VZW info + links --}}
         <div>
-            <img src="{{ asset('images/logo.png') }}" alt="De Harmonie" class="h-10 w-auto mb-4 brightness-0 invert">
-            <p class="text-sm opacity-80 leading-relaxed">
+            <img src="{{ asset('images/logo.png') }}" alt="De Harmonie" style="height: 2rem; width: auto; margin-bottom: 1.25rem; filter: brightness(0) invert(1);">
+            <p style="font-size: 1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 0.5rem;">
                 VZW Buurtwerk Noordwijk<br>
                 Antwerpsesteenweg 24<br>
                 1000 Brussel
             </p>
-            <div class="mt-4 space-y-1 text-sm opacity-80">
-                <p><a href="tel:0220328048" class="hover:underline">02/203.28.48</a></p>
-                <p><a href="mailto:info@deharmonie.be" class="hover:underline">info@deharmonie.be</a></p>
+            <p style="font-size: 1rem; opacity: 0.8; margin-bottom: 0.25rem;">
+                <a href="tel:0220328048" style="color: white; text-decoration: none;">02 203 28 48</a>
+            </p>
+            <p style="font-size: 1rem; opacity: 0.8; margin-bottom: 1.5rem;">
+                <a href="mailto:info@deharmonie.be" style="color: white; text-decoration: none;">info@deharmonie.be</a>
+            </p>
+            <p style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6; margin-bottom: 0.5rem;">
+                Snel naar
+            </p>
+            <p style="font-size: 1rem; opacity: 0.75; margin-bottom: 0.2rem;">
+                <a href="{{ route(app()->getLocale() . '.diensten') }}" style="color: white; text-decoration: none;">Diensten</a>
+            </p>
+            <p style="font-size: 1rem; opacity: 0.75;">
+                <a href="{{ route(app()->getLocale() . '.wie-is-wie') }}" style="color: white; text-decoration: none;">Wie is wie</a>
+            </p>
+        </div>
+
+        {{-- Center: Met steun van --}}
+        <div>
+            <p style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6; margin-bottom: 1rem;">
+                Met steun van
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <a href="https://www.vlaanderen.be/" target="_blank" rel="noopener">
+                    <img src="{{ asset('images/logo-vlaanderen.svg') }}" alt="Vlaanderen" style="height: 3.75rem; width: auto;">
+                </a>
+                <a href="https://regiefonciere.bruxelles.be/nl" target="_blank" rel="noopener">
+                    <img src="{{ asset('images/logo-nbrussel.png') }}" alt="Brussel" style="height: 3.125rem; width: auto;">
+                </a>
+                <a href="https://regiefonciere.bruxelles.be/nl" target="_blank" rel="noopener">
+                    <img src="{{ asset('images/logo-grondregie.png') }}" alt="Grondregie Brussel" style="height: 2.8rem; width: auto;">
+                </a>
+                <a href="https://be.brussels/" target="_blank" rel="noopener">
+                    <img src="{{ asset('images/logo-bhg.svg') }}" alt="Brussels Hoofdstedelijk Gewest" style="height: 2.5rem; width: auto; filter: brightness(0) invert(1); opacity: 0.85;">
+                </a>
             </div>
         </div>
+
+        {{-- Right: social --}}
         <div>
-            <h3 style="font-family: var(--font-sans);" class="font-bold text-lg mb-4">
-                {{ app()->getLocale() === 'fr' ? 'Heures d\'ouverture' : 'Openingsuren' }}
-            </h3>
-            <div class="text-sm opacity-80 space-y-1">
-                <p>{{ app()->getLocale() === 'fr' ? 'Lun–Ven' : 'Ma–Vr' }}: 10:00–16:30</p>
-                <p>{{ app()->getLocale() === 'fr' ? 'Sam' : 'Za' }}: 10:00–14:00</p>
-            </div>
-            <div class="mt-6">
-                <h3 style="font-family: var(--font-sans);" class="font-bold text-lg mb-3">Links</h3>
-                <div class="text-sm opacity-80 space-y-1">
-                    <p><a href="{{ route(app()->getLocale() . '.diensten') }}" class="hover:underline">{{ app()->getLocale() === 'fr' ? 'Services' : 'Diensten' }}</a></p>
-                    <p><a href="{{ route(app()->getLocale() . '.contact') }}" class="hover:underline">Contact</a></p>
-                </div>
-            </div>
-        </div>
-        <div>
-            <h3 style="font-family: var(--font-sans);" class="font-bold text-lg mb-4">
-                {{ app()->getLocale() === 'fr' ? 'Suivez-nous' : 'Volg ons' }}
-            </h3>
-            <a href="https://www.facebook.com/DeHarmonieBrussel" target="_blank" class="flex items-center gap-2 text-sm opacity-80 hover:opacity-100">
-                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-                Facebook
+            <p style="font-size: 1rem; opacity: 0.8; margin-bottom: 1rem;">
+                Volg De Harmonie op Facebook
+            </p>
+            <a href="https://www.facebook.com/deharmoniebrussel/" target="_blank" rel="noopener">
+                <img src="{{ asset('images/logo-facebook.png') }}" alt="Facebook" style="width: 2.5rem; height: 2.5rem; opacity: 0.9;">
             </a>
-            <div class="mt-8">
-                <p class="text-xs opacity-50 mb-3">{{ app()->getLocale() === 'fr' ? 'Avec le soutien de' : 'Met de steun van' }}</p>
-                <div class="flex flex-wrap gap-4 items-center opacity-60">
-                    <span class="text-xs font-bold">Vlaanderen</span>
-                    <span class="text-xs font-bold">VGC</span>
-                    <span class="text-xs font-bold">Brussels</span>
-                </div>
-            </div>
         </div>
+
     </div>
-    <div class="border-t border-white/10 text-center py-4 text-xs opacity-40">
+    <div style="border-top: 1px solid rgba(255,255,255,0.25); text-align: center; padding: 0.75rem; opacity: 0.8;">
         &copy; {{ date('Y') }} VZW Buurtwerk Noordwijk
     </div>
 </footer>

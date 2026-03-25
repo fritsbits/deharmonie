@@ -2,122 +2,116 @@
 
 namespace Database\Seeders;
 
+use App\Enums\ActiviteitStatus;
 use App\Models\Activiteit;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class ActiviteitSeeder extends Seeder
 {
     public function run(): void
     {
-        $activiteiten = [
-            [
-                'slug' => 'engelse-conversatietafel-2026-04',
-                'titel_nl' => 'Engelse conversatietafel',
-                'titel_fr' => 'Table de conversation anglaise',
-                'beschrijving_nl' => '<p>Oefen je Engels in een gezellige groep. Voor alle niveaus.</p>',
-                'beschrijving_fr' => '<p>Pratiquez votre anglais dans un groupe convivial. Tous niveaux.</p>',
-                'datum' => '2026-04-07',
-                'startuur' => '10:30:00',
-                'einduur' => '12:00:00',
-                'locatie' => 'De Harmonie',
-                'prijs' => null,
-                'status' => 'gepubliceerd',
-            ],
-            [
-                'slug' => 'spaanse-conversatietafel-2026-04',
-                'titel_nl' => 'Spaanse conversatietafel',
-                'titel_fr' => 'Table de conversation espagnole',
-                'beschrijving_nl' => '<p>Oefen je Spaans met andere enthousiastelingen.</p>',
-                'beschrijving_fr' => '<p>Pratiquez votre espagnol avec d\'autres passionnés.</p>',
-                'datum' => '2026-04-09',
-                'startuur' => '10:00:00',
-                'einduur' => '12:00:00',
-                'locatie' => 'De Harmonie',
-                'prijs' => null,
-                'status' => 'gepubliceerd',
-            ],
-            [
-                'slug' => 'country-line-dance-2026-04',
-                'titel_nl' => 'Country Line Dance',
-                'titel_fr' => 'Country Line Dance',
-                'beschrijving_nl' => '<p>Dansen voor iedereen! Geen ervaring nodig.</p>',
-                'beschrijving_fr' => '<p>La danse pour tous ! Aucune expérience requise.</p>',
-                'datum' => '2026-04-09',
-                'startuur' => '14:00:00',
-                'einduur' => '16:00:00',
-                'locatie' => 'De Harmonie',
-                'prijs' => null,
-                'status' => 'gepubliceerd',
-            ],
-            [
-                'slug' => 'naaiworkshop-2026-04',
-                'titel_nl' => 'Naaiworkshop',
-                'titel_fr' => 'Atelier couture',
-                'beschrijving_nl' => '<p>Creatief naaien voor beginners en gevorderden.</p>',
-                'beschrijving_fr' => '<p>Couture créative pour débutants et confirmés.</p>',
-                'datum' => '2026-04-15',
-                'startuur' => '13:30:00',
-                'einduur' => '16:00:00',
-                'locatie' => 'De Harmonie',
-                'prijs' => null,
-                'status' => 'gepubliceerd',
-            ],
-            [
-                'slug' => 'zumba-2026-04',
-                'titel_nl' => 'Zumba',
-                'titel_fr' => 'Zumba',
-                'beschrijving_nl' => '<p>Beweeg mee op Latijns-Amerikaanse muziek. Lekker energiek!</p>',
-                'beschrijving_fr' => '<p>Bougez sur des rythmes latino-américains. Super énergisant!</p>',
-                'datum' => '2026-04-17',
-                'startuur' => '14:00:00',
-                'einduur' => '15:00:00',
-                'locatie' => 'De Harmonie',
-                'prijs' => null,
-                'status' => 'gepubliceerd',
-            ],
-            [
-                'slug' => 'sociaal-infopunt-2026-04',
-                'titel_nl' => 'Sociaal infopunt',
-                'titel_fr' => 'Point d\'information social',
-                'beschrijving_nl' => '<p>Vragen over rechten, uitkeringen of administratie? Kom langs!</p>',
-                'beschrijving_fr' => '<p>Questions sur vos droits, allocations ou démarches administratives ? Venez!</p>',
-                'datum' => '2026-04-22',
-                'startuur' => '11:00:00',
-                'einduur' => '14:00:00',
-                'locatie' => 'De Harmonie',
-                'prijs' => null,
-                'status' => 'gepubliceerd',
-            ],
-            [
-                'slug' => 'diamantschilderen-2026-04',
-                'titel_nl' => 'Diamantschilderen',
-                'titel_fr' => 'Diamond Painting',
-                'beschrijving_nl' => '<p>Ontspannend en creatief werken met glinsterende steentjes.</p>',
-                'beschrijving_fr' => '<p>Travail créatif et relaxant avec des petites pierres brillantes.</p>',
-                'datum' => '2026-04-24',
-                'startuur' => '14:00:00',
-                'einduur' => null,
-                'locatie' => 'De Harmonie',
-                'prijs' => null,
-                'status' => 'gepubliceerd',
-            ],
-            [
-                'slug' => 'italiaanstalige-conversatietafel-2026-04',
-                'titel_nl' => 'Italiaanse conversatietafel',
-                'titel_fr' => 'Table de conversation italienne',
-                'beschrijving_nl' => '<p>Oefen je Italiaans in een leuke, informele sfeer.</p>',
-                'beschrijving_fr' => '<p>Pratiquez votre italien dans une ambiance détendue.</p>',
-                'datum' => '2026-04-28',
-                'startuur' => '11:30:00',
-                'einduur' => '12:30:00',
-                'locatie' => 'De Harmonie',
-                'prijs' => null,
-                'status' => 'gepubliceerd',
-            ],
-        ];
+        $csvPath = database_path('seeders/data/activities.csv');
 
-        foreach ($activiteiten as $data) {
-            Activiteit::updateOrCreate(['slug' => $data['slug']], $data);
+        $handle = fopen($csvPath, 'r');
+        $headers = array_map('trim', fgetcsv($handle, 0, ',', '"', ''));
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Activiteit::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+
+        $rows = [];
+
+        while (($row = fgetcsv($handle, 0, ',', '"', '')) !== false) {
+            if (count($row) !== count($headers)) {
+                continue;
+            }
+
+            $data = array_combine($headers, $row);
+
+            if (($data['Draft'] ?? '') === 'true' || ($data['Archived'] ?? '') === 'true') {
+                continue;
+            }
+
+            $rawDate = $data['Date/Time'] ?? '';
+            if (empty($rawDate)) {
+                continue;
+            }
+
+            try {
+                $cleanDate = preg_replace('/\s*\(.*?\)/', '', $rawDate);
+                $datum = Carbon::parse(trim($cleanDate))->format('Y-m-d');
+            } catch (\Exception $e) {
+                continue;
+            }
+
+            $startuur = $this->parseTime($data['TimeStart'] ?? '') ?? '00:00:00';
+            $einduur = $this->parseTime($data['TimeEnd'] ?? '');
+
+            $prijs = $data['Price'] ?? '';
+            $prijs = ($prijs === '' || $prijs === '0') ? null : (float) $prijs;
+
+            $statusRaw = strtolower(trim($data['Status'] ?? ''));
+            $status = match ($statusRaw) {
+                'gepubliceerd' => ActiviteitStatus::Gepubliceerd,
+                'geannuleerd' => ActiviteitStatus::Geannuleerd,
+                default => ActiviteitStatus::Concept,
+            };
+
+            $titelNl = trim($data['Name'] ?? '');
+            $titelFr = trim($data['Name FR'] ?? '');
+            if ($titelFr === '') {
+                $titelFr = $titelNl;
+            }
+
+            $rows[] = [
+                'slug' => trim($data['Slug'] ?? ''),
+                'titel_nl' => $titelNl,
+                'titel_fr' => $titelFr,
+                'beschrijving_nl' => $data['Description'] !== '' ? $data['Description'] : null,
+                'beschrijving_fr' => $data['Description FR'] !== '' ? $data['Description FR'] : null,
+                'notice_nl' => $data['Notice'] !== '' ? $data['Notice'] : null,
+                'notice_fr' => $data['Notice FR'] !== '' ? $data['Notice FR'] : null,
+                'datum' => $datum,
+                'startuur' => $startuur,
+                'einduur' => $einduur,
+                'locatie' => $data['Location'] !== '' ? $data['Location'] : 'De Harmonie',
+                'prijs' => $prijs,
+                'status' => $status->value,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ];
         }
+
+        fclose($handle);
+
+        foreach (array_chunk($rows, 100) as $chunk) {
+
+            Activiteit::insert($chunk);
+        }
+
+        $this->command->info('Imported '.count($rows).' activities from CSV.');
+    }
+
+    private function parseTime(string $value): ?string
+    {
+        $value = trim($value);
+        if ($value === '') {
+            return null;
+        }
+        // Normalize Dutch format: "14u00" or "14u" → "14:00"
+        $value = preg_replace('/(\d{1,2})u(\d{2})/i', '$1:$2', $value);
+        $value = preg_replace('/(\d{1,2})u$/i', '$1:00', $value);
+        // Ensure HH:MM:SS format
+        if (preg_match('/^\d{1,2}:\d{2}$/', $value)) {
+            return $value.':00';
+        }
+        // If it already has seconds
+        if (preg_match('/^\d{1,2}:\d{2}:\d{2}$/', $value)) {
+            return $value;
+        }
+
+        return null;
     }
 }

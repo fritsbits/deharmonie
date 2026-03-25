@@ -8,7 +8,14 @@ class ActivityController extends Controller
 {
     public function home()
     {
-        return view('activiteiten.index');
+        $activiteiten = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
+            ->where('datum', '>=', now()->startOfDay())
+            ->orderBy('datum')
+            ->orderBy('startuur')
+            ->limit(3)
+            ->get();
+
+        return view('activiteiten.index', compact('activiteiten'));
     }
 
     public function index()
@@ -18,18 +25,21 @@ class ActivityController extends Controller
             ->orderBy('datum')
             ->orderBy('startuur')
             ->get();
+
         return view('activiteiten.overzicht', compact('activiteiten'));
     }
 
     public function show(string $slug)
     {
         $activiteit = Activiteit::where('slug', $slug)->firstOrFail();
+
         return view('activiteiten.show', compact('activiteit'));
     }
 
     public function print(string $slug)
     {
         $activiteit = Activiteit::where('slug', $slug)->firstOrFail();
+
         return view('activiteiten.print', compact('activiteit'));
     }
 }

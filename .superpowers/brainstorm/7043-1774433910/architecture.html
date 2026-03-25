@@ -1,0 +1,40 @@
+<h2>How should "tweaking" a component work?</h2>
+<p class="subtitle">This determines how the style guide connects to the rest of the site. Pick the approach that fits how you want to maintain it.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Display-only page (simplest start)</h3>
+      <p>A single Blade view at <code>/stijlgids</code> that shows all components with their names and labels. You tweak a component here to find the right style, then manually copy those styles to the actual pages. No code is shared — just a visual reference.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Zero impact on existing pages</li><li>Fast to build</li><li>Easy to understand</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Changes don't propagate — you copy/paste to other pages</li><li>Can drift out of sync with reality</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Blade components (true single source of truth)</h3>
+      <p>Extract each pattern into a Blade component: <code>&lt;x-btn-primary&gt;</code>, <code>&lt;x-section-heading&gt;</code>, <code>&lt;x-eyebrow&gt;</code>, etc. The style guide page just renders all components. Actual pages use the same components. Edit the component file — every page updates.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Real single source of truth — edit once, updates everywhere</li><li>Style guide always reflects live styles</li><li>Gradually refactor existing pages to use components</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>More work to set up</li><li>Need to refactor existing pages to benefit</li></ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Hybrid — display page now, components later</h3>
+      <p>Build the style guide as a display page first. But write it using a component structure internally — so we're already building toward Blade components. The style guide works immediately, and migrating existing pages to use components can happen gradually over time.</p>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul><li>Useful immediately</li><li>Natural migration path</li><li>Low risk — no impact on existing pages until you're ready</li></ul></div>
+        <div class="cons"><h4>Cons</h4><ul><li>Slightly more up-front thinking than option A</li></ul></div>
+      </div>
+    </div>
+  </div>
+</div>
