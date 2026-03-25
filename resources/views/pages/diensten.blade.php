@@ -1,49 +1,50 @@
 @extends('layouts.app')
-@section('title', app()->getLocale() === 'fr' ? 'Services' : 'Diensten')
+@section('title', __('pages.diensten_title'))
 @section('content')
 <div class="max-w-5xl mx-auto px-6 py-10">
     <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color: var(--color-brand-orange)">
-        {{ app()->getLocale() === 'fr' ? 'SERVICES' : 'DIENSTEN' }}
+        {{ __('pages.diensten_eyebrow') }}
     </p>
-    <h1 class="font-bold text-3xl mb-8" style="font-family: var(--font-sans); color: var(--color-brand-dark)">
-        {{ app()->getLocale() === 'fr' ? 'Services & activités' : 'Diensten & activiteiten' }}
+    <h1 class="font-bold text-3xl mb-4" style="font-family: var(--font-sans); color: var(--color-brand-dark)">
+        {{ __('pages.diensten_heading') }}
     </h1>
-    <div class="grid md:grid-cols-2 gap-6 mb-8">
-        @foreach ([
-            ['icon' => '🤝', 'nl' => 'Sociale begeleiding', 'fr' => 'Accompagnement social',
-             'desc_nl' => 'Navigatie in het Brussels socioculturele landschap. Integratie in het eerstelijnsnetwerk.',
-             'desc_fr' => 'Navigation dans le paysage socioculturel bruxellois. Intégration dans le réseau de première ligne.'],
-            ['icon' => '🍽️', 'nl' => 'Sociaal restaurant', 'fr' => 'Restaurant social',
-             'desc_nl' => 'Dagschotel aan verminderd tarief voor senioren. Afhaal en thuisbezorging mogelijk.',
-             'desc_fr' => 'Plat du jour à tarif réduit pour seniors. Emporter et livraison à domicile possibles.'],
-            ['icon' => '🧹', 'nl' => 'Praktische hulp', 'fr' => 'Aide pratique',
-             'desc_nl' => 'Boodschappen, vervoer, poetshulp, kleine herstellingen en kledingwinkel.',
-             'desc_fr' => 'Courses, transport, aide ménagère, petites réparations et magasin de vêtements.'],
-            ['icon' => '🏠', 'nl' => 'Zaalverhuur & catering', 'fr' => 'Location de salle & traiteur',
-             'desc_nl' => 'Voor buurtbewoners en lokale organisaties.',
-             'desc_fr' => 'Pour les riverains et les organisations locales.'],
-        ] as $service)
-            <div class="rounded-xl p-6" style="background: white; border: 1px solid var(--color-brand-gray)">
-                <div class="text-3xl mb-3">{{ $service['icon'] }}</div>
-                <h2 class="font-bold text-lg mb-2" style="font-family: var(--font-sans); color: var(--color-brand-dark)">
-                    {{ app()->getLocale() === 'fr' ? $service['fr'] : $service['nl'] }}
-                </h2>
-                <p class="text-sm" style="color: var(--color-brand-muted)">
-                    {{ app()->getLocale() === 'fr' ? $service['desc_fr'] : $service['desc_nl'] }}
-                </p>
-            </div>
+    <p class="mb-8" style="color: var(--color-brand-muted)">
+        {{ __('pages.diensten_intro') }}
+    </p>
+    <h2 class="font-bold text-xl mb-4" style="font-family: var(--font-sans); color: var(--color-brand-dark)">
+        {{ __('pages.diensten_services_heading') }}
+    </h2>
+    @php $services = trans('pages.diensten_services'); @endphp
+    <ul class="mb-8 space-y-2">
+        @foreach ($services as $service)
+            <li class="flex items-start gap-2" style="color: var(--color-brand-muted)">
+                <span class="mt-1 shrink-0" style="color: var(--color-brand-orange)">&#8226;</span>
+                <span>{{ $service }}</span>
+            </li>
         @endforeach
-    </div>
+    </ul>
     <div class="rounded-xl p-6 text-white" style="background-color: var(--color-brand-orange)">
-        <h2 class="font-bold text-xl mb-2" style="font-family: var(--font-sans)">
-            {{ app()->getLocale() === 'fr' ? 'Grand Nettoyage (Grote Kuis)' : 'Grote Kuis' }}
-        </h2>
-        <p class="text-sm opacity-90">
-            {{ app()->getLocale() === 'fr'
-                ? 'Service combiné de nettoyage, petites réparations et aide administrative.'
-                : 'Gecombineerde dienst: poetsen, kleine herstellingen en administratieve hulp.' }}
+        <p class="text-xs font-bold uppercase tracking-widest mb-1 opacity-80">
+            {{ __('pages.grote_kuis_eyebrow') }}
         </p>
-        <a href="mailto:diensten@deharmonie.be" class="block mt-3 text-sm font-semibold underline">diensten@deharmonie.be</a>
+        <h2 class="font-bold text-xl mb-2" style="font-family: var(--font-sans)">
+            {{ __('pages.grote_kuis_title') }}
+        </h2>
+        <p class="text-sm opacity-90 mb-3">
+            {{ __('pages.grote_kuis_description') }}
+        </p>
+        <p class="text-sm font-semibold mb-2">
+            {{ __('pages.grote_kuis_examples_label') }}
+        </p>
+        @php $examples = trans('pages.grote_kuis_examples'); @endphp
+        <ul class="text-sm opacity-90 space-y-1 mb-3">
+            @foreach ($examples as $example)
+                <li>&#8226; {{ $example }}</li>
+            @endforeach
+        </ul>
+        <p class="text-sm opacity-90">
+            {{ __('pages.grote_kuis_cta') }}
+        </p>
     </div>
 </div>
 @endsection
