@@ -141,14 +141,136 @@
     </div>
 </section>
         <section id="knoppen" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
-            <p style="color: var(--color-brand-muted);">Knoppen & links — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Knoppen & links</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+        {{-- Primaire knop --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Primaire knop</p>
+            <a href="#" style="display: inline-block; font-size: 1rem; font-weight: 700; padding: 0.75rem 1.75rem; background-color: var(--color-brand-blue); color: white; border-radius: 4px; text-decoration: none; font-family: var(--font-sans);">Weekmenu de la Semaine</a>
+            <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">background: brand-blue · color: white · font-sans · weight 700 · padding 0.75rem 1.75rem · border-radius 4px</code>
+        </div>
+
+        {{-- Secundaire knop --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Secundaire knop (outline)</p>
+            <a href="#" style="display: inline-block; font-size: 1rem; font-weight: 600; padding: 0.5rem 1.25rem; border-radius: 4px; text-decoration: none; font-family: var(--font-sans); background-color: transparent; color: var(--color-brand-blue); border: 1.5px solid var(--color-brand-blue);">Alle activiteiten</a>
+            <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">background: transparent · color: brand-blue · border: 1.5px solid brand-blue · font-sans · weight 600 · padding 0.5rem 1.25rem</code>
+        </div>
+
+        {{-- Donkere knop --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Donkere knop (formulier)</p>
+            <button type="button" style="font-size: 0.875rem; font-weight: 600; padding: 0.625rem 1.25rem; border-radius: 4px; background-color: var(--color-brand-dark); color: white; font-family: var(--font-sans); border: none; cursor: pointer;">Verzenden</button>
+            <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">background: brand-dark · color: white · font-sans · weight 600 · text-sm · padding 0.625rem 1.25rem</code>
+        </div>
+
+        {{-- Tekstlink --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Tekstlink</p>
+            <a href="#" style="color: var(--color-brand-blue); text-decoration: none; font-size: 1.125rem; font-weight: 700;">02 203 28 48</a>
+            &nbsp;&nbsp;
+            <a href="#" style="color: var(--color-brand-blue); text-decoration: none; font-size: 1rem;">info@deharmonie.be</a>
+            <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">color: brand-blue · text-decoration: none · hover: underline</code>
+        </div>
+
+        {{-- Teruglink --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Teruglink (navigatie)</p>
+            <a href="#" style="color: var(--color-brand-blue); text-decoration: none; font-size: 0.875rem; font-weight: 600;">&larr; Alle activiteiten</a>
+            <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">color: brand-blue · text-sm · weight 600 · arrow prefix</code>
+        </div>
+
+    </div>
+</section>
         <section id="formulieren" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
-            <p style="color: var(--color-brand-muted);">Formulierelementen — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Formulierelementen</h2>
+
+    <div style="max-width: 420px; display: flex; flex-direction: column; gap: 1.25rem;">
+
+        {{-- Label + tekstveld --}}
+        <div>
+            <label style="display: block; font-size: 0.875rem; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Je naam *</label>
+            <input type="text" placeholder="Marie Dupont"
+                   style="width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--color-brand-gray); border-radius: 4px; background: white; color: var(--color-brand-dark); font-size: 0.875rem; box-sizing: border-box;">
+            <code style="font-size: 0.7rem; color: var(--color-brand-muted);">label: text-sm brand-dark · input: border brand-gray · bg white · rounded 4px</code>
+        </div>
+
+        {{-- Telefoonveld --}}
+        <div>
+            <label style="display: block; font-size: 0.875rem; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Je telefoonnummer *</label>
+            <input type="tel" placeholder="02 203 28 48"
+                   style="width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--color-brand-gray); border-radius: 4px; background: white; color: var(--color-brand-dark); font-size: 0.875rem; box-sizing: border-box;">
+        </div>
+
+        {{-- Tekstvak --}}
+        <div>
+            <label style="display: block; font-size: 0.875rem; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Bericht *</label>
+            <textarea rows="3" placeholder="Ik schrijf me in..."
+                      style="width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--color-brand-gray); border-radius: 4px; background: white; color: var(--color-brand-dark); font-size: 0.875rem; box-sizing: border-box;"></textarea>
+        </div>
+
+        {{-- Foutstatus --}}
+        <div>
+            <label style="display: block; font-size: 0.875rem; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Veld met fout</label>
+            <input type="text" value=""
+                   style="width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--color-brand-gray); border-radius: 4px; background: white; color: var(--color-brand-dark); font-size: 0.875rem; box-sizing: border-box; outline: 1px solid #f87171;">
+            <p style="color: #dc2626; font-size: 0.75rem; margin: 0.25rem 0 0;">Dit veld is verplicht.</p>
+            <code style="font-size: 0.7rem; color: var(--color-brand-muted);">outline: 1px solid red-400 · error: text-xs text-red-600</code>
+        </div>
+
+        {{-- Successtatus --}}
+        <div style="border-radius: 8px; padding: 1.5rem; text-align: center; background-color: #edf7f1; border: 1px solid #a8d5b8;">
+            <svg style="width: 2.5rem; height: 2.5rem; margin: 0 auto 0.75rem;" fill="none" stroke="#2e7d52" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            <p style="font-weight: 600; color: #2e7d52; margin: 0;">Je inschrijving is ontvangen.</p>
+            <code style="font-size: 0.7rem; color: var(--color-brand-muted);">bg #edf7f1 · border #a8d5b8 · color #2e7d52</code>
+        </div>
+
+    </div>
+</section>
         <section id="badges" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
-            <p style="color: var(--color-brand-muted);">Badges & statussen — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Badges & statussen</h2>
+
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+        {{-- Gratis badge --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.5rem;">Gratis badge</p>
+            <span style="font-size: 1rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; background-color: var(--color-brand-orange); color: white;">Gratis</span>
+            <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">bg: brand-orange · color: white · weight 700 · px 0.6rem py 0.2rem · rounded 4px</code>
+        </div>
+
+        {{-- Geannuleerd badge --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.5rem;">Geannuleerd badge (inline)</p>
+            <span style="font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; background-color: #fde8e3; color: #c0392b;">Geannuleerd</span>
+            <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">bg: #fde8e3 · color: #c0392b · text-xs · weight 700 · rounded 4px</code>
+        </div>
+
+        {{-- Volzet melding --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.5rem;">Volzet melding</p>
+            <div style="display: inline-block; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.875rem; font-weight: 600; background-color: #fff3e0; color: #e65100; border: 1px solid #ffccbc;">Volzet</div>
+            <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">bg: #fff3e0 · color: #e65100 · border: #ffccbc · text-sm · weight 600 · rounded 8px</code>
+        </div>
+
+        {{-- Annuleringsbanner --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.5rem;">Annuleringsbanner (volledige breedte)</p>
+            <div style="border-radius: 8px; padding: 1rem; font-size: 0.875rem; font-weight: 600; background-color: #fde8e3; color: #c0392b; border: 1px solid #f5c6b8;">
+                &times; Deze activiteit is geannuleerd.
+            </div>
+            <code style="font-size: 0.75rem; color: var(--color-brand-muted);">bg: #fde8e3 · color: #c0392b · border: #f5c6b8 · rounded 8px · text-sm · weight 600</code>
+        </div>
+
+    </div>
+</section>
         <section id="navigatie" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
             <p style="color: var(--color-brand-muted);">Navigatiebalk — nog in te vullen</p>
         </section>
