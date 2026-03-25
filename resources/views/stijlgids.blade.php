@@ -323,6 +323,7 @@
         <a href="#" style="display: inline-block; font-size: 1rem; font-weight: 700; padding: 0.75rem 1.75rem; background-color: var(--color-brand-blue); color: white; border-radius: 4px; text-decoration: none; font-family: var(--font-sans);">
             Weekmenu de la Semaine
         </a>
+        <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">H1: font-sans 3.7rem weight 900 brand-dark · H2: brand-green weight 900 · checklist: icon-check.svg 1.5rem · knop: brand-blue</code>
     </div>
 </section>
         <section id="activiteitenlijst" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
