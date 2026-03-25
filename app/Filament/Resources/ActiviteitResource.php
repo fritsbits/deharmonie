@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\ActiviteitStatus;
 use App\Filament\Resources\ActiviteitResource\Pages;
 use App\Models\Activiteit;
+use Filament\Actions\BulkAction;
+use Filament\Actions\BulkActionGroup;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -24,10 +26,15 @@ use Illuminate\Support\Str;
 class ActiviteitResource extends Resource
 {
     protected static ?string $model = Activiteit::class;
+
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-calendar';
+
     protected static ?string $navigationLabel = 'Activiteiten';
+
     protected static ?string $modelLabel = 'Activiteit';
+
     protected static ?string $pluralModelLabel = 'Activiteiten';
+
     protected static ?string $slug = 'activiteiten';
 
     public static function form(Schema $schema): Schema
@@ -40,13 +47,13 @@ class ActiviteitResource extends Resource
                         ->required()
                         ->maxLength(255)
                         ->live(onBlur: true)
-                        ->afterStateUpdated(fn ($state, Set $set, string $operation) =>
-                            $operation === 'create'
+                        ->afterStateUpdated(fn ($state, Set $set, string $operation) => $operation === 'create'
                                 ? $set('slug', Str::slug($state))
                                 : null
                         ),
                     RichEditor::make('beschrijving_nl')
-                        ->label('Beschrijving (NL)'),
+                        ->label('Beschrijving (NL)')
+                        ->toolbarButtons(['bold', 'bulletList', 'link']),
                     Textarea::make('notice_nl')
                         ->label('Opmerking / Annuleringsmelding (NL)'),
                 ]),
@@ -56,17 +63,18 @@ class ActiviteitResource extends Resource
                         ->required()
                         ->maxLength(255),
                     RichEditor::make('beschrijving_fr')
-                        ->label('Description (FR)'),
+                        ->label('Description (FR)')
+                        ->toolbarButtons(['bold', 'bulletList', 'link']),
                     Textarea::make('notice_fr')
                         ->label('Remarque / Message d\'annulation (FR)'),
                 ]),
             ])->columnSpanFull(),
 
             TextInput::make('slug')
-                ->label('Slug')
                 ->required()
                 ->unique(ignoreRecord: true)
-                ->maxLength(255),
+                ->maxLength(255)
+                ->hidden(),
 
             DatePicker::make('datum')
                 ->label('Datum')
@@ -97,12 +105,8 @@ class ActiviteitResource extends Resource
 
             Select::make('status')
                 ->label('Status')
-                ->options([
-                    'concept' => 'Concept',
-                    'gepubliceerd' => 'Gepubliceerd',
-                    'geannuleerd' => 'Geannuleerd',
-                ])
-                ->default('concept')
+                ->options(ActiviteitStatus::class)
+                ->default(ActiviteitStatus::Concept)
                 ->required(),
 
             SpatieMediaLibraryFileUpload::make('afbeelding')
@@ -128,13 +132,11 @@ class ActiviteitResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->label('Status')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'concept' => 'gray',
-                        'gepubliceerd' => 'success',
-                        'geannuleerd' => 'danger',
-                        default => 'gray',
-                    }),
+                    ->badge(),
+                Tables\Columns\TextColumn::make('template.titel_nl')
+                    ->label('Reeks')
+                    ->placeholder('—')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('deelnameverzoeken_count')
                     ->label('Inschrijvingen')
                     ->counts('deelnameverzoeken'),
@@ -142,21 +144,17 @@ class ActiviteitResource extends Resource
             ->defaultSort('datum', 'asc')
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
-                    ->options([
-                        'concept' => 'Concept',
-                        'gepubliceerd' => 'Gepubliceerd',
-                        'geannuleerd' => 'Geannuleerd',
-                    ]),
+                    ->options(ActiviteitStatus::class),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\BulkAction::make('publish')
+                BulkActionGroup::make([
+                    BulkAction::make('publish')
                         ->label('Publiceer geselecteerde')
-                        ->action(fn ($records) => $records->each->update(['status' => 'gepubliceerd']))
+                        ->action(fn ($records) => $records->each->update(['status' => ActiviteitStatus::Gepubliceerd]))
                         ->icon('heroicon-o-check'),
-                    Tables\Actions\BulkAction::make('cancel')
+                    BulkAction::make('cancel')
                         ->label('Annuleer geselecteerde')
-                        ->action(fn ($records) => $records->each->update(['status' => 'geannuleerd']))
+                        ->action(fn ($records) => $records->each->update(['status' => ActiviteitStatus::Geannuleerd]))
                         ->icon('heroicon-o-x-mark')
                         ->color('danger'),
                 ]),
