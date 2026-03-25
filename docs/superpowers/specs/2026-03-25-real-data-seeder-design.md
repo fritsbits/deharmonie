@@ -38,23 +38,27 @@ Canonical names strip emojis and "NIEUW:"/"Copy" noise from the source. French t
 
 | # | titel_nl | titel_fr | dag_van_de_week | startuur | einduur | locatie | prijs | interesse |
 |---|---|---|---|---|---|---|---|---|
-| 1 | Conversatietafel Spaans | Table de conversation Espagnole | 4 (Thu) | 10:00 | 12:00 | De Harmonie | null | Activiteiten |
-| 2 | Conversatietafel Engels | Table de Conversation Anglais | 2 (Tue) | 10:30 | null | De Harmonie | null | Activiteiten |
-| 3 | Conversatietafel Italiaans | Table de Conversation Italien | 1 (Mon) | 11:30 | 12:30 | De Harmonie | null | Activiteiten |
-| 4 | Nederlandse conversatietafel | Table de Conversation Néerlandais | 5 (Fri) | 10:30 | 11:30 | De Harmonie | null | Activiteiten |
-| 5 | Country Line Dance | Country Dance en Ligne | 4 (Thu) | 14:00 | 16:00 | De Harmonie | 2.00 | Activiteiten |
-| 6 | Geheugenatelier | Atelier de Mémoire | 1 (Mon) | 13:30 | 15:15 | De Harmonie | 1.00 | Activiteiten |
-| 7 | Stoel-gym met Nicole | Gym sur chaise avec Nicole | 1 (Mon) | 11:00 | null | De Harmonie | null | Activiteiten |
-| 8 | Digitale workshop | Atelier Numérique | 3 (Wed) | 14:00 | 16:00 | De Harmonie | null | Activiteiten |
-| 9 | Bingo | Bingo | 3 (Wed) | 13:30 | 16:00 | De Harmonie | 1.00 | Activiteiten |
-| 10 | Creativiteit workshop | Atelier de Créativité | 1 (Mon) | 14:00 | 16:00 | De Harmonie | null | Activiteiten |
-| 11 | Zumba | Zumba | 5 (Fri) | 14:00 | 15:00 | De Harmonie | 1.00 | Activiteiten |
-| 12 | Diamond Painting met Nadia | Atelier de Diamond Painting avec Nadia | 5 (Fri) | 14:00 | null | De Harmonie | null | Activiteiten |
-| 13 | Naaiworkshop | Atelier de Couture | 3 (Wed) | 13:30 | 16:00 | De Harmonie | 1.00 | Activiteiten |
-| 14 | Boodschappendienst | Service de Courses | 1 (Mon) | 14:00 | null | De Harmonie | 2.50 | Diensten |
-| 15 | Pilates & Fitness | Pilates & Fitness | 5 (Fri) | 11:00 | null | Pôle Nord | 1.00 | Activiteiten |
+| # | titel_nl | titel_fr | dag_van_de_week | startuur | einduur | locatie | prijs | interesse |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Conversatietafel Spaans | Table de conversation Espagnole | 4 (Donderdag) | 10:00 | 12:00 | De Harmonie | null | activiteiten |
+| 2 | Conversatietafel Engels | Table de Conversation Anglais | 2 (Dinsdag) | 10:30 | null | De Harmonie | null | activiteiten |
+| 3 | Conversatietafel Italiaans | Table de Conversation Italien | 1 (Maandag) | 11:30 | 12:30 | De Harmonie | null | activiteiten |
+| 4 | Nederlandse conversatietafel | Table de Conversation Néerlandais | 5 (Vrijdag) | 10:30 | 11:30 | De Harmonie | null | activiteiten |
+| 5 | Country Line Dance | Country Dance en Ligne | 4 (Donderdag) | 14:00 | 16:00 | De Harmonie | 2.00 | activiteiten |
+| 6 | Geheugenatelier | Atelier de Mémoire | 1 (Maandag) | 13:30 | 15:15 | De Harmonie | 1.00 | activiteiten |
+| 7 | Stoel-gym met Nicole | Gym sur chaise avec Nicole | 1 (Maandag) | 11:00 | null | De Harmonie | null | activiteiten |
+| 8 | Digitale workshop | Atelier Numérique | 3 (Woensdag) | 14:00 | 16:00 | De Harmonie | null | activiteiten |
+| 9 | Bingo | Bingo | 3 (Woensdag) | 13:30 | 16:00 | De Harmonie | 1.00 | activiteiten |
+| 10 | Creativiteit workshop | Atelier de Créativité | 1 (Maandag) | 14:00 | 16:00 | De Harmonie | null | activiteiten |
+| 11 | Zumba | Zumba | 5 (Vrijdag) | 14:00 | 15:00 | De Harmonie | 1.00 | activiteiten |
+| 12 | Diamond Painting met Nadia | Atelier de Diamond Painting avec Nadia | 5 (Vrijdag) | 14:00 | null | De Harmonie | null | activiteiten |
+| 13 | Naaiworkshop | Atelier de Couture | 3 (Woensdag) | 13:30 | 16:00 | De Harmonie | 1.00 | activiteiten |
+| 14 | Boodschappendienst | Service de Courses | 1 (Maandag) | 14:00 | null | De Harmonie | 2.50 | diensten |
+| 15 | Pilates & Fitness | Pilates & Fitness | 5 (Vrijdag) | 11:00 | null | Pôle Nord | 1.00 | activiteiten |
 
-`dag_van_de_week` integer mapping: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat — consistent with `DagVanDeWeek` enum.
+`dag_van_de_week` integer mapping: 0=Zondag, 1=Maandag, 2=Dinsdag, 3=Woensdag, 4=Donderdag, 5=Vrijdag, 6=Zaterdag — matches `DagVanDeWeek` enum values.
+
+`interesse` values are the enum's string backing values (lowercase), as stored in the database.
 
 ## Modified File: `DatabaseSeeder`
 
