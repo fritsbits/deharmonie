@@ -17,4 +17,7 @@ return [
     'detail' => 'Meer info',
     'cancellation_notice' => 'Deze activiteit is geannuleerd.',
     'registration_closed' => 'Inschrijving gesloten (activiteit geannuleerd).',
+    'at' => 'om',
+    'label' => 'ACTIVITEIT',
+    'all' => 'Alle activiteiten',
 ];

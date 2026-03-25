@@ -9,4 +9,5 @@ return [
     'required' => 'Ce champ est obligatoire.',
     'invalid_email' => 'Veuillez entrer une adresse e-mail valide.',
     'rate_limit' => 'Trop d\'inscriptions envoyées. Veuillez réessayer plus tard.',
+    'message_label' => 'Message',
 ];

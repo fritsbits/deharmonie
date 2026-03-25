@@ -17,4 +17,7 @@ return [
     'detail' => 'Plus d\'info',
     'cancellation_notice' => 'Cette activité est annulée.',
     'registration_closed' => 'Inscription fermée (activité annulée).',
+    'at' => 'à',
+    'label' => 'ACTIVITÉ',
+    'all' => 'Toutes les activités',
 ];
