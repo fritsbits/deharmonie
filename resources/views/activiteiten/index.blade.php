@@ -23,25 +23,22 @@
 <section style="border-top: 1px solid rgba(216,211,210,0.5);">
     <div style="display: flex; min-height: 320px;">
         <div style="flex: 0 0 42%; overflow: hidden; position: relative;">
-            <img src="{{ asset('images/photo-restaurant.jpg') }}" alt="Sociaal restaurant"
+            <img src="{{ asset('images/photo-restaurant.jpg') }}" alt="{{ __('nav.menu') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
         <div style="flex: 1; padding: 2rem; display: flex; flex-direction: column; background: white;">
             <p style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-orange); margin-bottom: 0.5rem;">
-                Sociaal restaurant · Restaurant social
+                {{ __('nav.menu') }}
             </p>
             <h2 style="font-family: var(--font-sans); font-size: 1.35rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.6rem;">
-                Elke dag samen aan tafel
+                {{ __('pages.home_restaurant_heading') }}
             </h2>
-            <p style="font-size: 0.95rem; line-height: 1.55; color: var(--color-brand-dark); margin-bottom: 0.35rem;">
-                <strong>Dagschotels</strong> aan verminderd tarief voor senioren. Afhaal en levering aan huis mogelijk.
-            </p>
-            <p style="font-size: 0.88rem; line-height: 1.5; color: var(--color-brand-muted); font-style: italic; margin-bottom: 1.25rem;">
-                Plat du jour à un tarif réduit pour les seniors. Emporter et livraison à domicile.
+            <p style="font-size: 0.95rem; line-height: 1.55; color: var(--color-brand-dark); margin-bottom: 1.25rem;">
+                {!! __('pages.home_restaurant_body') !!}
             </p>
             <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
                style="display: inline-flex; align-items: center; gap: 0.4rem; background: var(--color-brand-blue); color: white; font-family: var(--font-sans); font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.1rem; border-radius: 5px; text-decoration: none; align-self: flex-start; margin-top: auto;">
-                Weekmenu de la Semaine →
+                {{ __('pages.home_restaurant_cta') }}
             </a>
         </div>
     </div>
@@ -86,16 +83,13 @@
         <div style="flex: 1; display: flex; flex-direction: column; background: #f5f2ef;">
             <div style="padding: 2rem 2rem 1rem;">
                 <p style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-green); margin-bottom: 0.5rem;">
-                    Activiteiten · Activités
+                    {{ __('nav.activities') }}
                 </p>
                 <h2 style="font-family: var(--font-sans); font-size: 1.35rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.5rem;">
-                    Creatief, cultureel en sportief
+                    {{ __('pages.home_activities_heading') }}
                 </h2>
-                <p style="font-size: 0.95rem; line-height: 1.55; color: var(--color-brand-dark); margin-bottom: 0.2rem;">
-                    <strong>Activiteiten &amp; diensten</strong> in ons centrum en bij u thuis.
-                </p>
-                <p style="font-size: 0.88rem; line-height: 1.5; color: var(--color-brand-muted); font-style: italic;">
-                    Des activités dans notre centre et chez vous. Créatif, culturel, formateur.
+                <p style="font-size: 0.95rem; line-height: 1.55; color: var(--color-brand-dark);">
+                    {!! __('pages.home_activities_body') !!}
                 </p>
             </div>
             <div style="padding: 0 2rem; flex: 1;">
@@ -115,20 +109,17 @@
         </div>
         <div style="flex: 1; padding: 2rem; display: flex; flex-direction: column; background: #f0efed;">
             <p style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-blue); margin-bottom: 0.5rem;">
-                Diensten · Services
+                {{ __('nav.services') }}
             </p>
             <h2 style="font-family: var(--font-sans); font-size: 1.35rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.6rem;">
-                Ook hulp waar u het nodig heeft
+                {{ __('pages.home_services_heading') }}
             </h2>
-            <p style="font-size: 0.95rem; line-height: 1.55; color: var(--color-brand-dark); margin-bottom: 0.35rem;">
-                <strong>Partner</strong> voor iedereen met een hart voor onze buurt. Boodschappen, vervoer, poetswerk en meer.
-            </p>
-            <p style="font-size: 0.88rem; line-height: 1.5; color: var(--color-brand-muted); font-style: italic; margin-bottom: 1.25rem;">
-                Partenaire pour tout le monde. Courses, transport, nettoyage et petites réparations.
+            <p style="font-size: 0.95rem; line-height: 1.55; color: var(--color-brand-dark); margin-bottom: 1.25rem;">
+                {!! __('pages.home_services_body') !!}
             </p>
             <a href="{{ route(app()->getLocale() . '.diensten') }}"
                style="display: inline-flex; align-items: center; gap: 0.4rem; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.1rem; border-radius: 5px; text-decoration: none; align-self: flex-start; margin-top: auto;">
-                Onze diensten →
+                {{ __('pages.home_services_cta') }}
             </a>
         </div>
     </div>
@@ -143,7 +134,7 @@
     <div class="max-w-5xl mx-auto" style="position: relative; z-index: 1; padding: 4rem 1.5rem;">
         <div style="max-width: 36rem;">
             <p style="color: var(--color-brand-green); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.15rem; font-family: var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase;">
-                OPENINGSUREN
+                {{ __('pages.home_hours_label') }}
             </p>
             <h2 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.75rem;">
                 {{ __('activities.visit_us') }}
@@ -151,15 +142,15 @@
             <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
                 <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.125rem; color: var(--color-brand-dark); font-weight: 600;">
                     <img src="{{ asset('images/icon-clock.svg') }}" alt="" style="width: 26px; height: 26px; flex-shrink: 0;">
-                    10u – 16u30, maandag tot vrijdag
+                    {{ __('pages.home_hours_weekdays') }}
                 </div>
                 <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.125rem; color: var(--color-brand-dark); font-weight: 600;">
                     <img src="{{ asset('images/icon-clock.svg') }}" alt="" style="width: 26px; height: 26px; flex-shrink: 0;">
-                    10u – 14u, zaterdag
+                    {{ __('pages.home_hours_saturday') }}
                 </div>
             </div>
             <p style="font-size: 1.125rem; line-height: 1.7; color: var(--color-brand-muted); margin-bottom: 2rem;">
-                Kom voor een lekker maaltijd of voor de activiteiten en uitstappen. We geven je graag ook meer info over diensten zoals vervoer, poetsdienst (ook ruilen wassen), boodschappen, kleine herstellingen, wassen en strijken en maaltijden aan huis.
+                {{ __('pages.home_hours_body') }}
             </p>
             <p style="margin-bottom: 0.4rem;">
                 <a href="tel:0220328048" style="font-size: 1.25rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: none;">
