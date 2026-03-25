@@ -42,4 +42,31 @@ class BilingualRoutingTest extends TestCase
         $this->get('/fr/activites');
         $this->assertEquals('fr', app()->getLocale());
     }
+
+    public function test_nav_shows_fr_labels_on_fr_routes(): void
+    {
+        $response = $this->get('/fr');
+        $response->assertSee('Activités');
+        $response->assertSee('Services');
+    }
+
+    public function test_nav_shows_nl_labels_on_nl_routes(): void
+    {
+        $response = $this->get('/');
+        $response->assertSee('Activiteiten');
+        $response->assertSee('Diensten');
+    }
+
+    public function test_nav_language_switcher_link_present(): void
+    {
+        $response = $this->get('/');
+        $response->assertSee('set-locale', false); // link to /set-locale exists
+    }
+
+    public function test_footer_shows_fr_labels_on_fr_routes(): void
+    {
+        $response = $this->get('/fr');
+        $response->assertSee('Avec le soutien de');
+        $response->assertSee('Suivez De Harmonie sur Facebook');
+    }
 }

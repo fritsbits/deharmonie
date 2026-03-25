@@ -1,12 +1,12 @@
 @extends('layouts.app')
-@section('title', app()->getLocale() === 'fr' ? 'Qui est qui ?' : 'Wie is wie ?')
+@section('title', __('pages.wie_is_wie_title'))
 @section('content')
 
 <div class="max-w-5xl mx-auto px-6 py-10">
 
-    <x-eyebrow>{{ app()->getLocale() === 'fr' ? 'L\'ÉQUIPE' : 'HET TEAM' }}</x-eyebrow>
+    <x-eyebrow>{{ __('pages.team_eyebrow') }}</x-eyebrow>
     <h1 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 900; color: var(--color-brand-dark); margin-bottom: 2.5rem;">
-        {{ app()->getLocale() === 'fr' ? 'Qui est qui ?' : 'Wie is wie ?' }}
+        {{ __('pages.wie_is_wie_title') }}
     </h1>
 
     {{-- Staff: flat rows, department label left / names right --}}
@@ -63,7 +63,7 @@
         @foreach ($teams as $team)
             <div style="display: flex; gap: 2rem; padding: 1.1rem 0; border-bottom: 1px solid var(--color-brand-gray); align-items: baseline;">
                 <p style="flex: 0 0 38%; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-muted); font-family: var(--font-sans); margin: 0; padding-top: 0.15rem;">
-                    {{ app()->getLocale() === 'fr' ? $team['fr'] : $team['nl'] }}
+                    {{ $team[app()->getLocale()] }}
                 </p>
                 <div style="flex: 1;">
                     @foreach ($team['members'] as $name)
@@ -76,13 +76,13 @@
 
     {{-- Governance --}}
     <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 1.25rem; font-family: var(--font-sans);">
-        {{ app()->getLocale() === 'fr' ? 'GOUVERNANCE' : 'BESTUUR' }}
+        {{ __('pages.governance') }}
     </p>
 
     <div style="display: flex; gap: 3rem;">
         <div style="flex: 1;">
             <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-muted); font-family: var(--font-sans); margin-bottom: 0.75rem;">
-                {{ app()->getLocale() === 'fr' ? 'Organe d\'administration' : 'Bestuursorgaan' }}
+                {{ __('pages.board_organ') }}
             </p>
             @foreach (['Jan Vandekerckhove', 'Maarten Janssens', 'Sebastiano Cincinnato', 'Isabelle De Meyere', 'Relinde Raeymakers', 'Linda Struelens', 'Inge Verhaegen'] as $name)
                 <p style="font-size: 1rem; color: var(--color-brand-dark); line-height: 1.7; margin: 0;">{{ $name }}</p>
@@ -91,7 +91,7 @@
 
         <div style="flex: 1;">
             <p style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-muted); font-family: var(--font-sans); margin-bottom: 0.75rem;">
-                {{ app()->getLocale() === 'fr' ? 'Conseil de quartier Noordwijk' : 'Buurtraad Noordwijk' }}
+                {{ __('pages.neighborhood_council') }}
             </p>
             @foreach (['Jan Vandekerckhove', 'Maarten Janssens', 'Karen De Cooman', 'Mohamed El Morabit', 'Carine Haelemeersch', 'Bianca Laurino', 'Peter Vandenbempt', 'Léopold Vodak'] as $name)
                 <p style="font-size: 1rem; color: var(--color-brand-dark); line-height: 1.7; margin: 0;">{{ $name }}</p>

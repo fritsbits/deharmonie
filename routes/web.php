@@ -1,11 +1,17 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PageController;
+use App\Http\Middleware\DetectPreferredLocale;
 use Illuminate\Support\Facades\Route;
 
+Route::get('/set-locale/{locale}', [LocaleController::class, 'switch'])
+    ->name('set-locale')
+    ->where('locale', 'nl|fr');
+
 // NL routes (default, no prefix)
-Route::middleware('locale:nl')->group(function () {
+Route::middleware(['locale:nl', DetectPreferredLocale::class])->group(function () {
     Route::get('/', [ActivityController::class, 'home'])->name('nl.home');
     Route::get('/activiteiten', [ActivityController::class, 'index'])->name('nl.activiteiten.index');
     Route::get('/activiteiten/{slug}', [ActivityController::class, 'show'])->name('nl.activiteiten.show');

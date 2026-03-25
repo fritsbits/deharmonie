@@ -16,20 +16,20 @@
                 <a href="mailto:info@deharmonie.be" style="color: white; text-decoration: none;">info@deharmonie.be</a>
             </p>
             <p style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6; margin-bottom: 0.5rem;">
-                Snel naar
+                {{ __('common.quick_links') }}
             </p>
             <p style="font-size: 1rem; opacity: 0.75; margin-bottom: 0.2rem;">
-                <a href="{{ route(app()->getLocale() . '.diensten') }}" style="color: white; text-decoration: none;">Diensten</a>
+                <a href="{{ route(app()->getLocale() . '.diensten') }}" style="color: white; text-decoration: none;">{{ __('nav.services') }}</a>
             </p>
             <p style="font-size: 1rem; opacity: 0.75;">
-                <a href="{{ route(app()->getLocale() . '.wie-is-wie') }}" style="color: white; text-decoration: none;">Wie is wie</a>
+                <a href="{{ route(app()->getLocale() . '.wie-is-wie') }}" style="color: white; text-decoration: none;">{{ __('pages.wie_is_wie_title') }}</a>
             </p>
         </div>
 
         {{-- Center: Met steun van --}}
         <div>
             <p style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6; margin-bottom: 1rem;">
-                Met steun van
+                {{ __('common.supported_by') }}
             </p>
             <div style="display: flex; flex-direction: column; gap: 1.5rem;">
                 <a href="https://www.vlaanderen.be/" target="_blank" rel="noopener">
@@ -50,7 +50,7 @@
         {{-- Right: social --}}
         <div>
             <p style="font-size: 1rem; opacity: 0.8; margin-bottom: 1rem;">
-                Volg De Harmonie op Facebook
+                {{ __('common.follow_facebook') }}
             </p>
             <a href="https://www.facebook.com/deharmoniebrussel/" target="_blank" rel="noopener">
                 <img src="{{ asset('images/logo-facebook.png') }}" alt="Facebook" style="width: 2.5rem; height: 2.5rem; opacity: 0.9;">

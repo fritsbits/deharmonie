@@ -17,4 +17,7 @@ require __DIR__.'/../vendor/autoload.php';
 /** @var Application $app */
 $app = require_once __DIR__.'/../bootstrap/app.php';
 
+// Ensure we're using the worktree's base path, not the symlinked parent
+$app->setBasePath(realpath(__DIR__.'/..'));
+
 $app->handleRequest(Request::capture());

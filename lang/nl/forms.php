@@ -1,5 +1,6 @@
 <?php
 return [
+    'heading' => 'Inschrijvingsformulier',
     'name' => 'Naam',
     'email' => 'E-mailadres',
     'phone' => 'Telefoonnummer (optioneel)',
@@ -9,4 +10,5 @@ return [
     'required' => 'Dit veld is verplicht.',
     'invalid_email' => 'Vul een geldig e-mailadres in.',
     'rate_limit' => 'Je hebt te veel inschrijvingen verstuurd. Probeer later opnieuw.',
+    'message_label' => 'Bericht',
 ];

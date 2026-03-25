@@ -9,9 +9,9 @@ $styles = match($type) {
 };
 
 $defaultLabel = match($type) {
-    'gratis'      => app()->getLocale() === 'fr' ? 'Gratuit' : 'Gratis',
-    'geannuleerd' => app()->getLocale() === 'fr' ? 'Annulé' : 'Geannuleerd',
-    'volzet'      => app()->getLocale() === 'fr' ? 'Complet' : 'Volzet',
+    'gratis'      => __('activities.badge_gratis'),
+    'geannuleerd' => __('activities.badge_cancelled'),
+    'volzet'      => __('activities.badge_full'),
     default       => '',
 };
 @endphp

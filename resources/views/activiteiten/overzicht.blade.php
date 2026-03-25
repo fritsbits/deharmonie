@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', app()->getLocale() === 'fr' ? 'Agenda — Toutes les activités' : 'Agenda — Alle activiteiten')
+@section('title', 'Agenda — ' . __('activities.all'))
 
 @section('content')
 
@@ -26,12 +26,10 @@
     <div style="margin-bottom: 2.5rem;">
         <x-eyebrow>AGENDA</x-eyebrow>
         <h1 style="font-family: var(--font-sans); font-size: 2.75rem; font-weight: 900; color: var(--color-brand-dark); margin: 0 0 0.5rem; line-height: 1.1;">
-            {{ app()->getLocale() === 'fr' ? 'Toutes les activités' : 'Alle activiteiten' }}
+            {{ __('activities.all') }}
         </h1>
-        <p style="font-size: 2rem; font-weight: 300; line-height: 1.35; color: var(--color-brand-muted); max-width: 42rem; margin: 0;">
-            {{ app()->getLocale() === 'fr'
-                ? 'Cliquez sur une activité pour plus d\'informations et pour demander votre inscription.'
-                : 'Klik op een activiteit om meer info te lezen en je inschrijving aan te vragen.' }}
+        <p style="font-size: 1.0625rem; color: var(--color-brand-muted); margin: 0;">
+            {{ __('activities.overview_tagline') }}
         </p>
     </div>
 
@@ -51,7 +49,7 @@
         {{-- Activities in this month --}}
         @foreach ($items as $activiteit)
             <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
-               class="activity-row {{ $activiteit->status->value === 'geannuleerd' ? 'activity-row--cancelled' : '' }}">
+               class="activity-row {{ $activiteit->status === 'geannuleerd' ? 'activity-row--cancelled' : '' }}">
 
                 {{-- Date block --}}
                 <div style="flex-shrink: 0; width: 48px; text-align: center;">
@@ -64,7 +62,7 @@
                         <p style="font-weight: 700; font-size: 1.0625rem; line-height: 1.3; color: var(--color-brand-dark); font-family: var(--font-sans); margin: 0;">
                             {{ $activiteit->titel }}
                         </p>
-                        @if ($activiteit->status->value === 'geannuleerd')
+                        @if ($activiteit->status === 'geannuleerd')
                             <x-badge type="geannuleerd" />
                         @endif
                     </div>
@@ -81,7 +79,7 @@
     @empty
         <div style="padding: 4rem 0;">
             <p style="color: var(--color-brand-muted); font-size: 1.0625rem;">
-                {{ app()->getLocale() === 'fr' ? 'Momenteel zijn er geen activiteiten gepland.' : 'Momenteel zijn er geen activiteiten gepland.' }}
+                {{ __('activities.no_upcoming') }}
             </p>
         </div>
     @endforelse

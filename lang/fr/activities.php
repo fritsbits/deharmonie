@@ -17,4 +17,13 @@ return [
     'detail' => 'Plus d\'info',
     'cancellation_notice' => 'Cette activité est annulée.',
     'registration_closed' => 'Inscription fermée (activité annulée).',
+    'at' => 'à',
+    'label' => 'ACTIVITÉ',
+    'all' => 'Toutes les activités',
+    'no_upcoming' => 'Pas d\'activités prévues.',
+    'visit_us' => 'Venez nous rendre visite',
+    'overview_tagline' => 'Cliquez sur une activité pour plus d\'informations et pour demander votre inscription.',
+    'badge_gratis'     => 'Gratuit',
+    'badge_cancelled'  => 'Annulé',
+    'badge_full'       => 'Complet',
 ];

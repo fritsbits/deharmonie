@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', app()->getLocale() === 'fr' ? 'Services' : 'Diensten')
+@section('title', __('pages.diensten_title'))
 @section('content')
 
 {{-- INTRO: lead text left, photo right --}}
@@ -7,20 +7,18 @@
     <div class="diensten-intro" style="display: flex; align-items: center; gap: 4rem;">
 
         <div style="flex: 1;">
-            <x-eyebrow color="orange" mb="0.75rem">{{ app()->getLocale() === 'fr' ? 'SERVICES' : 'DIENSTEN' }}</x-eyebrow>
+            <x-eyebrow color="orange" mb="0.75rem">{{ __('pages.diensten_eyebrow') }}</x-eyebrow>
             <h1 style="font-family: var(--font-sans); font-size: 3rem; font-weight: 900; line-height: 1.1; color: var(--color-brand-dark); margin-bottom: 1.25rem;">
-                {{ app()->getLocale() === 'fr' ? 'De Harmonie est là pour vous' : 'De Harmonie is er voor jou' }}
+                {{ __('pages.diensten_heading') }}
             </h1>
             <p style="font-size: 2rem; font-weight: 300; line-height: 1.35; color: var(--color-brand-muted); max-width: 38rem;">
-                {{ app()->getLocale() === 'fr'
-                    ? 'De Harmonie aide les seniors du quartier Noordwijk dans leur vie quotidienne. Nous organisons des activités et des services dans notre propre centre, dans le quartier, mais aussi chez les personnes à domicile.'
-                    : 'De Harmonie helpt senioren uit de Noordwijk in het dagelijks leven. We organiseren activiteiten en diensten in ons eigen centrum, in de buurt, maar ook bij mensen thuis.' }}
+                {{ __('pages.diensten_intro') }}
             </p>
         </div>
 
         <div class="diensten-intro-photo" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
             <img src="{{ asset('images/photo-begeleiding-klas.webp') }}"
-                 alt="{{ app()->getLocale() === 'fr' ? 'Accompagnement personnalisé' : 'Persoonlijke begeleiding' }}"
+                 alt="{{ __('pages.diensten_heading') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
 
@@ -145,26 +143,19 @@
     <div class="diensten-intro" style="max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
 
         <div style="flex: 1;">
-            <x-eyebrow color="orange" mb="0.75rem">{{ app()->getLocale() === 'fr' ? 'PROJECT' : 'PROJECT' }}</x-eyebrow>
+            <x-eyebrow color="orange" mb="0.75rem">{{ __('pages.grote_kuis_eyebrow') }}</x-eyebrow>
             <h2 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.1; margin-bottom: 1rem;">
-                {{ app()->getLocale() === 'fr' ? 'Aide au Grand Nettoyage' : 'Hulp bij de Grote Kuis' }}
+                {{ __('pages.grote_kuis_title') }}
             </h2>
             <p style="font-size: 1.125rem; line-height: 1.7; color: var(--color-brand-dark); margin-bottom: 1.25rem;">
-                {{ app()->getLocale() === 'fr'
-                    ? 'Avec ce projet, nous voulons vous aider avec le \'Grand Nettoyage\'. Avec nos agents de nettoyage et bricoleurs, nous prenons en charge votre domicile. Nous pouvons effectuer de petits travaux ou réparations, donner un nettoyage complet à toutes vos affaires et vous aider avec votre administration.'
-                    : 'Met dit project willen we je helpen met de \'Grote Kuis\'. Samen met onze poetsers en klussers nemen we je woning onder handen. We kunnen kleine werken of herstellingen doen, we geven alle spullen een grondige poetsbeurt en we kunnen je ook helpen met je administratie.' }}
+                {{ __('pages.grote_kuis_description') }}
             </p>
 
             <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-muted); margin-bottom: 0.75rem; font-family: var(--font-sans);">
-                {{ app()->getLocale() === 'fr' ? 'Exemples' : 'Waarbij kan je bijvoorbeeld hulp krijgen?' }}
+                {{ __('pages.grote_kuis_examples_label') }}
             </p>
             <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.625rem 2rem; margin-bottom: 2rem; padding: 0; list-style: none;">
-                @php
-                $examples = app()->getLocale() === 'fr'
-                    ? ['Nettoyer le four', 'Réparer un robinet', 'Laver les vitres', 'Nettoyer le tapis', 'Installer une hotte', 'Laver les rideaux', 'Peindre les toilettes']
-                    : ['Oven kuisen', 'Kraantje repareren', 'Ruiten wassen', 'Tapijt kuisen', 'Dampkap installeren', 'Gordijnen wassen', 'Toilet schilderen'];
-                @endphp
-                @foreach ($examples as $example)
+                @foreach (trans('pages.grote_kuis_examples') as $example)
                     <li style="font-size: 1rem; color: var(--color-brand-dark); display: flex; align-items: center; gap: 0.5rem;">
                         <span style="flex-shrink: 0; width: 7px; height: 7px; border-radius: 50%; background-color: var(--color-brand-orange);"></span>
                         {{ $example }}
@@ -173,9 +164,7 @@
             </ul>
 
             <p style="font-size: 1.0625rem; line-height: 1.7; color: var(--color-brand-dark); margin-bottom: 2rem;">
-                {{ app()->getLocale() === 'fr'
-                    ? 'Vous êtes intéressé(e) ou vous connaissez quelqu\'un qui pourrait l\'être ? Faites-le nous savoir !'
-                    : 'Heb je interesse of ken je iemand die hiervoor interesse heeft? Laat het ons zeker weten!' }}
+                {{ __('pages.grote_kuis_cta') }}
             </p>
 
             <div style="border-top: 1px solid var(--color-brand-gray-dark); padding-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
@@ -192,7 +181,7 @@
 
         <div class="diensten-intro-photo" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 3/4;">
             <img src="{{ asset('images/grote-kuis.jpg') }}"
-                 alt="Project Grote Kuis"
+                 alt="{{ __('pages.grote_kuis_title') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
 

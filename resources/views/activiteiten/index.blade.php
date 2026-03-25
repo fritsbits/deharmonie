@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', app()->getLocale() === 'fr' ? 'Accueil' : 'Home')
+@section('title', __('pages.home_title'))
 
 @section('content')
 
@@ -53,24 +53,21 @@
     <div class="section-flex" style="max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
 
         <div style="flex: 1;">
-            <x-eyebrow color="orange" mb="0.75rem">Sociaal restaurant · Restaurant social</x-eyebrow>
+            <x-eyebrow color="orange" mb="0.75rem">{{ __('pages.home_restaurant_label') }}</x-eyebrow>
             <h2 style="font-family: var(--font-sans); font-size: 1.875rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.15; margin-bottom: 0.75rem;">
-                Elke dag samen aan tafel
+                {{ __('pages.home_restaurant_heading') }}
             </h2>
-            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-dark); margin-bottom: 0.35rem;">
-                <strong>Dagschotels</strong> aan verminderd tarief voor senioren. Afhaal en levering aan huis mogelijk.
-            </p>
-            <p style="font-size: 1rem; line-height: 1.5; color: var(--color-brand-muted); font-style: italic; margin-bottom: 1.5rem;">
-                Plat du jour à un tarif réduit pour les seniors. Emporter et livraison à domicile.
+            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-dark); margin-bottom: 1.5rem;">
+                {!! __('pages.home_restaurant_body') !!}
             </p>
             <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
                style="color: var(--color-brand-blue); font-family: var(--font-sans); font-weight: 700; font-size: 1.0625rem; text-decoration: underline;">
-                Weekmenu de la Semaine →
+                {{ __('pages.home_restaurant_cta') }}
             </a>
         </div>
 
         <div class="section-image" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
-            <img src="{{ asset('images/photo-restaurant-vol.webp') }}" alt="Sociaal restaurant"
+            <img src="{{ asset('images/photo-restaurant-vol.webp') }}" alt="{{ __('pages.home_restaurant_label') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
 
@@ -82,23 +79,20 @@
     <div class="section-flex" style="max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
 
         <div class="section-image" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
-            <img src="{{ asset('images/photo-thumbsup.webp') }}" alt="Activiteiten"
+            <img src="{{ asset('images/photo-thumbsup.webp') }}" alt="{{ __('nav.activities') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
 
         <div style="flex: 1;">
-            <x-eyebrow mb="0.75rem">Activiteiten · Activités</x-eyebrow>
+            <x-eyebrow mb="0.75rem">{{ __('nav.activities') }}</x-eyebrow>
             <h2 style="font-family: var(--font-sans); font-size: 1.875rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.15; margin-bottom: 0.75rem;">
-                Creatief, cultureel en sportief
+                {{ __('pages.home_activities_heading') }}
             </h2>
-            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-dark); margin-bottom: 0.35rem;">
-                <strong>Activiteiten &amp; diensten</strong> in ons centrum en bij u thuis.
-            </p>
-            <p style="font-size: 1rem; line-height: 1.5; color: var(--color-brand-muted); font-style: italic; margin-bottom: 1.5rem;">
-                Des activités dans notre centre et chez vous. Créatif, culturel, formateur.
+            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-dark); margin-bottom: 1.5rem;">
+                {!! __('pages.home_activities_body') !!}
             </p>
 
-            {{-- 3 upcoming activities, no thumbnails --}}
+            {{-- Upcoming activities --}}
             <div style="margin-bottom: 1.5rem;">
                 @forelse ($activiteiten as $activiteit)
                     <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
@@ -107,14 +101,14 @@
                             <span style="font-weight: 700; font-size: 1.25rem; line-height: 1.2; color: var(--color-brand-blue); font-family: var(--font-sans);">
                                 {{ $activiteit->titel }}
                             </span>
-                            @if ($activiteit->status->value === 'geannuleerd')
+                            @if ($activiteit->status === 'geannuleerd')
                                 <x-badge type="geannuleerd">&times;</x-badge>
                             @endif
                         </div>
                         <p style="font-size: 0.9375rem; margin: 0.2rem 0 0; color: var(--color-brand-muted);">
                             {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('dddd')) }}
                             {{ $activiteit->datum->format('j/n') }}
-                            om {{ substr($activiteit->startuur, 0, 5) }}
+                            {{ __('activities.at') }} {{ substr($activiteit->startuur, 0, 5) }}
                             @if ($activiteit->einduur)
                                 &ndash; {{ substr($activiteit->einduur, 0, 5) }}
                             @endif
@@ -123,14 +117,14 @@
                     </a>
                 @empty
                     <p style="padding: 1.5rem 0; color: var(--color-brand-muted);">
-                        {{ app()->getLocale() === 'fr' ? 'Pas d\'activités prévues.' : 'Geen activiteiten gepland.' }}
+                        {{ __('activities.no_upcoming') }}
                     </p>
                 @endforelse
             </div>
 
             <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
                style="color: var(--color-brand-green); font-family: var(--font-sans); font-weight: 700; font-size: 1.0625rem; text-decoration: underline;">
-                {{ app()->getLocale() === 'fr' ? 'Toutes les activités →' : 'Alle activiteiten →' }}
+                {{ __('activities.all') }} →
             </a>
         </div>
 
@@ -142,24 +136,21 @@
     <div class="section-flex" style="max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
 
         <div style="flex: 1;">
-            <x-eyebrow color="blue" mb="0.75rem">Diensten · Services</x-eyebrow>
+            <x-eyebrow color="blue" mb="0.75rem">{{ __('nav.services') }}</x-eyebrow>
             <h2 style="font-family: var(--font-sans); font-size: 1.875rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.15; margin-bottom: 0.75rem;">
-                Ook hulp waar u het nodig heeft
+                {{ __('pages.home_services_heading') }}
             </h2>
-            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-dark); margin-bottom: 0.35rem;">
-                <strong>Partner</strong> voor iedereen met een hart voor onze buurt. Boodschappen, vervoer, poetswerk en meer.
-            </p>
-            <p style="font-size: 1rem; line-height: 1.5; color: var(--color-brand-muted); font-style: italic; margin-bottom: 1.5rem;">
-                Partenaire pour tout le monde. Courses, transport, nettoyage et petites réparations.
+            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-dark); margin-bottom: 1.5rem;">
+                {!! __('pages.home_services_body') !!}
             </p>
             <a href="{{ route(app()->getLocale() . '.diensten') }}"
                style="color: var(--color-brand-dark); font-family: var(--font-sans); font-weight: 700; font-size: 1.0625rem; text-decoration: underline;">
-                Onze diensten →
+                {{ __('pages.home_services_cta') }}
             </a>
         </div>
 
         <div class="section-image" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
-            <img src="{{ asset('images/photo-samen.webp') }}" alt="Diensten"
+            <img src="{{ asset('images/photo-samen.webp') }}" alt="{{ __('nav.services') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
 
@@ -172,27 +163,27 @@
 
         <div class="section-image" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
             <img src="{{ asset('images/photo-gebouw.webp') }}"
-                 alt="{{ app()->getLocale() === 'fr' ? 'De Harmonie — Antwerpsesteenweg' : 'De Harmonie — Antwerpsesteenweg' }}"
+                 alt="De Harmonie — Antwerpsesteenweg"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
 
         <div style="flex: 1;">
-            <x-eyebrow mb="0.15rem">CONTACT &amp; OPENINGSUREN</x-eyebrow>
+            <x-eyebrow mb="0.15rem">CONTACT &amp; {{ __('pages.home_hours_label') }}</x-eyebrow>
             <h2 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.75rem;">
-                {{ app()->getLocale() === 'fr' ? 'Venez nous rendre visite' : 'Kom eens langs' }}
+                {{ __('activities.visit_us') }}
             </h2>
             <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
                 <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.125rem; color: var(--color-brand-dark); font-weight: 600;">
                     <img src="{{ asset('images/icon-clock.svg') }}" alt="" style="width: 26px; height: 26px; flex-shrink: 0;">
-                    10u – 16u30, maandag tot vrijdag
+                    {{ __('pages.home_hours_weekdays') }}
                 </div>
                 <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.125rem; color: var(--color-brand-dark); font-weight: 600;">
                     <img src="{{ asset('images/icon-clock.svg') }}" alt="" style="width: 26px; height: 26px; flex-shrink: 0;">
-                    10u – 14u, zaterdag
+                    {{ __('pages.home_hours_saturday') }}
                 </div>
             </div>
             <p style="font-size: 1.125rem; line-height: 1.7; color: var(--color-brand-muted); margin-bottom: 2rem;">
-                Kom voor een lekker maaltijd of voor de activiteiten en uitstappen. We geven je graag ook meer info over diensten zoals vervoer, poetsdienst (ook ruilen wassen), boodschappen, kleine herstellingen, wassen en strijken en maaltijden aan huis.
+                {{ __('pages.home_hours_body') }}
             </p>
             <p style="font-size: 1.125rem; color: var(--color-brand-muted); margin-bottom: 1.25rem; line-height: 1.6;">
                 VZW Buurtwerk Noordwijk<br>
