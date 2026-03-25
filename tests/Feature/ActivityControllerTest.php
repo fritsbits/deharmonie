@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Livewire\ActivityFilter;
 use App\Models\Activiteit;
+use App\Models\Deelnameverzoek;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -15,11 +17,11 @@ class ActivityControllerTest extends TestCase
     {
         $gepubliceerd = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum'  => now()->format('Y-m-d'),
+            'datum' => now()->format('Y-m-d'),
         ]);
         $concept = Activiteit::factory()->create([
             'status' => 'concept',
-            'datum'  => now()->format('Y-m-d'),
+            'datum' => now()->format('Y-m-d'),
         ]);
 
         $response = $this->get('/');
@@ -52,8 +54,10 @@ class ActivityControllerTest extends TestCase
 
     public function test_empty_state_shown_when_no_activities(): void
     {
+        Activiteit::query()->delete();
+
         $response = $this->get('/activiteiten');
-        $response->assertSee('Geen activiteiten');
+        $response->assertSee('Momenteel zijn er geen activiteiten gepland.');
     }
 
     public function test_upcoming_activities_shown_including_next_month(): void
@@ -83,7 +87,7 @@ class ActivityControllerTest extends TestCase
             'status' => 'geannuleerd',
             'notice_nl' => 'Deze activiteit gaat niet door.',
         ]);
-        $response = $this->get('/activiteiten/' . $activiteit->slug);
+        $response = $this->get('/activiteiten/'.$activiteit->slug);
         $response->assertSee('Deze activiteit gaat niet door.');
         $response->assertDontSee('Inschrijven');
     }
@@ -91,7 +95,7 @@ class ActivityControllerTest extends TestCase
     public function test_activity_detail_shows_registration_form_for_published(): void
     {
         $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
-        $response = $this->get('/activiteiten/' . $activiteit->slug);
+        $response = $this->get('/activiteiten/'.$activiteit->slug);
         $response->assertStatus(200);
         $response->assertSee('formulier'); // registration form is shown
     }
@@ -102,9 +106,9 @@ class ActivityControllerTest extends TestCase
             'status' => 'gepubliceerd',
             'max_deelnemers' => 1,
         ]);
-        \App\Models\Deelnameverzoek::factory()->create(['activiteit_id' => $activiteit->id]);
+        Deelnameverzoek::factory()->create(['activiteit_id' => $activiteit->id]);
 
-        $response = $this->get('/activiteiten/' . $activiteit->slug);
+        $response = $this->get('/activiteiten/'.$activiteit->slug);
         $response->assertSee('Volzet');
     }
 
@@ -112,10 +116,10 @@ class ActivityControllerTest extends TestCase
     {
         Activiteit::factory()->count(7)->create([
             'status' => 'gepubliceerd',
-            'datum'  => now()->format('Y-m-d'),
+            'datum' => now()->format('Y-m-d'),
         ]);
 
-        $component = Livewire::test(\App\Livewire\ActivityFilter::class);
+        $component = Livewire::test(ActivityFilter::class);
         $activiteiten = $component->get('activiteiten');
         $this->assertCount(5, $activiteiten);
     }
