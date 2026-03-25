@@ -10,7 +10,7 @@
     <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
        class="text-sm font-semibold hover:underline"
        style="color: var(--color-brand-blue)">
-        &larr; {{ app()->getLocale() === 'fr' ? 'Retour aux activités' : 'Terug naar alle activiteiten' }}
+        {{ __('activities.back') }}
     </a>
 
     <div class="mt-6">
@@ -43,7 +43,7 @@
              style="border-top: 1px solid var(--color-brand-gray); border-bottom: 1px solid var(--color-brand-gray)">
             <div>
                 <span class="block text-xs uppercase font-bold mb-0.5" style="color: var(--color-brand-muted)">
-                    {{ app()->getLocale() === 'fr' ? 'Heure' : 'Uur' }}
+                    {{ __('activities.time') }}
                 </span>
                 <span style="color: var(--color-brand-dark)">
                     {{ substr($activiteit->startuur, 0, 5) }}

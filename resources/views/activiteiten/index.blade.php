@@ -146,7 +146,7 @@
                 OPENINGSUREN
             </p>
             <h2 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.75rem;">
-                {{ app()->getLocale() === 'fr' ? 'Venez nous rendre visite' : 'Kom eens langs' }}
+                {{ __('activities.visit_us') }}
             </h2>
             <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
                 <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.125rem; color: var(--color-brand-dark); font-weight: 600;">

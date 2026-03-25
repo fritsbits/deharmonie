@@ -20,4 +20,10 @@ return [
     'at' => 'om',
     'label' => 'ACTIVITEIT',
     'all' => 'Alle activiteiten',
+    'no_upcoming' => 'Geen activiteiten gepland.',
+    'visit_us' => 'Kom eens langs',
+    'overview_tagline' => 'Klik op een activiteit om meer info te lezen en je inschrijving aan te vragen.',
+    'badge_gratis'     => 'Gratis',
+    'badge_cancelled'  => 'Geannuleerd',
+    'badge_full'       => 'Volzet',
 ];

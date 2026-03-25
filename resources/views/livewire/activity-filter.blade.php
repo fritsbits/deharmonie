@@ -46,7 +46,7 @@
             </a>
         @empty
             <p style="padding: 2rem 0; color: var(--color-brand-muted); font-size: 0.9rem;">
-                {{ app()->getLocale() === 'fr' ? 'Pas d\'activités prévues.' : 'Geen activiteiten gepland.' }}
+                {{ __('activities.no_upcoming') }}
             </p>
         @endforelse
     </div>

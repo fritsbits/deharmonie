@@ -8,11 +8,11 @@
         </div>
     @elseif (! $activiteit->isBeschikbaar())
         <div class="rounded-lg p-4 text-sm font-semibold" style="background-color: #fff3e0; color: #e65100; border: 1px solid #ffccbc">
-            {{ app()->getLocale() === 'fr' ? 'Complet' : 'Volzet' }}
+            {{ __('activities.full') }}
         </div>
     @else
         <h2 class="font-bold text-xl mb-4" style="font-family: var(--font-sans); color: var(--color-brand-dark)">
-            {{ app()->getLocale() === 'fr' ? 'S\'inscrire' : 'Inschrijven' }}
+            {{ __('forms.heading') }}
         </h2>
         <form wire:submit="submit" class="space-y-4">
             {{-- Honeypot --}}
