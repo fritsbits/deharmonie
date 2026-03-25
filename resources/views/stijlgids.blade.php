@@ -272,11 +272,59 @@
     </div>
 </section>
         <section id="navigatie" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
-            <p style="color: var(--color-brand-muted);">Navigatiebalk — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Navigatiebalk</h2>
+
+    <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
+        <header style="background-color: var(--color-brand-blue);">
+            <div style="max-width: 64rem; margin: 0 auto; padding: 1.25rem 1.5rem; display: flex; align-items: center;">
+                <a href="#" style="display: flex; align-items: center;">
+                    <img src="{{ asset('images/logo.png') }}" alt="De Harmonie" style="height: 2rem; width: auto; filter: brightness(0) invert(1);">
+                </a>
+                <nav style="margin-left: auto; display: flex; align-items: center; gap: 2rem; font-family: var(--font-sans);">
+                    <a href="#" style="color: white; font-size: 1.125rem; font-weight: 600; text-decoration: none;">Activiteiten</a>
+                    <a href="#" style="color: white; font-size: 1.125rem; font-weight: 600; text-decoration: none;">Diensten</a>
+                    <a href="#" style="color: white; font-size: 1.125rem; font-weight: 600; text-decoration: none;">Weekmenu de la Semaine</a>
+                    <a href="#" style="color: white; font-size: 1.125rem; font-weight: 600; text-decoration: none;">Contact</a>
+                </nav>
+            </div>
+        </header>
+    </div>
+    <code style="font-size: 0.75rem; color: var(--color-brand-muted);">bg: brand-blue · links: white · font-sans · weight 600 · 1.125rem</code>
+</section>
         <section id="hero" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
-            <p style="color: var(--color-brand-muted);">Hero sectie — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Hero sectie</h2>
+
+    <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1); background: white; padding: 4rem 3rem;">
+        <h1 style="font-family: var(--font-sans); font-size: 3.7rem; font-weight: 900; line-height: 1.1; color: var(--color-brand-dark); margin: 0 0 0.5rem;">
+            Dienstencentrum<br>Restaurant Social
+        </h1>
+        <h2 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 900; color: var(--color-brand-green); line-height: 1.2; margin: 0 0 2rem;">
+            Quartier Noordwijk
+        </h2>
+
+        <div style="display: flex; flex-direction: column; gap: 1.25rem; margin-bottom: 2rem;">
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                <img src="{{ asset('images/icon-check.svg') }}" alt="" style="width: 1.5rem; height: 1.5rem; margin-top: 2px; flex-shrink: 0;">
+                <p style="font-size: 1.125rem; line-height: 1.5; color: var(--color-brand-dark); margin: 0;">
+                    <strong>Activiteiten &amp; diensten</strong> in ons centrum en bij u thuis.<br>
+                    <span style="color: var(--color-brand-muted);">Services &amp; activités chez nous et chez vous.</span>
+                </p>
+            </div>
+            <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
+                <img src="{{ asset('images/icon-check.svg') }}" alt="" style="width: 1.5rem; height: 1.5rem; margin-top: 2px; flex-shrink: 0;">
+                <p style="font-size: 1.125rem; line-height: 1.5; color: var(--color-brand-dark); margin: 0;">
+                    <strong>Dagschotels</strong> aan verminderd tarief voor senioren.
+                </p>
+            </div>
+        </div>
+
+        <a href="#" style="display: inline-block; font-size: 1rem; font-weight: 700; padding: 0.75rem 1.75rem; background-color: var(--color-brand-blue); color: white; border-radius: 4px; text-decoration: none; font-family: var(--font-sans);">
+            Weekmenu de la Semaine
+        </a>
+    </div>
+</section>
         <section id="activiteitenlijst" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
             <p style="color: var(--color-brand-muted);">Activiteitenlijst — nog in te vullen</p>
         </section>
