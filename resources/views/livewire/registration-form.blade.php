@@ -22,7 +22,7 @@
 
             <div>
                 <label class="block text-xs font-bold uppercase mb-1" style="color: var(--color-brand-muted)">
-                    {{ app()->getLocale() === 'fr' ? 'Nom' : 'Naam' }} *
+                    {{ __('forms.name') }} *
                 </label>
                 <input type="text" wire:model="naam"
                        class="w-full px-3 py-2 rounded text-sm focus:outline-none @error('naam') ring-1 ring-red-400 @enderror"
@@ -32,7 +32,7 @@
 
             <div>
                 <label class="block text-xs font-bold uppercase mb-1" style="color: var(--color-brand-muted)">
-                    E-mail *
+                    {{ __('forms.email') }} *
                 </label>
                 <input type="email" wire:model="email"
                        class="w-full px-3 py-2 rounded text-sm focus:outline-none @error('email') ring-1 ring-red-400 @enderror"
@@ -42,7 +42,7 @@
 
             <div>
                 <label class="block text-xs font-bold uppercase mb-1" style="color: var(--color-brand-muted)">
-                    {{ app()->getLocale() === 'fr' ? 'Téléphone (optionnel)' : 'Telefoon (optioneel)' }}
+                    {{ __('forms.phone') }}
                 </label>
                 <input type="tel" wire:model="telefoon"
                        class="w-full px-3 py-2 rounded text-sm focus:outline-none"
@@ -51,7 +51,7 @@
 
             <div>
                 <label class="block text-xs font-bold uppercase mb-1" style="color: var(--color-brand-muted)">
-                    {{ app()->getLocale() === 'fr' ? 'Message (optionnel)' : 'Bericht (optioneel)' }}
+                    {{ __('forms.message_label') }} *
                 </label>
                 <textarea wire:model="bericht" rows="3"
                           class="w-full px-3 py-2 rounded text-sm focus:outline-none"
@@ -62,7 +62,7 @@
                     class="text-sm font-bold px-6 py-3 rounded text-white"
                     style="background-color: var(--color-brand-orange); font-family: var(--font-sans)"
                     wire:loading.attr="disabled">
-                <span wire:loading.remove>{{ app()->getLocale() === 'fr' ? 'S\'inscrire' : 'Inschrijven' }}</span>
+                <span wire:loading.remove>{{ __('forms.submit') }}</span>
                 <span wire:loading>...</span>
             </button>
         </form>
