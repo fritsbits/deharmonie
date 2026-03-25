@@ -49,7 +49,7 @@
         {{-- Activities in this month --}}
         @foreach ($items as $activiteit)
             <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
-               class="activity-row {{ $activiteit->status === 'geannuleerd' ? 'activity-row--cancelled' : '' }}">
+               class="activity-row {{ $activiteit->status->value === 'geannuleerd' ? 'activity-row--cancelled' : '' }}">
 
                 {{-- Date block --}}
                 <div style="flex-shrink: 0; width: 48px; text-align: center;">
@@ -62,7 +62,7 @@
                         <p style="font-weight: 700; font-size: 1.0625rem; line-height: 1.3; color: var(--color-brand-dark); font-family: var(--font-sans); margin: 0;">
                             {{ $activiteit->titel }}
                         </p>
-                        @if ($activiteit->status === 'geannuleerd')
+                        @if ($activiteit->status->value === 'geannuleerd')
                             <x-badge type="geannuleerd" />
                         @endif
                     </div>

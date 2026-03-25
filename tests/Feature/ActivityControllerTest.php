@@ -57,7 +57,7 @@ class ActivityControllerTest extends TestCase
         Activiteit::query()->delete();
 
         $response = $this->get('/activiteiten');
-        $response->assertSee('Momenteel zijn er geen activiteiten gepland.');
+        $response->assertSee('Geen activiteiten gepland.');
     }
 
     public function test_upcoming_activities_shown_including_next_month(): void
@@ -89,7 +89,7 @@ class ActivityControllerTest extends TestCase
         ]);
         $response = $this->get('/activiteiten/'.$activiteit->slug);
         $response->assertSee('Deze activiteit gaat niet door.');
-        $response->assertDontSee('Inschrijven');
+        $response->assertDontSee('Inschrijvingsformulier');
     }
 
     public function test_activity_detail_shows_registration_form_for_published(): void

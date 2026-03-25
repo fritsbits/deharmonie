@@ -18,7 +18,7 @@
         <div class="md:col-span-2">
 
             {{-- Cancellation banner --}}
-            @if ($activiteit->status === 'geannuleerd')
+            @if ($activiteit->status->value === 'geannuleerd')
                 <div class="rounded-lg p-4 mb-6 font-semibold"
                      style="background-color: rgba(235,102,67,0.1); color: var(--color-brand-orange); border: 1px solid rgba(235,102,67,0.3); font-size: 0.875rem;">
                     &times; {{ $activiteit->notice ?? __('activities.cancellation_notice') }}
@@ -62,11 +62,11 @@
             @endif
 
             {{-- Registration form --}}
-            @if ($activiteit->status === 'gepubliceerd')
+            @if ($activiteit->status->value === 'gepubliceerd')
                 <div class="rounded-lg p-6" style="border: 1px solid var(--color-brand-gray); background: white">
                     <livewire:registration-form :activiteit="$activiteit" />
                 </div>
-            @elseif ($activiteit->status === 'geannuleerd')
+            @elseif ($activiteit->status->value === 'geannuleerd')
                 <p class="text-sm italic" style="color: var(--color-brand-muted)">
                     {{ __('activities.registration_closed') }}
                 </p>

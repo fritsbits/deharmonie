@@ -101,7 +101,7 @@
                             <span style="font-weight: 700; font-size: 1.25rem; line-height: 1.2; color: var(--color-brand-blue); font-family: var(--font-sans);">
                                 {{ $activiteit->titel }}
                             </span>
-                            @if ($activiteit->status === 'geannuleerd')
+                            @if ($activiteit->status->value === 'geannuleerd')
                                 <x-badge type="geannuleerd">&times;</x-badge>
                             @endif
                         </div>
