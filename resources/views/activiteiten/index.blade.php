@@ -6,25 +6,37 @@
 
 {{-- HERO --}}
 <section style="background-color: white; overflow: hidden;">
-    <div class="hero-inner" style="display: flex; align-items: stretch; height: 468px;">
+    <div class="hero-inner" style="display: flex; align-items: stretch; min-height: 400px;">
 
-        {{-- Copy — left aligned, flush with nav --}}
+        {{-- Copy --}}
         <div class="hero-copy" style="flex: 1; display: flex; align-items: center;">
             <div style="max-width: 72rem; width: 100%; margin: 0 auto; padding: 3rem 1.5rem;">
-                <x-eyebrow mb="1rem">Noordwijk · Brussel</x-eyebrow>
-                <h1 style="font-family: var(--font-sans); font-size: 4.5rem; font-weight: 900; line-height: 1.05; color: var(--color-brand-dark); margin-bottom: 0.6rem;">
-                    Dienstencentrum<br>Restaurant Social
+                <x-eyebrow mb="1rem">{{ __('pages.home_hero_eyebrow') }}</x-eyebrow>
+                <h1 style="font-family: var(--font-sans); font-size: 4rem; font-weight: 900; line-height: 1.05; color: var(--color-brand-dark); margin-bottom: 1rem;">
+                    {{ __('pages.home_hero_heading_line1') }}<br>
+                    {{ __('pages.home_hero_heading_line2') }}<br>
+                    {{ __('pages.home_hero_heading_line3') }}
                 </h1>
-                <h2 style="font-family: var(--font-sans); font-size: 2.5rem; font-weight: 900; color: var(--color-brand-green); line-height: 1.2;">
-                    Quartier Noordwijk
-                </h2>
+                <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-muted); margin-bottom: 1.75rem; max-width: 38rem;">
+                    {{ __('pages.home_hero_subheading') }}
+                </p>
+                <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+                    <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
+                       style="background: var(--color-brand-orange); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; text-decoration: none;">
+                        {{ __('pages.home_hero_cta_activities') }}
+                    </a>
+                    <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
+                       style="background: transparent; color: var(--color-brand-blue); padding: 0.75rem 1.5rem; border-radius: 6px; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid var(--color-brand-blue);">
+                        {{ __('pages.home_hero_cta_menu') }}
+                    </a>
+                </div>
             </div>
         </div>
 
-        {{-- Right illustration --}}
-        <div class="hero-col-image" style="flex: 0 0 auto; overflow: hidden;">
-            <img src="{{ asset('images/header-illustration.png') }}" alt=""
-                 style="height: 100%; width: auto; display: block;">
+        {{-- Right photo --}}
+        <div class="hero-col-image" style="flex: 0 0 42%; overflow: hidden;">
+            <img src="{{ asset('images/photo-restaurant-vol.webp') }}" alt=""
+                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
 
     </div>

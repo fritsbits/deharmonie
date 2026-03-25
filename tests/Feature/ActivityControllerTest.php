@@ -28,10 +28,11 @@ class ActivityControllerTest extends TestCase
         // Activity appears via Livewire server-side render
         $response->assertSee($gepubliceerd->titel_nl);
         $response->assertDontSee($concept->titel_nl);
-        // New text-only hero content
-        $response->assertSee('Noordwijk · Brussel');
-        $response->assertSee('Dienstencentrum');
-        $response->assertSee('Quartier Noordwijk');
+        // New hero content
+        $response->assertSee('Eet mee');
+        $response->assertSee('Doe mee');
+        $response->assertSee('Kom langs');
+        $response->assertSee('Bekijk activiteiten');
         // Three sections present
         $response->assertSee('Elke dag samen aan tafel');
         $response->assertSee('Komende activiteiten');
