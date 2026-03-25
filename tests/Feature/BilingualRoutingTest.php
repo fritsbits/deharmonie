@@ -62,4 +62,11 @@ class BilingualRoutingTest extends TestCase
         $response = $this->get('/');
         $response->assertSee('set-locale', false); // link to /set-locale exists
     }
+
+    public function test_footer_shows_fr_labels_on_fr_routes(): void
+    {
+        $response = $this->get('/fr');
+        $response->assertSee('Avec le soutien de');
+        $response->assertSee('Suivez De Harmonie sur Facebook');
+    }
 }
