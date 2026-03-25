@@ -15,16 +15,27 @@ class ActivityControllerTest extends TestCase
     {
         $gepubliceerd = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->format('Y-m-d'),
+            'datum'  => now()->format('Y-m-d'),
         ]);
         $concept = Activiteit::factory()->create([
             'status' => 'concept',
-            'datum' => now()->format('Y-m-d'),
+            'datum'  => now()->format('Y-m-d'),
         ]);
 
         $response = $this->get('/');
+        // Activity appears via Livewire server-side render
         $response->assertSee($gepubliceerd->titel_nl);
         $response->assertDontSee($concept->titel_nl);
+        // New text-only hero content
+        $response->assertSee('Noordwijk · Brussel');
+        $response->assertSee('Dienstencentrum');
+        $response->assertSee('Quartier Noordwijk');
+        // Three sections present
+        $response->assertSee('Elke dag samen aan tafel');
+        $response->assertSee('Creatief, cultureel en sportief');
+        $response->assertSee('Ook hulp waar u het nodig heeft');
+        // Old standalone AGENDA section is gone
+        $response->assertDontSee('Volgende activiteiten');
     }
 
     public function test_cancelled_activity_shows_badge(): void

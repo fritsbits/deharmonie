@@ -6,9 +6,19 @@ use App\Models\Activiteit;
 
 class ActivityController extends Controller
 {
-    public function index()
+    public function home()
     {
         return view('activiteiten.index');
+    }
+
+    public function index()
+    {
+        $activiteiten = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
+            ->where('datum', '>=', now()->startOfDay())
+            ->orderBy('datum')
+            ->orderBy('startuur')
+            ->get();
+        return view('activiteiten.overzicht', compact('activiteiten'));
     }
 
     public function show(string $slug)

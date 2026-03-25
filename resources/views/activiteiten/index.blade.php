@@ -1,127 +1,182 @@
 @extends('layouts.app')
 
-@section('title', app()->getLocale() === 'fr' ? 'Activités' : 'Activiteiten')
+@section('title', app()->getLocale() === 'fr' ? 'Accueil' : 'Home')
 
 @section('content')
 
-{{-- HERO --}}
-<section class="max-w-5xl mx-auto px-6 pt-12 pb-8">
-    <div class="flex items-start justify-between gap-8">
-        <div class="flex-1 max-w-xl">
-            <h1 style="font-family: var(--font-sans); font-size: 3rem; font-weight: 800; line-height: 1.1; color: var(--color-brand-dark);" class="mb-2">
-                Dienstencentrum<br>Restaurant Social
-            </h1>
-            <p class="text-lg font-semibold mb-6" style="color: var(--color-brand-orange)">Quartier Noordwijk</p>
+{{-- HERO: text only --}}
+<section style="background-color: white; border-bottom: 1px solid #ebe8e5;">
+    <div style="max-width: 64rem; margin: 0 auto; padding: 3rem 1.5rem 2.5rem;">
+        <p style="font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-green); margin-bottom: 0.4rem;">
+            Noordwijk · Brussel
+        </p>
+        <h1 style="font-family: var(--font-sans); font-size: 2.8rem; font-weight: 900; line-height: 1.05; color: var(--color-brand-dark); margin-bottom: 0.35rem;">
+            Dienstencentrum<br>Restaurant Social
+        </h1>
+        <h2 style="font-family: var(--font-sans); font-size: 1.6rem; font-weight: 900; color: var(--color-brand-green); line-height: 1.2;">
+            Quartier Noordwijk
+        </h2>
+    </div>
+</section>
 
-            <div class="space-y-3 mb-8">
-                <div class="flex items-start gap-3">
-                    <img src="{{ asset('images/icon-check.svg') }}" alt="" class="w-6 h-6 mt-0.5 flex-shrink-0">
-                    <p class="text-sm" style="color: var(--color-brand-dark)">
-                        <strong>Activiteiten &amp; diensten</strong> in ons centrum en bij u thuis.<br>
-                        <span style="color: var(--color-brand-muted)">Services &amp; activités chez nous et chez vous.</span>
-                    </p>
-                </div>
-                <div class="flex items-start gap-3">
-                    <img src="{{ asset('images/icon-check.svg') }}" alt="" class="w-6 h-6 mt-0.5 flex-shrink-0">
-                    <p class="text-sm" style="color: var(--color-brand-dark)">
-                        <strong>Dagschotels</strong> aan verminderd tarief voor senioren.<br>
-                        <span style="color: var(--color-brand-muted)">Plat du jour à un tarif réduit pour les seniors.</span>
-                    </p>
-                </div>
-                <div class="flex items-start gap-3">
-                    <img src="{{ asset('images/icon-check.svg') }}" alt="" class="w-6 h-6 mt-0.5 flex-shrink-0">
-                    <p class="text-sm" style="color: var(--color-brand-dark)">
-                        <strong>Partner</strong> voor iedereen met een hart voor onze buurt.<br>
-                        <span style="color: var(--color-brand-muted)">Partenaire pour tout le monde avec un cœur pour notre quartier.</span>
-                    </p>
-                </div>
-            </div>
-
-            <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
-               class="inline-block text-sm font-bold px-6 py-3 rounded text-white"
-               style="background-color: var(--color-brand-orange); font-family: var(--font-sans)">
-               {{ app()->getLocale() === 'fr' ? 'Activités de la semaine' : 'Activiteiten de la Semaine' }}
+{{-- SECTION 1: Restaurant — photo left, text right --}}
+<section style="border-top: 1px solid rgba(216,211,210,0.5);">
+    <div style="display: flex; min-height: 320px;">
+        <div style="flex: 0 0 42%; overflow: hidden; position: relative;">
+            <img src="{{ asset('images/photo-restaurant.jpg') }}" alt="Sociaal restaurant"
+                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+        <div style="flex: 1; padding: 2rem; display: flex; flex-direction: column; background: white;">
+            <p style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-orange); margin-bottom: 0.5rem;">
+                Sociaal restaurant · Restaurant social
+            </p>
+            <h2 style="font-family: var(--font-sans); font-size: 1.35rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.6rem;">
+                Elke dag samen aan tafel
+            </h2>
+            <p style="font-size: 0.95rem; line-height: 1.55; color: var(--color-brand-dark); margin-bottom: 0.35rem;">
+                <strong>Dagschotels</strong> aan verminderd tarief voor senioren. Afhaal en levering aan huis mogelijk.
+            </p>
+            <p style="font-size: 0.88rem; line-height: 1.5; color: var(--color-brand-muted); font-style: italic; margin-bottom: 1.25rem;">
+                Plat du jour à un tarif réduit pour les seniors. Emporter et livraison à domicile.
+            </p>
+            <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
+               style="display: inline-flex; align-items: center; gap: 0.4rem; background: var(--color-brand-blue); color: white; font-family: var(--font-sans); font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.1rem; border-radius: 5px; text-decoration: none; align-self: flex-start; margin-top: auto;">
+                Weekmenu de la Semaine →
             </a>
         </div>
-        <div class="hidden lg:block flex-shrink-0">
-            <img src="{{ asset('images/header-illustration.png') }}" alt="" class="w-72 h-auto">
-        </div>
     </div>
 </section>
 
-{{-- AGENDA --}}
-<section class="max-w-5xl mx-auto px-6 py-8">
-    <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color: var(--color-brand-orange)">
-        AGENDA
-    </p>
-    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark);" class="mb-6">
-        {{ app()->getLocale() === 'fr' ? 'Activités à venir' : 'Volgende activiteiten' }}
-    </h2>
+{{-- SECTION 2: Activities — carousel right, content+list left --}}
+<section style="border-top: 1px solid rgba(216,211,210,0.5);">
+    <div style="display: flex; flex-direction: row-reverse; min-height: 320px;">
 
-    <livewire:activity-filter />
+        {{-- Photo carousel (right) --}}
+        @php $carouselPhotos = ['photo-party.jpg', 'photo-cake.jpg', 'photo-thumbsup.jpg']; @endphp
+        <div x-data="{ current: 0 }"
+             style="flex: 0 0 42%; position: relative; overflow: hidden; min-height: 320px;">
+            @foreach ($carouselPhotos as $idx => $photo)
+                <img src="{{ asset('images/' . $photo) }}"
+                     alt="Activiteiten"
+                     x-show="current === {{ $idx }}"
+                     style="width: 100%; height: 100%; object-fit: cover; display: block; position: absolute; inset: 0;">
+            @endforeach
 
-    <div class="mt-6 flex gap-3">
-        <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
-           class="text-sm font-semibold px-4 py-2 rounded"
-           style="background-color: var(--color-brand-dark); color: white; font-family: var(--font-sans)">
-           {{ app()->getLocale() === 'fr' ? 'Toutes les activités' : 'Alle activiteiten' }}
-        </a>
-        <a href="{{ route(app()->getLocale() . '.activiteiten.print', 'overzicht') }}"
-           class="text-sm font-semibold px-4 py-2 rounded"
-           style="border: 1px solid var(--color-brand-gray); color: var(--color-brand-dark); font-family: var(--font-sans)"
-           onclick="window.print(); return false;">
-           {{ app()->getLocale() === 'fr' ? 'Imprimer l\'aperçu' : 'Print overzicht' }}
-        </a>
-    </div>
-</section>
-
-{{-- PHOTOS --}}
-<section class="max-w-5xl mx-auto px-6 py-4">
-    <div class="grid md:grid-cols-2 gap-4">
-        <img src="{{ asset('images/photo-visitors-1.jpg') }}" alt="Bezoekers aan De Harmonie" class="w-full h-56 object-cover rounded-lg">
-        <img src="{{ asset('images/photo-visitors-2.jpg') }}" alt="Bezoekers aan De Harmonie" class="w-full h-56 object-cover rounded-lg">
-    </div>
-</section>
-
-{{-- OPENING HOURS --}}
-<section id="contact" class="max-w-5xl mx-auto px-6 py-10">
-    <div class="grid md:grid-cols-2 gap-10">
-        <div>
-            <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color: var(--color-brand-orange)">
-                OPENINGSUREN
-            </p>
-            <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark);" class="mb-4">
-                {{ app()->getLocale() === 'fr' ? 'Venez nous rendre visite' : 'Kom eens langs' }}
-            </h2>
-            <div class="space-y-2 text-sm mb-6" style="color: var(--color-brand-dark)">
-                <div class="flex gap-3">
-                    <span class="font-semibold w-16">Ma–Vr<br><span style="color: var(--color-brand-muted); font-weight: normal">Lun–Ven</span></span>
-                    <span>10:00 – 16:30</span>
-                </div>
-                <div class="flex gap-3">
-                    <span class="font-semibold w-16">Za<br><span style="color: var(--color-brand-muted); font-weight: normal">Sam</span></span>
-                    <span>10:00 – 14:00</span>
-                </div>
+            {{-- Prev arrow --}}
+            <button @click="current = (current - 1 + {{ count($carouselPhotos) }}) % {{ count($carouselPhotos) }}"
+                    style="position: absolute; left: 0.6rem; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); color: var(--color-brand-dark); width: 28px; height: 28px; border-radius: 50%; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 2;">
+                ‹
+            </button>
+            {{-- Next arrow --}}
+            <button @click="current = (current + 1) % {{ count($carouselPhotos) }}"
+                    style="position: absolute; right: 0.6rem; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.8); color: var(--color-brand-dark); width: 28px; height: 28px; border-radius: 50%; border: none; cursor: pointer; font-size: 0.95rem; font-weight: 700; display: flex; align-items: center; justify-content: center; z-index: 2;">
+                ›
+            </button>
+            {{-- Dots --}}
+            <div style="position: absolute; bottom: 0.75rem; left: 0; right: 0; display: flex; justify-content: center; gap: 0.4rem; z-index: 2;">
+                @foreach ($carouselPhotos as $idx => $photo)
+                    <span @click="current = {{ $idx }}"
+                          :style="current === {{ $idx }} ? 'opacity:1' : 'opacity:0.5'"
+                          style="width: 7px; height: 7px; border-radius: 50%; background: white; display: block; cursor: pointer;"></span>
+                @endforeach
             </div>
-            <p class="text-sm mb-1" style="color: var(--color-brand-muted)">{{ app()->getLocale() === 'fr' ? 'Vous pouvez nous rejoindre pour les activités et les repas. Nous proposons des plats du jour à tarif réduit pour les seniors.' : 'U kunt bij ons terecht voor activiteiten en maaltijden. We bieden dagschotels aan verminderd tarief voor senioren.' }}</p>
-            <div class="mt-4 space-y-1">
-                <p class="text-sm font-semibold" style="color: var(--color-brand-blue)">02/203.28.48</p>
-                <p class="text-sm" style="color: var(--color-brand-blue)">
-                    <a href="mailto:info@deharmonie.be" class="hover:underline">info@deharmonie.be</a>
+        </div>
+
+        {{-- Header + live activity list (left) --}}
+        <div style="flex: 1; display: flex; flex-direction: column; background: #f5f2ef;">
+            <div style="padding: 2rem 2rem 1rem;">
+                <p style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-green); margin-bottom: 0.5rem;">
+                    Activiteiten · Activités
+                </p>
+                <h2 style="font-family: var(--font-sans); font-size: 1.35rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.5rem;">
+                    Creatief, cultureel en sportief
+                </h2>
+                <p style="font-size: 0.95rem; line-height: 1.55; color: var(--color-brand-dark); margin-bottom: 0.2rem;">
+                    <strong>Activiteiten &amp; diensten</strong> in ons centrum en bij u thuis.
+                </p>
+                <p style="font-size: 0.88rem; line-height: 1.5; color: var(--color-brand-muted); font-style: italic;">
+                    Des activités dans notre centre et chez vous. Créatif, culturel, formateur.
                 </p>
             </div>
-        </div>
-        <div>
-            <div class="rounded-lg overflow-hidden h-64 md:h-full min-h-48" style="border: 1px solid var(--color-brand-gray)">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.5!2d4.3520!3d50.8520!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c38f0b0b0b0b%3A0x0!2zQW50d2VycHNlc3RlZW53ZWcgMjQ!5e0!3m2!1snl!2sbe!4v1234567890"
-                    class="w-full h-full border-0"
-                    allowfullscreen loading="lazy"
-                    title="{{ app()->getLocale() === 'fr' ? 'Carte' : 'Kaart' }}">
-                </iframe>
+            <div style="padding: 0 2rem; flex: 1;">
+                @livewire('activity-filter')
             </div>
+        </div>
+
+    </div>
+</section>
+
+{{-- SECTION 3: Services — photo left, text right --}}
+<section style="border-top: 1px solid rgba(216,211,210,0.5);">
+    <div style="display: flex; min-height: 320px;">
+        <div style="flex: 0 0 42%; overflow: hidden; position: relative;">
+            <img src="{{ asset('images/photo-samen.jpg') }}" alt="Diensten"
+                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        </div>
+        <div style="flex: 1; padding: 2rem; display: flex; flex-direction: column; background: #f0efed;">
+            <p style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-blue); margin-bottom: 0.5rem;">
+                Diensten · Services
+            </p>
+            <h2 style="font-family: var(--font-sans); font-size: 1.35rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.6rem;">
+                Ook hulp waar u het nodig heeft
+            </h2>
+            <p style="font-size: 0.95rem; line-height: 1.55; color: var(--color-brand-dark); margin-bottom: 0.35rem;">
+                <strong>Partner</strong> voor iedereen met een hart voor onze buurt. Boodschappen, vervoer, poetswerk en meer.
+            </p>
+            <p style="font-size: 0.88rem; line-height: 1.5; color: var(--color-brand-muted); font-style: italic; margin-bottom: 1.25rem;">
+                Partenaire pour tout le monde. Courses, transport, nettoyage et petites réparations.
+            </p>
+            <a href="{{ route(app()->getLocale() . '.diensten') }}"
+               style="display: inline-flex; align-items: center; gap: 0.4rem; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-weight: 700; font-size: 0.85rem; padding: 0.5rem 1.1rem; border-radius: 5px; text-decoration: none; align-self: flex-start; margin-top: auto;">
+                Onze diensten →
+            </a>
         </div>
     </div>
 </section>
+
+{{-- OPENING HOURS — unchanged --}}
+<section id="contact" style="background-color: white; position: relative; overflow: hidden;">
+    <img src="{{ asset('images/header-illustration.png') }}"
+         id="opening-hours-illustration"
+         alt=""
+         style="position: absolute; right: 0; top: 0; height: 100%; width: auto; pointer-events: none; user-select: none;">
+    <div class="max-w-5xl mx-auto" style="position: relative; z-index: 1; padding: 4rem 1.5rem;">
+        <div style="max-width: 36rem;">
+            <p style="color: var(--color-brand-green); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.15rem; font-family: var(--font-sans); letter-spacing: 0.06em; text-transform: uppercase;">
+                OPENINGSUREN
+            </p>
+            <h2 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.75rem;">
+                {{ app()->getLocale() === 'fr' ? 'Venez nous rendre visite' : 'Kom eens langs' }}
+            </h2>
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.125rem; color: var(--color-brand-dark); font-weight: 600;">
+                    <img src="{{ asset('images/icon-clock.svg') }}" alt="" style="width: 26px; height: 26px; flex-shrink: 0;">
+                    10u – 16u30, maandag tot vrijdag
+                </div>
+                <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.125rem; color: var(--color-brand-dark); font-weight: 600;">
+                    <img src="{{ asset('images/icon-clock.svg') }}" alt="" style="width: 26px; height: 26px; flex-shrink: 0;">
+                    10u – 14u, zaterdag
+                </div>
+            </div>
+            <p style="font-size: 1.125rem; line-height: 1.7; color: var(--color-brand-muted); margin-bottom: 2rem;">
+                Kom voor een lekker maaltijd of voor de activiteiten en uitstappen. We geven je graag ook meer info over diensten zoals vervoer, poetsdienst (ook ruilen wassen), boodschappen, kleine herstellingen, wassen en strijken en maaltijden aan huis.
+            </p>
+            <p style="margin-bottom: 0.4rem;">
+                <a href="tel:0220328048" style="font-size: 1.25rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: none;">
+                    02/203.28.48
+                </a>
+            </p>
+            <p style="font-size: 1.125rem; color: var(--color-brand-blue);">
+                <a href="mailto:info@deharmonie.be" style="text-decoration: none; color: inherit;">info@deharmonie.be</a>
+            </p>
+        </div>
+    </div>
+</section>
+
+<style>
+@media (max-width: 1023px) {
+    #opening-hours-illustration { display: none; }
+}
+</style>
 
 @endsection
