@@ -22,9 +22,9 @@ class ActivityControllerTest extends TestCase
             'datum' => now()->format('Y-m-d'),
         ]);
 
-        Livewire::test(\App\Livewire\ActivityFilter::class)
-            ->assertSee($gepubliceerd->titel_nl)
-            ->assertDontSee($concept->titel_nl);
+        $response = $this->get('/');
+        $response->assertSee($gepubliceerd->titel_nl);
+        $response->assertDontSee($concept->titel_nl);
     }
 
     public function test_cancelled_activity_shows_badge(): void
@@ -34,20 +34,20 @@ class ActivityControllerTest extends TestCase
             'datum' => now()->format('Y-m-d'),
         ]);
 
-        Livewire::test(\App\Livewire\ActivityFilter::class)
-            ->assertSee($geannuleerd->titel_nl)
-            ->assertSee('Geannuleerd');
+        $response = $this->get('/activiteiten');
+        $response->assertSee($geannuleerd->titel_nl);
+        $response->assertSee('Geannuleerd');
     }
 
     public function test_empty_state_shown_when_no_activities(): void
     {
-        Livewire::test(\App\Livewire\ActivityFilter::class)
-            ->assertSee('Geen activiteiten');
+        $response = $this->get('/activiteiten');
+        $response->assertSee('Geen activiteiten');
     }
 
-    public function test_month_filter_changes_results(): void
+    public function test_upcoming_activities_shown_including_next_month(): void
     {
-        $thisMonth = Activiteit::factory()->create([
+        $today = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
             'datum' => now()->format('Y-m-d'),
         ]);
@@ -55,13 +55,15 @@ class ActivityControllerTest extends TestCase
             'status' => 'gepubliceerd',
             'datum' => now()->addMonth()->format('Y-m-d'),
         ]);
+        $past = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->subDay()->format('Y-m-d'),
+        ]);
 
-        Livewire::test(\App\Livewire\ActivityFilter::class)
-            ->assertSee($thisMonth->titel_nl)
-            ->assertDontSee($nextMonth->titel_nl)
-            ->call('nextMonth')
-            ->assertSee($nextMonth->titel_nl)
-            ->assertDontSee($thisMonth->titel_nl);
+        $response = $this->get('/activiteiten');
+        $response->assertSee($today->titel_nl);
+        $response->assertSee($nextMonth->titel_nl);
+        $response->assertDontSee($past->titel_nl);
     }
 
     public function test_activity_detail_shows_cancellation_banner(): void
@@ -80,7 +82,7 @@ class ActivityControllerTest extends TestCase
         $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
         $response = $this->get('/activiteiten/' . $activiteit->slug);
         $response->assertStatus(200);
-        $response->assertSee('Inschrijven');
+        $response->assertSee('formulier'); // registration form is shown
     }
 
     public function test_activity_detail_shows_full_message_when_at_capacity(): void
@@ -93,5 +95,17 @@ class ActivityControllerTest extends TestCase
 
         $response = $this->get('/activiteiten/' . $activiteit->slug);
         $response->assertSee('Volzet');
+    }
+
+    public function test_activity_filter_shows_at_most_five(): void
+    {
+        Activiteit::factory()->count(7)->create([
+            'status' => 'gepubliceerd',
+            'datum'  => now()->format('Y-m-d'),
+        ]);
+
+        $component = Livewire::test(\App\Livewire\ActivityFilter::class);
+        $activiteiten = $component->get('activiteiten');
+        $this->assertCount(5, $activiteiten);
     }
 }
