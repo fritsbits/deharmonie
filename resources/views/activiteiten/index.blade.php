@@ -23,12 +23,12 @@
 <section style="border-top: 1px solid rgba(216,211,210,0.5);">
     <div style="display: flex; min-height: 320px;">
         <div style="flex: 0 0 42%; overflow: hidden; position: relative;">
-            <img src="{{ asset('images/photo-restaurant.jpg') }}" alt="{{ __('nav.menu') }}"
+            <img src="{{ asset('images/photo-restaurant.jpg') }}" alt="{{ __('pages.home_restaurant_label') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
         <div style="flex: 1; padding: 2rem; display: flex; flex-direction: column; background: white;">
             <p style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-orange); margin-bottom: 0.5rem;">
-                {{ __('nav.menu') }}
+                {{ __('pages.home_restaurant_label') }}
             </p>
             <h2 style="font-family: var(--font-sans); font-size: 1.35rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.6rem;">
                 {{ __('pages.home_restaurant_heading') }}

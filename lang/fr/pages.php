@@ -4,6 +4,7 @@ return [
     'home_title' => 'Accueil',
 
     // Homepage sections
+    'home_restaurant_label' => 'Restaurant social',
     'home_restaurant_heading' => 'À table ensemble chaque jour',
     'home_restaurant_body' => '<strong>Plats du jour</strong> à un tarif réduit pour les seniors. À emporter et livraison à domicile.',
     'home_restaurant_cta' => 'Menu de la semaine →',

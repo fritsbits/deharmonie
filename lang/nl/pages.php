@@ -4,6 +4,7 @@ return [
     'home_title' => 'Home',
 
     // Homepage sections
+    'home_restaurant_label' => 'Sociaal restaurant',
     'home_restaurant_heading' => 'Elke dag samen aan tafel',
     'home_restaurant_body' => '<strong>Dagschotels</strong> aan verminderd tarief voor senioren. Afhaal en levering aan huis mogelijk.',
     'home_restaurant_cta' => 'Weekmenu →',
