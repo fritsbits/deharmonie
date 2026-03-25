@@ -1,8 +1,13 @@
 <?php
 
 use App\Http\Controllers\ActivityController;
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/set-locale/{locale}', [LocaleController::class, 'switch'])
+    ->name('set-locale')
+    ->where('locale', 'nl|fr');
 
 // NL routes (default, no prefix)
 Route::middleware('locale:nl')->group(function () {
