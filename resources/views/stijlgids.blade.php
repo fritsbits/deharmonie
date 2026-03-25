@@ -408,14 +408,103 @@
     <code style="font-size: 0.75rem; color: var(--color-brand-muted);">card: border brand-gray · bg white · rounded 8px · rows separated by 1px brand-gray divider</code>
 </section>
         <section id="registratieformulier" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
-            <p style="color: var(--color-brand-muted);">Registratieformulier — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Registratieformulier</h2>
+
+    <div style="max-width: 480px; border-radius: 8px; padding: 1.5rem; border: 1px solid var(--color-brand-gray); background: white;">
+        <p style="font-weight: 700; font-size: 1rem; color: var(--color-brand-dark); margin: 0 0 0.25rem; font-family: var(--font-sans);">
+            Vul dit formulier in en we bellen je op om te bevestigen.
+        </p>
+        <p style="color: var(--color-brand-muted); font-size: 1rem; margin: 0 0 1.25rem;">
+            Remplissez le formulaire et nous vous appellerons pour confirmer.
+        </p>
+        <form style="display: flex; flex-direction: column; gap: 1rem;">
+            <div>
+                <label style="display: block; font-size: 0.875rem; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Je naam *</label>
+                <input type="text" style="width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--color-brand-gray); border-radius: 4px; background: white; color: var(--color-brand-dark); font-size: 0.875rem; box-sizing: border-box;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.875rem; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Je telefoonnummer *</label>
+                <input type="tel" style="width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--color-brand-gray); border-radius: 4px; background: white; color: var(--color-brand-dark); font-size: 0.875rem; box-sizing: border-box;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.875rem; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Je email</label>
+                <input type="email" style="width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--color-brand-gray); border-radius: 4px; background: white; color: var(--color-brand-dark); font-size: 0.875rem; box-sizing: border-box;">
+            </div>
+            <div>
+                <label style="display: block; font-size: 0.875rem; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Bericht *</label>
+                <textarea rows="3" style="width: 100%; padding: 0.5rem 0.75rem; border: 1px solid var(--color-brand-gray); border-radius: 4px; background: white; color: var(--color-brand-dark); font-size: 0.875rem; box-sizing: border-box;"></textarea>
+            </div>
+            <button type="button" style="font-size: 0.875rem; font-weight: 600; padding: 0.625rem 1.25rem; border-radius: 4px; background-color: var(--color-brand-dark); color: white; font-family: var(--font-sans); border: none; cursor: pointer; align-self: flex-start;">
+                Verzenden
+            </button>
+        </form>
+    </div>
+</section>
         <section id="diensten" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
-            <p style="color: var(--color-brand-muted);">Diensten sectie — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Diensten sectie</h2>
+
+    {{-- Services list --}}
+    <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Diensten lijst</p>
+    <ul style="max-width: 560px; margin: 0 0 2.5rem; border-top: 1px solid var(--color-brand-gray);">
+        @foreach (['Sociale dienst & Wegwijs in socio-cultureel Brussel', 'Sociaal restaurant, afhaal en levering aan huis', 'Boodschappendienst & Vervoersdienst', 'Klusjesdienst & Poetsdienst'] as $dienst)
+        <li style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.85rem 0; border-bottom: 1px solid var(--color-brand-gray); list-style: none;">
+            <span style="flex-shrink: 0; width: 6px; height: 6px; border-radius: 50%; background-color: var(--color-brand-orange); margin-top: 0.45rem;"></span>
+            <span style="font-size: 1rem; color: var(--color-brand-dark); line-height: 1.5;">{{ $dienst }}</span>
+        </li>
+        @endforeach
+    </ul>
+    <code style="font-size: 0.75rem; color: var(--color-brand-muted);">border-top + border-bottom brand-gray · bullet: 6px circle brand-orange · text 1rem brand-dark</code>
+
+    {{-- Service card --}}
+    <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin: 2rem 0 0.75rem;">Diensten kaart</p>
+    <div style="max-width: 560px; background: white; border: 1px solid var(--color-brand-gray); border-radius: 0.75rem; padding: 2rem;">
+        <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin: 0 0 0.5rem; font-family: var(--font-sans);">PROJECT</p>
+        <h2 style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 900; color: var(--color-brand-dark); margin: 0 0 0.75rem;">Hulp bij de Grote Kuis</h2>
+        <p style="font-size: 1rem; line-height: 1.7; color: var(--color-brand-dark); margin: 0 0 1rem;">Met dit project willen we je helpen met de 'Grote Kuis'. Samen met onze poetsers en klussers nemen we je woning onder handen.</p>
+        <a href="#" style="font-size: 1rem; font-weight: 600; color: var(--color-brand-blue); text-decoration: none;">diensten@deharmonie.be</a>
+    </div>
+    <code style="font-size: 0.75rem; color: var(--color-brand-muted);">card: bg white · border brand-gray · rounded-xl · padding 2rem · eyebrow orange</code>
+</section>
         <section id="voettekst" style="padding: 3rem 0;">
-            <p style="color: var(--color-brand-muted);">Voettekst — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Voettekst</h2>
+
+    <div style="border-radius: 8px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.1);">
+        <footer style="background-color: var(--color-brand-blue); color: white;">
+            <div style="max-width: 64rem; margin: 0 auto; padding: 3rem 1.5rem; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2.5rem;">
+                <div>
+                    <img src="{{ asset('images/logo.png') }}" alt="De Harmonie" style="height: 2rem; width: auto; margin-bottom: 1.25rem; filter: brightness(0) invert(1);">
+                    <p style="font-size: 1rem; line-height: 1.6; opacity: 0.8; margin-bottom: 0.5rem;">VZW Buurtwerk Noordwijk<br>Antwerpsesteenweg 24<br>1000 Brussel</p>
+                    <p style="font-size: 1rem; opacity: 0.8; margin-bottom: 0.25rem;">
+                        <a href="#" style="color: white; text-decoration: none;">02 203 28 48</a>
+                    </p>
+                    <p style="font-size: 1rem; opacity: 0.8; margin-bottom: 1.5rem;">
+                        <a href="#" style="color: white; text-decoration: none;">info@deharmonie.be</a>
+                    </p>
+                    <p style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6; margin-bottom: 0.5rem;">Snel naar</p>
+                    <p style="font-size: 1rem; opacity: 0.75; margin-bottom: 0.2rem;"><a href="#" style="color: white; text-decoration: none;">Diensten</a></p>
+                    <p style="font-size: 1rem; opacity: 0.75;"><a href="#" style="color: white; text-decoration: none;">Wie is wie</a></p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.6; margin-bottom: 1rem;">Met steun van</p>
+                    <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <img src="{{ asset('images/logo-vlaanderen.svg') }}" alt="Vlaanderen" style="height: 3rem; width: auto; filter: brightness(0) invert(1); opacity: 0.85;">
+                        <img src="{{ asset('images/logo-bhg.svg') }}" alt="Brussels Hoofdstedelijk Gewest" style="height: 2rem; width: auto; filter: brightness(0) invert(1); opacity: 0.85;">
+                    </div>
+                </div>
+                <div>
+                    <p style="font-size: 1rem; opacity: 0.8; margin-bottom: 1rem;">Volg De Harmonie op Facebook</p>
+                    <img src="{{ asset('images/logo-facebook.png') }}" alt="Facebook" style="width: 2.5rem; height: 2.5rem; opacity: 0.9;">
+                </div>
+            </div>
+            <div style="border-top: 1px solid rgba(255,255,255,0.15); text-align: center; padding: 0.75rem; font-size: 0.85rem; opacity: 0.4;">
+                &copy; {{ date('Y') }} VZW Buurtwerk Noordwijk
+            </div>
+        </footer>
+    </div>
+</section>
 
     </main>
 </div>
