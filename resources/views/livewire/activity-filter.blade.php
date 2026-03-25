@@ -35,7 +35,7 @@
                     <p style="font-size: 0.75rem; margin: 0.1rem 0 0; color: var(--color-brand-muted);">
                         {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('dddd')) }}
                         {{ $activiteit->datum->format('j/n') }}
-                        om {{ substr($activiteit->startuur, 0, 5) }}
+                        {{ __('activities.at') }} {{ substr($activiteit->startuur, 0, 5) }}
                         @if ($activiteit->einduur)
                             &ndash; {{ substr($activiteit->einduur, 0, 5) }}
                         @endif
