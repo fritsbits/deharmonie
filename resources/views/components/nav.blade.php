@@ -1,52 +1,53 @@
-<header class="bg-white shadow-sm">
-    <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
-        <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}" class="flex items-center gap-3">
-            <span class="font-sans font-bold text-xl" style="color: var(--color-brand-green)">De Harmonie</span>
+<header style="background-color: white; border-bottom: 1px solid var(--color-brand-gray); position: relative;">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex items-center justify-between">
+        <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}" class="flex items-center">
+            <img src="{{ asset('images/logo.png') }}" alt="De Harmonie" class="h-10 w-auto">
         </a>
-        <nav class="hidden md:flex items-center gap-6 text-sm font-semibold">
+        <nav class="hidden md:flex items-center gap-8" style="font-family: var(--font-sans);">
             <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
-               class="hover:underline transition-colors"
-               style="color: var(--color-brand-green)">
-               {{ __('nav.activities') }}
+               class="text-sm font-semibold hover:underline"
+               style="color: var(--color-brand-dark)">
+               {{ app()->getLocale() === 'fr' ? 'Activités' : 'Activiteiten' }}
             </a>
             <a href="{{ route(app()->getLocale() . '.diensten') }}"
-               class="hover:underline transition-colors"
-               style="color: var(--color-brand-green)">
-               {{ __('nav.services') }}
+               class="text-sm font-semibold hover:underline"
+               style="color: var(--color-brand-dark)">
+               {{ app()->getLocale() === 'fr' ? 'Services' : 'Diensten' }}
             </a>
-            <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
-               class="hover:underline transition-colors"
-               style="color: var(--color-brand-green)">
-               {{ __('nav.menu') }}
+            <a href="https://docs.google.com/document/d/1QW8cVxFS-ew1TWO5Czk3WXGn567ryRC92C1oluGWX4c/preview"
+               target="_blank"
+               class="text-sm font-semibold hover:underline"
+               style="color: var(--color-brand-dark)">
+               Weekmenu de la Semaine
             </a>
             <a href="{{ route(app()->getLocale() . '.contact') }}"
-               class="hover:underline transition-colors"
-               style="color: var(--color-brand-green)">
-               {{ __('nav.contact') }}
+               class="text-sm font-semibold hover:underline"
+               style="color: var(--color-brand-dark)">
+               Contact
             </a>
             @php
                 $switchLocale = app()->getLocale() === 'nl' ? 'fr' : 'nl';
                 $switchRoute = $switchLocale . '.activiteiten.index';
             @endphp
             <a href="{{ route($switchRoute) }}"
-               class="text-sm font-semibold border px-3 py-1 rounded transition-colors"
-               style="border-color: var(--color-brand-green); color: var(--color-brand-green)">
-               {{ __('nav.language_switch') }}
+               class="text-xs font-bold px-3 py-1 rounded"
+               style="background-color: var(--color-brand-gray); color: var(--color-brand-dark)">
+               {{ app()->getLocale() === 'nl' ? 'FR' : 'NL' }}
             </a>
         </nav>
-        <!-- Mobile menu toggle -->
-        <button x-data @click="$dispatch('toggle-menu')" class="md:hidden p-2 rounded" aria-label="Menu">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
-            </svg>
-        </button>
-    </div>
-    <!-- Mobile nav -->
-    <div x-data="{ open: false }" @toggle-menu.window="open = !open" x-show="open" class="md:hidden bg-white border-t px-4 py-3 space-y-3">
-        <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}" class="block font-semibold">{{ __('nav.activities') }}</a>
-        <a href="{{ route(app()->getLocale() . '.diensten') }}" class="block font-semibold">{{ __('nav.services') }}</a>
-        <a href="{{ route(app()->getLocale() . '.weekmenu') }}" class="block font-semibold">{{ __('nav.menu') }}</a>
-        <a href="{{ route(app()->getLocale() . '.contact') }}" class="block font-semibold">{{ __('nav.contact') }}</a>
-        <a href="{{ route($switchRoute) }}" class="block font-semibold">{{ __('nav.language_switch') }}</a>
+        <!-- Mobile toggle -->
+        <div x-data="{ open: false }">
+            <button @click="open = !open" class="md:hidden p-2">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+            <div x-show="open" class="absolute top-full left-0 right-0 bg-white border-t px-6 py-4 space-y-3 md:hidden z-50">
+                <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}" class="block text-sm font-semibold">{{ app()->getLocale() === 'fr' ? 'Activités' : 'Activiteiten' }}</a>
+                <a href="{{ route(app()->getLocale() . '.diensten') }}" class="block text-sm font-semibold">{{ app()->getLocale() === 'fr' ? 'Services' : 'Diensten' }}</a>
+                <a href="https://docs.google.com/document/d/1QW8cVxFS-ew1TWO5Czk3WXGn567ryRC92C1oluGWX4c/preview" target="_blank" class="block text-sm font-semibold">Weekmenu de la Semaine</a>
+                <a href="{{ route(app()->getLocale() . '.contact') }}" class="block text-sm font-semibold">Contact</a>
+            </div>
+        </div>
     </div>
 </header>

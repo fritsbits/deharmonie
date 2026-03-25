@@ -1,25 +1,17 @@
 @extends('layouts.app')
-@section('title', __('nav.menu'))
+@section('title', 'Weekmenu de la Semaine')
 @section('content')
-<div class="max-w-5xl mx-auto px-4 py-10">
-    <h1 class="font-sans font-extrabold text-3xl mb-6" style="color: var(--color-brand-dark)">
-        {{ __('nav.menu') }}
+<div class="max-w-5xl mx-auto px-6 py-10">
+    <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color: var(--color-brand-orange)">WEEKMENU</p>
+    <h1 class="font-bold text-3xl mb-6" style="font-family: var(--font-sans); color: var(--color-brand-dark)">
+        Weekmenu de la Semaine
     </h1>
-    @if (config('app.weekly_menu_url'))
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden" style="height: 800px;">
-            <iframe src="{{ config('app.weekly_menu_url') }}"
-                    class="w-full h-full border-0"
-                    title="{{ __('nav.menu') }}">
-            </iframe>
-        </div>
-    @else
-        <div class="bg-white rounded-xl shadow-sm p-8 text-center text-gray-500">
-            <p>
-                {{ app()->getLocale() === 'fr'
-                    ? 'Le menu de la semaine n\'est pas encore disponible.'
-                    : 'Het weekmenu is nog niet beschikbaar.' }}
-            </p>
-        </div>
-    @endif
+    <div class="rounded-lg overflow-hidden" style="height: 900px; border: 1px solid var(--color-brand-gray)">
+        <iframe
+            src="https://docs.google.com/document/d/1QW8cVxFS-ew1TWO5Czk3WXGn567ryRC92C1oluGWX4c/preview"
+            class="w-full h-full border-0"
+            title="Weekmenu de la Semaine">
+        </iframe>
+    </div>
 </div>
 @endsection

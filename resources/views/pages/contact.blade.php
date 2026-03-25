@@ -1,56 +1,50 @@
 @extends('layouts.app')
 @section('title', 'Contact')
 @section('content')
-<div class="max-w-5xl mx-auto px-4 py-10">
-    <h1 class="font-sans font-extrabold text-3xl mb-8" style="color: var(--color-brand-dark)">Contact</h1>
-    <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-white rounded-xl shadow-sm p-6 space-y-4">
+<div class="max-w-5xl mx-auto px-6 py-10">
+    <p class="text-xs font-bold uppercase tracking-widest mb-1" style="color: var(--color-brand-orange)">CONTACT</p>
+    <h1 class="font-bold text-3xl mb-8" style="font-family: var(--font-sans); color: var(--color-brand-dark)">
+        {{ app()->getLocale() === 'fr' ? 'Venez nous rendre visite' : 'Kom eens langs' }}
+    </h1>
+    <div class="grid md:grid-cols-2 gap-10">
+        <div class="space-y-6">
             <div>
-                <h2 class="font-sans font-bold text-lg mb-1">
+                <h2 class="text-xs font-bold uppercase tracking-widest mb-2" style="color: var(--color-brand-muted)">
                     {{ app()->getLocale() === 'fr' ? 'Adresse' : 'Adres' }}
                 </h2>
-                <p>Antwerpsesteenweg 24<br>1000 Brussel</p>
+                <p style="color: var(--color-brand-dark)">
+                    Antwerpsesteenweg 24<br>1000 Brussel
+                </p>
             </div>
             <div>
-                <h2 class="font-sans font-bold text-lg mb-1">
+                <h2 class="text-xs font-bold uppercase tracking-widest mb-2" style="color: var(--color-brand-muted)">
                     {{ app()->getLocale() === 'fr' ? 'Heures d\'ouverture' : 'Openingsuren' }}
                 </h2>
-                <p>{{ app()->getLocale() === 'fr' ? 'Lun–Ven' : 'Ma–Vr' }}: 9:30–16:30</p>
-                <p>{{ app()->getLocale() === 'fr' ? 'Sam' : 'Za' }}: 10:00–14:00</p>
+                <div class="space-y-1 text-sm" style="color: var(--color-brand-dark)">
+                    <p>{{ app()->getLocale() === 'fr' ? 'Lun–Ven' : 'Ma–Vr' }}: 10:00–16:30</p>
+                    <p>{{ app()->getLocale() === 'fr' ? 'Sam' : 'Za' }}: 10:00–14:00</p>
+                </div>
             </div>
             <div>
-                <h2 class="font-sans font-bold text-lg mb-1">
+                <h2 class="text-xs font-bold uppercase tracking-widest mb-2" style="color: var(--color-brand-muted)">
                     {{ app()->getLocale() === 'fr' ? 'Téléphone' : 'Telefoon' }}
                 </h2>
-                <p>
-                    <a href="tel:0220328048" class="font-semibold underline" style="color: var(--color-brand-green)">
-                        02 203 28 48
-                    </a>
-                </p>
+                <a href="tel:0220328048" class="font-semibold hover:underline" style="color: var(--color-brand-blue)">02/203.28.48</a>
             </div>
             <div>
-                <h2 class="font-sans font-bold text-lg mb-1">Email</h2>
-                <p>
-                    <a href="mailto:info@deharmonie.be" class="font-semibold underline" style="color: var(--color-brand-green)">
-                        info@deharmonie.be
-                    </a>
-                </p>
-                <p class="text-sm text-gray-500 mt-1">
-                    {{ app()->getLocale() === 'fr' ? 'Activités :' : 'Activiteiten:' }}
-                    <a href="mailto:animatie@deharmonie.be" class="underline">animatie@deharmonie.be</a>
-                </p>
-                <p class="text-sm text-gray-500">
-                    {{ app()->getLocale() === 'fr' ? 'Services :' : 'Diensten:' }}
-                    <a href="mailto:diensten@deharmonie.be" class="underline">diensten@deharmonie.be</a>
+                <h2 class="text-xs font-bold uppercase tracking-widest mb-2" style="color: var(--color-brand-muted)">Email</h2>
+                <p class="space-y-1 text-sm">
+                    <a href="mailto:info@deharmonie.be" class="block hover:underline" style="color: var(--color-brand-blue)">info@deharmonie.be</a>
+                    <a href="mailto:animatie@deharmonie.be" class="block hover:underline text-xs" style="color: var(--color-brand-muted)">animatie@deharmonie.be</a>
+                    <a href="mailto:diensten@deharmonie.be" class="block hover:underline text-xs" style="color: var(--color-brand-muted)">diensten@deharmonie.be</a>
                 </p>
             </div>
         </div>
-        <div class="bg-white rounded-xl shadow-sm overflow-hidden min-h-64">
+        <div class="rounded-lg overflow-hidden" style="min-height: 300px; border: 1px solid var(--color-brand-gray)">
             <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.5!2d4.352!3d50.852!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c38f0b0b0b0b%3A0x0!2zQW50d2VycHNlc3RlZW53ZWcgMjQsIDEwMDAgQnJ1c3NlbA!5e0!3m2!1snl!2sbe!4v1234567890!5m2!1snl!2sbe"
-                class="w-full h-full min-h-64 border-0"
-                allowfullscreen
-                loading="lazy"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2519.5!2d4.3520!3d50.8520!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47c3c38f0b0b0b0b%3A0x0!2zQW50d2VycHNlc3RlZW53ZWcgMjQ!5e0!3m2!1snl!2sbe!4v1234567890"
+                class="w-full h-full border-0 min-h-64"
+                allowfullscreen loading="lazy"
                 title="{{ app()->getLocale() === 'fr' ? 'Carte' : 'Kaart' }}">
             </iframe>
         </div>

@@ -3,8 +3,14 @@
 @theme {
     --font-sans: 'Nunito Sans', sans-serif;
     --font-body: 'Source Sans 3', sans-serif;
-    --color-brand-green: #4a7c59;
-    --color-brand-green-light: #6a9e79;
-    --color-brand-cream: #f5f0e8;
-    --color-brand-dark: #2c2c2c;
+
+    --color-brand-bg: #fbfaf9;
+    --color-brand-dark: #2c2826;
+    --color-brand-muted: #706662;
+    --color-brand-green: #81b59c;
+    --color-brand-orange: #eb6643;
+    --color-brand-blue: #4679bc;
+    --color-brand-gray: #d8d3d2;
+    --color-brand-gray-dark: #c0bbb9;
+    --color-brand-medium: #4e4543;
 }
