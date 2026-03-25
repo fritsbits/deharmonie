@@ -17,7 +17,7 @@
         {{-- Status badge --}}
         @if ($activiteit->status === 'geannuleerd')
             <div class="rounded-lg p-4 mb-6 text-sm font-semibold" style="background-color: #fde8e3; color: #c0392b; border: 1px solid #f5c6b8;">
-                &times; {{ $activiteit->notice ?? (app()->getLocale() === 'fr' ? 'Cette activité est annulée.' : 'Deze activiteit is geannuleerd.') }}
+                &times; {{ $activiteit->notice ?? __('activities.cancellation_notice') }}
             </div>
         @endif
 
@@ -34,7 +34,7 @@
             <a href="{{ route(app()->getLocale() . '.activiteiten.print', $activiteit->slug) }}"
                class="flex-shrink-0 text-xs font-semibold px-3 py-1.5 rounded"
                style="border: 1px solid var(--color-brand-gray); color: var(--color-brand-muted)">
-                &#9113; {{ app()->getLocale() === 'fr' ? 'Imprimer' : 'Afdrukken' }}
+                &#9113; {{ __('activities.print') }}
             </a>
         </div>
 
@@ -52,13 +52,13 @@
             </div>
             <div>
                 <span class="block text-xs uppercase font-bold mb-0.5" style="color: var(--color-brand-muted)">
-                    {{ app()->getLocale() === 'fr' ? 'Lieu' : 'Locatie' }}
+                    {{ __('activities.location') }}
                 </span>
                 <span style="color: var(--color-brand-dark)">{{ $activiteit->locatie }}</span>
             </div>
             <div>
                 <span class="block text-xs uppercase font-bold mb-0.5" style="color: var(--color-brand-muted)">
-                    {{ app()->getLocale() === 'fr' ? 'Prix' : 'Prijs' }}
+                    {{ __('activities.price') }}
                 </span>
                 <span style="color: var(--color-brand-dark)">{{ $activiteit->getPrijsLabel(app()->getLocale()) }}</span>
             </div>
@@ -85,7 +85,7 @@
             </div>
         @elseif ($activiteit->status === 'geannuleerd')
             <p class="text-sm italic" style="color: var(--color-brand-muted)">
-                {{ app()->getLocale() === 'fr' ? 'Inscription fermée (activité annulée).' : 'Inschrijving gesloten (activiteit geannuleerd).' }}
+                {{ __('activities.registration_closed') }}
             </p>
         @endif
     </div>
