@@ -68,7 +68,9 @@ class ActiviteitTemplateService
                 ->whereIn('status', ['te_contacteren', 'afgehandeld'])
                 ->count();
 
-            if ($activeRegistrations > 0) {
+            // Skip only if the new max_deelnemers would cause overbooking; sessions with
+            // registrations but remaining capacity are still eligible for propagation
+            if ($template->max_deelnemers !== null && $activeRegistrations >= $template->max_deelnemers) {
                 continue;
             }
 

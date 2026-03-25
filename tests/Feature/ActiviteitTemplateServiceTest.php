@@ -141,27 +141,52 @@ class ActiviteitTemplateServiceTest extends TestCase
         $this->assertSame('Original', $session->titel_nl);
     }
 
-    public function test_propagate_skips_sessions_with_active_registrations(): void
+    public function test_propagate_skips_session_when_new_max_deelnemers_would_overbook(): void
     {
         $template = ActiviteitTemplate::factory()->create([
             'dag_van_de_week' => 1,
             'reeks_start' => now()->addWeek()->startOfWeek(),
             'reeks_einde' => now()->addWeek()->startOfWeek(),
+            'max_deelnemers' => 2,
         ]);
         $this->service->generateSessions($template);
 
         $session = Activiteit::where('template_id', $template->id)->first();
         $session->update(['titel_nl' => 'Original']);
-        Deelnameverzoek::factory()->create([
-            'activiteit_id' => $session->id,
-            'status' => 'te_contacteren',
+
+        // Fill all spots so the new lower max would overbook
+        Deelnameverzoek::factory()->create(['activiteit_id' => $session->id, 'status' => 'te_contacteren']);
+        Deelnameverzoek::factory()->create(['activiteit_id' => $session->id, 'status' => 'afgehandeld']);
+
+        // Lower max_deelnemers to 1 — session already has 2 registrations, so skip it
+        $template->update(['max_deelnemers' => 1, 'titel_nl' => 'Changed']);
+        $this->service->propagateToFutureSessions($template);
+
+        $session->refresh();
+        $this->assertSame('Original', $session->titel_nl);
+    }
+
+    public function test_propagate_updates_session_with_registrations_but_remaining_capacity(): void
+    {
+        $template = ActiviteitTemplate::factory()->create([
+            'dag_van_de_week' => 1,
+            'reeks_start' => now()->addWeek()->startOfWeek(),
+            'reeks_einde' => now()->addWeek()->startOfWeek(),
+            'max_deelnemers' => 5,
         ]);
+        $this->service->generateSessions($template);
+
+        $session = Activiteit::where('template_id', $template->id)->first();
+        $session->update(['titel_nl' => 'Original']);
+
+        // One registration, but 4 spots remaining — should still be eligible
+        Deelnameverzoek::factory()->create(['activiteit_id' => $session->id, 'status' => 'te_contacteren']);
 
         $template->update(['titel_nl' => 'Changed']);
         $this->service->propagateToFutureSessions($template);
 
         $session->refresh();
-        $this->assertSame('Original', $session->titel_nl);
+        $this->assertSame('Changed', $session->titel_nl);
     }
 
     public function test_slugs_are_never_changed_during_propagation(): void
