@@ -327,11 +327,86 @@
     </div>
 </section>
         <section id="activiteitenlijst" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
-            <p style="color: var(--color-brand-muted);">Activiteitenlijst — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Activiteitenlijst item</h2>
+
+    <div style="max-width: 560px;">
+        {{-- Normaal item --}}
+        <a href="#" style="display: flex; align-items: center; gap: 1.25rem; padding: 1rem 0; text-decoration: none; border-bottom: 1px solid #e5e2de;">
+            <div style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; background-color: var(--color-brand-gray);">
+                <img src="{{ asset('images/interesses/activiteiten.png') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div>
+                <p style="font-weight: 700; font-size: 1.625rem; line-height: 1.2; color: var(--color-brand-blue); font-family: var(--font-sans); margin: 0;">Yoga voor senioren</p>
+                <p style="font-size: 1rem; margin: 0.35rem 0 0; color: var(--color-brand-muted);">Donderdag 27/3 om 10:00 &ndash; 11:30 &middot; Zaal De Harmonie</p>
+            </div>
+        </a>
+        <code style="font-size: 0.7rem; color: var(--color-brand-muted);">thumbnail: 80×80px rounded-8px · title: font-sans 1.625rem weight 700 brand-blue · meta: 1rem brand-muted</code>
+
+        {{-- Geannuleerd item --}}
+        <a href="#" style="display: flex; align-items: center; gap: 1.25rem; padding: 1rem 0; text-decoration: none; border-bottom: 1px solid #e5e2de; opacity: 0.5;">
+            <div style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; background-color: var(--color-brand-gray);">
+                <img src="{{ asset('images/interesses/uitstappen_en_vakanties.png') }}" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <p style="font-weight: 700; font-size: 1.625rem; line-height: 1.2; color: var(--color-brand-blue); font-family: var(--font-sans); margin: 0;">Uitstap Brugge</p>
+                    <span style="flex-shrink: 0; font-size: 0.75rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; background-color: #fde8e3; color: #c0392b;">Geannuleerd</span>
+                </div>
+                <p style="font-size: 1rem; margin: 0.35rem 0 0; color: var(--color-brand-muted);">Vrijdag 28/3 om 08:00 &middot; Vertrek aan de deur</p>
+            </div>
+        </a>
+        <code style="font-size: 0.7rem; color: var(--color-brand-muted);">geannuleerd: opacity 0.5 + badge inline</code>
+    </div>
+</section>
         <section id="activiteit-detail" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
-            <p style="color: var(--color-brand-muted);">Detail sidebar — nog in te vullen</p>
-        </section>
+    <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-green); margin-bottom: 0.25rem; font-family: var(--font-sans);">Stijlgids</p>
+    <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Activiteit detail sidebar</h2>
+
+    <div style="max-width: 280px; border-radius: 8px; padding: 1.25rem; border: 1px solid var(--color-brand-gray); background: white;">
+
+        <div style="margin-bottom: 1rem;">
+            <p style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-brand-muted); margin: 0 0 0.25rem;">Datum</p>
+            <p style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.25rem; margin: 0;">Donderdag 27 maart 2026</p>
+            <p style="font-weight: 600; color: var(--color-brand-muted); font-size: 1.125rem; margin: 0.1rem 0 0;">10:00 &ndash; 11:30</p>
+        </div>
+
+        <div style="border-top: 1px solid var(--color-brand-gray); margin: 1rem 0;"></div>
+
+        <div style="margin-bottom: 1rem;">
+            <p style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-brand-muted); margin: 0 0 0.25rem;">Prijs</p>
+            <span style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.25rem;">€ 5,00</span>
+            &nbsp;
+            <span style="font-size: 1rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; background-color: var(--color-brand-orange); color: white;">Gratis</span>
+        </div>
+
+        <div style="border-top: 1px solid var(--color-brand-gray); margin: 1rem 0;"></div>
+
+        <div style="margin-bottom: 1rem;">
+            <p style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-brand-muted); margin: 0 0 0.25rem;">Locatie</p>
+            <p style="font-weight: 600; color: var(--color-brand-dark); font-size: 1.125rem; margin: 0;">Zaal De Harmonie</p>
+        </div>
+
+        <div style="border-top: 1px solid var(--color-brand-gray); margin: 1rem 0;"></div>
+
+        <div>
+            <p style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-brand-muted); margin: 0 0 0.25rem;">Contact</p>
+            <p style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.125rem; margin: 0 0 0.25rem;">De Harmonie</p>
+            <p style="font-size: 1.125rem; margin: 0 0 0.25rem;">
+                <a href="#" style="color: var(--color-brand-blue); text-decoration: none; font-weight: 700;">02 203 28 48</a>
+            </p>
+            <p style="font-size: 1rem; margin: 0;">
+                <a href="#" style="color: var(--color-brand-blue); text-decoration: none;">info@deharmonie.be</a>
+            </p>
+        </div>
+
+        <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--color-brand-gray);">
+            <a href="#" style="font-size: 0.75rem; font-weight: 600; color: var(--color-brand-muted); text-decoration: none;">&#9113; Afdrukken</a>
+        </div>
+
+    </div>
+    <code style="font-size: 0.75rem; color: var(--color-brand-muted);">card: border brand-gray · bg white · rounded 8px · rows separated by 1px brand-gray divider</code>
+</section>
         <section id="registratieformulier" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
             <p style="color: var(--color-brand-muted);">Registratieformulier — nog in te vullen</p>
         </section>
