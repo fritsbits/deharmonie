@@ -10,7 +10,7 @@
                 $thumbColor = $thumbColors[$colorIdx];
             @endphp
             <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
-               style="display: flex; align-items: center; gap: 1rem; padding: 0.65rem 0; text-decoration: none; opacity: {{ $activiteit->status->value === 'geannuleerd' ? '0.5' : '1' }}; {{ !$loop->last ? 'border-bottom: 1px solid rgba(216,211,210,0.7);' : '' }}">
+               style="display: flex; align-items: center; gap: 1rem; padding: 0.65rem 0; text-decoration: none; opacity: {{ $activiteit->status === 'geannuleerd' ? '0.5' : '1' }}; {{ !$loop->last ? 'border-bottom: 1px solid rgba(216,211,210,0.7);' : '' }}">
 
                 {{-- Thumbnail --}}
                 <div style="flex-shrink: 0; width: 48px; height: 48px; border-radius: 6px; overflow: hidden; background-color: {{ $thumbColor }};">
@@ -26,7 +26,7 @@
                         <p style="font-weight: 700; font-size: 0.85rem; line-height: 1.2; color: var(--color-brand-dark); font-family: var(--font-sans); margin: 0;">
                             {{ $activiteit->titel }}
                         </p>
-                        @if ($activiteit->status->value === 'geannuleerd')
+                        @if ($activiteit->status === 'geannuleerd')
                             <span style="flex-shrink: 0; font-size: 0.7rem; font-weight: 700; padding: 0.1rem 0.4rem; border-radius: 4px; background-color: #fde8e3; color: #c0392b;">
                                 &times;
                             </span>
