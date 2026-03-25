@@ -8,7 +8,7 @@ return [
     'home_restaurant_heading' => 'À table ensemble chaque jour',
     'home_restaurant_body' => '<strong>Plats du jour</strong> à un tarif réduit pour les seniors. À emporter et livraison à domicile.',
     'home_restaurant_cta' => 'Menu de la semaine →',
-    'home_activities_heading' => 'Créatif, culturel et sportif',
+    'home_activities_heading' => 'Prochaines activités',
     'home_activities_body' => '<strong>Activités &amp; services</strong> dans notre centre et chez vous.',
     'home_services_heading' => 'De l\'aide quand vous en avez besoin',
     'home_services_body' => '<strong>Partenaire</strong> pour tout le monde. Courses, transport, nettoyage et petites réparations.',
@@ -17,6 +17,40 @@ return [
     'home_hours_weekdays' => '10h – 16h30, lundi au vendredi',
     'home_hours_saturday' => '10h – 14h, samedi',
     'home_hours_body' => 'Venez pour un bon repas ou pour les activités et sorties. Nous vous donnons aussi plus d\'info sur nos services comme le transport, le service de nettoyage, les courses, les petites réparations et les repas à domicile.',
+
+    // Homepage hero
+    'home_hero_eyebrow' => 'Noordwijk · Bruxelles · 50 ans déjà',
+    'home_hero_heading_line1' => 'Mangez ensemble.',
+    'home_hero_heading_line2' => 'Participez.',
+    'home_hero_heading_line3' => 'Venez nous voir.',
+    'home_hero_subheading' => 'Le cœur battant du Noordwijk. Chaque jour un accueil chaleureux, un repas et des activités pour tout le quartier.',
+    'home_hero_cta_activities' => 'Voir les activités',
+    'home_hero_cta_menu' => 'Menu de la semaine →',
+
+    // Homepage menu preview
+    'home_menu_label' => 'Restaurant & Menu',
+    'home_menu_preview_heading' => "Aujourd'hui & demain à table",
+    'home_menu_soup_included' => 'Potage du jour inclus',
+    'home_menu_link' => 'Voir le menu complet →',
+    'home_menu_today_badge' => "Aujourd'hui",
+
+    // Homepage service cards
+    'home_services_section_heading' => 'Pour tout le quartier',
+    'home_service_restaurant_title' => 'À table ensemble',
+    'home_service_restaurant_body' => 'Chaque jour un repas chaud dans notre restaurant social. À emporter et livraison à domicile possible.',
+    'home_service_restaurant_price' => 'À partir de € 9',
+    'home_service_restaurant_link' => 'En savoir plus →',
+    'home_service_activities_title' => 'Activités & ateliers',
+    'home_service_activities_body' => "De l'italien à la country line dance. Chaque semaine quelque chose à apprendre ou simplement à apprécier.",
+    'home_service_activities_link' => "Voir l'agenda →",
+    'home_service_home_title' => 'Chez vous',
+    'home_service_home_body' => 'Nettoyage, courses, transport, bricolage et repas à domicile. Pour rester chez soi le plus longtemps possible.',
+    'home_service_home_link' => 'Voir les services →',
+
+    // Homepage practical bar
+    'home_practical_address_label' => 'Adresse',
+    'home_practical_hours_label' => "Heures d'ouverture",
+    'home_practical_contact_label' => 'Contact',
 
     // Qui est qui
     'wie_is_wie_title' => 'Qui est qui ?',

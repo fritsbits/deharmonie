@@ -34,7 +34,7 @@ class ActivityControllerTest extends TestCase
         $response->assertSee('Quartier Noordwijk');
         // Three sections present
         $response->assertSee('Elke dag samen aan tafel');
-        $response->assertSee('Creatief, cultureel en sportief');
+        $response->assertSee('Komende activiteiten');
         $response->assertSee('Ook hulp waar u het nodig heeft');
         // Old standalone AGENDA section is gone
         $response->assertDontSee('Volgende activiteiten');
