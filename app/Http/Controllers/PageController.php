@@ -28,6 +28,7 @@ class PageController extends Controller
             'week' => $data['week'],
             'days' => $data['days'],
             'highlightedDate' => $highlightedDate,
+            'highlightedIsToday' => $highlightedDate !== null && $highlightedDate === $now->toDateString(),
         ]);
     }
 

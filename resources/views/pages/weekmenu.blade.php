@@ -61,12 +61,11 @@
         </span>
     </div>
 
+    @php $locale = app()->getLocale(); @endphp
     <div style="display: flex; flex-direction: column; gap: 0.625rem; max-width: 640px;">
         @foreach($days as $day)
             @php
-                $locale = app()->getLocale();
                 $isHighlighted = $highlightedDate && $day['date'] === $highlightedDate;
-                $isToday = $day['date'] === now()->toDateString();
                 $dayLabel = \Carbon\Carbon::parse($day['date'])->locale($locale)->isoFormat('dddd D/MM');
             @endphp
 
@@ -108,7 +107,7 @@
                 <div style="background: {{ $isHighlighted ? '#fff8f5' : 'white' }}; border: 1px solid #e8e0d8; {{ $isHighlighted ? 'border-left: 4px solid var(--color-brand-orange);' : '' }} border-radius: 10px; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
                     <div style="flex: 1; min-width: 0;">
                         @if($isHighlighted)
-                            <span style="display: inline-block; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 1px 7px; border-radius: 999px; margin-bottom: 0.3rem;">{{ $isToday ? __('weekmenu.today') : __('weekmenu.tomorrow') }}</span>
+                            <span style="display: inline-block; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; padding: 1px 7px; border-radius: 999px; margin-bottom: 0.3rem;">{{ $highlightedIsToday ? __('weekmenu.today') : __('weekmenu.tomorrow') }}</span>
                         @endif
                         <p style="font-family: var(--font-sans); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-muted); margin-bottom: 0.1rem; margin-top: 0;">{{ $dayLabel }}</p>
                         <p style="font-size: 0.85rem; color: var(--color-brand-muted); margin-bottom: 0.1rem; margin-top: 0;">{{ $day[$locale]['soup'] }}</p>
