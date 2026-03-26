@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activiteit;
+use App\Models\ActiviteitTemplate;
 use Illuminate\View\View;
 
 class ActivityController extends Controller
@@ -19,9 +20,13 @@ class ActivityController extends Controller
         return view('activiteiten.index', compact('activiteiten'));
     }
 
-    public function index()
+    public function index(): View
     {
-        return view('activiteiten.overzicht');
+        $reeksen = ActiviteitTemplate::orderBy('dag_van_de_week')
+            ->orderBy('startuur')
+            ->get();
+
+        return view('activiteiten.overzicht', compact('reeksen'));
     }
 
     public function agenda(): View
