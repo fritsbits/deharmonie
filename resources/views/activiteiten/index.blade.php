@@ -60,6 +60,42 @@
     </div>
 </section>
 
+{{-- MENU PREVIEW (static — to be wired to Weekmenu model in future) --}}
+<section style="background-color: #fff8f5; border-top: 3px solid var(--color-brand-orange); padding: 2.5rem 1.5rem;">
+    <div style="max-width: 72rem; margin: 0 auto;">
+        <x-eyebrow color="orange" mb="0.5rem">{{ __('pages.home_menu_label') }}</x-eyebrow>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;">
+            <h2 style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 900; color: var(--color-brand-dark);">
+                {{ __('pages.home_menu_preview_heading') }}
+            </h2>
+        </div>
+        {{-- TODO: Replace static content with dynamic Weekmenu model query --}}
+        <div class="menu-cards" style="display: flex; gap: 1rem;">
+            {{-- Today --}}
+            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.25rem 1.5rem; border: 1px solid #e8e0d8; position: relative;">
+                <span style="position: absolute; top: -10px; left: 1rem; background: var(--color-brand-orange); color: white; font-size: 0.6875rem; font-weight: 800; padding: 2px 10px; border-radius: 999px; text-transform: uppercase; letter-spacing: 0.06em;">
+                    {{ __('pages.home_menu_today_badge') }}
+                </span>
+                <p style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-muted); margin-bottom: 0.4rem;">Maandag 30/03</p>
+                <p style="font-size: 1rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Kalf blanket met bulgur</p>
+                <p style="font-size: 0.8125rem; color: var(--color-brand-muted); margin-bottom: 0.75rem;">{{ __('pages.home_menu_soup_included') }}</p>
+                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ 10</p>
+            </div>
+            {{-- Tomorrow --}}
+            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.25rem 1.5rem; border: 1px solid #e8e0d8;">
+                <p style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-muted); margin-bottom: 0.4rem;">Dinsdag 31/03</p>
+                <p style="font-size: 1rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Varkensgebraad met gestoofd witloof</p>
+                <p style="font-size: 0.8125rem; color: var(--color-brand-muted); margin-bottom: 0.75rem;">{{ __('pages.home_menu_soup_included') }}</p>
+                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ 9</p>
+            </div>
+        </div>
+        <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
+           style="display: inline-block; margin-top: 1rem; font-size: 0.9375rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: underline;">
+            {{ __('pages.home_menu_link') }}
+        </a>
+    </div>
+</section>
+
 {{-- SECTION 1: Restaurant — text left, photo right --}}
 <section class="section-pad" style="background-color: #f2f6fb; padding: 7rem 1.5rem;">
     <div class="section-flex" style="max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
@@ -224,6 +260,7 @@
     .section-flex { flex-direction: column !important; gap: 2rem !important; }
     .section-image { width: 100% !important; aspect-ratio: 16/9 !important; flex: none !important; }
     .section-pad { padding: 3.5rem 1.25rem !important; }
+    .menu-cards { flex-direction: column !important; }
 }
 /* md — tablet */
 @media (min-width: 768px) and (max-width: 1023px) {

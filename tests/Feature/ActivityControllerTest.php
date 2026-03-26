@@ -113,6 +113,14 @@ class ActivityControllerTest extends TestCase
         $response->assertSee('Volzet');
     }
 
+    public function test_homepage_shows_menu_preview(): void
+    {
+        $response = $this->get('/');
+        $response->assertSee('Vandaag');
+        $response->assertSee('Soep van de dag inbegrepen');
+        $response->assertSee('Volledig weekmenu bekijken');
+    }
+
     public function test_activity_filter_shows_at_most_five(): void
     {
         Activiteit::factory()->count(7)->create([
