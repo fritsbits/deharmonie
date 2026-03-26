@@ -217,28 +217,22 @@
 <style>
 /* sm — mobile */
 @media (max-width: 767px) {
-    .hero-inner { height: auto !important; }
+    .hero-inner { flex-direction: column !important; min-height: auto !important; }
     .hero-col-image { display: none; }
-    .hero-copy { padding: 3rem 1.5rem !important; }
+    .hero-copy div { padding: 2.5rem 1.25rem !important; }
     .hero-copy h1 { font-size: 2.75rem !important; }
-    .hero-copy h2 { font-size: 1.625rem !important; }
     .section-flex { flex-direction: column !important; gap: 2rem !important; }
     .section-image { width: 100% !important; aspect-ratio: 16/9 !important; flex: none !important; }
     .section-pad { padding: 3.5rem 1.25rem !important; }
 }
 /* md — tablet */
 @media (min-width: 768px) and (max-width: 1023px) {
-    .hero-inner { height: 340px !important; }
-    .hero-copy h1 { font-size: 3.25rem !important; }
-    .hero-copy h2 { font-size: 1.875rem !important; }
+    .hero-copy h1 { font-size: 3rem !important; }
 }
 /* lg — small desktop */
 @media (min-width: 1024px) and (max-width: 1279px) {
-    .hero-inner { height: 410px !important; }
-    .hero-copy h1 { font-size: 4rem !important; }
-    .hero-copy h2 { font-size: 2.2rem !important; }
+    .hero-copy h1 { font-size: 3.5rem !important; }
 }
-/* xl — large desktop (default inline styles apply: 468px / 4.5rem / 2.5rem) */
 </style>
 
 @endsection
