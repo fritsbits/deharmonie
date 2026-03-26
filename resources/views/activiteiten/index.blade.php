@@ -96,157 +96,132 @@
     </div>
 </section>
 
-{{-- SECTION 1: Restaurant — text left, photo right --}}
-<section class="section-pad" style="background-color: #f2f6fb; padding: 7rem 1.5rem;">
-    <div class="section-flex" style="max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
-
-        <div style="flex: 1;">
-            <x-eyebrow color="orange" mb="0.75rem">{{ __('pages.home_restaurant_label') }}</x-eyebrow>
-            <h2 style="font-family: var(--font-sans); font-size: 1.875rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.15; margin-bottom: 0.75rem;">
-                {{ __('pages.home_restaurant_heading') }}
-            </h2>
-            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-dark); margin-bottom: 1.5rem;">
-                {!! __('pages.home_restaurant_body') !!}
-            </p>
-            <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
-               style="color: var(--color-brand-blue); font-family: var(--font-sans); font-weight: 700; font-size: 1.0625rem; text-decoration: underline;">
-                {{ __('pages.home_restaurant_cta') }}
-            </a>
-        </div>
-
-        <div class="section-image" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
-            <img src="{{ asset('images/photo-restaurant-vol.webp') }}" alt="{{ __('pages.home_restaurant_label') }}"
-                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </div>
-
-    </div>
-</section>
-
-{{-- SECTION 2: Activities — photo left, text right --}}
-<section class="section-pad" style="background-color: white; padding: 7rem 1.5rem;">
-    <div class="section-flex" style="max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
-
-        <div class="section-image" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
-            <img src="{{ asset('images/photo-thumbsup.webp') }}" alt="{{ __('nav.activities') }}"
-                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </div>
-
-        <div style="flex: 1;">
-            <x-eyebrow mb="0.75rem">{{ __('nav.activities') }}</x-eyebrow>
-            <h2 style="font-family: var(--font-sans); font-size: 1.875rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.15; margin-bottom: 0.75rem;">
-                {{ __('pages.home_activities_heading') }}
-            </h2>
-            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-dark); margin-bottom: 1.5rem;">
-                {!! __('pages.home_activities_body') !!}
-            </p>
-
-            {{-- Upcoming activities --}}
-            <div style="margin-bottom: 1.5rem;">
-                @forelse ($activiteiten as $activiteit)
-                    <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
-                       style="display: block; padding: 0.75rem 0; text-decoration: none; {{ !$loop->last ? 'border-bottom: 1px solid rgba(216,211,210,0.7);' : '' }}">
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <span style="font-weight: 700; font-size: 1.25rem; line-height: 1.2; color: var(--color-brand-blue); font-family: var(--font-sans);">
-                                {{ $activiteit->titel }}
-                            </span>
-                            @if ($activiteit->status->value === 'geannuleerd')
-                                <x-badge type="geannuleerd">&times;</x-badge>
-                            @endif
-                        </div>
-                        <p style="font-size: 0.9375rem; margin: 0.2rem 0 0; color: var(--color-brand-muted);">
-                            {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('dddd')) }}
-                            {{ $activiteit->datum->format('j/n') }}
-                            {{ __('activities.at') }} {{ substr($activiteit->startuur, 0, 5) }}
-                            @if ($activiteit->einduur)
-                                &ndash; {{ substr($activiteit->einduur, 0, 5) }}
-                            @endif
-                            <span style="color: var(--color-brand-gray-dark);">&middot;</span> {{ $activiteit->locatie }}
-                        </p>
-                    </a>
-                @empty
-                    <p style="padding: 1.5rem 0; color: var(--color-brand-muted);">
-                        {{ __('activities.no_upcoming') }}
-                    </p>
-                @endforelse
+{{-- UPCOMING ACTIVITIES --}}
+<section style="background-color: white; padding: 3.5rem 1.5rem;">
+    <div style="max-width: 72rem; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.25rem;">
+            <div>
+                <x-eyebrow mb="0.4rem">{{ __('nav.activities') }}</x-eyebrow>
+                <h2 style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 900; color: var(--color-brand-dark);">
+                    {{ __('pages.home_activities_heading') }}
+                </h2>
             </div>
-
             <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
-               style="color: var(--color-brand-green); font-family: var(--font-sans); font-weight: 700; font-size: 1.0625rem; text-decoration: underline;">
+               style="font-family: var(--font-sans); font-weight: 700; font-size: 0.9375rem; color: var(--color-brand-green); text-decoration: underline; white-space: nowrap;">
                 {{ __('activities.all') }} →
             </a>
         </div>
-
-    </div>
-</section>
-
-{{-- SECTION 3: Services — text left, photo right --}}
-<section class="section-pad" style="background-color: white; padding: 7rem 1.5rem;">
-    <div class="section-flex" style="max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
-
-        <div style="flex: 1;">
-            <x-eyebrow color="blue" mb="0.75rem">{{ __('nav.services') }}</x-eyebrow>
-            <h2 style="font-family: var(--font-sans); font-size: 1.875rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.15; margin-bottom: 0.75rem;">
-                {{ __('pages.home_services_heading') }}
-            </h2>
-            <p style="font-size: 1.125rem; line-height: 1.6; color: var(--color-brand-dark); margin-bottom: 1.5rem;">
-                {!! __('pages.home_services_body') !!}
-            </p>
-            <a href="{{ route(app()->getLocale() . '.diensten') }}"
-               style="color: var(--color-brand-dark); font-family: var(--font-sans); font-weight: 700; font-size: 1.0625rem; text-decoration: underline;">
-                {{ __('pages.home_services_cta') }}
-            </a>
-        </div>
-
-        <div class="section-image" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
-            <img src="{{ asset('images/photo-samen.webp') }}" alt="{{ __('nav.services') }}"
-                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </div>
-
-    </div>
-</section>
-
-{{-- CONTACT / OPENING HOURS --}}
-<section id="contact" class="section-pad" style="background-color: var(--color-brand-bg-tint); padding: 7rem 1.5rem;">
-    <div class="section-flex" style="max-width: 72rem; margin: 0 auto; display: flex; align-items: center; gap: 4rem;">
-
-        <div class="section-image" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
-            <img src="{{ asset('images/photo-gebouw.webp') }}"
-                 alt="De Harmonie — Antwerpsesteenweg"
-                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </div>
-
-        <div style="flex: 1;">
-            <x-eyebrow mb="0.15rem">CONTACT &amp; {{ __('pages.home_hours_label') }}</x-eyebrow>
-            <h2 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.75rem;">
-                {{ __('activities.visit_us') }}
-            </h2>
-            <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
-                <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.125rem; color: var(--color-brand-dark); font-weight: 600;">
-                    <img src="{{ asset('images/icon-clock.svg') }}" alt="" style="width: 26px; height: 26px; flex-shrink: 0;">
-                    {{ __('pages.home_hours_weekdays') }}
-                </div>
-                <div style="display: flex; align-items: center; gap: 1rem; font-size: 1.125rem; color: var(--color-brand-dark); font-weight: 600;">
-                    <img src="{{ asset('images/icon-clock.svg') }}" alt="" style="width: 26px; height: 26px; flex-shrink: 0;">
-                    {{ __('pages.home_hours_saturday') }}
-                </div>
-            </div>
-            <p style="font-size: 1.125rem; line-height: 1.7; color: var(--color-brand-muted); margin-bottom: 2rem;">
-                {{ __('pages.home_hours_body') }}
-            </p>
-            <p style="font-size: 1.125rem; color: var(--color-brand-muted); margin-bottom: 1.25rem; line-height: 1.6;">
-                VZW Buurtwerk Noordwijk<br>
-                Antwerpsesteenweg 24 — 1000 Brussel
-            </p>
-            <p style="margin-bottom: 0.4rem;">
-                <a href="tel:0220328048" style="font-size: 1.25rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: none;">
-                    02/203.28.48
+        <div class="activity-cards-grid" style="display: flex; gap: 1rem;">
+            @forelse ($activiteiten as $activiteit)
+                <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
+                   style="flex: 1; display: block; background: var(--color-brand-bg); border: 1px solid #e8e0d8; border-radius: 8px; padding: 1.25rem 1.25rem; text-decoration: none; {{ $activiteit->status->value === 'geannuleerd' ? 'opacity: 0.6;' : '' }}">
+                    <p style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin-bottom: 0.35rem;">
+                        {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('ddd')) }}
+                        {{ $activiteit->datum->format('j/n') }}
+                    </p>
+                    <p style="font-size: 1rem; font-weight: 800; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.35rem;">
+                        {{ $activiteit->titel }}
+                        @if ($activiteit->status->value === 'geannuleerd')
+                            <x-badge type="geannuleerd" />
+                        @endif
+                    </p>
+                    <p style="font-size: 0.8125rem; color: var(--color-brand-muted); margin-bottom: 0.75rem;">
+                        {{ substr($activiteit->startuur, 0, 5) }} · {{ $activiteit->locatie }}
+                    </p>
+                    <span style="font-size: 0.875rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: underline;">
+                        {{ __('activities.register') }} →
+                    </span>
                 </a>
+            @empty
+                <p style="color: var(--color-brand-muted); padding: 1rem 0;">{{ __('activities.no_upcoming') }}</p>
+            @endforelse
+        </div>
+    </div>
+</section>
+
+{{-- WHAT WE DO — SERVICE CARDS --}}
+<section style="background-color: #f2f6fb; padding: 3.5rem 1.5rem;">
+    <div style="max-width: 72rem; margin: 0 auto;">
+        <x-eyebrow mb="0.4rem">{{ __('nav.services') }}</x-eyebrow>
+        <h2 style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 900; color: var(--color-brand-dark); margin-bottom: 1.5rem;">
+            {{ __('pages.home_services_section_heading') }}
+        </h2>
+        <div class="service-cards-grid" style="display: flex; gap: 1rem; align-items: stretch;">
+            {{-- Restaurant --}}
+            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem; border-bottom: 3px solid var(--color-brand-orange);">
+                <p style="font-family: var(--font-sans); font-size: 1rem; font-weight: 900; color: var(--color-brand-dark); margin-bottom: 0.5rem;">
+                    {{ __('pages.home_service_restaurant_title') }}
+                </p>
+                <p style="font-size: 0.9375rem; color: var(--color-brand-muted); line-height: 1.5; margin-bottom: 0.75rem;">
+                    {{ __('pages.home_service_restaurant_body') }}
+                </p>
+                <p style="font-family: var(--font-sans); font-size: 1rem; font-weight: 900; color: var(--color-brand-orange); margin-bottom: 0.75rem;">
+                    {{ __('pages.home_service_restaurant_price') }}
+                </p>
+                <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
+                   style="font-size: 0.875rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: underline;">
+                    {{ __('pages.home_service_restaurant_link') }}
+                </a>
+            </div>
+            {{-- Activities --}}
+            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem; border-bottom: 3px solid var(--color-brand-green);">
+                <p style="font-family: var(--font-sans); font-size: 1rem; font-weight: 900; color: var(--color-brand-dark); margin-bottom: 0.5rem;">
+                    {{ __('pages.home_service_activities_title') }}
+                </p>
+                <p style="font-size: 0.9375rem; color: var(--color-brand-muted); line-height: 1.5; margin-bottom: 0.75rem;">
+                    {{ __('pages.home_service_activities_body') }}
+                </p>
+                <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
+                   style="font-size: 0.875rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: underline;">
+                    {{ __('pages.home_service_activities_link') }}
+                </a>
+            </div>
+            {{-- Home services --}}
+            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem; border-bottom: 3px solid var(--color-brand-blue);">
+                <p style="font-family: var(--font-sans); font-size: 1rem; font-weight: 900; color: var(--color-brand-dark); margin-bottom: 0.5rem;">
+                    {{ __('pages.home_service_home_title') }}
+                </p>
+                <p style="font-size: 0.9375rem; color: var(--color-brand-muted); line-height: 1.5; margin-bottom: 0.75rem;">
+                    {{ __('pages.home_service_home_body') }}
+                </p>
+                <a href="{{ route(app()->getLocale() . '.diensten') }}"
+                   style="font-size: 0.875rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: underline;">
+                    {{ __('pages.home_service_home_link') }}
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{{-- PRACTICAL INFO --}}
+<section id="contact" style="background-color: var(--color-brand-bg); border-top: 1px solid #e8e0d8; padding: 2rem 1.5rem;">
+    <div class="practical-grid" style="max-width: 72rem; margin: 0 auto; display: flex; gap: 3rem; align-items: start;">
+        <div>
+            <p style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-muted); margin-bottom: 0.35rem;">
+                {{ __('pages.home_practical_address_label') }}
             </p>
-            <p style="font-size: 1.125rem; color: var(--color-brand-blue);">
-                <a href="mailto:info@deharmonie.be" style="text-decoration: none; color: inherit;">info@deharmonie.be</a>
+            {{-- address and contact are locale-invariant factual data --}}
+            <p style="font-size: 0.9375rem; font-weight: 600; color: var(--color-brand-dark); line-height: 1.5;">
+                Antwerpsesteenweg 24<br>1000 Brussel
             </p>
         </div>
-
+        <div>
+            <p style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-muted); margin-bottom: 0.35rem;">
+                {{ __('pages.home_practical_hours_label') }}
+            </p>
+            <p style="font-size: 0.9375rem; font-weight: 600; color: var(--color-brand-dark); line-height: 1.5;">
+                {{ __('pages.home_hours_weekdays') }}<br>{{ __('pages.home_hours_saturday') }}
+            </p>
+        </div>
+        <div>
+            <p style="font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-brand-muted); margin-bottom: 0.35rem;">
+                {{ __('pages.home_practical_contact_label') }}
+            </p>
+            <p style="font-size: 0.9375rem; line-height: 1.6;">
+                <a href="tel:0220328048" style="font-weight: 700; color: var(--color-brand-blue); text-decoration: none;">02/203.28.48</a><br>
+                <a href="mailto:info@deharmonie.be" style="color: var(--color-brand-blue); text-decoration: none;">info@deharmonie.be</a>
+            </p>
+        </div>
     </div>
 </section>
 
@@ -257,18 +232,14 @@
     .hero-col-image { display: none; }
     .hero-copy div { padding: 2.5rem 1.25rem !important; }
     .hero-copy h1 { font-size: 2.75rem !important; }
-    .section-flex { flex-direction: column !important; gap: 2rem !important; }
-    .section-image { width: 100% !important; aspect-ratio: 16/9 !important; flex: none !important; }
-    .section-pad { padding: 3.5rem 1.25rem !important; }
     .menu-cards { flex-direction: column !important; }
+    .activity-cards-grid { flex-direction: column !important; }
+    .service-cards-grid { flex-direction: column !important; }
+    .practical-grid { flex-direction: column !important; gap: 1.5rem !important; }
 }
 /* md — tablet */
 @media (min-width: 768px) and (max-width: 1023px) {
     .hero-copy h1 { font-size: 3rem !important; }
-}
-/* lg — small desktop */
-@media (min-width: 1024px) and (max-width: 1279px) {
-    .hero-copy h1 { font-size: 3.5rem !important; }
 }
 </style>
 
