@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Activiteit;
 use App\Models\ActiviteitTemplate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -22,17 +23,14 @@ class ActiviteitenOverviewTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function test_overview_page_shows_reeksen(): void
+    public function test_overview_page_shows_theme_names(): void
     {
-        $reeks = ActiviteitTemplate::factory()->create([
-            'titel_nl' => 'Yoga op dinsdag',
-            'dag_van_de_week' => 2,
-            'startuur' => '10:00:00',
-        ]);
-
         $response = $this->get('/activiteiten');
         $response->assertStatus(200);
-        $response->assertSee('Yoga op dinsdag');
+        $response->assertSee('Beweeg mee');
+        $response->assertSee('Maak iets');
+        $response->assertSeeText('Praat & leer');
+        $response->assertSee('Vier mee');
     }
 
     public function test_overview_page_loads_for_fr(): void
@@ -44,7 +42,7 @@ class ActiviteitenOverviewTest extends TestCase
     public function test_overview_page_passes_bijzondere_activiteiten_to_view(): void
     {
         // A special activiteit (template_id IS NULL, future date, published)
-        $special = \App\Models\Activiteit::factory()->create([
+        $special = Activiteit::factory()->create([
             'template_id' => null,
             'datum' => now()->addDays(5)->format('Y-m-d'),
             'status' => 'gepubliceerd',
@@ -52,8 +50,8 @@ class ActiviteitenOverviewTest extends TestCase
         ]);
 
         // A recurring activiteit (template_id IS NOT NULL) — should NOT appear
-        $template = \App\Models\ActiviteitTemplate::factory()->create();
-        $recurring = \App\Models\Activiteit::factory()->create([
+        $template = ActiviteitTemplate::factory()->create();
+        $recurring = Activiteit::factory()->create([
             'template_id' => $template->id,
             'datum' => now()->addDays(3)->format('Y-m-d'),
             'status' => 'gepubliceerd',
