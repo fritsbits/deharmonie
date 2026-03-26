@@ -20,13 +20,7 @@ class ActivityController extends Controller
 
     public function index()
     {
-        $activiteiten = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
-            ->where('datum', '>=', now()->startOfDay())
-            ->orderBy('datum')
-            ->orderBy('startuur')
-            ->get();
-
-        return view('activiteiten.overzicht', compact('activiteiten'));
+        return view('activiteiten.overzicht');
     }
 
     public function show(string $slug)
