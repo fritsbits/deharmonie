@@ -69,7 +69,7 @@ class ActiviteitenOverviewTest extends TestCase
 
     public function test_bijzondere_momenten_shows_upcoming_special_activities(): void
     {
-        $special = \App\Models\Activiteit::factory()->create([
+        $special = Activiteit::factory()->create([
             'template_id' => null,
             'datum' => now()->addDays(10)->format('Y-m-d'),
             'status' => 'gepubliceerd',
@@ -77,7 +77,7 @@ class ActiviteitenOverviewTest extends TestCase
         ]);
 
         // Past activity — should NOT appear
-        \App\Models\Activiteit::factory()->create([
+        Activiteit::factory()->create([
             'template_id' => null,
             'datum' => now()->subDay()->format('Y-m-d'),
             'status' => 'gepubliceerd',
@@ -85,7 +85,7 @@ class ActiviteitenOverviewTest extends TestCase
         ]);
 
         // Draft — should NOT appear
-        \App\Models\Activiteit::factory()->create([
+        Activiteit::factory()->create([
             'template_id' => null,
             'datum' => now()->addDays(3)->format('Y-m-d'),
             'status' => 'concept',
