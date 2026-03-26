@@ -24,9 +24,17 @@ class ActivityController extends Controller
     {
         $reeksen = ActiviteitTemplate::orderBy('dag_van_de_week')
             ->orderBy('startuur')
+            ->get()
+            ->keyBy('id');
+
+        $bijzondereActiviteiten = Activiteit::whereNull('template_id')
+            ->where('datum', '>=', today())
+            ->where('status', 'gepubliceerd')
+            ->orderBy('datum')
+            ->limit(5)
             ->get();
 
-        return view('activiteiten.overzicht', compact('reeksen'));
+        return view('activiteiten.overzicht', compact('reeksen', 'bijzondereActiviteiten'));
     }
 
     public function agenda(): View
