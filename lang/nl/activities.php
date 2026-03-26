@@ -33,7 +33,7 @@ return [
     'badge_cancelled' => 'Geannuleerd',
     'badge_full' => 'Volzet',
     'reeksen_eyebrow' => 'Elke week',
-    'reeksen_heading' => 'Vaste activiteiten',
+    'reeksen_heading' => 'Elke week bij ons',
     'reeksen_day_prefix' => 'Elke',
     'special_moments_eyebrow' => 'Sfeer',
     'special_moments_heading' => 'Bijzondere momenten',

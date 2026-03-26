@@ -33,7 +33,7 @@ return [
     'badge_cancelled' => 'Annulé',
     'badge_full' => 'Complet',
     'reeksen_eyebrow' => 'Chaque semaine',
-    'reeksen_heading' => 'Activités régulières',
+    'reeksen_heading' => 'Chaque semaine chez nous',
     'reeksen_day_prefix' => 'Chaque',
     'special_moments_eyebrow' => 'Ambiance',
     'special_moments_heading' => 'Moments forts',

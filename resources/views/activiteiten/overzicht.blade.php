@@ -42,8 +42,8 @@
             $iconMap = [
                 1 => 'message-circle', 2 => 'message-circle', 3 => 'message-circle',
                 4 => 'message-circle', 5 => 'music-2', 6 => 'brain', 7 => 'armchair',
-                8 => 'monitor', 9 => 'circle-dot', 10 => 'palette', 11 => 'zap',
-                12 => 'gem', 13 => 'scissors', 14 => 'shopping-bag', 15 => 'dumbbell',
+                8 => 'monitor', 9 => 'dice-5', 10 => 'palette', 11 => 'zap',
+                12 => 'gem', 13 => 'scissors', 14 => 'shopping-bag', 15 => 'activity',
                 16 => 'info', 17 => 'cake', 18 => 'landmark',
             ];
             $bgColors = ['#f3dbd5','#d4e8df','#d5e0f0','#f5e8d3','#dde7d5','#e8d9ef','#d9e8f0'];
@@ -69,7 +69,7 @@
                         <p style="font-family: var(--font-sans); font-weight: 800; font-size: 1rem; color: var(--color-brand-dark); margin: 0 0 0.2rem;">
                             {{ app()->getLocale() === 'fr' ? ($reeks->titel_fr ?? $reeks->titel_nl) : $reeks->titel_nl }}
                         </p>
-                        <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin: 0 0 0.35rem;">
+                        <p style="font-size: 1rem; font-weight: 700; color: var(--color-brand-dark); margin: 0 0 0.35rem;">
                             {{ __('activities.reeksen_day_prefix') }} {{ $dag }} · {{ $uur }}
                         </p>
                         @if ($beschrijving)
@@ -112,9 +112,9 @@
 </section>
 
 {{-- FULL AGENDA LINK --}}
-<section style="background: white; padding: 3rem 1.5rem; text-align: center;">
+<section style="background: var(--color-brand-dark); padding: 4.5rem 1.5rem; text-align: center;">
     <a href="{{ route(app()->getLocale() . '.activiteiten.agenda') }}"
-       style="font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: underline;">
+       style="display: inline-block; background: var(--color-brand-orange); color: white; padding: 1rem 2.5rem; border-radius: 6px; font-family: var(--font-sans); font-weight: 700; font-size: 1.125rem; text-decoration: none;">
         {{ __('activities.agenda_link') }} →
     </a>
 </section>

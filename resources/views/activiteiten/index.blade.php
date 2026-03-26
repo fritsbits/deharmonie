@@ -111,10 +111,15 @@
                 @endphp
                 <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
                    style="flex: 1; display: block; text-decoration: none; border-radius: 10px; overflow: hidden; border: 1px solid #e8e0d8; {{ $activiteit->status->value === 'geannuleerd' ? 'opacity: 0.7;' : '' }}">
-                    {{-- Photo or color band --}}
-                    <div style="height: 160px; background: {{ $bg }}; overflow: hidden;">
+                    {{-- Photo or date band --}}
+                    <div style="height: 160px; background: {{ $bg }}; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center;">
                         @if ($imgUrl)
-                            <img src="{{ $imgUrl }}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                            <img src="{{ $imgUrl }}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
+                        @else
+                            <div style="text-align: center; color: rgba(44,40,38,0.2);">
+                                <p style="font-family: var(--font-sans); font-size: 4rem; font-weight: 900; line-height: 1; margin: 0;">{{ \Carbon\Carbon::parse($activiteit->datum)->format('d') }}</p>
+                                <p style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin: 0.25rem 0 0;">{{ strtoupper(\Carbon\Carbon::parse($activiteit->datum)->locale(app()->getLocale())->isoFormat('MMM')) }}</p>
+                            </div>
                         @endif
                     </div>
                     {{-- Card body --}}
