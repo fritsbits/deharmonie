@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activiteit;
+use Illuminate\View\View;
 
 class ActivityController extends Controller
 {
@@ -21,6 +22,11 @@ class ActivityController extends Controller
     public function index()
     {
         return view('activiteiten.overzicht');
+    }
+
+    public function agenda(): View
+    {
+        return view('activiteiten.agenda');
     }
 
     public function show(string $slug)
