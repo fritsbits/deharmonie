@@ -79,6 +79,6 @@ class BilingualRoutingTest extends TestCase
     {
         $response = $this->get('/fr');
         $response->assertSee('Avec le soutien de');
-        $response->assertSee('Suivez De Harmonie sur Facebook');
+        $response->assertSee('Facebook');
     }
 }

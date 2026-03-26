@@ -48,7 +48,7 @@ class ActivityControllerTest extends TestCase
             'datum' => now()->format('Y-m-d'),
         ]);
 
-        $response = $this->get('/activiteiten');
+        $response = $this->get('/activiteiten/agenda');
         $response->assertSee($geannuleerd->titel_nl);
         $response->assertSee('Geannuleerd');
     }
@@ -57,7 +57,7 @@ class ActivityControllerTest extends TestCase
     {
         Activiteit::query()->delete();
 
-        $response = $this->get('/activiteiten');
+        $response = $this->get('/activiteiten/agenda');
         $response->assertSee('Geen activiteiten gepland.');
     }
 
@@ -76,7 +76,7 @@ class ActivityControllerTest extends TestCase
             'datum' => now()->subDay()->format('Y-m-d'),
         ]);
 
-        $response = $this->get('/activiteiten');
+        $response = $this->get('/activiteiten/agenda');
         $response->assertSee($today->titel_nl);
         $response->assertDontSee($nextMonth->titel_nl);
         $response->assertDontSee($past->titel_nl);
