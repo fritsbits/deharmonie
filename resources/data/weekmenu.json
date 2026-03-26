@@ -1,0 +1,138 @@
+{
+  "week": {
+    "nl": "23 – 28 maart 2026",
+    "fr": "23 – 28 mars 2026"
+  },
+  "days": [
+    {
+      "date": "2026-03-23",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Stoofvlees met Sla en Kroketjes", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Carbonnades, Frites et Salade", "courses": [] }
+    },
+    {
+      "date": "2026-03-24",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Chicon Gratin met Puree", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Chicon Gratin avec Purée", "courses": [] }
+    },
+    {
+      "date": "2026-03-25",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Rog in Botersaus met Kappers en Aardappelen", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Raie au Beurre avec Câpres et Pommes de Terre", "courses": [] }
+    },
+    {
+      "date": "2026-03-26",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Keuze van Vlees met groene kool Stoemp", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Choix de Viande avec Stoump Chou vert", "courses": [] }
+    },
+    {
+      "date": "2026-03-27",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Spaghetti met Forestière Saus", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Spaghetti Sauce Forestière", "courses": [] }
+    },
+    {
+      "date": "2026-03-28",
+      "closed": true,
+      "closed_label_nl": "Gesloten",
+      "closed_label_fr": "Fermé",
+      "special_event": false,
+      "price": null,
+      "nl": { "soup": null, "main": null, "courses": [] },
+      "fr": { "soup": null, "main": null, "courses": [] }
+    },
+    {
+      "date": "2026-03-30",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Kalf blanket met Bulgur", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Blanquette de veau avec Boulgour", "courses": [] }
+    },
+    {
+      "date": "2026-03-31",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Varkensgebraad met gestoofd Witloof en Aardappelen", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Rôti de Porc avec Chicon Braisé et Pommes de Terre", "courses": [] }
+    },
+    {
+      "date": "2026-04-01",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Parmentier met Erwtjes en Wortelen", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Hachis Parmentier au Petits Pois et Carottes", "courses": [] }
+    },
+    {
+      "date": "2026-04-02",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": true,
+      "price": 20,
+      "nl": {
+        "event_label": "Paasmenu",
+        "soup": null,
+        "main": null,
+        "courses": ["Kir Royal", "Scampi met look", "Eendenborst", "Gestoofd Witloof", "Duo van IJs op Lente wijze"]
+      },
+      "fr": {
+        "event_label": "Menu de Pâques",
+        "soup": null,
+        "main": null,
+        "courses": ["Kir Royal", "Scampi à l'Ail", "Magret de Canard", "Chicons Braisés et pdt Rissolées", "Duo de Glace Printanière"]
+      }
+    },
+    {
+      "date": "2026-04-03",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Witte Vis met Aardappelsla en princesseboontjes", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Poisson Blanc avec une salade de Pommes de terre et princesse", "courses": [] }
+    },
+    {
+      "date": "2026-04-04",
+      "closed": true,
+      "closed_label_nl": "Gesloten",
+      "closed_label_fr": "Fermé",
+      "special_event": false,
+      "price": null,
+      "nl": { "soup": null, "main": null, "courses": [] },
+      "fr": { "soup": null, "main": null, "courses": [] }
+    }
+  ]
+}
