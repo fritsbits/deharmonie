@@ -1,4 +1,5 @@
 <?php
+
 return [
     'upcoming' => 'Activités à venir',
     'no_activities' => 'Pas d\'activités en :month',
@@ -21,9 +22,26 @@ return [
     'label' => 'ACTIVITÉ',
     'all' => 'Toutes les activités',
     'no_upcoming' => 'Pas d\'activités prévues.',
+    'date_today' => "Aujourd'hui",
+    'date_tomorrow' => 'Demain',
+    'date_day_after' => 'Après-demain',
+    'date_next_week' => 'La semaine prochaine',
     'visit_us' => 'Venez nous rendre visite',
-    'overview_tagline' => 'Cliquez sur une activité pour plus d\'informations et pour demander votre inscription.',
-    'badge_gratis'     => 'Gratuit',
-    'badge_cancelled'  => 'Annulé',
-    'badge_full'       => 'Complet',
+    'overview_heading' => 'Toujours quelque chose à vivre',
+    'overview_tagline' => 'Du sport au bricolage — découvrez ce qui est au programme.',
+    'badge_gratis' => 'Gratuit',
+    'badge_cancelled' => 'Annulé',
+    'badge_full' => 'Complet',
+    'reeksen_eyebrow' => 'Chaque semaine',
+    'reeksen_heading' => 'Activités régulières',
+    'reeksen_day_prefix' => 'Chaque',
+    'special_moments_eyebrow' => 'Ambiance',
+    'special_moments_heading' => 'Moments forts',
+    'agenda_link' => "Voir l'agenda complet",
+    'overview_hero_eyebrow' => 'Activités',
+    'days' => [
+        0 => 'dimanche', 1 => 'lundi', 2 => 'mardi',
+        3 => 'mercredi', 4 => 'jeudi', 5 => 'vendredi',
+        6 => 'samedi', 7 => 'dimanche',
+    ],
 ];

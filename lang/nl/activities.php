@@ -1,4 +1,5 @@
 <?php
+
 return [
     'upcoming' => 'Komende activiteiten',
     'no_activities' => 'Geen activiteiten in :month',
@@ -21,9 +22,26 @@ return [
     'label' => 'ACTIVITEIT',
     'all' => 'Alle activiteiten',
     'no_upcoming' => 'Geen activiteiten gepland.',
+    'date_today' => 'Vandaag',
+    'date_tomorrow' => 'Morgen',
+    'date_day_after' => 'Overmorgen',
+    'date_next_week' => 'Volgende week',
     'visit_us' => 'Kom eens langs',
-    'overview_tagline' => 'Klik op een activiteit om meer info te lezen en je inschrijving aan te vragen.',
-    'badge_gratis'     => 'Gratis',
-    'badge_cancelled'  => 'Geannuleerd',
-    'badge_full'       => 'Volzet',
+    'overview_heading' => 'Altijd iets te beleven',
+    'overview_tagline' => 'Van bewegen tot knutselen — bekijk wat er op het programma staat.',
+    'badge_gratis' => 'Gratis',
+    'badge_cancelled' => 'Geannuleerd',
+    'badge_full' => 'Volzet',
+    'reeksen_eyebrow' => 'Elke week',
+    'reeksen_heading' => 'Vaste activiteiten',
+    'reeksen_day_prefix' => 'Elke',
+    'special_moments_eyebrow' => 'Sfeer',
+    'special_moments_heading' => 'Bijzondere momenten',
+    'agenda_link' => 'Bekijk de volledige agenda',
+    'overview_hero_eyebrow' => 'Activiteiten',
+    'days' => [
+        0 => 'zondag', 1 => 'maandag', 2 => 'dinsdag',
+        3 => 'woensdag', 4 => 'donderdag', 5 => 'vrijdag',
+        6 => 'zaterdag', 7 => 'zondag',
+    ],
 ];
