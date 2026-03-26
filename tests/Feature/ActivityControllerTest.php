@@ -32,11 +32,10 @@ class ActivityControllerTest extends TestCase
         $response->assertSee('Eet mee');
         $response->assertSee('Doe mee');
         $response->assertSee('Kom langs');
-        $response->assertSee('Bekijk activiteiten');
+        $response->assertSee('Weekmenu');
         // Sections present
         $response->assertSee('Komende activiteiten');
-        $response->assertSee('Samen aan tafel');
-        $response->assertSee('Bij u thuis');
+        $response->assertSee('Wij komen ook naar u toe');
         $response->assertSee('Antwerpsesteenweg 24');
         // Old standalone AGENDA section is gone
         $response->assertDontSee('Volgende activiteiten');
@@ -62,7 +61,7 @@ class ActivityControllerTest extends TestCase
         $response->assertSee('Geen activiteiten gepland.');
     }
 
-    public function test_upcoming_activities_shown_including_next_month(): void
+    public function test_overview_shows_only_current_month_by_default(): void
     {
         $today = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -70,7 +69,7 @@ class ActivityControllerTest extends TestCase
         ]);
         $nextMonth = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->addMonth()->format('Y-m-d'),
+            'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
         ]);
         $past = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -79,7 +78,7 @@ class ActivityControllerTest extends TestCase
 
         $response = $this->get('/activiteiten');
         $response->assertSee($today->titel_nl);
-        $response->assertSee($nextMonth->titel_nl);
+        $response->assertDontSee($nextMonth->titel_nl);
         $response->assertDontSee($past->titel_nl);
     }
 
@@ -119,7 +118,7 @@ class ActivityControllerTest extends TestCase
         $response = $this->get('/');
         $response->assertSee('Vandaag');
         $response->assertSee('Soep van de dag inbegrepen');
-        $response->assertSee('Volledig weekmenu bekijken');
+        $response->assertSee('Volledig menu →');
     }
 
     public function test_activity_filter_shows_at_most_five(): void
