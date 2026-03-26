@@ -141,7 +141,9 @@
                 <img src="{{ asset('images/photo-feest-2.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.25rem 1rem; background: linear-gradient(to top, rgba(20,16,14,0.85) 0%, rgba(20,16,14,0.5) 50%, transparent 100%);">
-                    <p style="font-family: var(--font-sans); font-weight: 800; font-size: 1rem; color: white; margin: 0; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">Feest van 51 jaar De Harmonie</p>
+                    <p style="font-family: var(--font-sans); font-weight: 800; font-size: 1rem; color: white; margin: 0; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">
+                        {{ $isFr ? 'Fête des 51 ans de De Harmonie' : 'Feest van 51 jaar De Harmonie' }}
+                    </p>
                 </div>
             </div>
 
@@ -150,7 +152,9 @@
                 <img src="{{ asset('images/photo-buiten-event.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 1rem 0.75rem; background: linear-gradient(to top, rgba(20,16,14,0.85) 0%, rgba(20,16,14,0.5) 50%, transparent 100%);">
-                    <p style="font-family: var(--font-sans); font-weight: 800; font-size: 0.9rem; color: white; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">Culturele uitstap</p>
+                    <p style="font-family: var(--font-sans); font-weight: 800; font-size: 0.9rem; color: white; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">
+                        {{ $isFr ? 'Sortie culturelle' : 'Culturele uitstap' }}
+                    </p>
                 </div>
             </div>
 
@@ -207,7 +211,9 @@
                 <img src="{{ asset('images/photo-cake.jpg') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 1rem 0.75rem; background: linear-gradient(to top, rgba(20,16,14,0.85) 0%, rgba(20,16,14,0.5) 50%, transparent 100%);">
-                    <p style="font-family: var(--font-sans); font-weight: 800; font-size: 0.9rem; color: white; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">Verjaardagsfeest</p>
+                    <p style="font-family: var(--font-sans); font-weight: 800; font-size: 0.9rem; color: white; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">
+                        {{ $isFr ? 'Fête d\'anniversaire' : 'Verjaardagsfeest' }}
+                    </p>
                 </div>
             </div>
 
