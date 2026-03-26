@@ -13,13 +13,10 @@
 />
 
 {{-- THEMATIC CARDS --}}
-<section style="background: #fff8f5; padding: 5rem 1.5rem 6rem;">
+<section style="background: #fff8f5; padding: 3.5rem 1.5rem 6rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
-        <x-eyebrow color="blue" mb="0.75rem">{{ __('activities.reeksen_eyebrow') }}</x-eyebrow>
-        <x-section-heading mb="0">{{ __('activities.reeksen_heading') }}</x-section-heading>
 
         @php
-            $days = __('activities.days');
             $isFr = app()->getLocale() === 'fr';
 
             $themes = [
@@ -97,15 +94,20 @@
                         <ul style="list-style: none; padding: 0; border-top: 1px dashed #e4dbd3; padding-top: 0.75rem;">
                             @foreach ($templates as $t)
                                 @php
-                                    $dag = $days[$t->dag_van_de_week] ?? '';
-                                    $uur = substr($t->startuur, 0, 5);
                                     $titel = $isFr ? ($t->titel_fr ?? $t->titel_nl) : $t->titel_nl;
+                                    $nextActiviteit = $nextActiviteiten->get($t->id);
                                 @endphp
-                                <li style="font-size: 0.875rem; color: var(--color-brand-dark); padding: 0.3rem 0; display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; border-bottom: 1px solid rgba(44,40,38,0.05);">
-                                    <span style="font-weight: 600;">{{ $titel }}</span>
-                                    <span style="font-size: 0.75rem; color: var(--color-brand-muted); white-space: nowrap; flex-shrink: 0;">
-                                        {{ ucfirst($dag) }} · {{ $uur }}
-                                    </span>
+                                <li style="border-bottom: 1px solid rgba(44,40,38,0.05);">
+                                    @if ($nextActiviteit)
+                                        <a href="{{ route(app()->getLocale() . '.activiteiten.show', $nextActiviteit->slug) }}"
+                                           style="display: block; font-size: 1rem; font-weight: 600; color: var(--color-brand-dark); padding: 0.35rem 0; text-decoration: none;">
+                                            {{ $titel }}
+                                        </a>
+                                    @else
+                                        <span style="display: block; font-size: 1rem; font-weight: 600; color: var(--color-brand-dark); padding: 0.35rem 0;">
+                                            {{ $titel }}
+                                        </span>
+                                    @endif
                                 </li>
                             @endforeach
                         </ul>
@@ -137,34 +139,34 @@
         <div class="moments-layout" style="display: grid; grid-template-columns: 2fr 1.5fr 1.5fr; grid-template-rows: 240px 220px; gap: 0.875rem; margin-top: 2rem;">
 
             {{-- Big photo — spans both rows --}}
-            <div style="grid-row: 1 / 3; border-radius: 10px; overflow: hidden; position: relative;">
+            <div style="grid-row: 1 / 3; overflow: hidden; position: relative;">
                 <img src="{{ asset('images/photo-feest-2.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 2rem 1.25rem 1rem; background: linear-gradient(to top, rgba(20,16,14,0.85) 0%, rgba(20,16,14,0.5) 50%, transparent 100%);">
-                    <p style="font-family: var(--font-sans); font-weight: 800; font-size: 1rem; color: white; margin: 0; line-height: 1.3; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">
+                <div style="position: absolute; bottom: 0.75rem; left: 0.75rem;">
+                    <span style="background: var(--color-brand-green); color: white; padding: 0.2rem 0.6rem; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; display: inline-block;">
                         {{ $isFr ? 'Fête des 51 ans de De Harmonie' : 'Feest van 51 jaar De Harmonie' }}
-                    </p>
+                    </span>
                 </div>
             </div>
 
             {{-- Middle top photo --}}
-            <div style="border-radius: 10px; overflow: hidden; position: relative;">
+            <div style="overflow: hidden; position: relative;">
                 <img src="{{ asset('images/photo-buiten-event.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 1rem 0.75rem; background: linear-gradient(to top, rgba(20,16,14,0.85) 0%, rgba(20,16,14,0.5) 50%, transparent 100%);">
-                    <p style="font-family: var(--font-sans); font-weight: 800; font-size: 0.9rem; color: white; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">
+                <div style="position: absolute; bottom: 0.75rem; left: 0.75rem;">
+                    <span style="background: var(--color-brand-green); color: white; padding: 0.2rem 0.6rem; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; display: inline-block;">
                         {{ $isFr ? 'Sortie culturelle' : 'Culturele uitstap' }}
-                    </p>
+                    </span>
                 </div>
             </div>
 
             {{-- Upcoming events card — spans both rows --}}
-            <div style="grid-row: 1 / 3; background: white; border-radius: 10px; border: 1px solid #d8ece5; overflow: hidden; display: flex; flex-direction: column;">
-                <div style="padding: 1rem 1.25rem 0.75rem; border-bottom: 1px solid #eef5f1;">
-                    <p style="font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 800; color: var(--color-brand-dark); margin: 0 0 0.1rem;">
+            <div style="grid-row: 1 / 3; grid-column: 3; background: white; border: 1px solid #d8ece5; overflow: hidden; display: flex; flex-direction: column;">
+                <div style="padding: 1rem 1.25rem 0.75rem; background: var(--color-brand-green);">
+                    <p style="font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 800; color: white; margin: 0 0 0.1rem;">
                         {{ __('activities.upcoming_activities_heading') }}
                     </p>
-                    <p style="font-size: 0.75rem; color: var(--color-brand-muted); margin: 0;">
+                    <p style="font-size: 0.75rem; color: rgba(255,255,255,0.8); margin: 0;">
                         {{ __('activities.upcoming_activities_subline') }}
                     </p>
                 </div>
@@ -177,28 +179,25 @@
                             : $activiteit->titel_nl;
                         $uur = substr($activiteit->startuur, 0, 5);
                     @endphp
-                    <div style="display: flex; align-items: flex-start; gap: 0.875rem; padding: 0.875rem 1.25rem; border-bottom: 1px solid #f0ebe6;">
+                    <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
+                       style="display: flex; align-items: flex-start; gap: 0.875rem; padding: 0.875rem 1.25rem; border-bottom: 1px solid #f0ebe6; text-decoration: none; color: inherit;">
                         <div style="flex-shrink: 0; width: 40px; text-align: center;">
                             <div style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1;">
                                 {{ $date->format('d') }}
                             </div>
                             <div style="font-family: var(--font-sans); font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-muted); margin-top: 0.1rem;">
-                                {{ $date->locale(app()->getLocale())->isoFormat('MMM') }}
+                                {{ rtrim($date->locale(app()->getLocale())->isoFormat('MMM'), '.') }}
                             </div>
                         </div>
                         <div style="flex: 1; min-width: 0;">
                             <p style="font-family: var(--font-sans); font-size: 0.875rem; font-weight: 700; color: var(--color-brand-dark); margin: 0 0 0.2rem; line-height: 1.3;">
                                 {{ $titel }}
                             </p>
-                            <p style="font-size: 0.775rem; color: var(--color-brand-muted); margin: 0 0 0.35rem;">
+                            <p style="font-size: 0.775rem; color: var(--color-brand-muted); margin: 0;">
                                 {{ $uur }}
                             </p>
-                            <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
-                               style="font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; color: var(--color-brand-orange); text-decoration: none;">
-                                {{ __('activities.register') }} →
-                            </a>
                         </div>
-                    </div>
+                    </a>
                 @empty
                     <div style="padding: 1.5rem 1.25rem; color: var(--color-brand-muted); font-size: 0.875rem;">
                         {{ __('activities.no_upcoming') }}
@@ -207,13 +206,13 @@
             </div>
 
             {{-- Middle bottom photo --}}
-            <div style="border-radius: 10px; overflow: hidden; position: relative;">
+            <div style="overflow: hidden; position: relative;">
                 <img src="{{ asset('images/photo-cake.jpg') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 1.5rem 1rem 0.75rem; background: linear-gradient(to top, rgba(20,16,14,0.85) 0%, rgba(20,16,14,0.5) 50%, transparent 100%);">
-                    <p style="font-family: var(--font-sans); font-weight: 800; font-size: 0.9rem; color: white; margin: 0; text-shadow: 0 1px 4px rgba(0,0,0,0.4);">
+                <div style="position: absolute; bottom: 0.75rem; left: 0.75rem;">
+                    <span style="background: var(--color-brand-green); color: white; padding: 0.2rem 0.6rem; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; display: inline-block;">
                         {{ $isFr ? 'Fête d\'anniversaire' : 'Verjaardagsfeest' }}
-                    </p>
+                    </span>
                 </div>
             </div>
 

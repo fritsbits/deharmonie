@@ -40,7 +40,7 @@ return [
     'reeksen_eyebrow' => 'Elke week',
     'reeksen_heading' => 'Elke week bij ons',
     'reeksen_day_prefix' => 'Elke',
-    'special_moments_eyebrow' => 'Sfeer',
+    'special_moments_eyebrow' => 'Speciale activiteiten',
     'special_moments_heading' => 'Bijzondere momenten',
     'agenda_link' => 'Bekijk de volledige agenda',
     'overview_hero_eyebrow' => 'Activiteiten',

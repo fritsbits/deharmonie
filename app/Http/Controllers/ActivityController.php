@@ -34,7 +34,16 @@ class ActivityController extends Controller
             ->limit(5)
             ->get();
 
-        return view('activiteiten.overzicht', compact('reeksen', 'bijzondereActiviteiten'));
+        $allThemeIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];
+        $nextActiviteiten = Activiteit::whereIn('template_id', $allThemeIds)
+            ->where('datum', '>=', today())
+            ->where('status', 'gepubliceerd')
+            ->orderBy('datum')
+            ->get()
+            ->groupBy('template_id')
+            ->map(fn ($group) => $group->first());
+
+        return view('activiteiten.overzicht', compact('reeksen', 'bijzondereActiviteiten', 'nextActiviteiten'));
     }
 
     public function agenda(): View
@@ -47,12 +56,5 @@ class ActivityController extends Controller
         $activiteit = Activiteit::where('slug', $slug)->firstOrFail();
 
         return view('activiteiten.show', compact('activiteit'));
-    }
-
-    public function print(string $slug)
-    {
-        $activiteit = Activiteit::where('slug', $slug)->firstOrFail();
-
-        return view('activiteiten.print', compact('activiteit'));
     }
 }

@@ -40,7 +40,7 @@ return [
     'reeksen_eyebrow' => 'Chaque semaine',
     'reeksen_heading' => 'Chaque semaine chez nous',
     'reeksen_day_prefix' => 'Chaque',
-    'special_moments_eyebrow' => 'Ambiance',
+    'special_moments_eyebrow' => 'Activités spéciales',
     'special_moments_heading' => 'Moments forts',
     'agenda_link' => "Voir l'agenda complet",
     'overview_hero_eyebrow' => 'Activités',
