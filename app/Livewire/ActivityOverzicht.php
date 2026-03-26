@@ -15,27 +15,15 @@ class ActivityOverzicht extends Component
 
     public function mount(): void
     {
-        $hasCurrentMonth = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
+        $first = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
             ->where('datum', '>=', now()->startOfDay())
-            ->whereYear('datum', now()->year)
-            ->whereMonth('datum', now()->month)
-            ->exists();
+            ->orderBy('datum')
+            ->first();
 
-        if (! $hasCurrentMonth) {
-            $first = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
-                ->where('datum', '>=', now()->startOfDay())
-                ->orderBy('datum')
-                ->first();
-
-            if ($first) {
-                $offset = (int) now()->startOfMonth()->diffInMonths(
-                    $first->datum->copy()->startOfMonth()
-                );
-
-                if ($offset > 1) {
-                    $this->monthOffset = $offset;
-                }
-            }
+        if ($first) {
+            $this->monthOffset = (int) now()->startOfMonth()->diffInMonths(
+                $first->datum->copy()->startOfMonth()
+            );
         }
     }
 

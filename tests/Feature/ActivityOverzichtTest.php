@@ -70,6 +70,10 @@ class ActivityOverzichtTest extends TestCase
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
+            'datum' => now()->format('Y-m-d'),
+        ]);
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
             'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
         ]);
 
@@ -80,6 +84,10 @@ class ActivityOverzichtTest extends TestCase
 
     public function test_next_month_increments_offset(): void
     {
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->format('Y-m-d'),
+        ]);
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
             'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
