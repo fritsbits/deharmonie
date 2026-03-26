@@ -90,21 +90,30 @@
         <x-eyebrow color="green" mb="0.75rem">{{ __('activities.special_moments_eyebrow') }}</x-eyebrow>
         <x-section-heading mb="2rem">{{ __('activities.special_moments_heading') }}</x-section-heading>
 
-        <div class="moments-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem; height: 320px; overflow: hidden;">
+        <div class="moments-grid" style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
             {{-- Large photo left --}}
-            <div style="border-radius: 12px; overflow: hidden; height: 100%;">
+            <div style="border-radius: 12px; overflow: hidden; height: 400px; position: relative;">
                 <img src="{{ asset('images/photo-feest-2.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 1.25rem 1.5rem; background: linear-gradient(to top, rgba(44,40,38,0.75) 0%, transparent 100%);">
+                    <p style="font-family: var(--font-sans); font-weight: 700; font-size: 1rem; color: white; margin: 0;">Feest van 51 jaar De Harmonie</p>
+                </div>
             </div>
             {{-- Two smaller right --}}
-            <div style="display: flex; flex-direction: column; gap: 1rem; height: 100%;">
-                <div style="flex: 1; border-radius: 12px; overflow: hidden;">
+            <div style="display: flex; flex-direction: column; gap: 1rem; height: 400px;">
+                <div style="flex: 1; border-radius: 12px; overflow: hidden; position: relative;">
                     <img src="{{ asset('images/photo-buiten-event.webp') }}" alt=""
                          style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 0.75rem 1rem; background: linear-gradient(to top, rgba(44,40,38,0.75) 0%, transparent 100%);">
+                        <p style="font-family: var(--font-sans); font-weight: 700; font-size: 0.875rem; color: white; margin: 0;">Culturele uitstap</p>
+                    </div>
                 </div>
-                <div style="flex: 1; border-radius: 12px; overflow: hidden;">
+                <div style="flex: 1; border-radius: 12px; overflow: hidden; position: relative;">
                     <img src="{{ asset('images/photo-cake.jpg') }}" alt=""
                          style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                    <div style="position: absolute; bottom: 0; left: 0; right: 0; padding: 0.75rem 1rem; background: linear-gradient(to top, rgba(44,40,38,0.75) 0%, transparent 100%);">
+                        <p style="font-family: var(--font-sans); font-weight: 700; font-size: 0.875rem; color: white; margin: 0;">Verjaardagsfeest</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,9 +121,9 @@
 </section>
 
 {{-- FULL AGENDA LINK --}}
-<section style="background: var(--color-brand-dark); padding: 4.5rem 1.5rem; text-align: center;">
+<section style="background: white; padding: 4rem 1.5rem; text-align: center;">
     <a href="{{ route(app()->getLocale() . '.activiteiten.agenda') }}"
-       style="display: inline-block; background: var(--color-brand-orange); color: white; padding: 1rem 2.5rem; border-radius: 6px; font-family: var(--font-sans); font-weight: 700; font-size: 1.125rem; text-decoration: none;">
+       style="display: inline-block; border: 2px solid var(--color-brand-dark); color: var(--color-brand-dark); padding: 0.875rem 2.25rem; border-radius: 6px; font-family: var(--font-sans); font-weight: 700; font-size: 1.0625rem; text-decoration: none;">
         {{ __('activities.agenda_link') }} →
     </a>
 </section>
@@ -122,9 +131,9 @@
 <style>
 @media (max-width: 767px) {
     .reeksen-grid { grid-template-columns: 1fr !important; }
-    .moments-grid { grid-template-columns: 1fr !important; height: auto !important; }
+    .moments-grid { grid-template-columns: 1fr !important; }
     .moments-grid > div:last-child { display: none; }
-    .moments-grid > div:first-child { height: 220px; }
+    .moments-grid > div:first-child { height: 260px !important; }
 }
 </style>
 
