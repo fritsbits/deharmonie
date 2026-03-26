@@ -66,4 +66,50 @@ class ActiviteitenOverviewTest extends TestCase
         $this->assertTrue($bijzondere->contains('id', $special->id));
         $this->assertFalse($bijzondere->contains('id', $recurring->id));
     }
+
+    public function test_bijzondere_momenten_shows_upcoming_special_activities(): void
+    {
+        $special = \App\Models\Activiteit::factory()->create([
+            'template_id' => null,
+            'datum' => now()->addDays(10)->format('Y-m-d'),
+            'status' => 'gepubliceerd',
+            'titel_nl' => 'Zomerfeest',
+        ]);
+
+        // Past activity — should NOT appear
+        \App\Models\Activiteit::factory()->create([
+            'template_id' => null,
+            'datum' => now()->subDay()->format('Y-m-d'),
+            'status' => 'gepubliceerd',
+            'titel_nl' => 'Oud evenement',
+        ]);
+
+        // Draft — should NOT appear
+        \App\Models\Activiteit::factory()->create([
+            'template_id' => null,
+            'datum' => now()->addDays(3)->format('Y-m-d'),
+            'status' => 'concept',
+            'titel_nl' => 'Ongepubliceerd',
+        ]);
+
+        $response = $this->get('/activiteiten');
+        $response->assertStatus(200);
+        $response->assertSee('Zomerfeest');
+        $response->assertDontSee('Oud evenement');
+        $response->assertDontSee('Ongepubliceerd');
+    }
+
+    public function test_agenda_cta_link_correct_for_nl(): void
+    {
+        $response = $this->get('/activiteiten');
+        $response->assertStatus(200);
+        $response->assertSee('/activiteiten/agenda');
+    }
+
+    public function test_agenda_cta_link_correct_for_fr(): void
+    {
+        $response = $this->get('/fr/activites');
+        $response->assertStatus(200);
+        $response->assertSee('/fr/activites/agenda');
+    }
 }
