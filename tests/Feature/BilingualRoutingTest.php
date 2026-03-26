@@ -27,8 +27,8 @@ class BilingualRoutingTest extends TestCase
     public function test_activity_detail_resolves_by_slug(): void
     {
         $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
-        $this->get('/activiteiten/' . $activiteit->slug)->assertStatus(200);
-        $this->get('/fr/activites/' . $activiteit->slug)->assertStatus(200);
+        $this->get('/activiteiten/'.$activiteit->slug)->assertStatus(200);
+        $this->get('/fr/activites/'.$activiteit->slug)->assertStatus(200);
     }
 
     public function test_nl_locale_set_on_default_routes(): void
@@ -57,10 +57,22 @@ class BilingualRoutingTest extends TestCase
         $response->assertSee('Diensten');
     }
 
-    public function test_nav_language_switcher_link_present(): void
+    public function test_nl_nav_shows_fr_as_link(): void
     {
         $response = $this->get('/');
-        $response->assertSee('set-locale', false); // link to /set-locale exists
+        // FR is the clickable "other" language on the NL site
+        $response->assertSee('set-locale', false);
+        $response->assertSee('>FR<', false);
+        // NL appears as a non-linked span
+        $response->assertSee('>NL<', false);
+    }
+
+    public function test_fr_nav_shows_nl_as_link(): void
+    {
+        $response = $this->get('/fr');
+        $response->assertSee('set-locale', false);
+        $response->assertSee('>NL<', false);
+        $response->assertSee('>FR<', false);
     }
 
     public function test_footer_shows_fr_labels_on_fr_routes(): void
