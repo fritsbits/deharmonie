@@ -45,6 +45,7 @@ class DeelnameverzoekResource extends Resource
                 TextEntry::make('activiteit.datum')
                     ->label('Datum')
                     ->date('d/m/Y'),
+                TextEntry::make('activiteit.locatie')->label('Locatie')->placeholder('—'),
                 TextEntry::make('activiteit.startuur')
                     ->label('Tijdstip')
                     ->formatStateUsing(fn (string $state): string => substr($state, 0, 5)),
