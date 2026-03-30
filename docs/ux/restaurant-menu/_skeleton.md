@@ -24,7 +24,11 @@ _Status: Draft_
 │  ├─────────────┼────────────────┤    │
 │  │ Zonder      │ Antwerpsesteen-│    │
 │  │ reservatie  │ weg 24         │    │
-│  └─────────────┴────────────────┘    │
+│  ├─────────────┴────────────────┤    │
+│  │ Afhaal & Levering            │    │
+│  │ Bel 's ochtends of stuur een │    │
+│  │ e-mail → dezelfde dag klaar  │    │
+│  └──────────────────────────────┘    │
 │                                      │
 ├──────────────────────────────────────┤
 │  WEEKMENU  23 – 28 maart             │
@@ -117,4 +121,4 @@ _Status: Draft_
 
 ## Open items (to confirm with team)
 - Exact lunch hours (using 11u15–13u15 as placeholder from Chambéry reference)
-- Delivery/takeaway details — omitted in Phase 1
+- ~~Email address for takeaway/delivery orders~~ — confirmed: info@deharmonie.be (mailto pre-filled with order template)

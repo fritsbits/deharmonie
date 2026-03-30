@@ -43,27 +43,9 @@ class PageController extends Controller
         return view('pages.diensten');
     }
 
-    public function weekmenu()
+    public function weekmenu(): View
     {
-        $data = json_decode(file_get_contents(resource_path('data/weekmenu.json')), true);
-
-        $now = now();
-        $candidate = $now->hour >= 14 ? $now->copy()->addDay() : $now->copy();
-
-        $highlightedDate = null;
-        foreach ($data['days'] as $day) {
-            if ($day['date'] >= $candidate->toDateString() && ! $day['closed']) {
-                $highlightedDate = $day['date'];
-                break;
-            }
-        }
-
-        return view('pages.weekmenu', [
-            'week' => $data['week'],
-            'days' => $data['days'],
-            'highlightedDate' => $highlightedDate,
-            'highlightedIsToday' => $highlightedDate !== null && $highlightedDate === $now->toDateString(),
-        ]);
+        return view('pages.weekmenu');
     }
 
     public function overOns()

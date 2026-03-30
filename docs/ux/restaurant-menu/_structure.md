@@ -6,7 +6,7 @@ _Status: Draft_
 ```
 Restaurant & Menu
 ├── Restaurant intro       — photo + warm tagline
-├── Practical info         — hours, price, walk-in, address
+├── Practical info         — hours, price, walk-in, address, takeaway/delivery
 ├── Weekly menu            — current week, day-by-day stack
 │   ├── Standard day       — day + date, soup, main, price
 │   ├── Special event day  — named menu, full course list, price
@@ -28,7 +28,7 @@ Restaurant & Menu
 → Page loads → scrolls past intro + practical info → finds today's highlighted card immediately
 
 **Family member (first visit):**
-→ Page loads → reads intro → scans practical info (hours + price + walk-in) → browses the week → feels confident
+→ Page loads → reads intro → scans practical info (hours + price + walk-in + delivery option) → browses the week → feels confident
 
 **Today logic:**
 - Before 14:00 → highlight today's card

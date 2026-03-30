@@ -24,37 +24,55 @@ return [
     'home_hero_heading_line2' => 'Doe mee.',
     'home_hero_heading_line3' => 'Kom langs.',
     'home_hero_subheading' => 'Het kloppend hart van de Noordwijk. Elke dag een warm onthaal, een maaltijd en activiteiten voor iedereen uit de buurt.',
-    'home_hero_cta_activities' => 'Bekijk activiteiten',
-    'home_hero_cta_menu' => 'Weekmenu →',
+    'home_hero_cta_activities' => 'Activiteiten',
+    'home_hero_cta_menu' => 'Weekmenu',
 
     // Homepage menu preview
     'home_menu_label' => 'Restaurant & Menu',
     'home_menu_preview_heading' => 'Vandaag & morgen aan tafel',
     'home_menu_soup_included' => 'Soep van de dag inbegrepen',
-    'home_menu_link' => 'Volledig weekmenu bekijken →',
+    'home_menu_link' => 'Volledig menu →',
     'home_menu_today_badge' => 'Vandaag',
+    'home_menu_check_link' => 'Bekijk het volledige weekmenu voor de dagschotels en prijzen.',
 
-    // Homepage service cards
-    'home_services_section_heading' => 'Voor iedereen uit de buurt',
-    'home_service_restaurant_title' => 'Samen aan tafel',
-    'home_service_restaurant_body' => 'Elke dag een warme maaltijd in ons sociaal restaurant. Takeaway en thuisbezorging mogelijk.',
-    'home_service_restaurant_price' => 'Vanaf € 9',
-    'home_service_restaurant_link' => 'Meer over het restaurant →',
-    'home_service_activities_title' => 'Activiteiten & workshops',
-    'home_service_activities_body' => 'Van Italiaans leren tot country line dance. Elke week iets om bij te leren of gewoon te genieten.',
-    'home_service_activities_link' => 'Bekijk agenda →',
-    'home_service_home_title' => 'Bij u thuis',
-    'home_service_home_body' => 'Poetsen, boodschappen, vervoer, klusjes en maaltijden aan huis. Zodat u thuis kan blijven wonen.',
-    'home_service_home_link' => 'Bekijk thuisdiensten →',
+    // Homepage services block
+    'home_services_section_heading' => 'Wij komen ook naar u toe',
+    'home_services_intro' => 'Liever thuis? Geen probleem. Onze poetsdienst, boodschappendienst, vervoersdienst en klusjesdienst komen naar u. Warme maaltijden worden ook aan huis bezorgd. Zodat u thuis kan blijven wonen, zo lang u wilt.',
+    'home_services_cta' => 'Meer over onze thuisdiensten →',
+
+    // Diensten page hero lead (shorter than full intro)
+    'diensten_lead' => 'Hulp thuis, boodschappen, vervoer en meer. Wij komen naar u toe.',
+
+    // Homepage image alt text
+    'home_hero_photo_alt' => 'Het restaurant van De Harmonie, gevuld met bezoekers',
+    'home_photo_groep_tafel_alt' => 'Bezoekers samen aan tafel in De Harmonie',
+    'home_photo_party_alt' => 'Feestelijke bijeenkomst in De Harmonie',
+    'home_photo_groep_actief_alt' => 'Actieve groep bezoekers bij De Harmonie',
+    'home_photo_thumbsup_alt' => 'Bezoeker geeft duimen omhoog na een activiteit',
+    'home_photo_samen_alt' => 'Bezoekers genieten samen in De Harmonie',
+    'home_photo_feest_alt' => 'Feest en gezelligheid in De Harmonie',
+    'home_photo_bloemen_alt' => 'Bloemen in De Harmonie',
 
     // Homepage practical bar
     'home_practical_address_label' => 'Adres',
     'home_practical_hours_label' => 'Openingsuren',
     'home_practical_contact_label' => 'Contact',
 
+    // Contact
+    'contact_eyebrow' => 'Contact',
+    'contact_heading' => 'Kom eens langs',
+    'contact_lead' => 'U bent altijd welkom aan de Antwerpsesteenweg 24 in Brussel.',
+
+    // Over ons
+    'over_ons_eyebrow' => 'Over De Harmonie',
+    'over_ons_heading' => 'Vijftig jaar hart voor de Noordwijk',
+    'over_ons_lead' => 'Al 50 jaar zijn wij er voor de senioren van de Noordwijk in Brussel.',
+
     // Wie is wie
     'wie_is_wie_title' => 'Wie is wie ?',
-    'team_eyebrow' => 'HET TEAM',
+    'team_eyebrow' => 'Het team',
+    'team_heading' => 'De mensen achter De Harmonie',
+    'team_lead' => 'Van de keuken tot de administratie: de mensen die De Harmonie elke dag draaiende houden.',
     'governance' => 'BESTUUR',
     'board_organ' => 'Bestuursorgaan',
     'neighborhood_council' => 'Buurtraad Noordwijk',

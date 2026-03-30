@@ -102,39 +102,64 @@
                 {{ __('activities.all') }} →
             </a>
         </div>
+        @php
+            $cardColors = [
+                ['bg' => 'var(--color-brand-green)',  'tint' => 'var(--color-brand-green-tint)',  'dark_tint' => '#5a8a74', 'accent' => 'var(--color-brand-green)'],
+                ['bg' => 'var(--color-brand-blue)',   'tint' => 'var(--color-brand-blue-tint)',   'dark_tint' => '#2f5490', 'accent' => 'var(--color-brand-blue)'],
+                ['bg' => 'var(--color-brand-orange)', 'tint' => 'var(--color-brand-orange-tint)', 'dark_tint' => '#b34a2d', 'accent' => 'var(--color-brand-orange)'],
+            ];
+        @endphp
         <div class="activity-cards-grid" style="display: flex; gap: 1rem;">
             @forelse ($activiteiten as $activiteit)
                 @php
-                    $colors = ['#f3dbd5','#d4e8df','#d5e0f0'];
-                    $bg = $colors[$loop->index % count($colors)];
-                    $imgUrl = $activiteit->getFirstMediaUrl('afbeelding');
+                    $cc = $cardColors[$loop->index % 3];
+                    $t = strtolower($activiteit->titel);
+                    // Filled icon paths (Heroicons solid 24x24)
+                    $iconChat   = '<path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 0 1-3.476.383.39.39 0 0 0-.297.17l-2.755 4.133a.75.75 0 0 1-1.248 0l-2.755-4.133a.39.39 0 0 0-.297-.17 48.9 48.9 0 0 1-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97Z" clip-rule="evenodd"/>';
+                    $iconMusic  = '<path fill-rule="evenodd" d="M19.952 1.651a.75.75 0 0 1 .298.599V16.303a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.403-4.909l2.311-.66a1.5 1.5 0 0 0 1.088-1.442V6.994l-9 2.572v9.737a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.402-4.909l2.31-.66a1.5 1.5 0 0 0 1.088-1.442V5.25a.75.75 0 0 1 .544-.721l10.5-3a.75.75 0 0 1 .658.122Z" clip-rule="evenodd"/>';
+                    $iconStar   = '<path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/>';
+                    $iconBolt   = '<path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.268a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .895-.143Z" clip-rule="evenodd"/>';
+
+                    if (str_contains($t, 'conversat') || str_contains($t, 'tafel') || str_contains($t, 'praat')) {
+                        $icon = $iconChat;
+                    } elseif (str_contains($t, 'zumba') || str_contains($t, 'dans') || str_contains($t, 'muziek') || str_contains($t, 'concert')) {
+                        $icon = $iconMusic;
+                    } elseif (str_contains($t, 'voorstelling') || str_contains($t, 'theater') || str_contains($t, 'théâtre') || str_contains($t, 'film')) {
+                        $icon = $iconStar;
+                    } elseif (str_contains($t, 'yoga') || str_contains($t, 'sport') || str_contains($t, 'fitness') || str_contains($t, 'bewegen') || str_contains($t, 'gym')) {
+                        $icon = $iconBolt;
+                    } else {
+                        $fallbacks = [$iconChat, $iconMusic, $iconStar];
+                        $icon = $fallbacks[abs(crc32($activiteit->slug)) % 3];
+                    }
                 @endphp
                 <a href="{{ route(app()->getLocale() . '.activiteiten.show', $activiteit->slug) }}"
-                   style="flex: 1; display: block; text-decoration: none; border-radius: 10px; overflow: hidden; border: 1px solid #e8e0d8; {{ $activiteit->status->value === 'geannuleerd' ? 'opacity: 0.7;' : '' }}">
-                    {{-- Photo or date band --}}
-                    <div style="height: 160px; background: {{ $bg }}; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center;">
-                        @if ($imgUrl)
-                            <img src="{{ $imgUrl }}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;">
-                        @else
-                            <div style="text-align: center; color: rgba(44,40,38,0.2);">
-                                <p style="font-family: var(--font-sans); font-size: 4rem; font-weight: 900; line-height: 1; margin: 0;">{{ \Carbon\Carbon::parse($activiteit->datum)->format('d') }}</p>
-                                <p style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin: 0.25rem 0 0;">{{ strtoupper(\Carbon\Carbon::parse($activiteit->datum)->locale(app()->getLocale())->isoFormat('MMM')) }}</p>
-                            </div>
-                        @endif
+                   class="activity-card"
+                   style="flex: 1; display: flex; flex-direction: column; text-decoration: none; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(44,40,38,.09), 0 8px 28px rgba(44,40,38,.11); {{ $activiteit->status->value === 'geannuleerd' ? 'opacity: 0.7;' : '' }}">
+                    {{-- Colored header with big date + clipped icon --}}
+                    <div style="position: relative; height: 160px; background: {{ $cc['bg'] }}; overflow: hidden;">
+                        <svg style="position: absolute; width: 170px; height: 170px; bottom: -22px; right: -12px; transform: rotate(12deg); pointer-events: none;"
+                             viewBox="0 0 24 24" fill="{{ $cc['dark_tint'] }}" stroke="none">
+                            {!! $icon !!}
+                        </svg>
+                        <div style="position: absolute; bottom: 1.1rem; left: 1.25rem; z-index: 2;">
+                            <span style="font-family: var(--font-sans); font-weight: 900; font-size: 3.75rem; line-height: 1; color: white; display: block;">{{ \Carbon\Carbon::parse($activiteit->datum)->format('d') }}</span>
+                            <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.75rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); display: block; margin-top: 1px;">{{ strtoupper(\Carbon\Carbon::parse($activiteit->datum)->locale(app()->getLocale())->isoFormat('MMM')) }}</span>
+                        </div>
                     </div>
-                    {{-- Card body --}}
-                    <div style="padding: 1rem 1.25rem 1.5rem; background: var(--color-brand-bg);">
-                        <p style="font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-green); margin: 0 0 0.3rem;">
+                    {{-- White card body --}}
+                    <div style="padding: 1rem 1.25rem 1.4rem; background: white; flex: 1; display: flex; flex-direction: column;">
+                        <p style="font-family: var(--font-sans); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: {{ $cc['accent'] }}; margin: 0 0 0.3rem;">
                             <x-relative-date :datum="$activiteit->datum" />
                         </p>
-                        <h3 style="font-size: 1.2rem; font-weight: 800; color: var(--color-brand-dark); line-height: 1.2; margin: 0 0 0.25rem;">
+                        <h3 style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin: 0 0 0.35rem; flex: 1;">
                             {{ $activiteit->titel }}
                             @if ($activiteit->status->value === 'geannuleerd')
                                 <x-badge type="geannuleerd" />
                             @endif
                         </h3>
-                        <p style="font-size: 0.9rem; color: var(--color-brand-muted); margin: 0;">
-                            {{ substr($activiteit->startuur, 0, 5) }} · {{ $activiteit->locatie }}
+                        <p style="font-size: 1.05rem; color: var(--color-brand-muted); margin: 0; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
+                            {{ substr($activiteit->startuur, 0, 5) }}<span style="display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: {{ $cc['accent'] }}; flex-shrink: 0;"></span>{{ $activiteit->locatie }}
                         </p>
                     </div>
                 </a>
@@ -220,6 +245,9 @@
 </section>
 
 <style>
+.activity-card { transition: transform .14s ease, box-shadow .14s ease; }
+.activity-card:hover { transform: translateY(-3px); box-shadow: 0 4px 14px rgba(44,40,38,.13), 0 16px 40px rgba(44,40,38,.14); }
+
 /* sm — mobile */
 @media (max-width: 767px) {
     .hero-inner { min-height: auto !important; }

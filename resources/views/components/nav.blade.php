@@ -46,23 +46,23 @@
             {{-- Divider --}}
             <span aria-hidden="true" style="width: 1px; height: 1.25rem; background: rgba(255,255,255,0.35); margin: 0 0.25rem;"></span>
             {{-- Language toggle --}}
-            <div class="flex items-center gap-1.5" style="font-family: var(--font-sans); font-size: 0.875rem; font-weight: 600;">
-                {{-- Globe icon (Heroicons outline GlobeAltIcon) --}}
+            <div class="flex items-center gap-2" style="font-family: var(--font-sans); font-size: 1rem; font-weight: 600; letter-spacing: 0.04em;">
+                {{-- Globe icon (Lucide Globe) --}}
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                      stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
-                     style="color: white; opacity: 0.75; flex-shrink: 0;">
+                     style="color: white; opacity: 0.7; flex-shrink: 0;">
                     <circle cx="12" cy="12" r="10"/>
                     <line x1="2" y1="12" x2="22" y2="12"/>
                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                 </svg>
                 {{-- Current locale (not a link) --}}
-                <span style="color: white; opacity: 1;">{{ $currentLocaleLabel }}</span>
+                <span style="color: white;">{{ $currentLocaleLabel }}</span>
                 {{-- Separator --}}
-                <span aria-hidden="true" style="color: white; opacity: 0.4; font-size: 0.75rem;">/</span>
+                <span aria-hidden="true" style="color: white; opacity: 0.35; font-size: 0.75rem; letter-spacing: 0;">/</span>
                 {{-- Other locale (link) --}}
                 <a href="{{ route('set-locale', ['locale' => $targetLocale, 'redirect' => $targetUrl]) }}"
-                   style="color: white; opacity: 0.6; text-decoration: underline;"
-                   class="hover:opacity-90 transition-opacity">{{ $targetLocaleLabel }}</a>
+                   style="color: white; opacity: 0.8; text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px;"
+                   class="hover:opacity-100 transition-opacity">{{ $targetLocaleLabel }}</a>
             </div>
         </nav>
         <!-- Mobile toggle -->
@@ -83,8 +83,8 @@
                 <a href="{{ route(app()->getLocale() . '.over-ons') }}" class="block font-semibold" style="color: white; padding: 1rem 0; font-size: 1.25rem; font-family: var(--font-sans); border-bottom: 1px solid rgba(255,255,255,0.15);">{{ __('nav.over_ons') }}</a>
                 <a href="{{ route(app()->getLocale() . '.contact') }}" class="block font-semibold" style="color: white; padding: 1rem 0; font-size: 1.25rem; font-family: var(--font-sans);">{{ __('nav.contact') }}</a>
                 {{-- Mobile language toggle --}}
-                <div class="flex items-center gap-2" style="padding: 1rem 0; border-top: 1px solid rgba(255,255,255,0.15);">
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                <div class="flex items-center gap-2" style="padding: 1rem 0; border-top: 1px solid rgba(255,255,255,0.15); letter-spacing: 0.04em;">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                          stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
                          style="color: white; opacity: 0.7; flex-shrink: 0;">
                         <circle cx="12" cy="12" r="10"/>
@@ -92,10 +92,10 @@
                         <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                     </svg>
                     <span style="color: white; font-weight: 600; font-size: 1.125rem; font-family: var(--font-sans);">{{ $currentLocaleLabel }}</span>
-                    <span aria-hidden="true" style="color: white; opacity: 0.4; font-size: 0.875rem;">/</span>
+                    <span aria-hidden="true" style="color: white; opacity: 0.35; font-size: 0.875rem; letter-spacing: 0;">/</span>
                     <a href="{{ route('set-locale', ['locale' => $targetLocale, 'redirect' => $targetUrl]) }}"
-                       style="color: white; opacity: 0.65; font-weight: 600; font-size: 1.125rem; font-family: var(--font-sans); text-decoration: underline;"
-                       class="hover:opacity-90 transition-opacity">{{ $targetLocaleLabel }}</a>
+                       style="color: white; opacity: 0.8; font-weight: 600; font-size: 1.125rem; font-family: var(--font-sans); text-decoration: underline; text-underline-offset: 2px; text-decoration-thickness: 1px;"
+                       class="hover:opacity-100 transition-opacity">{{ $targetLocaleLabel }}</a>
                 </div>
             </div>
         </div>

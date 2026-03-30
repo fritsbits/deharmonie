@@ -1,6 +1,7 @@
 <?php
+
 return [
-    'heading' => 'Formulaire d\'inscription',
+    'heading' => 'Participez',
     'name' => 'Nom',
     'email' => 'Adresse e-mail',
     'phone' => 'Numéro de téléphone (optionnel)',

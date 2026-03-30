@@ -1,6 +1,7 @@
 <?php
+
 return [
-    'heading' => 'Inschrijvingsformulier',
+    'heading' => 'Doe mee',
     'name' => 'Naam',
     'email' => 'E-mailadres',
     'phone' => 'Telefoonnummer (optioneel)',

@@ -18,8 +18,12 @@
                 ['navigatie', 'Navigatiebalk'],
                 ['hero', 'Hero sectie'],
                 ['activiteitenlijst', 'Activiteitenlijst'],
+                ['activiteiten-kaart', 'Activiteitenkaart'],
+                ['datum-label', 'Datumweergave'],
                 ['activiteit-detail', 'Detail sidebar'],
+                ['weekmenu-kaart', 'Weekmenu kaart'],
                 ['registratieformulier', 'Registratieformulier'],
+                ['praktische-info', 'Praktische info blok'],
                 ['diensten', 'Diensten sectie'],
                 ['voettekst', 'Voettekst'],
             ] as [$anchor, $label])
@@ -58,7 +62,10 @@
             ['--color-brand-gray',      '#d8d3d2', 'Brand grijs'],
             ['--color-brand-gray-dark', '#c0bbb9', 'Brand grijs donker'],
             ['--color-brand-medium',    '#4e4543', 'Brand medium'],
-            ['--color-brand-bg-tint',   '#e8eef7', 'Brand achtergrond blauw'],
+            ['--color-brand-bg-tint',     '#e8eef7', 'Achtergrond tint (blauw)'],
+            ['--color-brand-green-tint',  '#eef5f1', 'Activiteiten achtergrond'],
+            ['--color-brand-orange-tint', '#fff8f5', 'Restaurant achtergrond'],
+            ['--color-brand-blue-tint',   '#eef2f8', 'Diensten achtergrond'],
         ] as [$token, $hex, $name])
         <div style="width: 140px;">
             <div style="width: 100%; height: 64px; border-radius: 8px; background-color: {{ $hex }}; border: 1px solid rgba(0,0,0,0.08); margin-bottom: 0.5rem;"></div>
@@ -67,6 +74,16 @@
             <code style="font-size: 0.7rem; color: var(--color-brand-muted);">{{ $token }}</code>
         </div>
         @endforeach
+    </div>
+
+    <div style="margin-top: 2rem; padding: 1.25rem 1.5rem; background: white; border: 1px solid var(--color-brand-gray); border-radius: 8px; max-width: 560px;">
+        <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Semantisch gebruik</p>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.95rem;">
+            <p style="margin: 0;"><span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--color-brand-green); vertical-align: middle; margin-right: 0.4rem;"></span><strong>Groen</strong> — activiteiten (datum labels, eyebrow, pill knop)</p>
+            <p style="margin: 0;"><span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--color-brand-orange); vertical-align: middle; margin-right: 0.4rem;"></span><strong>Oranje</strong> — restaurant / weekmenu (dag labels, prijs, sectie-achtergrond)</p>
+            <p style="margin: 0;"><span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--color-brand-blue); vertical-align: middle; margin-right: 0.4rem;"></span><strong>Blauw</strong> — navigatie, primaire CTAs, contact, diensten</p>
+            <p style="margin: 0;"><span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background: var(--color-brand-muted); vertical-align: middle; margin-right: 0.4rem;"></span><strong>Gedempd</strong> — secundaire info, labels in praktische info blokken</p>
+        </div>
     </div>
 </section>
         <section id="typografie" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
@@ -167,6 +184,16 @@
             <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Teruglink (navigatie)</p>
             <a href="#" style="color: var(--color-brand-blue); text-decoration: none; font-size: 0.875rem; font-weight: 600;">&larr; Alle activiteiten</a>
             <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">color: brand-blue · text-sm · weight 600 · arrow prefix</code>
+        </div>
+
+        {{-- Sectieknop (pill) —— gebruikt als "meer zien" CTA naast sectietitel --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Sectieknop (pill)</p>
+            <div style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;">
+                <a href="#" style="background: var(--color-brand-green); color: white; padding: 0.5rem 1.25rem; border-radius: 999px; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; text-decoration: none; white-space: nowrap;">Alle activiteiten →</a>
+                <a href="#" style="background: var(--color-brand-orange); color: white; padding: 0.5rem 1.25rem; border-radius: 999px; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; text-decoration: none; white-space: nowrap;">Weekmenu →</a>
+            </div>
+            <br><code style="font-size: 0.75rem; color: var(--color-brand-muted);">border-radius: 999px · padding: 0.5rem 1.25rem · weight 700 · groen voor activiteiten · oranje voor restaurant</code>
         </div>
 
     </div>
@@ -347,21 +374,22 @@
 </section>
         <section id="activiteit-detail" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
     <x-eyebrow>Stijlgids</x-eyebrow>
-    <h2 style="font-family: var(--font-sans); font-size: 2.1rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 1.5rem;">Activiteit detail sidebar</h2>
+    <h2 style="font-family: var(--font-sans); font-size: 2.1rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 0.5rem;">Activiteit detail sidebar</h2>
+    <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin-bottom: 1.5rem; font-style: italic;">Gebruikt <code>&lt;x-eyebrow size="sm" color="green"&gt;</code> als rijlabel. Zie ook Praktische info blok voor het volledige patroon.</p>
 
     <div style="max-width: 280px; border-radius: 8px; padding: 1.25rem; border: 1px solid var(--color-brand-gray); background: white;">
 
         <div style="margin-bottom: 1rem;">
-            <p style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-brand-green); margin: 0 0 0.25rem;">Datum</p>
-            <p style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.25rem; margin: 0;">Donderdag 27 maart 2026</p>
-            <p style="font-weight: 600; color: var(--color-brand-muted); font-size: 1.125rem; margin: 0.1rem 0 0;">10:00 &ndash; 11:30</p>
+            <x-eyebrow size="sm" color="green" mb="0.3rem">Datum</x-eyebrow>
+            <p style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.125rem; margin: 0;">Donderdag 27 maart 2026</p>
+            <p style="font-weight: 600; color: var(--color-brand-muted); font-size: 1rem; margin: 0.1rem 0 0;">10:00 &ndash; 11:30</p>
         </div>
 
         <div style="border-top: 1px solid var(--color-brand-gray); margin: 1rem 0;"></div>
 
         <div style="margin-bottom: 1rem;">
-            <p style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-brand-green); margin: 0 0 0.25rem;">Prijs</p>
-            <span style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.25rem;">€ 5,00</span>
+            <x-eyebrow size="sm" color="green" mb="0.3rem">Prijs</x-eyebrow>
+            <span style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.125rem;">€ 5,00</span>
             &nbsp;
             <x-badge type="gratis" />
         </div>
@@ -369,29 +397,24 @@
         <div style="border-top: 1px solid var(--color-brand-gray); margin: 1rem 0;"></div>
 
         <div style="margin-bottom: 1rem;">
-            <p style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-brand-green); margin: 0 0 0.25rem;">Locatie</p>
-            <p style="font-weight: 600; color: var(--color-brand-dark); font-size: 1.125rem; margin: 0;">Zaal De Harmonie</p>
+            <x-eyebrow size="sm" color="green" mb="0.3rem">Locatie</x-eyebrow>
+            <p style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.125rem; margin: 0;">Zaal De Harmonie</p>
         </div>
 
         <div style="border-top: 1px solid var(--color-brand-gray); margin: 1rem 0;"></div>
 
         <div>
-            <p style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-brand-green); margin: 0 0 0.25rem;">Contact</p>
-            <p style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.125rem; margin: 0 0 0.25rem;">De Harmonie</p>
-            <p style="font-size: 1.125rem; margin: 0 0 0.25rem;">
-                <a href="#" style="color: var(--color-brand-blue); text-decoration: none; font-weight: 700;">02 203 28 48</a>
+            <x-eyebrow size="sm" color="green" mb="0.3rem">Contact</x-eyebrow>
+            <p style="font-size: 1.125rem; margin: 0 0 0.2rem;">
+                <a href="#" style="font-weight: 700; color: var(--color-brand-dark); text-decoration: underline; text-underline-offset: 2px;">02 203 28 48</a>
             </p>
             <p style="font-size: 1rem; margin: 0;">
-                <a href="#" style="color: var(--color-brand-blue); text-decoration: none;">info@deharmonie.be</a>
+                <a href="#" style="color: var(--color-brand-dark); text-decoration: underline; text-underline-offset: 2px;">info@deharmonie.be</a>
             </p>
-        </div>
-
-        <div style="margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--color-brand-gray);">
-            <a href="#" style="display: inline-block; font-size: 0.9rem; font-weight: 700; padding: 0.5rem 1rem; border: 2px solid var(--color-brand-blue); color: var(--color-brand-blue); border-radius: 4px; text-decoration: none; font-family: var(--font-sans);">&#9113; Afdrukken</a>
         </div>
 
     </div>
-    <code style="font-size: 0.75rem; color: var(--color-brand-muted);">card: border brand-gray · bg white · rounded 8px · rows separated by 1px brand-gray divider</code>
+    <code style="font-size: 0.75rem; color: var(--color-brand-muted);">&lt;x-eyebrow size="sm" color="green" mb="0.3rem"&gt; · card: border brand-gray · bg white · rounded-8px · rijen: 1px brand-gray divider</code>
 </section>
         <section id="registratieformulier" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
     <x-eyebrow>Stijlgids</x-eyebrow>
@@ -427,6 +450,171 @@
             </button>
         </form>
     </div>
+</section>
+        <section id="activiteiten-kaart" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
+    <x-eyebrow>Stijlgids</x-eyebrow>
+    <h2 style="font-family: var(--font-sans); font-size: 2.1rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 0.5rem;">Activiteitenkaart (grid)</h2>
+    <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin-bottom: 1.5rem; font-style: italic;">Gebruikt op de homepage en overzichtspagina. Groen kleuraccent = activiteiten.</p>
+
+    <div style="display: flex; gap: 1rem; max-width: 720px;">
+        {{-- Normale kaart --}}
+        <a href="#" style="flex: 1; display: block; background: var(--color-brand-bg); border: 1px solid #e8e0d8; border-radius: 8px; padding: 1.5rem; padding-bottom: 2.5rem; text-decoration: none; position: relative;">
+            <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-green); margin-bottom: 0.35rem;">Donderdag</p>
+            <h3 style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 800; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.35rem;">Yoga voor senioren</h3>
+            <p style="font-size: 1rem; color: var(--color-brand-muted);">10:00 · Zaal De Harmonie</p>
+            <span style="position: absolute; bottom: 1.25rem; right: 1.25rem; color: var(--color-brand-muted); font-size: 1rem; opacity: 0.5;">→</span>
+        </a>
+        {{-- Geannuleerde kaart --}}
+        <a href="#" style="flex: 1; display: block; background: var(--color-brand-bg); border: 1px solid #e8e0d8; border-radius: 8px; padding: 1.5rem; padding-bottom: 2.5rem; text-decoration: none; position: relative; filter: grayscale(0.4);">
+            <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-green); margin-bottom: 0.35rem;">Vrijdag 28/3</p>
+            <h3 style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 800; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.35rem;">
+                Uitstap Brugge <x-badge type="geannuleerd" />
+            </h3>
+            <p style="font-size: 1rem; color: var(--color-brand-muted);">08:00 · Vertrek aan de deur</p>
+            <span style="position: absolute; bottom: 1.25rem; right: 1.25rem; color: var(--color-brand-muted); font-size: 1rem; opacity: 0.5;">→</span>
+        </a>
+        {{-- Vandaag kaart --}}
+        <a href="#" style="flex: 1; display: block; background: var(--color-brand-bg); border: 1px solid #e8e0d8; border-radius: 8px; padding: 1.5rem; padding-bottom: 2.5rem; text-decoration: none; position: relative;">
+            <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-green); margin-bottom: 0.35rem;">Vandaag</p>
+            <h3 style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 800; color: var(--color-brand-dark); line-height: 1.2; margin-bottom: 0.35rem;">Kaartnamiddag</h3>
+            <p style="font-size: 1rem; color: var(--color-brand-muted);">14:00 · Cafetaria</p>
+            <span style="position: absolute; bottom: 1.25rem; right: 1.25rem; color: var(--color-brand-muted); font-size: 1rem; opacity: 0.5;">→</span>
+        </a>
+    </div>
+    <code style="font-size: 0.75rem; color: var(--color-brand-muted); display: block; margin-top: 0.75rem;">bg: brand-bg · border: #e8e0d8 · rounded-8px · datum: brand-green uppercase 0.875rem weight 800 · titel: font-sans 1.5rem weight 800 · geannuleerd: filter grayscale(0.4)</code>
+</section>
+        <section id="datum-label" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
+    <x-eyebrow>Stijlgids</x-eyebrow>
+    <h2 style="font-family: var(--font-sans); font-size: 2.1rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 0.5rem;">Datumweergave</h2>
+    <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin-bottom: 1.5rem;">Relatieve datum via <code>&lt;x-relative-date :datum="$activiteit->datum" /&gt;</code>. Logica: Vandaag · Morgen · dagnaam (≤13d) · dag + datum (&gt;13d).</p>
+
+    <div style="display: flex; flex-direction: column; gap: 2rem;">
+
+        {{-- Groen — activiteiten --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Activiteiten — groen (in kaarten en lijstitems)</p>
+            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                @foreach (['Vandaag', 'Morgen', 'Donderdag', 'Vrijdag 28/3'] as $d)
+                <span style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-green);">{{ $d }}</span>
+                @endforeach
+            </div>
+            <code style="font-size: 0.75rem; color: var(--color-brand-muted);">brand-green · 0.875rem · weight 800 · uppercase · letter-spacing 0.06em</code>
+        </div>
+
+        {{-- Oranje — restaurant --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Restaurant — oranje (in weekmenu kaarten)</p>
+            <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+                @foreach (['Vandaag', 'Morgen', 'Woensdag', 'Donderdag 27/3'] as $d)
+                <span style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange);">{{ $d }}</span>
+                @endforeach
+            </div>
+            <code style="font-size: 0.75rem; color: var(--color-brand-muted);">brand-orange · 0.875rem · weight 800 · uppercase · letter-spacing 0.08em</code>
+        </div>
+
+        {{-- Volledige datum in sidebar --}}
+        <div>
+            <p style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Volledige datum (activiteit detail sidebar)</p>
+            <p style="font-size: 0.75rem; text-transform: uppercase; font-weight: 700; color: var(--color-brand-green); margin: 0 0 0.25rem;">Datum</p>
+            <p style="font-weight: 700; color: var(--color-brand-dark); font-size: 1.25rem; margin: 0;">Donderdag 27 maart 2026</p>
+            <p style="font-weight: 600; color: var(--color-brand-muted); font-size: 1.125rem; margin: 0.1rem 0 0;">10:00 – 11:30</p>
+            <code style="font-size: 0.75rem; color: var(--color-brand-muted);">label: brand-green · datum: 1.25rem weight 700 brand-dark · tijd: 1.125rem weight 600 brand-muted</code>
+        </div>
+
+    </div>
+</section>
+        <section id="weekmenu-kaart" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
+    <x-eyebrow color="orange">Stijlgids</x-eyebrow>
+    <h2 style="font-family: var(--font-sans); font-size: 2.1rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 0.5rem;">Weekmenu kaart</h2>
+    <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin-bottom: 1.5rem; font-style: italic;">Oranje kleuraccent = restaurant. Sectieachtergrond: brand-orange-tint (#fff8f5).</p>
+
+    <div style="background-color: #fff8f5; border-radius: 12px; padding: 2rem; max-width: 620px;">
+        <div style="display: flex; gap: 1rem;">
+            {{-- Vandaag --}}
+            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid #e8e0d8;">
+                <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin-bottom: 0.4rem;">Vandaag</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Kalf blanket met bulgur</p>
+                <p style="font-size: 1rem; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Soep inbegrepen</p>
+                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ 10</p>
+            </div>
+            {{-- Morgen --}}
+            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid #e8e0d8;">
+                <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin-bottom: 0.4rem;">Morgen</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Varkensgebraad met gestoofd witloof</p>
+                <p style="font-size: 1rem; color: var(--color-brand-muted); margin-bottom: 0.75rem;">Soep inbegrepen</p>
+                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ 9</p>
+            </div>
+        </div>
+    </div>
+    <code style="font-size: 0.75rem; color: var(--color-brand-muted); display: block; margin-top: 0.75rem;">sectie-bg: #fff8f5 (brand-orange-tint) · kaart: bg white · border #e8e0d8 · dag-label: brand-orange 0.875rem weight 800 uppercase · prijs: brand-orange 1.25rem weight 900 font-sans</code>
+</section>
+        <section id="praktische-info" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
+    <x-eyebrow>Stijlgids</x-eyebrow>
+    <h2 style="font-family: var(--font-sans); font-size: 2.1rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 0.5rem;">Praktische info blok</h2>
+    <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin-bottom: 2rem; font-style: italic;">Label + waarde patroon via <code>&lt;x-eyebrow size="sm" color="…"&gt;</code>. Labelkleur = sectieaccent: oranje (restaurant), groen (activiteiten), blauw (diensten/contact). Twee vormen: info kaart met accentbalk, en vlakke rijen.</p>
+
+    <div style="display: flex; gap: 2.5rem; align-items: flex-start; flex-wrap: wrap; margin-bottom: 2rem;">
+
+        {{-- Info kaart — oranje (restaurant) --}}
+        <div>
+            <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-muted); margin: 0 0 0.75rem;">Info kaart — oranje</p>
+            <div style="width: 240px; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 16px rgba(44,40,38,0.09);">
+                <div style="height: 4px; background: var(--color-brand-orange);"></div>
+                <div style="padding: 1.25rem;">
+                    <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed #e4dbd3;">
+                        <x-eyebrow size="sm" color="orange" mb="0.35rem">Openingsuren</x-eyebrow>
+                        <p style="font-size: 1.125rem; font-weight: 700; color: var(--color-brand-dark); margin: 0; line-height: 1.5;">Ma – vr<br>11u15 – 13u15</p>
+                    </div>
+                    <div>
+                        <x-eyebrow size="sm" color="orange" mb="0.35rem">Prijs</x-eyebrow>
+                        <div style="display: flex; align-items: flex-start; gap: 0; line-height: 1;">
+                            <span style="font-family: var(--font-sans); font-size: 1.1rem; font-weight: 900; color: var(--color-brand-dark); margin-top: 0.25rem;">€</span>
+                            <span style="font-family: var(--font-sans); font-size: 2.5rem; font-weight: 900; color: var(--color-brand-dark); letter-spacing: -0.04em; line-height: 0.9;">9</span>
+                        </div>
+                        <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin: 0.2rem 0 0;">Vanaf — soep + hoofdgerecht</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Info kaart — groen (activiteiten) --}}
+        <div>
+            <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-muted); margin: 0 0 0.75rem;">Info kaart — groen</p>
+            <div style="width: 240px; background: white; border-radius: 8px; border: 1px solid var(--color-brand-gray);">
+                <div style="padding: 1.25rem;">
+                    <div style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px solid var(--color-brand-gray);">
+                        <x-eyebrow size="sm" color="green" mb="0.35rem">Datum</x-eyebrow>
+                        <p style="font-size: 1.125rem; font-weight: 700; color: var(--color-brand-dark); margin: 0;">Donderdag 27 maart</p>
+                        <p style="font-size: 1rem; font-weight: 600; color: var(--color-brand-muted); margin: 0.1rem 0 0;">10:00 – 11:30</p>
+                    </div>
+                    <div>
+                        <x-eyebrow size="sm" color="green" mb="0.35rem">Locatie</x-eyebrow>
+                        <p style="font-size: 1.125rem; font-weight: 700; color: var(--color-brand-dark); margin: 0;">Zaal De Harmonie</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {{-- Vlakke rijen — blauw (contact/diensten) --}}
+        <div>
+            <p style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-muted); margin: 0 0 0.75rem;">Vlakke rijen — blauw</p>
+            <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+                <div>
+                    <x-eyebrow size="sm" color="blue" mb="0.35rem">Adres</x-eyebrow>
+                    <p style="font-size: 1.125rem; font-weight: 700; color: var(--color-brand-dark); margin: 0; line-height: 1.5;">Antwerpsesteenweg 24<br>1000 Brussel</p>
+                </div>
+                <div>
+                    <x-eyebrow size="sm" color="blue" mb="0.35rem">Contact</x-eyebrow>
+                    <p style="font-size: 1.125rem; margin: 0; line-height: 1.6;">
+                        <a href="#" style="font-weight: 700; color: var(--color-brand-dark); text-decoration: underline; text-underline-offset: 2px;">02 203 28 48</a><br>
+                        <a href="#" style="color: var(--color-brand-dark); text-decoration: underline; text-underline-offset: 2px;">info@deharmonie.be</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <code style="font-size: 0.75rem; color: var(--color-brand-muted); display: block;">&lt;x-eyebrow size="sm" color="orange|green|blue" mb="0.35rem"&gt; · waarde: 1.125rem · weight 700 · brand-dark · links: dark + underline · kaart: shadow of border brand-gray · dashed divider voor oranje · solid voor groen</code>
 </section>
         <section id="diensten" style="padding: 3rem 0; border-bottom: 1px solid var(--color-brand-gray);">
     <x-eyebrow>Stijlgids</x-eyebrow>

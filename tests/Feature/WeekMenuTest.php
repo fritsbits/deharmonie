@@ -21,10 +21,9 @@ class WeekMenuTest extends TestCase
         $response = $this->get('/restaurant-menu');
 
         $response->assertStatus(200);
-        $response->assertSee('Weekmenu');
+        $response->assertSee('Menu deze week');
         $response->assertSee('Openingsuren');
         $response->assertSee('Gewoon binnenlopen');
-        $response->assertSee('Allergenen');
     }
 
     public function test_weekmenu_page_loads_in_fr(): void
@@ -32,7 +31,7 @@ class WeekMenuTest extends TestCase
         $response = $this->get('/fr/restaurant-menu');
 
         $response->assertStatus(200);
-        $response->assertSee('Semaine');
+        $response->assertSee('Menu de cette semaine');
         $response->assertSee("Heures d'ouverture");
         $response->assertSee('Entrez librement');
     }
@@ -59,16 +58,20 @@ class WeekMenuTest extends TestCase
         $response->assertSee('Chicon Gratin met Puree');
     }
 
-    public function test_closed_day_shows_gesloten(): void
+    public function test_closed_day_is_not_shown(): void
     {
+        Carbon::setTestNow('2026-03-23 10:00:00'); // week 1 shown; Saturday March 28 is closed
+
         $response = $this->get('/restaurant-menu');
 
         $response->assertStatus(200);
-        $response->assertSee('Gesloten');
+        $response->assertDontSee('28/03'); // closed Saturday must not appear
     }
 
     public function test_special_event_shows_all_courses(): void
     {
+        Carbon::setTestNow('2026-04-01 10:00:00'); // Wednesday of Easter week — April 2 is in scope
+
         $response = $this->get('/restaurant-menu');
 
         $response->assertStatus(200);

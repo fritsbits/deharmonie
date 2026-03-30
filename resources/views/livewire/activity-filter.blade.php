@@ -31,8 +31,7 @@
                         @endif
                     </div>
                     <p style="font-size: 1rem; margin: 0.25rem 0 0; color: var(--color-brand-muted);">
-                        {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('dddd')) }}
-                        {{ $activiteit->datum->format('j/n') }}
+                        <x-relative-date :datum="$activiteit->datum" />
                         {{ __('activities.at') }} {{ substr($activiteit->startuur, 0, 5) }}
                         @if ($activiteit->einduur)
                             &ndash; {{ substr($activiteit->einduur, 0, 5) }}

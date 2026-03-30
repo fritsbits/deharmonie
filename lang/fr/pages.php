@@ -24,37 +24,55 @@ return [
     'home_hero_heading_line2' => 'Participez.',
     'home_hero_heading_line3' => 'Venez nous voir.',
     'home_hero_subheading' => 'Le cœur battant du Noordwijk. Chaque jour un accueil chaleureux, un repas et des activités pour tout le quartier.',
-    'home_hero_cta_activities' => 'Voir les activités',
-    'home_hero_cta_menu' => 'Menu de la semaine →',
+    'home_hero_cta_activities' => 'Activités',
+    'home_hero_cta_menu' => 'Menu de la semaine',
 
     // Homepage menu preview
     'home_menu_label' => 'Restaurant & Menu',
     'home_menu_preview_heading' => "Aujourd'hui & demain à table",
     'home_menu_soup_included' => 'Potage du jour inclus',
-    'home_menu_link' => 'Voir le menu complet →',
+    'home_menu_link' => 'Menu complet →',
     'home_menu_today_badge' => "Aujourd'hui",
+    'home_menu_check_link' => 'Consultez le menu de la semaine pour les plats du jour et les prix.',
 
-    // Homepage service cards
-    'home_services_section_heading' => 'Pour tout le quartier',
-    'home_service_restaurant_title' => 'À table ensemble',
-    'home_service_restaurant_body' => 'Chaque jour un repas chaud dans notre restaurant social. À emporter et livraison à domicile possible.',
-    'home_service_restaurant_price' => 'À partir de € 9',
-    'home_service_restaurant_link' => 'En savoir plus →',
-    'home_service_activities_title' => 'Activités & ateliers',
-    'home_service_activities_body' => "De l'italien à la country line dance. Chaque semaine quelque chose à apprendre ou simplement à apprécier.",
-    'home_service_activities_link' => "Voir l'agenda →",
-    'home_service_home_title' => 'Chez vous',
-    'home_service_home_body' => 'Nettoyage, courses, transport, bricolage et repas à domicile. Pour rester chez soi le plus longtemps possible.',
-    'home_service_home_link' => 'Voir les services →',
+    // Homepage services block
+    'home_services_section_heading' => 'Nous venons aussi chez vous',
+    'home_services_intro' => 'Vous préférez rester à la maison ? Pas de problème. Notre service de nettoyage, de courses, de transport et de bricolage se déplace chez vous. Les repas chauds sont également livrés à domicile. Pour rester chez soi le plus longtemps possible.',
+    'home_services_cta' => 'En savoir plus sur nos services à domicile →',
+
+    // Diensten page hero lead (shorter than full intro)
+    'diensten_lead' => 'Aide à domicile, courses, transport et plus. Nous venons chez vous.',
+
+    // Homepage image alt text
+    'home_hero_photo_alt' => 'Le restaurant De Harmonie, rempli de visiteurs',
+    'home_photo_groep_tafel_alt' => 'Des visiteurs attablés ensemble à De Harmonie',
+    'home_photo_party_alt' => 'Une fête à De Harmonie',
+    'home_photo_groep_actief_alt' => 'Un groupe actif de visiteurs à De Harmonie',
+    'home_photo_thumbsup_alt' => 'Un visiteur donne son pouce levé après une activité',
+    'home_photo_samen_alt' => 'Des visiteurs profitent ensemble à De Harmonie',
+    'home_photo_feest_alt' => 'Fête et convivialité à De Harmonie',
+    'home_photo_bloemen_alt' => 'Fleurs à De Harmonie',
 
     // Homepage practical bar
     'home_practical_address_label' => 'Adresse',
     'home_practical_hours_label' => "Heures d'ouverture",
     'home_practical_contact_label' => 'Contact',
 
+    // Contact
+    'contact_eyebrow' => 'Contact',
+    'contact_heading' => 'Venez nous rendre visite',
+    'contact_lead' => 'Vous êtes toujours les bienvenus au Antwerpsesteenweg 24 à Bruxelles.',
+
+    // Over ons
+    'over_ons_eyebrow' => 'À propos de nous',
+    'over_ons_heading' => 'Cinquante ans au cœur du Noordwijk',
+    'over_ons_lead' => 'Depuis 50 ans, nous sommes là pour les seniors du Noordwijk à Bruxelles.',
+
     // Qui est qui
     'wie_is_wie_title' => 'Qui est qui ?',
-    'team_eyebrow' => 'L\'ÉQUIPE',
+    'team_eyebrow' => "L'équipe",
+    'team_heading' => 'Les personnes derrière De Harmonie',
+    'team_lead' => "De la cuisine à l'administration : les personnes qui font tourner De Harmonie chaque jour.",
     'governance' => 'GOUVERNANCE',
     'board_organ' => 'Organe d\'administration',
     'neighborhood_council' => 'Conseil de quartier Noordwijk',

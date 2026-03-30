@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'De Harmonie') — Dienstencentrum Restaurant Social</title>
+    <title>@yield('title', 'De Harmonie') — {{ __('common.site_tagline') }}</title>
     <meta name="description" content="@yield('description', 'Lokaal dienstencentrum en sociaal restaurant in de Noordwijk, Brussel.')">
     @if(View::hasSection('og_title'))
     <meta property="og:title" content="@yield('og_title')">

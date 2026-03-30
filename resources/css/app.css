@@ -1,5 +1,12 @@
 @import 'tailwindcss';
 
+/* Global focus styles — keyboard navigation */
+*:focus-visible {
+    outline: 2px solid var(--color-brand-orange);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
 @theme {
     --font-sans: 'Nunito Sans', sans-serif;
     --font-body: 'Source Sans 3', sans-serif;
@@ -12,6 +19,15 @@
     --color-brand-blue: #4679bc;
     --color-brand-gray: #d8d3d2;
     --color-brand-gray-dark: #c0bbb9;
+    --color-brand-border-green: #b7d5c6;
+    --color-brand-border-blue: #9ab5da;
+    --color-brand-border-orange: #f5af9c;
     --color-brand-medium: #4e4543;
     --color-brand-bg-tint: #e8eef7;
+    --color-brand-green-tint: #eef5f1;
+    --color-brand-orange-tint: #fff8f5;
+    --color-brand-blue-tint: #eef2f8;
+    --color-brand-green-dark: #1e4433;
+    --color-brand-orange-dark: #6b2211;
+    --color-brand-blue-dark: #1a2f5c;
 }

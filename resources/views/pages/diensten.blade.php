@@ -2,30 +2,16 @@
 @section('title', __('pages.diensten_title'))
 @section('content')
 
-{{-- INTRO: lead text left, photo right --}}
-<div style="max-width: 72rem; margin: 0 auto; padding: 5rem 1.5rem 4rem;">
-    <div class="diensten-intro" style="display: flex; align-items: center; gap: 4rem;">
-
-        <div style="flex: 1;">
-            <x-eyebrow color="orange" mb="0.75rem">{{ __('pages.diensten_eyebrow') }}</x-eyebrow>
-            <h1 style="font-family: var(--font-sans); font-size: 3rem; font-weight: 900; line-height: 1.1; color: var(--color-brand-dark); margin-bottom: 1.25rem;">
-                {{ __('pages.diensten_heading') }}
-            </h1>
-            <p style="font-size: 2rem; font-weight: 300; line-height: 1.35; color: var(--color-brand-muted); max-width: 38rem;">
-                {{ __('pages.diensten_intro') }}
-            </p>
-        </div>
-
-        <div class="diensten-intro-photo" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 4/3;">
-            <img src="{{ asset('images/photo-begeleiding-klas.webp') }}"
-                 alt="{{ __('pages.diensten_heading') }}"
-                 style="width: 100%; height: 100%; object-fit: cover; display: block;">
-        </div>
-
-    </div>
-</div>
+<x-page-hero
+    :eyebrow="__('pages.diensten_eyebrow')"
+    eyebrow-color="blue"
+    :heading="__('pages.diensten_heading')"
+    :lead="__('pages.diensten_lead')"
+    bg="white"
+/>
 
 {{-- SERVICE CLUSTERS --}}
+<div style="background: #eef2f8;">
 <div style="max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 5rem;">
 
     @php
@@ -102,6 +88,10 @@
 
 </div>
 
+{{-- close blue-tint wrapper --}}
+</div>
+
+<div style="background: #eef2f8;">
 {{-- CTA beneath services --}}
 <div style="max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 5rem;">
     <div style="border-top: 1px solid var(--color-brand-gray); padding-top: 2.5rem; display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;">
@@ -117,6 +107,9 @@
             info@deharmonie.be
         </a>
     </div>
+</div>
+
+{{-- close blue-tint wrapper --}}
 </div>
 
 {{-- PHOTO STRIP --}}

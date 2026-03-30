@@ -12,10 +12,10 @@ _Status: Draft_
 | Closed days | Single greyed row ("Gesloten") | Public holiday: named label (e.g. "Paasmaandag: Gesloten") |
 | Allergen note | "Allergenen? Vraag aan de kok." | Small, below the menu |
 | Sfeer section | 3-photo strip, warm sentence | No CTA — atmosphere only |
+| Takeaway & delivery | How to order: call or email that morning | Both options available same-day |
 
 ## Phase 2 (after team meeting)
 
-- Delivery/takeaway — exists but details unknown; add once confirmed
 - Solidarity pricing table — currently just "v.a. €9" hint
 
 ## Menu data structure (per day)

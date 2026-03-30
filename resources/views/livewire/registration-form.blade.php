@@ -6,14 +6,7 @@
             </svg>
             <p class="font-semibold" style="color: var(--color-brand-green)">{{ __('forms.success') }}</p>
         </div>
-    @elseif (! $activiteit->isBeschikbaar())
-        <div class="rounded-lg p-4">
-            <x-badge type="volzet" />
-        </div>
     @else
-        <h2 class="font-bold text-xl mb-4" style="font-family: var(--font-sans); color: var(--color-brand-dark)">
-            {{ __('forms.heading') }}
-        </h2>
         <form wire:submit="submit" class="space-y-4">
             {{-- Honeypot --}}
             <div class="hidden" aria-hidden="true">
@@ -21,46 +14,46 @@
             </div>
 
             <div>
-                <label class="block mb-1" style="color: var(--color-brand-dark); font-size: 1.125rem;">
+                <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
                     {{ __('forms.name') }} *
                 </label>
                 <input type="text" wire:model="naam"
-                       class="w-full px-3 py-2 rounded focus:outline-none @error('naam') error-field @enderror"
-                       style="border: 1px solid var(--color-brand-gray); background: white; color: var(--color-brand-dark); font-size: 1.125rem; @error('naam') border-color: var(--color-brand-orange); outline: 1px solid var(--color-brand-orange); @enderror">
+                       class="w-full px-3 py-3 rounded focus:outline-none @error('naam') error-field @enderror"
+                       style="border: 1px solid var(--color-brand-gray); background: var(--color-brand-bg); color: var(--color-brand-dark); font-size: 1.125rem; @error('naam') border-color: var(--color-brand-orange); outline: 1px solid var(--color-brand-orange); @enderror">
                 @error('naam') <p style="color: var(--color-brand-orange); font-size: 1rem; margin-top: 0.25rem;">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label class="block mb-1" style="color: var(--color-brand-dark); font-size: 1.125rem;">
+                <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
                     {{ __('forms.email') }}
                 </label>
                 <input type="email" wire:model="email"
-                       class="w-full px-3 py-2 rounded focus:outline-none @error('email') error-field @enderror"
-                       style="border: 1px solid var(--color-brand-gray); background: white; color: var(--color-brand-dark); font-size: 1.125rem; @error('email') border-color: var(--color-brand-orange); outline: 1px solid var(--color-brand-orange); @enderror">
+                       class="w-full px-3 py-3 rounded focus:outline-none @error('email') error-field @enderror"
+                       style="border: 1px solid var(--color-brand-gray); background: var(--color-brand-bg); color: var(--color-brand-dark); font-size: 1.125rem; @error('email') border-color: var(--color-brand-orange); outline: 1px solid var(--color-brand-orange); @enderror">
                 @error('email') <p style="color: var(--color-brand-orange); font-size: 1rem; margin-top: 0.25rem;">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label class="block mb-1" style="color: var(--color-brand-dark); font-size: 1.125rem;">
-                    {{ __('forms.phone') }} *
+                <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
+                    {{ __('forms.phone') }}
                 </label>
                 <input type="tel" wire:model="telefoon"
-                       class="w-full px-3 py-2 rounded focus:outline-none"
-                       style="border: 1px solid var(--color-brand-gray); background: white; color: var(--color-brand-dark); font-size: 1.125rem;">
+                       class="w-full px-3 py-3 rounded focus:outline-none"
+                       style="border: 1px solid var(--color-brand-gray); background: var(--color-brand-bg); color: var(--color-brand-dark); font-size: 1.125rem;">
             </div>
 
             <div>
-                <label class="block mb-1" style="color: var(--color-brand-dark); font-size: 1.125rem;">
+                <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
                     {{ __('forms.message_label') }} *
                 </label>
                 <textarea wire:model="bericht" rows="3"
-                          class="w-full px-3 py-2 rounded focus:outline-none"
-                          style="border: 1px solid var(--color-brand-gray); background: white; color: var(--color-brand-dark); font-size: 1.125rem;"></textarea>
+                          class="w-full px-3 py-3 rounded focus:outline-none"
+                          style="border: 1px solid var(--color-brand-gray); background: var(--color-brand-bg); color: var(--color-brand-dark); font-size: 1.125rem;"></textarea>
             </div>
 
             <button type="submit"
-                    class="font-semibold px-5 py-2.5 rounded"
-                    style="background-color: var(--color-brand-dark); color: white; font-family: var(--font-sans); font-size: 1rem;"
+                    class="w-full font-bold px-5 py-3 rounded"
+                    style="background-color: var(--color-brand-green); color: white; font-family: var(--font-sans); font-size: 1rem; letter-spacing: 0.03em;"
                     wire:loading.attr="disabled">
                 <span wire:loading.remove>{{ __('forms.submit') }}</span>
                 <span wire:loading>...</span>

@@ -2,12 +2,16 @@
 @section('title', __('pages.wie_is_wie_title'))
 @section('content')
 
-<div class="max-w-5xl mx-auto px-6 py-10">
+<x-page-hero
+    :eyebrow="__('pages.team_eyebrow')"
+    eyebrow-color="blue"
+    :heading="__('pages.team_heading')"
+    :lead="__('pages.team_lead')"
+    bg="white"
+/>
 
-    <x-eyebrow>{{ __('pages.team_eyebrow') }}</x-eyebrow>
-    <h1 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 900; color: var(--color-brand-dark); margin-bottom: 2.5rem;">
-        {{ __('pages.wie_is_wie_title') }}
-    </h1>
+<div style="background: #eef2f8;">
+<div class="max-w-5xl mx-auto px-6 py-10">
 
     {{-- Staff: flat rows, department label left / names right --}}
     @php
@@ -99,6 +103,7 @@
         </div>
     </div>
 
+</div>
 </div>
 
 @endsection

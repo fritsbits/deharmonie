@@ -69,7 +69,7 @@ class RegistrationFormTest extends TestCase
         $response = $this->get(route('nl.activiteiten.show', $activiteit->slug));
 
         $response->assertStatus(200);
-        $response->assertSee('volgeboekt');
+        $response->assertSee(__('activities.fully_booked'));
         $response->assertDontSee(__('forms.submit'));
     }
 
