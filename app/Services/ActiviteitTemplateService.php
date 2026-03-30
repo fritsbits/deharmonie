@@ -64,9 +64,7 @@ class ActiviteitTemplateService
             ->get();
 
         foreach ($sessions as $session) {
-            $activeRegistrations = $session->deelnameverzoeken()
-                ->whereIn('status', ['te_contacteren', 'afgehandeld'])
-                ->count();
+            $activeRegistrations = $session->deelnameverzoeken()->count();
 
             // Skip only if the new max_deelnemers would cause overbooking; sessions with
             // registrations but remaining capacity are still eligible for propagation
