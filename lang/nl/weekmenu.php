@@ -14,6 +14,7 @@ return [
     'address_label' => 'Adres & contact',
     'today' => 'Vandaag',
     'tomorrow' => 'Morgen',
+    'next_meal' => 'Volgende maaltijd',
     'closed' => 'Gesloten',
     'special_badge' => 'Speciaal',
     'allergen_note' => 'Allergenen? Vraag aan onze kok.',

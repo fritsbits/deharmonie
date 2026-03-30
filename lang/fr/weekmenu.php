@@ -14,6 +14,7 @@ return [
     'address_label' => 'Adresse & contact',
     'today' => "Aujourd'hui",
     'tomorrow' => 'Demain',
+    'next_meal' => 'Prochain repas',
     'closed' => 'Fermé',
     'special_badge' => 'Spécial',
     'allergen_note' => 'Allergènes ? Demandez à notre cuisinier.',
