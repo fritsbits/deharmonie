@@ -48,11 +48,8 @@ class Activiteit extends Model implements HasMedia
         if ($this->max_deelnemers === null) {
             return true;
         }
-        $count = $this->deelnameverzoeken()
-            ->whereIn('status', ['te_contacteren', 'afgehandeld'])
-            ->count();
 
-        return $count < $this->max_deelnemers;
+        return $this->deelnameverzoeken()->count() < $this->max_deelnemers;
     }
 
     public function getPrijsLabel(string $locale = 'nl'): string

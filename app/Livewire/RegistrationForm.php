@@ -33,25 +33,19 @@ class RegistrationForm extends Component
 
     public function submit(): void
     {
-        // Honeypot check — silently abort for bots
         if ($this->honeypot !== '') {
             return;
         }
 
-        // Rate limiting
-        $key = 'registration:' . request()->ip();
+        $key = 'registration:'.request()->ip();
         if (RateLimiter::tooManyAttempts($key, 5)) {
             $this->addError('email', __('forms.rate_limit'));
+
             return;
         }
         RateLimiter::hit($key, 60);
 
         $this->validate();
-
-        // Capacity check
-        if (! $this->activiteit->isBeschikbaar()) {
-            return;
-        }
 
         $verzoek = Deelnameverzoek::create([
             'activiteit_id' => $this->activiteit->id,
@@ -59,7 +53,6 @@ class RegistrationForm extends Component
             'email' => $this->email,
             'telefoon' => $this->telefoon ?: null,
             'bericht' => $this->bericht ?: null,
-            'status' => 'te_contacteren',
         ]);
 
         $locale = app()->getLocale();

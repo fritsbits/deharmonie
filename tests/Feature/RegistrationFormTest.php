@@ -58,7 +58,7 @@ class RegistrationFormTest extends TestCase
             ->assertHasErrors(['naam', 'email']);
     }
 
-    public function test_form_still_shows_when_at_capacity(): void
+    public function test_fully_booked_activity_shows_notice_on_detail_page(): void
     {
         $activiteit = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -66,10 +66,11 @@ class RegistrationFormTest extends TestCase
         ]);
         Deelnameverzoek::factory()->create(['activiteit_id' => $activiteit->id]);
 
-        // Capacity is not surfaced to users — form still renders, submission silently stops
-        Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
-            ->assertDontSee('Volzet')
-            ->assertSee(__('forms.submit'));
+        $response = $this->get(route('nl.activiteiten.show', $activiteit->slug));
+
+        $response->assertStatus(200);
+        $response->assertSee('volgeboekt');
+        $response->assertDontSee(__('forms.submit'));
     }
 
     public function test_honeypot_spam_field_blocks_submission(): void
