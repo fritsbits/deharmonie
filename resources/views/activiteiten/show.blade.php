@@ -48,7 +48,7 @@
                     booked = ids.includes({{ $activiteit->id }});
                 "
                 x-show="booked"
-                style="display: inline-block; background: var(--color-brand-green); color: white; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; font-family: var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem;">
+                style="display: none; background: var(--color-brand-green); color: white; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; font-family: var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem;">
                 {{ __('activities.booked') }}
             </span>
             @php
