@@ -2,6 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Livewire\RegistrationForm;
+use App\Mail\RegistratieBevestiging;
+use App\Mail\RegistratieNotificatie;
 use App\Models\Activiteit;
 use App\Models\Deelnameverzoek;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,7 +21,7 @@ class RegistrationFormTest extends TestCase
         Mail::fake();
         $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
 
-        Livewire::test(\App\Livewire\RegistrationForm::class, ['activiteit' => $activiteit])
+        Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
             ->set('naam', 'Jan Janssen')
             ->set('email', 'jan@example.com')
             ->set('telefoon', '0471234567')
@@ -29,7 +32,6 @@ class RegistrationFormTest extends TestCase
             'activiteit_id' => $activiteit->id,
             'naam' => 'Jan Janssen',
             'email' => 'jan@example.com',
-            'status' => 'te_contacteren',
         ]);
     }
 
@@ -38,25 +40,25 @@ class RegistrationFormTest extends TestCase
         Mail::fake();
         $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
 
-        Livewire::test(\App\Livewire\RegistrationForm::class, ['activiteit' => $activiteit])
+        Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
             ->set('naam', 'Jan Janssen')
             ->set('email', 'jan@example.com')
             ->call('submit');
 
-        Mail::assertSent(\App\Mail\RegistratieNotificatie::class);
-        Mail::assertSent(\App\Mail\RegistratieBevestiging::class);
+        Mail::assertSent(RegistratieNotificatie::class);
+        Mail::assertSent(RegistratieBevestiging::class);
     }
 
     public function test_form_requires_naam_and_email(): void
     {
         $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
 
-        Livewire::test(\App\Livewire\RegistrationForm::class, ['activiteit' => $activiteit])
+        Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
             ->call('submit')
             ->assertHasErrors(['naam', 'email']);
     }
 
-    public function test_form_shows_full_when_at_capacity(): void
+    public function test_form_still_shows_when_at_capacity(): void
     {
         $activiteit = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -64,8 +66,10 @@ class RegistrationFormTest extends TestCase
         ]);
         Deelnameverzoek::factory()->create(['activiteit_id' => $activiteit->id]);
 
-        Livewire::test(\App\Livewire\RegistrationForm::class, ['activiteit' => $activiteit])
-            ->assertSee('Volzet');
+        // Capacity is not surfaced to users — form still renders, submission silently stops
+        Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
+            ->assertDontSee('Volzet')
+            ->assertSee(__('forms.submit'));
     }
 
     public function test_honeypot_spam_field_blocks_submission(): void
@@ -73,7 +77,7 @@ class RegistrationFormTest extends TestCase
         Mail::fake();
         $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
 
-        Livewire::test(\App\Livewire\RegistrationForm::class, ['activiteit' => $activiteit])
+        Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
             ->set('naam', 'Spammer')
             ->set('email', 'spam@example.com')
             ->set('honeypot', 'filled-by-bot')

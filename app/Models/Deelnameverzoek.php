@@ -13,7 +13,7 @@ class Deelnameverzoek extends Model
     protected $table = 'deelnameverzoeken';
 
     protected $fillable = [
-        'activiteit_id', 'naam', 'email', 'telefoon', 'bericht', 'status',
+        'activiteit_id', 'naam', 'email', 'telefoon', 'bericht',
     ];
 
     public function activiteit(): BelongsTo

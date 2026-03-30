@@ -15,7 +15,6 @@ class DeelnameverzoekFactory extends Factory
             'email' => $this->faker->safeEmail(),
             'telefoon' => $this->faker->phoneNumber(),
             'bericht' => $this->faker->sentence(),
-            'status' => 'te_contacteren',
         ];
     }
 }
