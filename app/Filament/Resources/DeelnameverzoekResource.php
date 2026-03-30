@@ -4,8 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\DeelnameverzoekResource\Pages;
 use App\Models\Deelnameverzoek;
-use Filament\Actions\Action as FilamentAction;
+use Filament\Actions\ViewAction;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -26,7 +28,29 @@ class DeelnameverzoekResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema->components([]);  // view-only, no editing via form
+        return $schema->components([]);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema->components([
+            Section::make('Persoon')->schema([
+                TextEntry::make('naam')->label('Naam'),
+                TextEntry::make('email')->label('E-mail'),
+                TextEntry::make('telefoon')->label('Telefoon')->placeholder('—'),
+                TextEntry::make('bericht')->label('Bericht')->placeholder('—')->columnSpanFull(),
+            ])->columns(2),
+            Section::make('Activiteit')->schema([
+                TextEntry::make('activiteit.titel_nl')->label('Activiteit'),
+                TextEntry::make('activiteit.datum')
+                    ->label('Datum')
+                    ->date('d/m/Y'),
+                TextEntry::make('activiteit.startuur')
+                    ->label('Tijdstip')
+                    ->formatStateUsing(fn (string $state): string => substr($state, 0, 5)),
+                TextEntry::make('created_at')->label('Ontvangen')->dateTime('d/m/Y H:i'),
+            ])->columns(2),
+        ]);
     }
 
     public static function table(Table $table): Table
@@ -49,34 +73,14 @@ class DeelnameverzoekResource extends Resource
                     ->label('Aangevraagd')
                     ->dateTime('d/m/Y H:i')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->label('Status')
-                    ->badge()
-                    ->color(fn (string $state): string => match ($state) {
-                        'te_contacteren' => 'warning',
-                        'afgehandeld' => 'success',
-                        default => 'gray',
-                    }),
             ])
             ->defaultSort('created_at', 'desc')
             ->filters([
-                Tables\Filters\SelectFilter::make('status')
-                    ->options([
-                        'te_contacteren' => 'Te contacteren',
-                        'afgehandeld' => 'Afgehandeld',
-                    ]),
                 Tables\Filters\SelectFilter::make('activiteit')
                     ->relationship('activiteit', 'titel_nl'),
             ])
             ->actions([
-                FilamentAction::make('toggle_status')
-                    ->label(fn (Deelnameverzoek $record) => $record->status === 'te_contacteren' ? 'Afgehandeld' : 'Heropenen')
-                    ->action(function (Deelnameverzoek $record): void {
-                        $record->update([
-                            'status' => $record->status === 'te_contacteren' ? 'afgehandeld' : 'te_contacteren',
-                        ]);
-                    })
-                    ->icon('heroicon-o-check-circle'),
+                ViewAction::make(),
             ]);
     }
 
@@ -89,11 +93,11 @@ class DeelnameverzoekResource extends Resource
 
     public static function canCreate(): bool
     {
-        return false;  // registrations come from public form only
+        return false;
     }
 
     public static function canDelete(mixed $record): bool
     {
-        return false;  // audit trail — no deletion
+        return false;
     }
 }
