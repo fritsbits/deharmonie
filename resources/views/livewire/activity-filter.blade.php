@@ -22,13 +22,23 @@
 
                 {{-- Content --}}
                 <div style="flex: 1; min-width: 0;">
-                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
                         <p style="font-weight: 700; font-size: 1.625rem; line-height: 1.2; color: var(--color-brand-blue); font-family: var(--font-sans); margin: 0;">
                             {{ $activiteit->titel }}
                         </p>
                         @if ($activiteit->status->value === 'geannuleerd')
                             <x-badge type="geannuleerd">&times;</x-badge>
                         @endif
+                        <span
+                            x-data="{ booked: false }"
+                            x-init="
+                                const ids = JSON.parse(localStorage.getItem('bookedActivities') || '[]');
+                                booked = ids.includes({{ $activiteit->id }});
+                            "
+                            x-show="booked"
+                            style="display: none; background: var(--color-brand-green); color: white; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; font-family: var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase;">
+                            {{ __('activities.booked') }}
+                        </span>
                     </div>
                     <p style="font-size: 1rem; margin: 0.25rem 0 0; color: var(--color-brand-muted);">
                         <x-relative-date :datum="$activiteit->datum" />
