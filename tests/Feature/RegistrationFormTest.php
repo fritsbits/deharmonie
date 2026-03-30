@@ -130,4 +130,29 @@ class RegistrationFormTest extends TestCase
         $this->assertStringContainsString('02 203 28 48', $html);
         $this->assertStringNotContainsString('nemen snel contact', $html);
     }
+
+    public function test_staff_notification_has_reply_to_and_date_in_subject(): void
+    {
+        Mail::fake();
+        $activiteit = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'titel_nl' => 'Koken met kruiden',
+            'datum' => '2026-04-18',
+        ]);
+
+        Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
+            ->set('naam', 'Marie Dupont')
+            ->set('email', 'marie@example.com')
+            ->call('submit');
+
+        Mail::assertSent(RegistratieNotificatie::class, function (RegistratieNotificatie $mail): bool {
+            $envelope = $mail->envelope();
+            $hasReplyTo = collect($envelope->replyTo)->contains(
+                fn ($address) => $address->address === 'marie@example.com'
+            );
+            $hasDate = str_contains($envelope->subject, 'april');
+
+            return $hasReplyTo && $hasDate;
+        });
+    }
 }
