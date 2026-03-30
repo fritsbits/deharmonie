@@ -105,4 +105,29 @@ class RegistrationFormTest extends TestCase
             ->assertSee('De Harmonie')
             ->assertSee('Je bent ingeschreven');
     }
+
+    public function test_confirmation_email_has_confirmed_tone_and_activity_details(): void
+    {
+        $activiteit = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'titel_nl' => 'Koken met kruiden',
+            'titel_fr' => 'Cuisine aux herbes',
+            'locatie' => 'De Harmonie',
+        ]);
+
+        Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
+            ->set('naam', 'Marie Dupont')
+            ->set('email', 'marie@example.com')
+            ->call('submit');
+
+        $verzoek = Deelnameverzoek::where('email', 'marie@example.com')->first();
+        $mail = new RegistratieBevestiging($verzoek, $activiteit, 'nl');
+        $html = $mail->render();
+
+        $this->assertStringContainsString('ingeschreven', $html);
+        $this->assertStringContainsString('Koken met kruiden', $html);
+        $this->assertStringContainsString('De Harmonie', $html);
+        $this->assertStringContainsString('02 203 28 48', $html);
+        $this->assertStringNotContainsString('nemen snel contact', $html);
+    }
 }
