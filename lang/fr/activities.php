@@ -2,6 +2,7 @@
 
 return [
     'upcoming' => 'Activités à venir',
+    'coming_soon' => 'Bientôt',
     'no_activities' => 'Pas d\'activités en :month',
     'cancelled' => 'Annulé',
     'free' => 'Gratuit',
@@ -26,6 +27,9 @@ return [
     'date_tomorrow' => 'Demain',
     'date_day_after' => 'Après-demain',
     'date_next_week' => 'La semaine prochaine',
+    'questions' => 'Des questions\u{A0}?',
+    'register_cta_heading' => "Vous souhaitez participer\u{A0}? Faites-le nous savoir — appelez le\u{A0}",
+    'register_cta_form_sub' => ' ou remplissez le formulaire ci-dessous.',
     'visit_us' => 'Venez nous rendre visite',
     'overview_heading' => 'Toujours quelque chose à vivre',
     'overview_tagline' => 'Chaque semaine, des activités sont au programme — du sport à la création et aux échanges. Nous organisons aussi des moments forts pour lesquels il vaut mieux s\'inscrire à l\'avance.',
@@ -42,11 +46,13 @@ return [
     'reeksen_day_prefix' => 'Chaque',
     'special_moments_eyebrow' => 'Activités spéciales',
     'special_moments_heading' => 'Moments forts',
-    'agenda_link' => "Voir l'agenda complet",
+    'agenda_link' => "Voir l'agenda",
     'overview_hero_eyebrow' => 'Activités',
     'days' => [
         0 => 'dimanche', 1 => 'lundi', 2 => 'mardi',
         3 => 'mercredi', 4 => 'jeudi', 5 => 'vendredi',
         6 => 'samedi', 7 => 'dimanche',
     ],
+    'booked' => 'Inscrit(e)',
+    'fully_booked' => 'Cette activité est complète.',
 ];

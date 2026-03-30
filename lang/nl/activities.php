@@ -2,6 +2,7 @@
 
 return [
     'upcoming' => 'Komende activiteiten',
+    'coming_soon' => 'Binnenkort',
     'no_activities' => 'Geen activiteiten in :month',
     'cancelled' => 'Geannuleerd',
     'free' => 'Gratis',
@@ -26,6 +27,9 @@ return [
     'date_tomorrow' => 'Morgen',
     'date_day_after' => 'Overmorgen',
     'date_next_week' => 'Volgende week',
+    'questions' => 'Vragen?',
+    'register_cta_heading' => 'Wil je meedoen? Laat het ons weten — bel ',
+    'register_cta_form_sub' => ' of vul het formulier hieronder in.',
     'visit_us' => 'Kom eens langs',
     'overview_heading' => 'Altijd iets te beleven',
     'overview_tagline' => 'Elke week staan er vaste activiteiten op het programma — van bewegen tot knutselen en gesprekken. Daarnaast organiseren we bijzondere momenten waarvoor je je beter op voorhand inschrijft.',
@@ -42,11 +46,13 @@ return [
     'reeksen_day_prefix' => 'Elke',
     'special_moments_eyebrow' => 'Speciale activiteiten',
     'special_moments_heading' => 'Bijzondere momenten',
-    'agenda_link' => 'Bekijk de volledige agenda',
+    'agenda_link' => 'Bekijk de agenda',
     'overview_hero_eyebrow' => 'Activiteiten',
     'days' => [
         0 => 'zondag', 1 => 'maandag', 2 => 'dinsdag',
         3 => 'woensdag', 4 => 'donderdag', 5 => 'vrijdag',
         6 => 'zaterdag', 7 => 'zondag',
     ],
+    'booked' => 'Ingeschreven',
+    'fully_booked' => 'Deze activiteit is volgeboekt.',
 ];
