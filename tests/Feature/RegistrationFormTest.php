@@ -87,4 +87,22 @@ class RegistrationFormTest extends TestCase
         $this->assertDatabaseCount('deelnameverzoeken', 0);
         Mail::assertNothingSent();
     }
+
+    public function test_success_state_shows_activity_details(): void
+    {
+        Mail::fake();
+        $activiteit = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'titel_nl' => 'Koken met kruiden',
+            'locatie' => 'De Harmonie',
+        ]);
+
+        Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
+            ->set('naam', 'Marie Dupont')
+            ->set('email', 'marie@example.com')
+            ->call('submit')
+            ->assertSee('Koken met kruiden')
+            ->assertSee('De Harmonie')
+            ->assertSee('Je bent ingeschreven');
+    }
 }
