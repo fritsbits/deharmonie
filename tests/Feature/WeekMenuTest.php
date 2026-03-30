@@ -2,7 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\Livewire\WeekMenu;
 use Carbon\Carbon;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class WeekMenuTest extends TestCase
@@ -10,6 +12,7 @@ class WeekMenuTest extends TestCase
     protected function tearDown(): void
     {
         Carbon::setTestNow();
+        app()->setLocale('nl');
         parent::tearDown();
     }
 
@@ -84,5 +87,24 @@ class WeekMenuTest extends TestCase
         $response->assertStatus(200);
         // Next open day after Saturday is Monday 30/03
         $response->assertSee('Kalf blanket met Bulgur');
+    }
+
+    public function test_week_menu_component_shows_print_link_in_nl(): void
+    {
+        Carbon::setTestNow('2026-03-23 10:00:00');
+
+        Livewire::test(WeekMenu::class)
+            ->assertSee('Afdrukken / PDF')
+            ->assertSee('restaurant-menu/print');
+    }
+
+    public function test_week_menu_component_shows_print_link_in_fr(): void
+    {
+        Carbon::setTestNow('2026-03-23 10:00:00');
+        app()->setLocale('fr');
+
+        Livewire::test(WeekMenu::class)
+            ->assertSee('Imprimer / PDF')
+            ->assertSee('fr/restaurant-menu/print');
     }
 }
