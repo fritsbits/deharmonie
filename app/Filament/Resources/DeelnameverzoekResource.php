@@ -26,11 +26,6 @@ class DeelnameverzoekResource extends Resource
 
     protected static ?string $slug = 'deelnameverzoeken';
 
-    public static function form(Schema $schema): Schema
-    {
-        return $schema->components([]);
-    }
-
     public static function infolist(Schema $schema): Schema
     {
         return $schema->components([
@@ -48,7 +43,7 @@ class DeelnameverzoekResource extends Resource
                 TextEntry::make('activiteit.locatie')->label('Locatie')->placeholder('—'),
                 TextEntry::make('activiteit.startuur')
                     ->label('Tijdstip')
-                    ->formatStateUsing(fn (string $state): string => substr($state, 0, 5)),
+                    ->formatStateUsing(fn (?string $state): string => $state ? substr($state, 0, 5) : '—'),
                 TextEntry::make('created_at')->label('Ontvangen')->dateTime('d/m/Y H:i'),
             ])->columns(2),
         ]);
