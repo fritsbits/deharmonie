@@ -136,7 +136,7 @@ class ActiviteitTemplateSeeder extends Seeder
                 'interesse' => Interesse::Activiteiten,
             ],
             [
-                'titel_nl' => 'Diamond Painting met Nadia',
+                'titel_nl' => 'Diamond Painting Workshop met Nadia',
                 'titel_fr' => 'Atelier de Diamond Painting avec Nadia',
                 'dag_van_de_week' => 5,
                 'startuur' => '14:00:00',

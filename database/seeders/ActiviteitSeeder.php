@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Enums\ActiviteitStatus;
 use App\Models\Activiteit;
+use App\Models\ActiviteitTemplate;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -92,6 +93,50 @@ class ActiviteitSeeder extends Seeder
         }
 
         $this->command->info('Imported '.count($rows).' activities from CSV.');
+
+        $this->linkTemplateSessions();
+    }
+
+    private function linkTemplateSessions(): void
+    {
+        $templates = ActiviteitTemplate::all();
+
+        if ($templates->isEmpty()) {
+            return;
+        }
+
+        // Build a map of normalized template title → template id
+        $templateMap = $templates->mapWithKeys(fn (ActiviteitTemplate $t) => [
+            $this->normalizeTitle($t->titel_nl) => $t->id,
+        ]);
+
+        $linked = 0;
+
+        Activiteit::whereNull('template_id')->chunkById(200, function ($activiteiten) use ($templateMap, &$linked) {
+            foreach ($activiteiten as $activiteit) {
+                $normalized = $this->normalizeTitle($activiteit->titel_nl);
+                if (isset($templateMap[$normalized])) {
+                    $activiteit->update(['template_id' => $templateMap[$normalized]]);
+                    $linked++;
+                }
+            }
+        });
+
+        $this->command->info("Linked {$linked} activities to templates.");
+    }
+
+    private function normalizeTitle(string $title): string
+    {
+        // Strip emojis (broad unicode ranges)
+        $title = preg_replace('/[\x{1F000}-\x{1FFFF}]|[\x{2600}-\x{27BF}]|[\x{FE00}-\x{FEFF}]|\x{200D}/u', '', $title);
+        // Strip "NIEUW : " prefix
+        $title = preg_replace('/^nieuw\s*:\s*/i', '', $title);
+        // Strip " Copy N" or " copie N" suffixes
+        $title = preg_replace('/\s+(copy|copie)\s*\d*\s*$/i', '', $title);
+        // Strip trailing punctuation like "!"
+        $title = preg_replace('/[!?]+/', '', $title);
+
+        return strtolower(trim(preg_replace('/\s+/', ' ', $title)));
     }
 
     private function parseTime(string $value): ?string
