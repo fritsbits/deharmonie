@@ -51,21 +51,6 @@
                 style="display: none; background: var(--color-brand-green); color: white; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; font-family: var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase; vertical-align: middle; margin-left: 0.5rem;">
                 {{ __('activities.booked') }}
             </span>
-            @php
-                $altTitel = app()->getLocale() === 'nl' ? $activiteit->titel_fr : $activiteit->titel_nl;
-                $altClean = strtolower(trim(strip_tags($altTitel ?? '')));
-                $mainClean = strtolower(trim(strip_tags($activiteit->titel)));
-                $stripPrefix = fn($s) => trim(preg_replace('/^[^:]+:\s*/', '', $s));
-                $altCore = $stripPrefix($altClean);
-                $mainCore = $stripPrefix($mainClean);
-                $showAlt = $altTitel
-                    && $altClean !== $mainClean
-                    && !str_contains($mainClean, $altClean)
-                    && !($altCore === $mainCore && $altCore !== $altClean);
-            @endphp
-            @if ($showAlt)
-                <p class="text-base" style="color: var(--color-brand-muted)">{{ $altTitel }}</p>
-            @endif
         </div>
 
         {{-- Logistics strip --}}
