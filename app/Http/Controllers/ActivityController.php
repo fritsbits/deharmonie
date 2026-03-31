@@ -31,7 +31,7 @@ class ActivityController extends Controller
             ->where('datum', '>=', today())
             ->where('status', 'gepubliceerd')
             ->orderBy('datum')
-            ->limit(5)
+            ->limit(2)
             ->get();
 
         $allThemeIds = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18];

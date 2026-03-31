@@ -45,7 +45,7 @@ class RegistrationFormTest extends TestCase
             ->set('email', 'jan@example.com')
             ->call('submit');
 
-        Mail::assertSent(RegistratieNotificatie::class);
+        Mail::assertQueued(RegistratieNotificatie::class);
         Mail::assertSent(RegistratieBevestiging::class);
     }
 
@@ -145,7 +145,7 @@ class RegistrationFormTest extends TestCase
             ->set('email', 'marie@example.com')
             ->call('submit');
 
-        Mail::assertSent(RegistratieNotificatie::class, function (RegistratieNotificatie $mail): bool {
+        Mail::assertQueued(RegistratieNotificatie::class, function (RegistratieNotificatie $mail): bool {
             $envelope = $mail->envelope();
             $hasReplyTo = collect($envelope->replyTo)->contains(
                 fn ($address) => $address->address === 'marie@example.com'

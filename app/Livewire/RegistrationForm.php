@@ -57,8 +57,8 @@ class RegistrationForm extends Component
 
         $locale = app()->getLocale();
 
-        Mail::send(new RegistratieNotificatie($verzoek, $this->activiteit));
         Mail::send(new RegistratieBevestiging($verzoek, $this->activiteit, $locale));
+        Mail::later(now()->addSeconds(2), new RegistratieNotificatie($verzoek, $this->activiteit));
 
         $this->submitted = true;
     }

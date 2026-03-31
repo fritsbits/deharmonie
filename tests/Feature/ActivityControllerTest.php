@@ -110,7 +110,7 @@ class ActivityControllerTest extends TestCase
         Deelnameverzoek::factory()->create(['activiteit_id' => $activiteit->id]);
 
         $response = $this->get('/activiteiten/'.$activiteit->slug);
-        $response->assertSee('Volzet');
+        $response->assertSee('volgeboekt');
     }
 
     public function test_homepage_shows_menu_preview(): void

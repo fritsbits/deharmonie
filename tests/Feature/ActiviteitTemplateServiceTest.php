@@ -155,8 +155,8 @@ class ActiviteitTemplateServiceTest extends TestCase
         $session->update(['titel_nl' => 'Original']);
 
         // Fill all spots so the new lower max would overbook
-        Deelnameverzoek::factory()->create(['activiteit_id' => $session->id, 'status' => 'te_contacteren']);
-        Deelnameverzoek::factory()->create(['activiteit_id' => $session->id, 'status' => 'afgehandeld']);
+        Deelnameverzoek::factory()->create(['activiteit_id' => $session->id]);
+        Deelnameverzoek::factory()->create(['activiteit_id' => $session->id]);
 
         // Lower max_deelnemers to 1 — session already has 2 registrations, so skip it
         $template->update(['max_deelnemers' => 1, 'titel_nl' => 'Changed']);
@@ -180,7 +180,7 @@ class ActiviteitTemplateServiceTest extends TestCase
         $session->update(['titel_nl' => 'Original']);
 
         // One registration, but 4 spots remaining — should still be eligible
-        Deelnameverzoek::factory()->create(['activiteit_id' => $session->id, 'status' => 'te_contacteren']);
+        Deelnameverzoek::factory()->create(['activiteit_id' => $session->id]);
 
         $template->update(['titel_nl' => 'Changed']);
         $this->service->propagateToFutureSessions($template);

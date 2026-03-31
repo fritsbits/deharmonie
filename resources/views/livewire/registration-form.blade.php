@@ -48,7 +48,8 @@
 
             <div>
                 <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
-                    {{ __('forms.name') }} *
+                    {{ __('forms.name') }}
+                    <span style="font-size: 0.7rem; font-weight: 500; color: var(--color-brand-muted); background: #ede9e6; border-radius: 3px; padding: 0.1em 0.45em; text-transform: none; letter-spacing: 0; margin-left: 0.4rem; vertical-align: middle;">{{ __('forms.required_label') }}</span>
                 </label>
                 <input type="text" wire:model="naam"
                        class="w-full px-3 py-3 rounded focus:outline-none @error('naam') error-field @enderror"
@@ -59,6 +60,7 @@
             <div>
                 <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
                     {{ __('forms.email') }}
+                    <span style="font-size: 0.7rem; font-weight: 500; color: var(--color-brand-muted); background: #ede9e6; border-radius: 3px; padding: 0.1em 0.45em; text-transform: none; letter-spacing: 0; margin-left: 0.4rem; vertical-align: middle;">{{ __('forms.required_label') }}</span>
                 </label>
                 <input type="email" wire:model="email"
                        class="w-full px-3 py-3 rounded focus:outline-none @error('email') error-field @enderror"
@@ -77,7 +79,7 @@
 
             <div>
                 <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
-                    {{ __('forms.message_label') }} *
+                    {{ __('forms.message_label') }}
                 </label>
                 <textarea wire:model="bericht" rows="3"
                           class="w-full px-3 py-3 rounded focus:outline-none"
