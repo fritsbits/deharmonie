@@ -21,7 +21,7 @@ php artisan db:seed --class=ActiviteitSeeder
 php artisan view:clear && php artisan cache:clear
 ```
 
-The site is served by Laravel Herd at `https://harmonie.test` (HTTPS with self-signed cert).
+The site is served by Laravel Herd at `https://deharmonie.test` (HTTPS with self-signed cert).
 Database: MySQL via DBngin at `/tmp/mysql_3306.sock`, port 3306, no password.
 
 ## Architecture
@@ -90,6 +90,15 @@ Seniors (primarily 60+) in Brussels' Noordwijk neighbourhood, Dutch and French s
 ### Brand Personality
 **Warm. Toegankelijk. Community.**
 A living neighbourhood hub — not a startup, not a government agency. Welcoming and unpretentious, like a trusted neighbour. Never cold, never formal, never distant.
+
+### Voice & Tone
+
+**Dutch copy uses "je/jou/jouw" (informal) throughout — never "u/uw".**
+The informal register matches the brand personality: a trusted neighbour, not a government agency. This applies to all user-facing NL strings: headings, lead text, body copy, CTAs, form labels, and error messages.
+
+French copy uses "vous" throughout (French has no informal equivalent that fits a public-facing context).
+
+When writing or reviewing any NL copy, flag any use of "u" or "uw" as a bug.
 
 ### Aesthetic Direction
 - Warm, earthy palette — respect the established CSS tokens (see Design System above)

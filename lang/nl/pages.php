@@ -9,8 +9,8 @@ return [
     'home_restaurant_body' => '<strong>Dagschotels</strong> aan verminderd tarief voor senioren. Afhaal en levering aan huis mogelijk.',
     'home_restaurant_cta' => 'Weekmenu →',
     'home_activities_heading' => 'Komende activiteiten',
-    'home_activities_body' => '<strong>Activiteiten &amp; diensten</strong> in ons centrum en bij u thuis.',
-    'home_services_heading' => 'Ook hulp waar u het nodig heeft',
+    'home_activities_body' => '<strong>Activiteiten &amp; diensten</strong> in ons centrum en bij je thuis.',
+    'home_services_heading' => 'Ook hulp waar je het nodig hebt',
     'home_services_body' => '<strong>Partner</strong> voor iedereen met een hart voor onze buurt. Boodschappen, vervoer, poetswerk en meer.',
     'home_services_cta' => 'Onze diensten →',
     'home_hours_label' => 'OPENINGSUREN',
@@ -36,12 +36,12 @@ return [
     'home_menu_check_link' => 'Bekijk het volledige weekmenu voor de dagschotels en prijzen.',
 
     // Homepage services block
-    'home_services_section_heading' => 'Wij komen ook naar u toe',
-    'home_services_intro' => 'Liever thuis? Geen probleem. Onze poetsdienst, boodschappendienst, vervoersdienst en klusjesdienst komen naar u. Warme maaltijden worden ook aan huis bezorgd. Zodat u thuis kan blijven wonen, zo lang u wilt.',
+    'home_services_section_heading' => 'Wij komen ook naar je toe',
+    'home_services_intro' => 'Liever thuis? Geen probleem. Onze poetsdienst, boodschappendienst, vervoersdienst en klusjesdienst komen naar je. Warme maaltijden worden ook aan huis bezorgd. Zodat je thuis kan blijven wonen, zo lang je wilt.',
     'home_services_cta' => 'Meer over onze thuisdiensten →',
 
     // Diensten page hero lead (shorter than full intro)
-    'diensten_lead' => 'Hulp thuis, boodschappen, vervoer en meer. Wij komen naar u toe.',
+    'diensten_lead' => 'Hulp thuis, boodschappen, vervoer en meer. Wij komen naar je toe.',
 
     // Homepage image alt text
     'home_hero_photo_alt' => 'Het restaurant van De Harmonie, gevuld met bezoekers',
@@ -97,7 +97,7 @@ return [
     // Diensten
     'diensten_title' => 'Diensten',
     'diensten_eyebrow' => 'DIENSTEN',
-    'diensten_heading' => 'De Harmonie is er voor u',
+    'diensten_heading' => 'De Harmonie is er voor jou',
     'diensten_intro' => 'De Harmonie helpt senioren uit de Noordwijk in het dagelijks leven. We organiseren activiteiten en diensten in ons eigen centrum, in de buurt, maar ook bij mensen thuis.',
     'diensten_services_heading' => 'Onze diensten',
     'diensten_services' => [
