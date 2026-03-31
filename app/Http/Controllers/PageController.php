@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WeekMenuDag;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
@@ -11,21 +12,18 @@ class PageController extends Controller
     public function weekmenuPrint(Request $request): View
     {
         $weekOffset = (int) $request->query('week', 0);
-        $data = json_decode(file_get_contents(resource_path('data/weekmenu.json')), true);
         $locale = app()->getLocale();
 
         $weekStart = Carbon::now()->startOfWeek(Carbon::MONDAY)->addWeeks($weekOffset);
         $weekEnd = $weekStart->copy()->endOfWeek(Carbon::SUNDAY);
 
-        $days = array_values(array_filter(
-            $data['days'],
-            fn ($day) => $day['date'] >= $weekStart->toDateString()
-                && $day['date'] <= $weekEnd->toDateString()
-        ));
+        $days = WeekMenuDag::whereBetween('date', [$weekStart->toDateString(), $weekEnd->toDateString()])
+            ->orderBy('date')
+            ->get();
 
-        if (! empty($days)) {
-            $first = Carbon::parse($days[0]['date'])->locale($locale);
-            $last = Carbon::parse(end($days)['date'])->locale($locale);
+        if ($days->isNotEmpty()) {
+            $first = $days->first()->date->locale($locale);
+            $last = $days->last()->date->locale($locale);
             $weekLabel = $first->month === $last->month
                 ? $first->isoFormat('D').' – '.$last->isoFormat('D MMMM YYYY')
                 : $first->isoFormat('D MMMM').' – '.$last->isoFormat('D MMMM YYYY');

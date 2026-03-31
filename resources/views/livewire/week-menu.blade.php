@@ -4,22 +4,31 @@
     <div style="font-family: var(--font-sans); font-size: 0.6rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 0.3rem;">{{ __('weekmenu.menu_label') }}</div>
     <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
         <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 900; color: white; margin: 0; line-height: 1.1;">{{ $this->weekHeading }}</h2>
-        @if ($this->hasPrev || $this->hasNext)
-            <div style="display: flex; gap: 0.6rem; flex-shrink: 0;">
-                @if ($this->hasPrev)
-                    <button wire:click="prevWeek" aria-label="{{ __('weekmenu.prev_week') }}"
-                            style="background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.9rem; border-radius: 999px; cursor: pointer; white-space: nowrap;">
-                        ← {{ __('weekmenu.prev_week') }}
-                    </button>
-                @endif
-                @if ($this->hasNext)
-                    <button wire:click="nextWeek" aria-label="{{ __('weekmenu.next_week') }}"
-                            style="background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.9rem; border-radius: 999px; cursor: pointer; white-space: nowrap;">
-                        {{ __('weekmenu.next_week') }} →
-                    </button>
-                @endif
-            </div>
-        @endif
+        <div style="display: flex; gap: 0.6rem; flex-shrink: 0; align-items: center;">
+            @if ($this->hasPrev)
+                <button wire:click="prevWeek" aria-label="{{ __('weekmenu.prev_week') }}"
+                        style="background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.9rem; border-radius: 999px; cursor: pointer; white-space: nowrap;">
+                    ← {{ __('weekmenu.prev_week') }}
+                </button>
+            @endif
+            @if ($this->hasNext)
+                <button wire:click="nextWeek" aria-label="{{ __('weekmenu.next_week') }}"
+                        style="background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.9rem; border-radius: 999px; cursor: pointer; white-space: nowrap;">
+                    {{ __('weekmenu.next_week') }} →
+                </button>
+            @endif
+            <a href="{{ route(app()->getLocale() . '.weekmenu.print', ['week' => $this->weekOffset]) }}"
+               target="_blank"
+               aria-label="{{ __('weekmenu.print_link') }}"
+               style="display: inline-flex; align-items: center; gap: 0.35rem; background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.3rem 0.9rem; border-radius: 999px; text-decoration: none; white-space: nowrap;">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <polyline points="6 9 6 2 18 2 18 9"/>
+                    <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
+                    <rect x="6" y="14" width="12" height="8"/>
+                </svg>
+                {{ __('weekmenu.print_link') }}
+            </a>
+        </div>
     </div>
 </div>
 
@@ -30,9 +39,9 @@
     <div style="display: flex; flex-direction: column; gap: 1.875rem;">
         @forelse ($this->days as $day)
             @php
-                $carbon        = \Carbon\Carbon::parse($day['date'])->locale($locale);
+                $carbon        = $day->date->locale($locale);
                 $isPast        = $carbon->lt(\Carbon\Carbon::today());
-                $isHighlighted = $this->highlightedDate && $day['date'] === $this->highlightedDate;
+                $isHighlighted = $this->highlightedDate && $day->date->toDateString() === $this->highlightedDate;
                 $dateNum       = $carbon->day;
                 $monthAbbr     = $carbon->isoFormat('MMM');
 
@@ -63,7 +72,7 @@
                     : '';
             @endphp
 
-            @if ($day['special_event'])
+            @if ($day->special_event)
                 {{-- SPECIAL EVENT — extends to paper edge like highlighted --}}
                 <div style="display: flex; align-items: flex-start; gap: 0; margin-left: -3.25rem; padding-left: calc(3.25rem - 3px); border-left: 3px solid var(--color-brand-orange); {{ $isPast ? 'opacity: 0.45;' : '' }}">
                     {{-- Date column --}}
@@ -76,12 +85,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
                             <div>
                                 <span style="display: inline-block; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; padding: 1px 7px; border-radius: 999px; margin-bottom: 0.2rem;">{{ __('weekmenu.special_badge') }}</span>
-                                <p style="font-family: var(--font-body); font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin: 0; line-height: 1.3;">{{ $day[$locale]['event_label'] }}</p>
+                                <p style="font-family: var(--font-body); font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin: 0; line-height: 1.3;">{{ $day->event_label }}</p>
                             </div>
-                            <p style="font-family: var(--font-sans); font-size: 0.875rem; font-weight: 800; color: {{ $mutedColor }}; margin: 0; flex-shrink: 0;">€ {{ $day['price'] }}</p>
+                            <p style="font-family: var(--font-sans); font-size: 0.875rem; font-weight: 800; color: {{ $mutedColor }}; margin: 0; flex-shrink: 0;">€ {{ $day->price }}</p>
                         </div>
                         <ul style="list-style: none; padding: 0; margin: 0.5rem 0 0; border-top: 1px solid #e8e0d8; padding-top: 0.4rem; display: flex; flex-direction: column; gap: 0.2rem;">
-                            @foreach ($day[$locale]['courses'] as $course)
+                            @foreach ($day->coursesForLocale as $course)
                                 <li style="font-size: 1.15rem; color: var(--color-brand-dark); padding-left: 0.75rem; position: relative;">
                                     <span style="position: absolute; left: 0; color: var(--color-brand-orange); font-weight: 700;" aria-hidden="true">·</span>
                                     {{ $course }}
@@ -103,8 +112,8 @@
                     <div style="flex: 1; min-width: 0;">
                         <p style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: {{ $labelColor }}; margin: 0 0 0.05rem;">{{ $label }}</p>
                         <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;">
-                            <p style="font-family: var(--font-body); font-size: 1.5rem; font-weight: 700; color: {{ $textColor }}; margin: 0; line-height: 1.3;">{{ $day[$locale]['main'] }}</p>
-                            <p style="font-family: var(--font-sans); font-size: 0.9rem; font-weight: 700; color: {{ $mutedColor }}; margin: 0; flex-shrink: 0; font-variant-numeric: tabular-nums;">€&thinsp;{{ $day['price'] }}</p>
+                            <p style="font-family: var(--font-body); font-size: 1.5rem; font-weight: 700; color: {{ $textColor }}; margin: 0; line-height: 1.3;">{{ $day->main }}</p>
+                            <p style="font-family: var(--font-sans); font-size: 0.9rem; font-weight: 700; color: {{ $mutedColor }}; margin: 0; flex-shrink: 0; font-variant-numeric: tabular-nums;">€&thinsp;{{ $day->price }}</p>
                         </div>
                     </div>
                 </div>
@@ -116,13 +125,6 @@
 
     <div style="border-top: 1px solid #e8e0d8; padding-top: 0.875rem; margin-top: 1.5rem;">
         <p style="font-size: 1rem; color: var(--color-brand-muted); margin: 0;">{{ __('weekmenu.allergen_note') }}</p>
-        <div style="margin-top: 0.75rem; text-align: right;">
-            <a href="{{ route(app()->getLocale() . '.weekmenu.print', ['week' => $this->weekOffset]) }}"
-               target="_blank"
-               style="font-family: var(--font-sans); font-size: 0.875rem; font-weight: 700; color: var(--color-brand-muted); text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px;">
-                🖨 {{ __('weekmenu.print_link') }}
-            </a>
-        </div>
     </div>
 
 </div>

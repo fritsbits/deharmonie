@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             ActiviteitTemplateSeeder::class,
             ActiviteitSeeder::class,
+            WeekMenuDagSeeder::class,
         ]);
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\WeekMenuDag;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
 
@@ -13,25 +15,19 @@ class WeekMenu extends Component
 
     public function mount(): void
     {
-        $data = json_decode(file_get_contents(resource_path('data/weekmenu.json')), true);
         $now = Carbon::now();
         $candidate = $now->hour >= 14 ? $now->copy()->addDay() : $now->copy();
 
-        foreach ($data['days'] as $day) {
-            if (! $day['closed'] && $day['date'] >= $candidate->toDateString()) {
-                $highlightedWeekStart = Carbon::parse($day['date'])->startOfWeek(Carbon::MONDAY);
-                $currentWeekStart = $now->copy()->startOfWeek(Carbon::MONDAY);
-                $this->weekOffset = (int) ($currentWeekStart->diffInDays($highlightedWeekStart) / 7);
-                break;
-            }
+        $day = WeekMenuDag::where('closed', false)
+            ->where('date', '>=', $candidate->toDateString())
+            ->orderBy('date')
+            ->first();
+
+        if ($day) {
+            $highlightedWeekStart = $day->date->startOfWeek(Carbon::MONDAY);
+            $currentWeekStart = $now->copy()->startOfWeek(Carbon::MONDAY);
+            $this->weekOffset = (int) ($currentWeekStart->diffInDays($highlightedWeekStart) / 7);
         }
-    }
-
-    private function allDays(): array
-    {
-        $data = json_decode(file_get_contents(resource_path('data/weekmenu.json')), true);
-
-        return $data['days'];
     }
 
     private function weekStart(int $offset): Carbon
@@ -40,17 +36,15 @@ class WeekMenu extends Component
     }
 
     #[Computed]
-    public function days(): array
+    public function days(): Collection
     {
         $weekStart = $this->weekStart($this->weekOffset);
         $weekEnd = $weekStart->copy()->endOfWeek(Carbon::SUNDAY);
 
-        return array_values(array_filter(
-            $this->allDays(),
-            fn ($day) => ! $day['closed']
-                && $day['date'] >= $weekStart->toDateString()
-                && $day['date'] <= $weekEnd->toDateString()
-        ));
+        return WeekMenuDag::where('closed', false)
+            ->whereBetween('date', [$weekStart->toDateString(), $weekEnd->toDateString()])
+            ->orderBy('date')
+            ->get();
     }
 
     #[Computed]
@@ -75,7 +69,7 @@ class WeekMenu extends Component
         $locale = app()->getLocale();
         $open = $this->days;
 
-        if (empty($open)) {
+        if ($open->isEmpty()) {
             $ws = $this->weekStart($this->weekOffset);
 
             return $ws->locale($locale)->isoFormat('D MMM')
@@ -83,8 +77,8 @@ class WeekMenu extends Component
                 .$ws->copy()->endOfWeek(Carbon::SUNDAY)->locale($locale)->isoFormat('D MMM YYYY');
         }
 
-        $first = Carbon::parse($open[0]['date'])->locale($locale);
-        $last = Carbon::parse(end($open)['date'])->locale($locale);
+        $first = $open->first()->date->locale($locale);
+        $last = $open->last()->date->locale($locale);
 
         if ($first->month === $last->month) {
             return $first->isoFormat('D').' – '.$last->isoFormat('D MMMM YYYY');
@@ -99,13 +93,12 @@ class WeekMenu extends Component
         $now = Carbon::now();
         $candidate = $now->hour >= 14 ? $now->copy()->addDay() : $now->copy();
 
-        foreach ($this->allDays() as $day) {
-            if (! $day['closed'] && $day['date'] >= $candidate->toDateString()) {
-                return $day['date'];
-            }
-        }
+        $day = WeekMenuDag::where('closed', false)
+            ->where('date', '>=', $candidate->toDateString())
+            ->orderBy('date')
+            ->first();
 
-        return null;
+        return $day?->date->toDateString();
     }
 
     #[Computed]
@@ -128,15 +121,9 @@ class WeekMenu extends Component
         $prevStart = $this->weekStart($this->weekOffset - 1);
         $prevEnd = $prevStart->copy()->endOfWeek(Carbon::SUNDAY);
 
-        foreach ($this->allDays() as $day) {
-            if (! $day['closed']
-                && $day['date'] >= $prevStart->toDateString()
-                && $day['date'] <= $prevEnd->toDateString()) {
-                return true;
-            }
-        }
-
-        return false;
+        return WeekMenuDag::where('closed', false)
+            ->whereBetween('date', [$prevStart->toDateString(), $prevEnd->toDateString()])
+            ->exists();
     }
 
     #[Computed]
@@ -145,15 +132,9 @@ class WeekMenu extends Component
         $nextStart = $this->weekStart($this->weekOffset + 1);
         $nextEnd = $nextStart->copy()->endOfWeek(Carbon::SUNDAY);
 
-        foreach ($this->allDays() as $day) {
-            if (! $day['closed']
-                && $day['date'] >= $nextStart->toDateString()
-                && $day['date'] <= $nextEnd->toDateString()) {
-                return true;
-            }
-        }
-
-        return false;
+        return WeekMenuDag::where('closed', false)
+            ->whereBetween('date', [$nextStart->toDateString(), $nextEnd->toDateString()])
+            ->exists();
     }
 
     public function prevWeek(): void

@@ -30,5 +30,6 @@ return [
     'closed' => 'Fermé',
     'special_badge' => 'Spécial',
     'allergen_note' => 'Allergènes ? Demandez à notre cuisinier.',
-    'print_link' => 'Imprimer / PDF',
+    'soup_default' => 'Potage du jour',
+    'print_link' => 'Imprimer',
 ];
