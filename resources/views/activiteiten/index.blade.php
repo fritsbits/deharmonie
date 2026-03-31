@@ -265,7 +265,9 @@
     .menu-cards { flex-direction: column !important; }
     .activity-cards-grid { flex-direction: column !important; }
 .practical-grid { flex-direction: column !important; gap: 1.5rem !important; }
-    .social-proof-strip { display: none; }
+    .social-proof-strip { height: 200px; }
+    .social-proof-strip > div:nth-child(2),
+    .social-proof-strip > div:nth-child(3) { display: none; }
     .contact-photo { display: none; }
 }
 </style>
