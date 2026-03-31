@@ -81,6 +81,9 @@ return [
     'over_ons_cta_heading' => 'Benieuwd hoe het eruitziet?',
     'over_ons_cta_lead' => 'Kom gerust langs. We zijn er elke weekdag.',
     'over_ons_cta_btn' => 'Neem contact op',
+    'over_ons_photo_samen_alt' => 'Samen bij De Harmonie',
+    'over_ons_photo_buiten_event_alt' => 'Evenement buiten bij De Harmonie',
+    'over_ons_photo_groep_actief_alt' => 'Groep actief bij De Harmonie',
 
     // Wie is wie
     'wie_is_wie_title' => 'Wie is wie ?',

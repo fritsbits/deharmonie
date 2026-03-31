@@ -46,13 +46,13 @@
 {{-- PHOTO STRIP --}}
 <div style="display: flex; height: 280px; overflow: hidden;">
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-samen.webp') }}" alt="{{ app()->getLocale() === 'fr' ? 'Ensemble à De Harmonie' : 'Samen bij De Harmonie' }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="{{ asset('images/photo-samen.webp') }}" alt="{{ __('pages.over_ons_photo_samen_alt') }}" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-buiten-event.webp') }}" alt="{{ app()->getLocale() === 'fr' ? 'Événement en plein air' : 'Buiten evenement' }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="{{ asset('images/photo-buiten-event.webp') }}" alt="{{ __('pages.over_ons_photo_buiten_event_alt') }}" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
     <div class="over-ons-photo-strip-third" style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-groep-actief.webp') }}" alt="{{ app()->getLocale() === 'fr' ? 'Groupe actif' : 'Actieve groep' }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="{{ asset('images/photo-groep-actief.webp') }}" alt="{{ __('pages.over_ons_photo_groep_actief_alt') }}" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
 </div>
 

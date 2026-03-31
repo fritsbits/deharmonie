@@ -81,6 +81,9 @@ return [
     'over_ons_cta_heading' => 'Curieux de voir à quoi ça ressemble ?',
     'over_ons_cta_lead' => 'Venez donc. Nous sommes là tous les jours de la semaine.',
     'over_ons_cta_btn' => 'Contactez-nous',
+    'over_ons_photo_samen_alt' => 'Ensemble à De Harmonie',
+    'over_ons_photo_buiten_event_alt' => 'Événement en plein air à De Harmonie',
+    'over_ons_photo_groep_actief_alt' => 'Groupe actif à De Harmonie',
 
     // Qui est qui
     'wie_is_wie_title' => 'Qui est qui ?',
