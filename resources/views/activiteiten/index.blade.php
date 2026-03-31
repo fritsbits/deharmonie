@@ -179,14 +179,17 @@
 <div class="social-proof-strip" style="display: flex; height: 260px; overflow: hidden;">
     <div style="flex: 1; overflow: hidden;">
         <img src="{{ asset('images/photo-thumbsup.webp') }}" alt="{{ __('pages.home_photo_thumbsup_alt') }}"
+             loading="lazy"
              style="width: 100%; height: 100%; object-fit: cover; display: block; object-position: center top;">
     </div>
     <div style="flex: 1; overflow: hidden;">
         <img src="{{ asset('images/photo-samen.webp') }}" alt="{{ __('pages.home_photo_samen_alt') }}"
+             loading="lazy"
              style="width: 100%; height: 100%; object-fit: cover; display: block;">
     </div>
     <div style="flex: 1; overflow: hidden;">
         <img src="{{ asset('images/photo-visitors-2.webp') }}" alt="{{ __('pages.home_photo_feest_alt') }}"
+             loading="lazy"
              style="width: 100%; height: 100%; object-fit: cover; display: block;">
     </div>
 </div>
@@ -213,6 +216,7 @@
         {{-- Building photo --}}
         <div class="contact-photo" style="flex: 0 0 300px; height: 260px; overflow: hidden; border-radius: 12px;">
             <img src="{{ asset('images/photo-gebouw.webp') }}" alt="Het gebouw van De Harmonie"
+                 loading="lazy"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
 

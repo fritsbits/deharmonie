@@ -37,13 +37,13 @@
 {{-- PHOTO STRIP --}}
 <div style="display: flex; height: 280px; overflow: hidden;">
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-samen.webp') }}" alt="{{ __('pages.over_ons_photo_samen_alt') }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="{{ asset('images/photo-samen.webp') }}" alt="{{ __('pages.over_ons_photo_samen_alt') }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-buiten-event.webp') }}" alt="{{ __('pages.over_ons_photo_buiten_event_alt') }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="{{ asset('images/photo-buiten-event.webp') }}" alt="{{ __('pages.over_ons_photo_buiten_event_alt') }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
     <div class="over-ons-photo-strip-third" style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-groep-actief.webp') }}" alt="{{ __('pages.over_ons_photo_groep_actief_alt') }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="{{ asset('images/photo-groep-actief.webp') }}" alt="{{ __('pages.over_ons_photo_groep_actief_alt') }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
 </div>
 

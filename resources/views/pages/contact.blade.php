@@ -13,13 +13,13 @@
 {{-- PHOTO STRIP --}}
 <div style="display: flex; height: 260px; overflow: hidden;">
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-contact-gebouw.webp') }}" alt="{{ __('common.building_exterior_alt') }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="{{ asset('images/photo-contact-gebouw.webp') }}" alt="{{ __('common.building_exterior_alt') }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-contact-onthaal.webp') }}" alt="{{ __('common.reception_alt') }}" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center top;">
+        <img src="{{ asset('images/photo-contact-onthaal.webp') }}" alt="{{ __('common.reception_alt') }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;object-position:center top;">
     </div>
     <div class="contact-photo-third" style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-contact-terras.webp') }}" alt="{{ __('common.terrace_alt') }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+        <img src="{{ asset('images/photo-contact-terras.webp') }}" alt="{{ __('common.terrace_alt') }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
 </div>
 
@@ -31,17 +31,6 @@
             {{-- LEFT: details --}}
             <div style="flex: 1; min-width: 0;">
                 <div style="background: white; border-radius: 10px; padding: 0 1.25rem;">
-
-                    {{-- Adres --}}
-                    <div class="contact-field-row">
-                        <div class="contact-icon-tile">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4679bc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                        </div>
-                        <div>
-                            <p class="contact-field-label">{{ __('common.address') }}</p>
-                            <p style="line-height: 1.6; color: var(--color-brand-dark);">Antwerpsesteenweg 24<br>1000 Brussel</p>
-                        </div>
-                    </div>
 
                     {{-- Openingsuren --}}
                     <div class="contact-field-row">
@@ -92,20 +81,29 @@
                 </div>
             </div>
 
-            {{-- RIGHT: map placeholder (no third-party requests on load) --}}
-            <div style="flex: 1.4; min-width: 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--color-brand-gray); min-height: 400px; display: flex; flex-direction: column;">
-                <div style="flex: 1; background: #e8e4e0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 2rem; text-align: center;">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#706662" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    <div>
-                        <p style="font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Antwerpsesteenweg 24</p>
-                        <p style="font-family: var(--font-body); font-size: 0.9375rem; color: var(--color-brand-muted);">1000 Brussel</p>
+            {{-- RIGHT: OpenStreetMap embed (GDPR-safe, no cookies, no tracking) --}}
+            <div style="flex: 1.4; min-width: 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--color-brand-gray); display: flex; flex-direction: column;">
+                <iframe
+                    src="https://www.openstreetmap.org/export/embed.html?bbox=4.3515%2C50.8568%2C4.3555%2C50.8588&layer=humanitarian&marker=50.8578%2C4.3535"
+                    style="flex: 1; width: 100%; min-height: 320px; border: 0; display: block;"
+                    loading="lazy"
+                    title="{{ __('common.map') }}">
+                </iframe>
+                {{-- Address row — matches left column styling --}}
+                <div class="contact-field-row" style="border-bottom: none; padding: 1.25rem 1.25rem; background: white; border-top: 1px solid var(--color-brand-gray);">
+                    <div class="contact-icon-tile">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4679bc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    </div>
+                    <div style="flex: 1; min-width: 0;">
+                        <p class="contact-field-label">{{ __('common.address') }}</p>
+                        <p style="line-height: 1.6; color: var(--color-brand-dark);">Antwerpsesteenweg 24<br>1000 Brussel</p>
                     </div>
                     <a
-                        href="https://maps.google.com/maps?q=Antwerpsesteenweg+24,+1000+Brussel,+Belgium"
+                        href="https://www.openstreetmap.org/?mlat=50.8578&mlon=4.3535#map=17/50.8578/4.3535"
                         target="_blank"
                         rel="noopener noreferrer"
-                        style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--color-brand-blue); color: white; font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 700; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; min-height: 44px; transition: opacity 0.15s ease;">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: none; white-space: nowrap; align-self: center; min-height: 44px; padding: 0 0.25rem;">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         {{ __('common.open_in_maps') }}
                     </a>
                 </div>

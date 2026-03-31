@@ -72,6 +72,7 @@
                     {{-- photo --}}
                     <div class="theme-card-photo" style="height: 140px; overflow: hidden;">
                         <img src="{{ asset('images/' . $theme['photo']) }}" alt=""
+                             loading="lazy"
                              style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
 
@@ -126,12 +127,14 @@
             {{-- Big photo — spans both rows --}}
             <div style="grid-row: 1 / 3; overflow: hidden; position: relative;">
                 <img src="{{ asset('images/photo-uitstap.webp') }}" alt=""
+                     loading="lazy"
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
             </div>
 
             {{-- Middle top photo --}}
             <div style="overflow: hidden; position: relative;">
                 <img src="{{ asset('images/photo-muzikanten.webp') }}" alt=""
+                     loading="lazy"
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
             </div>
 
@@ -205,6 +208,7 @@
             {{-- Middle bottom photo --}}
             <div style="overflow: hidden; position: relative;">
                 <img src="{{ asset('images/photo-verjaardag.webp') }}" alt=""
+                     loading="lazy"
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
             </div>
 

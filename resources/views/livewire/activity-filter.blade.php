@@ -16,7 +16,7 @@
                 <div style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; background-color: {{ $thumbColor }};">
                     @if ($activiteit->getFirstMediaUrl('afbeelding'))
                         <img src="{{ $activiteit->getFirstMediaUrl('afbeelding') }}"
-                             alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                             alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
                     @endif
                 </div>
 

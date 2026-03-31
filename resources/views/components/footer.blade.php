@@ -69,18 +69,22 @@
             </span>
             <a href="https://www.vlaanderen.be/" target="_blank" rel="noopener">
                 <img src="{{ asset('images/logo-vlaanderen.svg') }}" alt="Vlaanderen"
+                     loading="lazy"
                      style="height: 2.75rem; width: auto; filter: brightness(0) invert(1); opacity: 0.65;">
             </a>
             <a href="https://regiefonciere.bruxelles.be/nl" target="_blank" rel="noopener">
                 <img src="{{ asset('images/logo-nbrussel.png') }}" alt="Brussel"
+                     loading="lazy"
                      style="height: 2.4rem; width: auto; filter: brightness(0) invert(1); opacity: 0.65;">
             </a>
             <a href="https://regiefonciere.bruxelles.be/nl" target="_blank" rel="noopener">
                 <img src="{{ asset('images/logo-grondregie.png') }}" alt="Grondregie Brussel"
+                     loading="lazy"
                      style="height: 2.2rem; width: auto; opacity: 0.65;">
             </a>
             <a href="https://be.brussels/" target="_blank" rel="noopener">
                 <img src="{{ asset('images/logo-bhg.svg') }}" alt="Brussels Hoofdstedelijk Gewest"
+                     loading="lazy"
                      style="height: 2rem; width: auto; filter: brightness(0) invert(1); opacity: 0.65;">
             </a>
         </div>

@@ -73,13 +73,13 @@
 {{-- PHOTO STRIP --}}
 <div style="display: flex; height: 380px; overflow: hidden;">
     <div style="flex: 2; overflow: hidden;">
-        <img src="{{ asset('images/photo-chef-taart-2.webp') }}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <img src="{{ asset('images/photo-chef-taart-2.webp') }}" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
     </div>
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-restaurant-bord.webp') }}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <img src="{{ asset('images/photo-restaurant-bord.webp') }}" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
     </div>
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-feest-2.webp') }}" alt="" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+        <img src="{{ asset('images/photo-feest-2.webp') }}" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
     </div>
 </div>
 
