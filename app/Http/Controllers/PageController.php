@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\TeamCategorie;
 use App\Models\WeekMenuDag;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
@@ -56,8 +57,12 @@ class PageController extends Controller
         return view('pages.contact');
     }
 
-    public function wieIsWie()
+    public function wieIsWie(): View
     {
-        return view('pages.wie-is-wie');
+        $categorieen = TeamCategorie::with(['leden' => fn ($q) => $q->orderBy('volgorde')])
+            ->orderBy('volgorde')
+            ->get();
+
+        return view('pages.wie-is-wie', compact('categorieen'));
     }
 }
