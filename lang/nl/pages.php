@@ -64,6 +64,7 @@ return [
     'contact_lead' => 'U bent altijd welkom aan de Antwerpsesteenweg 24 in Brussel.',
 
     // Over ons
+    'over_ons_title' => 'Over ons',
     'over_ons_eyebrow' => 'Over De Harmonie',
     'over_ons_heading' => 'Vijftig jaar hart voor de Noordwijk',
     'over_ons_lead' => 'Een buurtplek in Brussel waar mensen al 50 jaar samenkomen.',

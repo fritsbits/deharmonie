@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', __('nav.over_ons'))
+@section('title', __('pages.over_ons_title'))
 @section('content')
 
 {{-- HERO --}}
