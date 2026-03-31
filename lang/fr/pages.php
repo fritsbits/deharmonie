@@ -92,7 +92,7 @@ return [
     'team_heading' => 'Les personnes derrière De Harmonie',
     'team_lead' => "De la cuisine à l'administration : les personnes qui font tourner De Harmonie chaque jour.",
     'team_staff' => 'Collaborateurs',
-    'governance' => 'GOUVERNANCE',
+    'governance' => 'Gouvernance',
     'board_organ' => 'Organe d\'administration',
     'neighborhood_council' => 'Conseil de quartier Noordwijk',
 

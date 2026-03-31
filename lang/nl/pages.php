@@ -92,7 +92,7 @@ return [
     'team_heading' => 'De mensen achter De Harmonie',
     'team_lead' => 'Van de keuken tot de administratie: de mensen die De Harmonie elke dag draaiende houden.',
     'team_staff' => 'Medewerkers',
-    'governance' => 'BESTUUR',
+    'governance' => 'Bestuur',
     'board_organ' => 'Bestuursorgaan',
     'neighborhood_council' => 'Buurtraad Noordwijk',
 
