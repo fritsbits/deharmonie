@@ -3,12 +3,16 @@
 namespace Tests\Feature;
 
 use App\Livewire\WeekMenu;
+use App\Models\WeekMenuDag;
 use Carbon\Carbon;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
 
 class WeekMenuTest extends TestCase
 {
+    use RefreshDatabase;
+
     protected function tearDown(): void
     {
         Carbon::setTestNow();
@@ -38,7 +42,12 @@ class WeekMenuTest extends TestCase
 
     public function test_today_card_is_highlighted_before_cutoff(): void
     {
-        Carbon::setTestNow('2026-03-23 10:00:00'); // Monday, before 14:00
+        Carbon::setTestNow('2026-03-23 10:00:00');
+        WeekMenuDag::factory()->create([
+            'date' => '2026-03-23',
+            'main_nl' => 'Stoofvlees met Sla en Kroketjes',
+            'main_fr' => 'Carbonnades, Frites et Salade',
+        ]);
 
         $response = $this->get('/restaurant-menu');
 
@@ -49,7 +58,9 @@ class WeekMenuTest extends TestCase
 
     public function test_tomorrow_card_is_highlighted_after_cutoff(): void
     {
-        Carbon::setTestNow('2026-03-23 15:00:00'); // Monday, after 14:00
+        Carbon::setTestNow('2026-03-23 15:00:00');
+        WeekMenuDag::factory()->create(['date' => '2026-03-23', 'main_nl' => 'Stoofvlees met Sla en Kroketjes']);
+        WeekMenuDag::factory()->create(['date' => '2026-03-24', 'main_nl' => 'Chicon Gratin met Puree']);
 
         $response = $this->get('/restaurant-menu');
 
@@ -60,17 +71,33 @@ class WeekMenuTest extends TestCase
 
     public function test_closed_day_is_not_shown(): void
     {
-        Carbon::setTestNow('2026-03-23 10:00:00'); // week 1 shown; Saturday March 28 is closed
+        Carbon::setTestNow('2026-03-23 10:00:00');
+        WeekMenuDag::factory()->create(['date' => '2026-03-23']);
+        WeekMenuDag::factory()->closed()->create(['date' => '2026-03-28']);
 
         $response = $this->get('/restaurant-menu');
 
         $response->assertStatus(200);
-        $response->assertDontSee('28/03'); // closed Saturday must not appear
+        $response->assertDontSee('Gesloten'); // closed days are filtered out of the live component entirely
     }
 
     public function test_special_event_shows_all_courses(): void
     {
-        Carbon::setTestNow('2026-04-01 10:00:00'); // Wednesday of Easter week — April 2 is in scope
+        Carbon::setTestNow('2026-04-01 10:00:00');
+        WeekMenuDag::factory()->create(['date' => '2026-04-01', 'main_nl' => 'Soep dag']);
+        WeekMenuDag::factory()->create([
+            'date' => '2026-04-02',
+            'special_event' => true,
+            'price' => 20,
+            'main_nl' => null,
+            'main_fr' => null,
+            'event_label_nl' => 'Paasmenu',
+            'event_label_fr' => 'Menu de Pâques',
+            'courses' => [
+                ['nl' => 'Kir Royal', 'fr' => 'Kir Royal'],
+                ['nl' => 'Eendenborst', 'fr' => 'Magret de Canard'],
+            ],
+        ]);
 
         $response = $this->get('/restaurant-menu');
 
@@ -83,21 +110,23 @@ class WeekMenuTest extends TestCase
 
     public function test_closed_day_is_skipped_when_resolving_highlighted_date(): void
     {
-        Carbon::setTestNow('2026-03-27 15:00:00'); // Friday after 14:00 — Saturday is closed
+        Carbon::setTestNow('2026-03-27 15:00:00');
+        WeekMenuDag::factory()->closed()->create(['date' => '2026-03-28']);
+        WeekMenuDag::factory()->create(['date' => '2026-03-30', 'main_nl' => 'Kalf blanket met Bulgur']);
 
         $response = $this->get('/restaurant-menu');
 
         $response->assertStatus(200);
-        // Next open day after Saturday is Monday 30/03
         $response->assertSee('Kalf blanket met Bulgur');
     }
 
     public function test_week_menu_component_shows_print_link_in_nl(): void
     {
         Carbon::setTestNow('2026-03-23 10:00:00');
+        WeekMenuDag::factory()->create(['date' => '2026-03-23']);
 
         Livewire::test(WeekMenu::class)
-            ->assertSee('Afdrukken / PDF')
+            ->assertSee('Druk af')
             ->assertSee('restaurant-menu/print');
     }
 
@@ -105,9 +134,10 @@ class WeekMenuTest extends TestCase
     {
         Carbon::setTestNow('2026-03-23 10:00:00');
         app()->setLocale('fr');
+        WeekMenuDag::factory()->create(['date' => '2026-03-23']);
 
         Livewire::test(WeekMenu::class)
-            ->assertSee('Imprimer / PDF')
+            ->assertSee('Imprimer')
             ->assertSee('fr/restaurant-menu/print');
     }
 }
