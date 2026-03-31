@@ -67,15 +67,27 @@
         </nav>
         <!-- Mobile toggle -->
         <div x-data="{ open: false }" class="md:hidden" style="margin-left: auto;">
-            <button @click="open = !open" :aria-expanded="open" aria-label="{{ __('nav.open_menu') }}"
+            <button @click="open = !open" :aria-expanded="open" aria-label="{{ __('nav.open_menu') }}" aria-controls="mobile-menu"
                     class="flex items-center gap-2 font-semibold"
                     style="color: white; font-family: var(--font-sans); font-size: 1rem; background: none; border: none; padding: 0.5rem 0; cursor: pointer;">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {{-- Hamburger icon (shown when closed) --}}
+                <svg x-show="!open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+                {{-- X icon (shown when open) --}}
+                <svg x-show="open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                 </svg>
                 Menu
             </button>
-            <div x-show="open" class="absolute top-full left-0 right-0 z-50"
+            <div id="mobile-menu" x-show="open"
+                 x-transition:enter="transition ease-out duration-150"
+                 x-transition:enter-start="opacity-0 -translate-y-2"
+                 x-transition:enter-end="opacity-100 translate-y-0"
+                 x-transition:leave="transition ease-in duration-100"
+                 x-transition:leave-start="opacity-100 translate-y-0"
+                 x-transition:leave-end="opacity-0 -translate-y-2"
+                 class="absolute top-full left-0 right-0 z-50"
                  style="background-color: var(--color-brand-blue); padding: 0.5rem 1.5rem 2rem;">
                 <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}" class="block font-semibold" style="color: white; padding: 1rem 0; font-size: 1.25rem; font-family: var(--font-sans); border-bottom: 1px solid rgba(255,255,255,0.15);">{{ __('nav.activities') }}</a>
                 <a href="{{ route(app()->getLocale() . '.weekmenu') }}" class="block font-semibold" style="color: white; padding: 1rem 0; font-size: 1.25rem; font-family: var(--font-sans); border-bottom: 1px solid rgba(255,255,255,0.15);">{{ __('nav.restaurant_menu') }}</a>
