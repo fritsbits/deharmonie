@@ -16,7 +16,7 @@ class ActivityOverzicht extends Component
     public function mount(): void
     {
         $first = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
-            ->where('datum', '>=', now()->startOfDay())
+            ->where('datum', '>=', now()->toDateString())
             ->orderBy('datum')
             ->first();
 

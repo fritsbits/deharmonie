@@ -236,10 +236,7 @@ class ActivityOverzichtTest extends TestCase
         // Use startOfWeek() only if it's not today, otherwise skip this test setup.
         $monday = now()->startOfWeek();
         if ($monday->isToday()) {
-            // Can't test "past day in current week" if today is Monday — mark as pass
-            $this->assertTrue(true);
-
-            return;
+            $this->markTestSkipped('Cannot test past-day-in-current-week when today is Monday.');
         }
 
         Activiteit::factory()->create([
