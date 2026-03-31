@@ -1,5 +1,13 @@
 <div>
     @if ($submitted)
+        @php
+            $rawTitel = $activiteit->titel;
+            $cleanTitel = trim(preg_replace('/[\x{1F000}-\x{1FFFF}]|[\x{2600}-\x{27BF}][\x{FE00}-\x{FEFF}]?|\x{200D}/u', '', $rawTitel));
+            if ($cleanTitel === strtoupper($cleanTitel)) {
+                $cleanTitel = ucwords(strtolower($cleanTitel));
+            }
+            $tijd = substr($activiteit->startuur, 0, 5) . ($activiteit->einduur ? '–' . substr($activiteit->einduur, 0, 5) : '');
+        @endphp
         <div
             x-data
             x-init="
@@ -10,33 +18,33 @@
                 }
             "
             class="rounded-lg p-6 text-center"
-            style="background-color: rgba(129,181,156,0.12); border: 1px solid var(--color-brand-green);">
-            <svg class="w-10 h-10 mx-auto mb-3" fill="none" stroke="var(--color-brand-green)" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
-            </svg>
-            <p class="font-bold text-lg mb-3" style="color: var(--color-brand-dark);">
-                @if (app()->getLocale() === 'fr')
-                    Vous êtes inscrit(e)&nbsp;!
-                @else
-                    Je bent ingeschreven!
-                @endif
+            style="background-color: rgba(129,181,156,0.10); border: 1px solid rgba(129,181,156,0.4);">
+
+            {{-- Checkmark --}}
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--color-brand-green); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem;">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 13l4 4L19 7"/>
+                </svg>
+            </div>
+
+            {{-- Heading --}}
+            <p style="font-family: var(--font-sans); font-weight: 900; font-size: 1.25rem; color: var(--color-brand-dark); margin: 0 0 1rem;">
+                @if (app()->getLocale() === 'fr')Vous êtes inscrit(e)&nbsp;!@else Je bent ingeschreven!@endif
             </p>
-            <p style="font-size: 1.05rem; color: var(--color-brand-dark); font-weight: 600; margin-bottom: 0.25rem;">
-                {{ $activiteit->titel }}
-            </p>
-            <p style="font-size: 0.95rem; color: var(--color-brand-muted); margin-bottom: 0.25rem;">
-                {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('dddd D MMMM YYYY')) }}
-                &middot; {{ substr($activiteit->startuur, 0, 5) }}@if ($activiteit->einduur)&ndash;{{ substr($activiteit->einduur, 0, 5) }}@endif
-            </p>
-            <p style="font-size: 0.95rem; color: var(--color-brand-muted); margin-bottom: 1rem;">
-                {{ $activiteit->locatie }}
-            </p>
-            <p style="font-size: 0.9rem; color: var(--color-brand-muted);">
-                @if (app()->getLocale() === 'fr')
-                    Vous recevrez une confirmation par e-mail.
-                @else
-                    Je ontvangt een bevestiging per e-mail.
-                @endif
+
+            {{-- Activity summary — one compact block --}}
+            <div style="background: white; border-radius: 8px; padding: 0.875rem 1rem; margin-bottom: 1rem; text-align: left;">
+                <p style="font-weight: 700; font-size: 1rem; color: var(--color-brand-dark); margin: 0 0 0.3rem;">{{ $cleanTitel }}</p>
+                <p style="font-size: 0.9rem; color: var(--color-brand-muted); margin: 0;">
+                    {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('dddd D MMMM')) }}
+                    &middot; {{ $tijd }}
+                    &middot; {{ $activiteit->locatie }}
+                </p>
+            </div>
+
+            {{-- Email note --}}
+            <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin: 0;">
+                @if (app()->getLocale() === 'fr')Vous recevrez une confirmation par e-mail.@else Je ontvangt een bevestiging per e-mail.@endif
             </p>
         </div>
     @else
