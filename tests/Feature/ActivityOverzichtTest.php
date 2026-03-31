@@ -13,31 +13,42 @@ class ActivityOverzichtTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_shows_activities_in_current_month(): void
+    public function test_shows_activities_in_current_week(): void
     {
-        $thisMonth = Activiteit::factory()->create([
+        $thisWeek = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->format('Y-m-d'),
         ]);
-        $nextMonth = Activiteit::factory()->create([
+        $nextWeek = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
         Livewire::test(ActivityOverzicht::class)
-            ->assertSee($thisMonth->titel_nl)
-            ->assertDontSee($nextMonth->titel_nl);
+            ->assertSee($thisWeek->titel_nl)
+            ->assertDontSee($nextWeek->titel_nl);
     }
 
-    public function test_does_not_show_past_activities(): void
+    public function test_does_not_show_previous_week_activities(): void
     {
-        $past = Activiteit::factory()->create([
+        $lastWeek = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->subDay()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->subDay()->format('Y-m-d'),
         ]);
 
         Livewire::test(ActivityOverzicht::class)
-            ->assertDontSee($past->titel_nl);
+            ->assertDontSee($lastWeek->titel_nl);
+    }
+
+    public function test_shows_full_week_including_past_days(): void
+    {
+        $monday = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->startOfWeek()->format('Y-m-d'),
+        ]);
+
+        Livewire::test(ActivityOverzicht::class)
+            ->assertSee($monday->titel_nl);
     }
 
     public function test_has_prev_false_at_initial_offset(): void
@@ -51,10 +62,10 @@ class ActivityOverzichtTest extends TestCase
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $component = Livewire::test(ActivityOverzicht::class)->call('nextMonth');
+        $component = Livewire::test(ActivityOverzicht::class)->call('nextWeek');
 
         $this->assertTrue($component->get('hasPrev'));
     }
@@ -66,15 +77,15 @@ class ActivityOverzichtTest extends TestCase
         $this->assertFalse($component->get('hasNext'));
     }
 
-    public function test_has_next_true_when_future_month_has_activities(): void
+    public function test_has_next_true_when_future_week_has_activities(): void
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->format('Y-m-d'),
         ]);
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
         $component = Livewire::test(ActivityOverzicht::class);
@@ -82,105 +93,139 @@ class ActivityOverzichtTest extends TestCase
         $this->assertTrue($component->get('hasNext'));
     }
 
-    public function test_next_month_increments_offset(): void
+    public function test_next_week_increments_offset(): void
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->format('Y-m-d'),
         ]);
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
         Livewire::test(ActivityOverzicht::class)
-            ->assertSet('monthOffset', 0)
-            ->call('nextMonth')
-            ->assertSet('monthOffset', 1);
+            ->assertSet('weekOffset', 0)
+            ->call('nextWeek')
+            ->assertSet('weekOffset', 1);
     }
 
-    public function test_prev_month_decrements_offset(): void
+    public function test_prev_week_decrements_offset(): void
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
         Livewire::test(ActivityOverzicht::class)
-            ->call('nextMonth')
-            ->assertSet('monthOffset', 1)
-            ->call('prevMonth')
-            ->assertSet('monthOffset', 0);
+            ->call('nextWeek')
+            ->assertSet('weekOffset', 1)
+            ->call('prevWeek')
+            ->assertSet('weekOffset', 0);
     }
 
-    public function test_prev_month_does_nothing_at_zero(): void
+    public function test_prev_week_does_nothing_at_zero(): void
     {
         Livewire::test(ActivityOverzicht::class)
-            ->assertSet('monthOffset', 0)
-            ->call('prevMonth')
-            ->assertSet('monthOffset', 0);
+            ->assertSet('weekOffset', 0)
+            ->call('prevWeek')
+            ->assertSet('weekOffset', 0);
     }
 
-    public function test_month_heading_is_localised_for_nl(): void
+    public function test_week_heading_is_localised_for_nl(): void
     {
         app()->setLocale('nl');
-        $component = Livewire::test(ActivityOverzicht::class);
-        $expected = ucfirst(Carbon::now()->startOfMonth()->locale('nl')->translatedFormat('F Y'));
+        $start = Carbon::now()->startOfWeek();
+        $end = Carbon::now()->endOfWeek();
 
-        $this->assertSame($expected, $component->get('monthHeading'));
+        $expected = $start->month === $end->month
+            ? "{$start->day}–{$end->day} ".$start->locale('nl')->isoFormat('MMMM YYYY')
+            : $start->locale('nl')->isoFormat('D MMMM').' – '.$end->locale('nl')->isoFormat('D MMMM YYYY');
+
+        $component = Livewire::test(ActivityOverzicht::class);
+
+        $this->assertSame($expected, $component->get('weekHeading'));
     }
 
-    public function test_month_heading_is_localised_for_fr(): void
+    public function test_week_heading_is_localised_for_fr(): void
     {
         app()->setLocale('fr');
-        $component = Livewire::test(ActivityOverzicht::class);
-        $expected = ucfirst(Carbon::now()->startOfMonth()->locale('fr')->translatedFormat('F Y'));
+        $start = Carbon::now()->startOfWeek();
+        $end = Carbon::now()->endOfWeek();
 
-        $this->assertSame($expected, $component->get('monthHeading'));
+        $expected = $start->month === $end->month
+            ? "{$start->day}–{$end->day} ".$start->locale('fr')->isoFormat('MMMM YYYY')
+            : $start->locale('fr')->isoFormat('D MMMM').' – '.$end->locale('fr')->isoFormat('D MMMM YYYY');
+
+        $component = Livewire::test(ActivityOverzicht::class);
+
+        $this->assertSame($expected, $component->get('weekHeading'));
     }
 
     public function test_cancelled_activities_appear_in_list(): void
     {
         $cancelled = Activiteit::factory()->create([
             'status' => 'geannuleerd',
-            'datum' => now()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->format('Y-m-d'),
         ]);
 
         Livewire::test(ActivityOverzicht::class)
             ->assertSee($cancelled->titel_nl);
     }
 
-    public function test_mount_jumps_to_first_month_with_activities(): void
+    public function test_mount_jumps_to_first_week_with_activities(): void
     {
-        $nextMonth = Activiteit::factory()->create([
+        $nextWeek = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
         Livewire::test(ActivityOverzicht::class)
-            ->assertSet('monthOffset', 1)
-            ->assertSee($nextMonth->titel_nl);
+            ->assertSet('weekOffset', 1)
+            ->assertSee($nextWeek->titel_nl);
+    }
+
+    public function test_activities_grouped_by_date(): void
+    {
+        $monday = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->startOfWeek()->format('Y-m-d'),
+            'titel_nl' => 'Maandag activiteit',
+        ]);
+        $tuesday = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->startOfWeek()->addDay()->format('Y-m-d'),
+            'titel_nl' => 'Dinsdag activiteit',
+        ]);
+
+        $component = Livewire::test(ActivityOverzicht::class);
+        $grouped = $component->get('activiteiten');
+
+        $this->assertCount(2, $grouped);
+        $this->assertTrue($grouped->has($monday->datum->toDateString()));
+        $this->assertTrue($grouped->has($tuesday->datum->toDateString()));
     }
 
     public function test_activities_ordered_by_date_then_time(): void
     {
         $later = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->format('Y-m-d'),
             'startuur' => '15:00:00',
             'titel_nl' => 'Kaartspelen',
         ]);
         $earlier = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->format('Y-m-d'),
             'startuur' => '09:00:00',
             'titel_nl' => 'Aquafit',
         ]);
 
         $component = Livewire::test(ActivityOverzicht::class);
-        $activiteiten = $component->get('activiteiten');
+        $grouped = $component->get('activiteiten');
+        $dayActivities = $grouped->first();
 
-        $this->assertSame($earlier->id, $activiteiten->first()->id);
-        $this->assertSame($later->id, $activiteiten->last()->id);
+        $this->assertSame($earlier->id, $dayActivities->first()->id);
+        $this->assertSame($later->id, $dayActivities->last()->id);
     }
 }

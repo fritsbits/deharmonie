@@ -11,79 +11,84 @@ use Livewire\Component;
 
 class ActivityOverzicht extends Component
 {
-    public int $monthOffset = 0;
+    public int $weekOffset = 0;
 
     public function mount(): void
     {
         $first = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
-            ->where('datum', '>=', now()->startOfDay())
+            ->where('datum', '>=', now()->startOfWeek()->startOfDay())
             ->orderBy('datum')
             ->first();
 
         if ($first) {
-            $this->monthOffset = (int) now()->startOfMonth()->diffInMonths(
-                $first->datum->copy()->startOfMonth()
+            $this->weekOffset = (int) now()->startOfWeek()->diffInWeeks(
+                $first->datum->copy()->startOfWeek()
             );
         }
     }
 
     #[Computed]
-    public function activeMonth(): Carbon
+    public function activeWeekStart(): Carbon
     {
-        return Carbon::now()->startOfMonth()->addMonths($this->monthOffset);
+        return Carbon::now()->startOfWeek()->addWeeks($this->weekOffset);
+    }
+
+    #[Computed]
+    public function activeWeekEnd(): Carbon
+    {
+        return $this->activeWeekStart->copy()->endOfWeek();
     }
 
     #[Computed]
     public function activiteiten(): Collection
     {
-        $query = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
-            ->whereYear('datum', $this->activeMonth->year)
-            ->whereMonth('datum', $this->activeMonth->month)
+        return Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
+            ->whereBetween('datum', [$this->activeWeekStart, $this->activeWeekEnd])
             ->orderBy('datum')
-            ->orderBy('startuur');
-
-        if ($this->monthOffset === 0) {
-            $query->where('datum', '>=', now()->startOfDay());
-        }
-
-        return $query->get();
+            ->orderBy('startuur')
+            ->get()
+            ->groupBy(fn (Activiteit $a) => $a->datum->toDateString());
     }
 
     #[Computed]
-    public function monthHeading(): string
+    public function weekHeading(): string
     {
-        return ucfirst(
-            $this->activeMonth->locale(app()->getLocale())->translatedFormat('F Y')
-        );
+        $start = $this->activeWeekStart;
+        $end = $this->activeWeekEnd;
+        $locale = app()->getLocale();
+
+        if ($start->month === $end->month) {
+            return "{$start->day}–{$end->day} ".$start->locale($locale)->isoFormat('MMMM YYYY');
+        }
+
+        return $start->locale($locale)->isoFormat('D MMMM').' – '.$end->locale($locale)->isoFormat('D MMMM YYYY');
     }
 
     #[Computed]
     public function hasPrev(): bool
     {
-        return $this->monthOffset > 0;
+        return $this->weekOffset > 0;
     }
 
     #[Computed]
     public function hasNext(): bool
     {
-        $nextMonthStart = $this->activeMonth->copy()->addMonth();
-
         return Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
-            ->where('datum', '>=', $nextMonthStart)
+            ->where('datum', '>', $this->activeWeekEnd)
             ->exists();
     }
 
-    public function prevMonth(): void
+    public function prevWeek(): void
     {
         if ($this->hasPrev) {
-            $this->monthOffset--;
+            $this->weekOffset--;
         }
     }
 
-    public function nextMonth(): void
+    public function nextWeek(): void
     {
         if ($this->hasNext) {
-            $this->monthOffset++;
+            $this->weekOffset++;
         }
     }
 
