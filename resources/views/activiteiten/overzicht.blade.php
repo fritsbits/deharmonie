@@ -13,7 +13,7 @@
 />
 
 {{-- THEMATIC CARDS --}}
-<section style="background: #fff8f5; padding: 3.5rem 1.5rem 3rem;">
+<section style="background: var(--color-brand-orange-tint); padding: 3.5rem 1.5rem 3rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
 
         @php
@@ -23,7 +23,7 @@
                 [
                     'name'       => $isFr ? 'Bougez avec nous' : 'Beweeg mee',
                     'tagline'    => $isFr ? 'À votre rythme — pas besoin d\'être sportif.' : 'Op eigen tempo — je hoeft geen sportman te zijn.',
-                    'color'      => '#eb6643',
+                    'color'      => 'var(--color-brand-orange)',
                     'photo'      => 'photo-petanque.webp',
                     'rotate'     => '-2deg',
                     'margin_top' => '0.75rem',
@@ -32,7 +32,7 @@
                 [
                     'name'       => $isFr ? 'Créez ensemble' : 'Maak iets',
                     'tagline'    => $isFr ? 'Les mains à l\'ouvrage — calme, convivial, ensemble.' : 'Met de handen bezig — rustig, gezellig, samen.',
-                    'color'      => '#81b59c',
+                    'color'      => 'var(--color-brand-green)',
                     'photo'      => 'photo-handwerk.webp',
                     'rotate'     => '1.8deg',
                     'margin_top' => '0',
@@ -41,7 +41,7 @@
                 [
                     'name'       => $isFr ? 'Parlez & apprenez' : 'Praat & leer',
                     'tagline'    => $isFr ? 'Quatre langues, la mémoire, le numérique.' : 'Vier talen, het geheugen oefenen, digitaal leren.',
-                    'color'      => '#4679bc',
+                    'color'      => 'var(--color-brand-blue)',
                     'photo'      => 'photo-samen.webp',
                     'rotate'     => '-1deg',
                     'margin_top' => '1.25rem',
@@ -113,7 +113,7 @@
 </section>
 
 {{-- BIJZONDERE MOMENTEN --}}
-<section style="background: #eef5f1; padding: 5rem 1.5rem 5.5rem;">
+<section style="background: var(--color-brand-green-tint); padding: 5rem 1.5rem 5.5rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
         <x-eyebrow color="green" mb="0.75rem">{{ __('activities.special_moments_eyebrow') }}</x-eyebrow>
         <x-section-heading mb="0.75rem">{{ __('activities.special_moments_heading') }}</x-section-heading>

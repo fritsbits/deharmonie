@@ -24,7 +24,7 @@
 </div>
 
 {{-- CONTACT INFO --}}
-<div style="background: #eef2f8;">
+<div style="background: var(--color-brand-blue-tint);">
     <div style="max-width: 72rem; margin: 0 auto; padding: 3.5rem 1.5rem;">
         <div class="contact-grid" style="display: flex; gap: 3rem; align-items: start;">
 

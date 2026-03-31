@@ -528,7 +528,7 @@
     <h2 style="font-family: var(--font-sans); font-size: 2.1rem; font-weight: 800; color: var(--color-brand-dark); margin-bottom: 0.5rem;">Weekmenu kaart</h2>
     <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin-bottom: 1.5rem; font-style: italic;">Oranje kleuraccent = restaurant. Sectieachtergrond: brand-orange-tint (#fff8f5).</p>
 
-    <div style="background-color: #fff8f5; border-radius: 12px; padding: 2rem; max-width: 620px;">
+    <div style="background-color: var(--color-brand-orange-tint); border-radius: 12px; padding: 2rem; max-width: 620px;">
         <div style="display: flex; gap: 1rem;">
             {{-- Vandaag --}}
             <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid #e8e0d8;">

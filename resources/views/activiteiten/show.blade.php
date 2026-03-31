@@ -98,7 +98,7 @@
 </div>
 
 {{-- Main content --}}
-<div style="background: #eef5f1;">
+<div style="background: var(--color-brand-green-tint);">
 <div style="max-width: 72rem; margin: 0 auto; padding: 2.5rem 1.5rem 4rem;">
 
     {{-- Description --}}

@@ -60,7 +60,7 @@
 
 {{-- MENU PREVIEW --}}
 @if ($menuVandaag || $menuMorgen)
-<section style="background-color: #fff8f5; padding: 4rem 1.5rem;">
+<section style="background-color: var(--color-brand-orange-tint); padding: 4rem 1.5rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
         <x-eyebrow color="orange" mb="0.75rem">{{ __('pages.home_menu_label') }}</x-eyebrow>
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
@@ -195,7 +195,7 @@
 </div>
 
 {{-- SERVICES — home visit focus --}}
-<section style="background-color: #eef2f8; padding: 5rem 1.5rem;">
+<section style="background-color: var(--color-brand-blue-tint); padding: 5rem 1.5rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
         <x-eyebrow color="blue" mb="0.75rem">{{ __('nav.services') }}</x-eyebrow>
         <x-section-heading mb="1.25rem">{{ __('pages.home_services_section_heading') }}</x-section-heading>

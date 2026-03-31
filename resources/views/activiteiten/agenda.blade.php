@@ -12,7 +12,7 @@
     />
 </div>
 
-<div class="agenda-bg-wrapper" style="background: #eef5f1;">
+<div class="agenda-bg-wrapper" style="background: var(--color-brand-green-tint);">
     <div style="max-width: 72rem; margin: 0 auto; padding: 2rem 1.5rem 4rem;">
         <div class="agenda-paper-outer">
             <div class="agenda-paper">

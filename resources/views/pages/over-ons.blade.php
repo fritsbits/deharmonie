@@ -11,7 +11,7 @@
 />
 
 {{-- MISSION STORY --}}
-<section style="background: #eef2f8; padding: 4rem 0;">
+<section style="background: var(--color-brand-blue-tint); padding: 4rem 0;">
     <div style="max-width: 72rem; margin: 0 auto; padding: 0 1.5rem;">
 
         <x-eyebrow size="sm" color="blue" mb="0.5rem">{{ __('pages.over_ons_verhaal_eyebrow') }}</x-eyebrow>
@@ -122,7 +122,7 @@
 </section>
 
 {{-- CTA BAND --}}
-<section style="background: #eef2f8; border-top: 1px solid #e8e5e2; padding: 3.5rem 2rem; text-align: center;">
+<section style="background: var(--color-brand-blue-tint); border-top: 1px solid #e8e5e2; padding: 3.5rem 2rem; text-align: center;">
     <h2 style="font-family: var(--font-sans); font-size: clamp(1.5rem, 2.5vw, 2.25rem); font-weight: 900; color: var(--color-brand-dark); line-height: 1.15; margin-bottom: 0.75rem;">
         {{ __('pages.over_ons_cta_heading') }}
     </h2>

@@ -11,7 +11,7 @@
 />
 
 {{-- TWO-COLUMN: MENU + PRACTICAL INFO --}}
-<div style="background: #fff8f5;">
+<div style="background: var(--color-brand-orange-tint);">
     <div style="max-width: 72rem; margin: 0 auto; padding: 3rem 1.5rem;">
         <div class="menu-layout" style="display: flex; gap: 3rem; align-items: flex-start;">
 
