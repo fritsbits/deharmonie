@@ -34,11 +34,14 @@ class WeekMenuDagResource extends Resource
     public static function form(Schema $schema): Schema
     {
         return $schema->components([
+            // What day — full width
             DatePicker::make('date')
                 ->label('Datum')
                 ->required()
-                ->unique(ignoreRecord: true),
+                ->unique(ignoreRecord: true)
+                ->columnSpanFull(),
 
+            // What kind of day — toggles side by side
             Toggle::make('closed')
                 ->label('Gesloten')
                 ->live()
@@ -50,6 +53,7 @@ class WeekMenuDagResource extends Resource
                 ->default(false)
                 ->hidden(fn (Get $get): bool => (bool) $get('closed')),
 
+            // Normal day — NL/FR pair side by side
             TextInput::make('main_nl')
                 ->label('Gerecht (NL)')
                 ->required()
@@ -60,13 +64,7 @@ class WeekMenuDagResource extends Resource
                 ->required()
                 ->hidden(fn (Get $get): bool => (bool) $get('closed') || (bool) $get('special_event')),
 
-            TextInput::make('price')
-                ->label('Prijs (€)')
-                ->numeric()
-                ->required()
-                ->prefix('€')
-                ->hidden(fn (Get $get): bool => (bool) $get('closed')),
-
+            // Special event — NL/FR pair side by side
             TextInput::make('event_label_nl')
                 ->label('Naam speciaal menu (NL)')
                 ->required()
@@ -77,6 +75,15 @@ class WeekMenuDagResource extends Resource
                 ->required()
                 ->hidden(fn (Get $get): bool => ! (bool) $get('special_event')),
 
+            // Price — below content, half width
+            TextInput::make('price')
+                ->label('Prijs (€)')
+                ->numeric()
+                ->required()
+                ->prefix('€')
+                ->hidden(fn (Get $get): bool => (bool) $get('closed')),
+
+            // Courses — full width at the bottom
             Repeater::make('courses')
                 ->label('Gangen')
                 ->schema([

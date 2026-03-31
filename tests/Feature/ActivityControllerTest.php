@@ -35,7 +35,7 @@ class ActivityControllerTest extends TestCase
         $response->assertSee('Weekmenu');
         // Sections present
         $response->assertSee('Komende activiteiten');
-        $response->assertSee('Wij komen ook naar u toe');
+        $response->assertSee('Wij komen ook naar je toe');
         $response->assertSee('Antwerpsesteenweg 24');
         // Old standalone AGENDA section is gone
         $response->assertDontSee('Volgende activiteiten');

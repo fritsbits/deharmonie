@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Dashboard;
+use Filament\FontProviders\GoogleFontProvider;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -15,6 +16,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\PreventRequestForgery;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\HtmlString;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
@@ -27,9 +29,38 @@ class AdminPanelProvider extends PanelProvider
             ->path('admin')
             ->login()
             ->colors([
-                'primary' => Color::Amber,
+                'primary' => Color::hex('#eb6643'),
+                'gray' => Color::hex('#706662'),
             ])
+            ->font('Nunito Sans', provider: GoogleFontProvider::class)
             ->darkMode(false)
+            ->renderHook('panels::head.end', fn (): HtmlString => new HtmlString('
+<style>
+/* De Harmonie admin overrides */
+
+/* Form actions footer — dark band visually separated from form content */
+.fi-sc-actions {
+    background-color: #2c2826;
+    border-radius: 0.5rem;
+    padding: 1rem 1.25rem;
+    margin-top: 0.75rem;
+}
+.fi-sc-actions .fi-btn {
+    font-weight: 800;
+    letter-spacing: 0.01em;
+}
+/* Cancel button readable on dark background */
+.fi-sc-actions .fi-btn-color-gray {
+    color: rgba(255,255,255,0.65) !important;
+    border-color: rgba(255,255,255,0.2) !important;
+    background: transparent !important;
+}
+.fi-sc-actions .fi-btn-color-gray:hover {
+    color: white !important;
+    border-color: rgba(255,255,255,0.45) !important;
+}
+</style>
+            '))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
             ->pages([
