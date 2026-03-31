@@ -15,10 +15,10 @@ class TeamLidFactory extends Factory
     {
         return [
             'team_categorie_id' => TeamCategorie::factory(),
-            'naam' => fake()->name(),
+            'naam' => $this->faker->name(),
             'titel_nl' => null,
             'titel_fr' => null,
-            'volgorde' => fake()->numberBetween(1, 100),
+            'volgorde' => $this->faker->numberBetween(1, 100),
         ];
     }
 }

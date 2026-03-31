@@ -13,9 +13,9 @@ class TeamCategorieFactory extends Factory
     public function definition(): array
     {
         return [
-            'naam_nl' => fake()->words(2, true),
-            'naam_fr' => fake()->words(2, true),
-            'volgorde' => fake()->numberBetween(1, 100),
+            'naam_nl' => $this->faker->words(2, true),
+            'naam_fr' => $this->faker->words(2, true),
+            'volgorde' => $this->faker->numberBetween(1, 100),
         ];
     }
 }
