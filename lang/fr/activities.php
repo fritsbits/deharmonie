@@ -17,6 +17,8 @@ return [
     'previous_week' => 'Semaine précédente',
     'next_week' => 'Semaine suivante',
     'no_activities_this_day' => 'Pas d\'activités ce jour.',
+    'no_activities_this_week' => 'Pas d\'activités cette semaine.',
+    'agenda_page_heading' => 'Planning de la semaine',
     'print' => 'Imprimer',
     'back' => '← Retour aux activités',
     'detail' => 'Plus d\'info',

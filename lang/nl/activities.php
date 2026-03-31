@@ -17,6 +17,8 @@ return [
     'previous_week' => 'Vorige week',
     'next_week' => 'Volgende week',
     'no_activities_this_day' => 'Geen activiteiten deze dag.',
+    'no_activities_this_week' => 'Geen activiteiten deze week.',
+    'agenda_page_heading' => 'Weekplanning',
     'print' => 'Afdrukken',
     'back' => '← Terug naar alle activiteiten',
     'detail' => 'Meer info',

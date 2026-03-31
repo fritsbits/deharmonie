@@ -58,7 +58,7 @@ class ActivityControllerTest extends TestCase
         Activiteit::query()->delete();
 
         $response = $this->get('/activiteiten/agenda');
-        $response->assertSee('Geen activiteiten deze dag.');
+        $response->assertSee('Geen activiteiten deze week.');
     }
 
     public function test_overview_shows_only_current_week_by_default(): void
