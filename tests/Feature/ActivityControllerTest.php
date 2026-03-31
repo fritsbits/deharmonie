@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Livewire\ActivityFilter;
 use App\Models\Activiteit;
 use App\Models\Deelnameverzoek;
+use App\Models\WeekMenuDag;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Livewire\Livewire;
 use Tests\TestCase;
@@ -114,12 +115,76 @@ class ActivityControllerTest extends TestCase
         $response->assertDontSee('Inschrijvingsformulier');
     }
 
-    public function test_homepage_shows_menu_preview(): void
+    public function test_homepage_shows_menu_section_when_menu_data_exists(): void
     {
+        $vandaag = WeekMenuDag::factory()->create([
+            'date' => today()->toDateString(),
+            'main_nl' => 'Kalf blanket met bulgur',
+            'price' => 10,
+        ]);
+        $morgen = WeekMenuDag::factory()->create([
+            'date' => today()->addDay()->toDateString(),
+            'main_nl' => 'Varkensgebraad met witloof',
+            'price' => 9,
+        ]);
+
         $response = $this->get('/');
+
         $response->assertSee('Vandaag');
+        $response->assertSee('Kalf blanket met bulgur');
+        $response->assertSee('€ 10');
+        $response->assertSee('Morgen');
+        $response->assertSee('Varkensgebraad met witloof');
+        $response->assertSee('€ 9');
         $response->assertSee('Soep van de dag inbegrepen');
         $response->assertSee('Volledig menu →');
+    }
+
+    public function test_homepage_hides_menu_section_when_no_menu_data(): void
+    {
+        WeekMenuDag::query()->delete();
+
+        $response = $this->get('/');
+
+        // The menu section key string is absent when no menu data exists
+        $response->assertDontSee('Soep van de dag inbegrepen');
+    }
+
+    public function test_homepage_hides_today_card_when_only_tomorrow_has_menu(): void
+    {
+        WeekMenuDag::factory()->create([
+            'date' => today()->addDay()->toDateString(),
+            'main_nl' => 'Morgen_only_dish_xyz',
+            'price' => 8,
+        ]);
+
+        $response = $this->get('/');
+
+        // Menu section is visible (tomorrow exists)
+        $response->assertSee('Soep van de dag inbegrepen');
+        // Today's dish is not present, tomorrow's is
+        $response->assertDontSee('Morgen_only_dish_xyz_today');
+        $response->assertSee('Morgen_only_dish_xyz');
+        $response->assertSee('Morgen');
+    }
+
+    public function test_homepage_hides_closed_day_menu_card(): void
+    {
+        WeekMenuDag::factory()->closed()->create([
+            'date' => today()->toDateString(),
+        ]);
+        WeekMenuDag::factory()->create([
+            'date' => today()->addDay()->toDateString(),
+            'main_nl' => 'Open_morgen_gerecht_xyz',
+            'price' => 11,
+        ]);
+
+        $response = $this->get('/');
+
+        // Only tomorrow's menu card appears
+        $response->assertSee('Open_morgen_gerecht_xyz');
+        $response->assertSee('Morgen');
+        $response->assertSee('Soep van de dag inbegrepen');
     }
 
     public function test_activity_filter_shows_at_most_five(): void

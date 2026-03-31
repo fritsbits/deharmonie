@@ -58,7 +58,8 @@
     </div>
 </section>
 
-{{-- MENU PREVIEW (static — to be wired to Weekmenu model in future) --}}
+{{-- MENU PREVIEW --}}
+@if ($menuVandaag || $menuMorgen)
 <section style="background-color: #fff8f5; padding: 4rem 1.5rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
         <x-eyebrow color="orange" mb="0.75rem">{{ __('pages.home_menu_label') }}</x-eyebrow>
@@ -69,25 +70,29 @@
                 {{ __('pages.home_menu_link') }}
             </a>
         </div>
-        {{-- TODO: Replace static content with dynamic Weekmenu model query --}}
         <div class="menu-cards" style="display: flex; gap: 1rem;">
             {{-- Today --}}
+            @if ($menuVandaag)
             <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid #e8e0d8;">
                 <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin-bottom: 0.4rem;">{{ __('activities.date_today') }}</p>
-                <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Kalf blanket met bulgur</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">{{ $menuVandaag->main }}</p>
                 <p style="font-size: 1rem; color: var(--color-brand-muted); margin-bottom: 0.75rem;">{{ __('pages.home_menu_soup_included') }}</p>
-                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ 10</p>
+                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ {{ $menuVandaag->price }}</p>
             </div>
+            @endif
             {{-- Tomorrow --}}
+            @if ($menuMorgen)
             <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid #e8e0d8;">
                 <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin-bottom: 0.4rem;">{{ __('activities.date_tomorrow') }}</p>
-                <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Varkensgebraad met gestoofd witloof</p>
+                <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">{{ $menuMorgen->main }}</p>
                 <p style="font-size: 1rem; color: var(--color-brand-muted); margin-bottom: 0.75rem;">{{ __('pages.home_menu_soup_included') }}</p>
-                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ 9</p>
+                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ {{ $menuMorgen->price }}</p>
             </div>
+            @endif
         </div>
     </div>
 </section>
+@endif
 
 {{-- UPCOMING ACTIVITIES --}}
 <section style="background-color: white; padding: 5rem 1.5rem;">

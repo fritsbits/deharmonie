@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Activiteit;
 use App\Models\ActiviteitTemplate;
+use App\Models\WeekMenuDag;
 use Illuminate\View\View;
 
 class ActivityController extends Controller
@@ -17,7 +18,15 @@ class ActivityController extends Controller
             ->limit(3)
             ->get();
 
-        return view('activiteiten.index', compact('activiteiten'));
+        $menuVandaag = WeekMenuDag::whereDate('date', today())
+            ->where('closed', false)
+            ->first();
+
+        $menuMorgen = WeekMenuDag::whereDate('date', today()->addDay())
+            ->where('closed', false)
+            ->first();
+
+        return view('activiteiten.index', compact('activiteiten', 'menuVandaag', 'menuMorgen'));
     }
 
     public function index(): View
