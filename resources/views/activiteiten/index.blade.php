@@ -181,7 +181,7 @@
              style="width: 100%; height: 100%; object-fit: cover; display: block;">
     </div>
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-feest-2.webp') }}" alt="{{ __('pages.home_photo_feest_alt') }}"
+        <img src="{{ asset('images/photo-visitors-2.webp') }}" alt="{{ __('pages.home_photo_feest_alt') }}"
              style="width: 100%; height: 100%; object-fit: cover; display: block;">
     </div>
 </div>
