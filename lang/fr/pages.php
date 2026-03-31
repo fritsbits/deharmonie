@@ -119,4 +119,14 @@ return [
     'grote_kuis_examples_label' => 'Exemples',
     'grote_kuis_examples' => ['Nettoyer le four', 'Réparer un robinet', 'Laver les vitres', 'Nettoyer le tapis', 'Installer une hotte', 'Laver les rideaux', 'Peindre les toilettes'],
     'grote_kuis_cta' => 'Vous êtes intéressé(e) ou vous connaissez quelqu\'un qui pourrait l\'être ? Faites-le nous savoir !',
+
+    // Activiteiten overzicht — textes alternatifs des images
+    'overzicht_photo_uitstap_alt' => 'Des visiteurs en sortie avec De Harmonie',
+    'overzicht_photo_muzikanten_alt' => 'Musiciens en représentation à De Harmonie',
+    'overzicht_photo_verjaardag_alt' => 'Fête d\'anniversaire à De Harmonie',
+
+    // Weekmenu — textes alternatifs des images
+    'weekmenu_photo_chef_taart_alt' => 'Un chef avec un gâteau dans la cuisine de De Harmonie',
+    'weekmenu_photo_restaurant_bord_alt' => 'Plat du jour servi au restaurant de De Harmonie',
+    'weekmenu_photo_feest_alt' => 'Repas festif à De Harmonie',
 ];

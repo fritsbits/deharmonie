@@ -119,4 +119,14 @@ return [
     'grote_kuis_examples_label' => 'Waarbij kan je bijvoorbeeld hulp krijgen?',
     'grote_kuis_examples' => ['Oven kuisen', 'Kraantje repareren', 'Ruiten wassen', 'Tapijt kuisen', 'Dampkap installeren', 'Gordijnen wassen', 'Toilet schilderen'],
     'grote_kuis_cta' => 'Heb je interesse of ken je iemand die hiervoor interesse heeft? Laat het ons zeker weten!',
+
+    // Activiteiten overzicht — image alt text
+    'overzicht_photo_uitstap_alt' => 'Bezoekers op uitstap met De Harmonie',
+    'overzicht_photo_muzikanten_alt' => 'Muzikanten tijdens een optreden bij De Harmonie',
+    'overzicht_photo_verjaardag_alt' => 'Verjaardagsviering in De Harmonie',
+
+    // Weekmenu — image alt text
+    'weekmenu_photo_chef_taart_alt' => 'Chef met een taart in de keuken van De Harmonie',
+    'weekmenu_photo_restaurant_bord_alt' => 'Bord met dagschotel in het restaurant van De Harmonie',
+    'weekmenu_photo_feest_alt' => 'Feestelijke maaltijd in De Harmonie',
 ];
