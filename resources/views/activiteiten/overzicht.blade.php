@@ -127,22 +127,12 @@
             <div style="grid-row: 1 / 3; overflow: hidden; position: relative;">
                 <img src="{{ asset('images/photo-uitstap.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <div style="position: absolute; bottom: 0.75rem; left: 0.75rem;">
-                    <span style="background: var(--color-brand-green); color: white; padding: 0.2rem 0.6rem; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; display: inline-block;">
-                        {{ $isFr ? 'Fête des 51 ans de De Harmonie' : 'Feest van 51 jaar De Harmonie' }}
-                    </span>
-                </div>
             </div>
 
             {{-- Middle top photo --}}
             <div style="overflow: hidden; position: relative;">
                 <img src="{{ asset('images/photo-muzikanten.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <div style="position: absolute; bottom: 0.75rem; left: 0.75rem;">
-                    <span style="background: var(--color-brand-green); color: white; padding: 0.2rem 0.6rem; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; display: inline-block;">
-                        {{ $isFr ? 'Sortie culturelle' : 'Culturele uitstap' }}
-                    </span>
-                </div>
             </div>
 
             {{-- Upcoming special events — homepage-style cards --}}
@@ -216,11 +206,6 @@
             <div style="overflow: hidden; position: relative;">
                 <img src="{{ asset('images/photo-verjaardag.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
-                <div style="position: absolute; bottom: 0.75rem; left: 0.75rem;">
-                    <span style="background: var(--color-brand-green); color: white; padding: 0.2rem 0.6rem; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; display: inline-block;">
-                        {{ $isFr ? 'Fête d\'anniversaire' : 'Verjaardagsfeest' }}
-                    </span>
-                </div>
             </div>
 
         </div>
