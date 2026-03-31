@@ -131,7 +131,7 @@
 
 @media (max-width: 767px) {
     .menu-layout { flex-direction: column !important; gap: 2rem !important; }
-    .practical-sidebar { position: static !important; min-width: 0 !important; }
+    .practical-sidebar { position: static !important; min-width: 0 !important; order: -1; }
 }
 </style>
 
