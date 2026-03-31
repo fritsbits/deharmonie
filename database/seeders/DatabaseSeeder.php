@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             ActiviteitTemplateSeeder::class,
             ActiviteitSeeder::class,
             WeekMenuDagSeeder::class,
+            TeamCategorieSeeder::class,
         ]);
     }
 }
