@@ -2,9 +2,8 @@
     @php $locale = app()->getLocale(); @endphp
 
     {{-- Print header (hidden on screen, visible on print) --}}
-    <div class="agenda-print-header" style="display: none; padding: 1rem 3.25rem 0; font-family: var(--font-sans);">
-        <span style="font-size: 1rem; font-weight: 700; color: var(--color-brand-dark);">{{ $this->weekHeading }}</span>
-        <span style="font-size: 0.875rem; color: var(--color-brand-muted); margin-left: 1rem;">Antwerpsesteenweg 24 · 02 203 28 48</span>
+    <div class="agenda-print-header" style="display: none; padding: 0 3.25rem 1.5rem; font-family: var(--font-sans);">
+        <span style="font-size: 1.25rem; font-weight: 700; color: var(--color-brand-muted);">{{ $this->weekHeading }}</span>
     </div>
 
     {{-- Dark green card header --}}

@@ -56,20 +56,21 @@
     transform-origin: bottom right;
 }
 
-@media (max-width: 767px) {
+@@media (max-width: 767px) {
     .agenda-paper-outer { transform: none !important; }
 }
 
-@media print {
-    @page { size: A4 portrait; margin: 12mm 14mm; }
+@@media print {
+    @@page { size: A4 portrait; margin: 12mm 14mm; }
 
     /* Hide all screen chrome */
     header, footer,
     .agenda-card-header,
     .agenda-print-btn { display: none !important; }
 
-    /* Strip card decoration */
-    .agenda-bg-wrapper { background: white !important; }
+    /* Strip card decoration and collapse spacing so date subtitle sits under h1 */
+    .agenda-screen-only section { padding-bottom: 0 !important; }
+    .agenda-bg-wrapper { background: white !important; padding-top: 0 !important; }
     .agenda-paper-outer { transform: none !important; }
     .agenda-paper {
         border: none !important;

@@ -9,7 +9,7 @@
 
     {{-- Right illustration: full height, flush to viewport right edge --}}
     <div class="hero-col-image" style="position: absolute; top: 0; right: 0; height: 100%; z-index: 0; overflow: hidden;">
-        <img src="{{ asset('images/illustration-header.png') }}" alt=""
+        <img src="{{ asset('images/illustration-header.webp') }}" alt=""
              style="height: 100%; width: auto; display: block;">
     </div>
 
