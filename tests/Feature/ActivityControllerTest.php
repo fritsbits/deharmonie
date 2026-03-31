@@ -58,10 +58,10 @@ class ActivityControllerTest extends TestCase
         Activiteit::query()->delete();
 
         $response = $this->get('/activiteiten/agenda');
-        $response->assertSee('Geen activiteiten gepland.');
+        $response->assertSee('Geen activiteiten deze dag.');
     }
 
-    public function test_overview_shows_only_current_month_by_default(): void
+    public function test_overview_shows_only_current_week_by_default(): void
     {
         $today = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -69,17 +69,17 @@ class ActivityControllerTest extends TestCase
         ]);
         $nextMonth = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->addMonthNoOverflow()->startOfMonth()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->addWeeks(2)->format('Y-m-d'),
         ]);
-        $past = Activiteit::factory()->create([
+        $lastWeek = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->subDay()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->subDay()->format('Y-m-d'),
         ]);
 
         $response = $this->get('/activiteiten/agenda');
         $response->assertSee($today->titel_nl);
         $response->assertDontSee($nextMonth->titel_nl);
-        $response->assertDontSee($past->titel_nl);
+        $response->assertDontSee($lastWeek->titel_nl);
     }
 
     public function test_activity_detail_shows_cancellation_banner(): void
