@@ -92,6 +92,7 @@
 
                 {{-- Coloured header --}}
                 <div style="background: {{ $cluster['color'] }}; padding: 1.25rem 1.5rem 1.5rem; position: relative; overflow: hidden; min-height: 90px;">
+                    {{-- icon is hardcoded SVG path data from this file's @php block — never user input --}}
                     <svg style="position: absolute; right: -14px; bottom: -18px; width: 110px; height: 110px; opacity: 0.18; transform: rotate(12deg); pointer-events: none;"
                          viewBox="0 0 24 24" fill="white" stroke="none">
                         {!! $cluster['icon'] !!}
@@ -110,7 +111,7 @@
                         @foreach ($cluster['items'] as $item)
                             <li style="display: flex; gap: 0.6rem; align-items: baseline; padding: 0.65rem 0; {{ !$loop->last ? 'border-bottom: 1px solid rgba(44,40,38,.07);' : '' }}">
                                 <span style="flex-shrink: 0; color: {{ $cluster['color'] }}; font-weight: 700;">&#10003;</span>
-                                <span style="font-size: 0.9375rem; color: var(--color-brand-dark); line-height: 1.45;">{{ $item }}</span>
+                                <span style="font-size: 1.0625rem; color: var(--color-brand-dark); line-height: 1.45;">{{ $item }}</span>
                             </li>
                         @endforeach
                     </ul>
