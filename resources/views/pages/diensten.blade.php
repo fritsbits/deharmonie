@@ -86,20 +86,36 @@
     ];
     @endphp
 
-    <div style="display: flex; gap: 3rem; flex-wrap: wrap;">
+    <div class="service-cards" style="display: flex; gap: 1.5rem;">
         @foreach ($clusters as $cluster)
-            <div style="flex: 1; min-width: 220px;">
-                <p style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-blue); margin-bottom: 0.5rem;">
-                    {{ $cluster['label_top'] }}<br>{{ $cluster['label_main'] }}
-                </p>
-                <ul style="border-top: 1px solid var(--color-brand-gray); margin: 0; padding: 0;">
-                    @foreach ($cluster['items'] as $item)
-                        <li style="display: flex; align-items: baseline; gap: 0.75rem; padding: 0.85rem 0; border-bottom: 1px solid var(--color-brand-gray); list-style: none;">
-                            <span style="flex-shrink: 0; color: var(--color-brand-orange); font-weight: 700; font-size: 1.1rem; line-height: 1;">&#10003;</span>
-                            <span style="font-size: 1.0625rem; color: var(--color-brand-dark); line-height: 1.5;">{{ $item }}</span>
-                        </li>
-                    @endforeach
-                </ul>
+            <div style="flex: 1; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(44,40,38,.09), 0 8px 28px rgba(44,40,38,.10);">
+
+                {{-- Coloured header --}}
+                <div style="background: {{ $cluster['color'] }}; padding: 1.25rem 1.5rem 1.5rem; position: relative; overflow: hidden; min-height: 90px;">
+                    <svg style="position: absolute; right: -14px; bottom: -18px; width: 110px; height: 110px; opacity: 0.18; transform: rotate(12deg); pointer-events: none;"
+                         viewBox="0 0 24 24" fill="white" stroke="none">
+                        {!! $cluster['icon'] !!}
+                    </svg>
+                    <p style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.75); margin: 0 0 0.2rem; position: relative; z-index: 1;">
+                        {{ $cluster['label_top'] }}
+                    </p>
+                    <p style="font-family: var(--font-sans); font-size: 1.125rem; font-weight: 900; color: white; margin: 0; position: relative; z-index: 1; line-height: 1.2;">
+                        {{ $cluster['label_main'] }}
+                    </p>
+                </div>
+
+                {{-- Card body --}}
+                <div style="padding: 1.25rem 1.5rem 1.5rem;">
+                    <ul style="list-style: none; padding: 0; margin: 0;">
+                        @foreach ($cluster['items'] as $item)
+                            <li style="display: flex; gap: 0.6rem; align-items: baseline; padding: 0.65rem 0; {{ !$loop->last ? 'border-bottom: 1px solid rgba(44,40,38,.07);' : '' }}">
+                                <span style="flex-shrink: 0; color: {{ $cluster['color'] }}; font-weight: 700;">&#10003;</span>
+                                <span style="font-size: 0.9375rem; color: var(--color-brand-dark); line-height: 1.45;">{{ $item }}</span>
+                            </li>
+                        @endforeach
+                    </ul>
+                </div>
+
             </div>
         @endforeach
     </div>
@@ -200,7 +216,10 @@
 </section>
 
 <style>
+.service-cards { align-items: stretch; }
+
 @media (max-width: 767px) {
+    .service-cards { flex-direction: column !important; }
     .diensten-intro { flex-direction: column !important; gap: 2rem !important; }
     .diensten-intro-photo { width: 100% !important; flex: none !important; aspect-ratio: 16/9 !important; }
 }
