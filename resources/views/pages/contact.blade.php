@@ -92,14 +92,23 @@
                 </div>
             </div>
 
-            {{-- RIGHT: map --}}
-            <div style="flex: 1.4; min-width: 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--color-brand-gray); min-height: 400px;">
-                <iframe
-                    src="https://maps.google.com/maps?q=Antwerpsesteenweg+24,+1000+Brussel,+Belgium&output=embed"
-                    style="width:100%;height:100%;min-height:400px;border:0;display:block;"
-                    allowfullscreen loading="lazy"
-                    title="{{ __('common.map') }}">
-                </iframe>
+            {{-- RIGHT: map placeholder (no third-party requests on load) --}}
+            <div style="flex: 1.4; min-width: 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--color-brand-gray); min-height: 400px; display: flex; flex-direction: column;">
+                <div style="flex: 1; background: #e8e4e0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; padding: 2rem; text-align: center;">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#706662" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    <div>
+                        <p style="font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">Antwerpsesteenweg 24</p>
+                        <p style="font-family: var(--font-body); font-size: 0.9375rem; color: var(--color-brand-muted);">1000 Brussel</p>
+                    </div>
+                    <a
+                        href="https://maps.google.com/maps?q=Antwerpsesteenweg+24,+1000+Brussel,+Belgium"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--color-brand-blue); color: white; font-family: var(--font-sans); font-size: 0.9375rem; font-weight: 700; text-decoration: none; padding: 0.75rem 1.5rem; border-radius: 8px; min-height: 44px; transition: opacity 0.15s ease;">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        {{ __('common.open_in_maps') }}
+                    </a>
+                </div>
             </div>
 
         </div>
