@@ -24,7 +24,7 @@
                     'name'       => $isFr ? 'Bougez avec nous' : 'Beweeg mee',
                     'tagline'    => $isFr ? 'À votre rythme — pas besoin d\'être sportif.' : 'Op eigen tempo — je hoeft geen sportman te zijn.',
                     'color'      => '#eb6643',
-                    'photo'      => 'photo-groep-actief.webp',
+                    'photo'      => 'photo-petanque.webp',
                     'rotate'     => '-2deg',
                     'margin_top' => '0.75rem',
                     'ids'        => [5, 7, 11, 15],
@@ -33,7 +33,7 @@
                     'name'       => $isFr ? 'Créez ensemble' : 'Maak iets',
                     'tagline'    => $isFr ? 'Les mains à l\'ouvrage — calme, convivial, ensemble.' : 'Met de handen bezig — rustig, gezellig, samen.',
                     'color'      => '#81b59c',
-                    'photo'      => 'photo-visitors-2.webp',
+                    'photo'      => 'photo-handwerk.webp',
                     'rotate'     => '1.8deg',
                     'margin_top' => '0',
                     'ids'        => [10, 12, 13],
@@ -125,7 +125,7 @@
 
             {{-- Big photo — spans both rows --}}
             <div style="grid-row: 1 / 3; overflow: hidden; position: relative;">
-                <img src="{{ asset('images/photo-feest-2.webp') }}" alt=""
+                <img src="{{ asset('images/photo-uitstap.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 <div style="position: absolute; bottom: 0.75rem; left: 0.75rem;">
                     <span style="background: var(--color-brand-green); color: white; padding: 0.2rem 0.6rem; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; display: inline-block;">
@@ -136,7 +136,7 @@
 
             {{-- Middle top photo --}}
             <div style="overflow: hidden; position: relative;">
-                <img src="{{ asset('images/photo-buiten-event.webp') }}" alt=""
+                <img src="{{ asset('images/photo-muzikanten.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 <div style="position: absolute; bottom: 0.75rem; left: 0.75rem;">
                     <span style="background: var(--color-brand-green); color: white; padding: 0.2rem 0.6rem; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; display: inline-block;">
@@ -214,7 +214,7 @@
 
             {{-- Middle bottom photo --}}
             <div style="overflow: hidden; position: relative;">
-                <img src="{{ asset('images/photo-cake.jpg') }}" alt=""
+                <img src="{{ asset('images/photo-verjaardag.webp') }}" alt=""
                      style="width: 100%; height: 100%; object-fit: cover; display: block;">
                 <div style="position: absolute; bottom: 0.75rem; left: 0.75rem;">
                     <span style="background: var(--color-brand-green); color: white; padding: 0.2rem 0.6rem; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; display: inline-block;">
