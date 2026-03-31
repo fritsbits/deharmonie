@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Subpage Hero Patterns — De Harmonie</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #f5f5f0;
+    color: #1a1a1a;
+  }
+
+  /* --- Controls bar --- */
+  .controls {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #1a1a1a;
+    padding: 16px 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .controls h1 {
+    font-size: 14px;
+    font-weight: 500;
+    color: #999;
+    margin-right: 16px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .controls button {
+    padding: 8px 20px;
+    border: 1px solid #444;
+    background: transparent;
+    color: #ccc;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .controls button:hover {
+    border-color: #888;
+    color: #fff;
+  }
+  .controls button.active {
+    background: #fff;
+    color: #1a1a1a;
+    border-color: #fff;
+  }
+  .pattern-note {
+    margin-left: auto;
+    font-size: 12px;
+    color: #666;
+    max-width: 400px;
+    line-height: 1.5;
+  }
+
+  /* --- Fake browser chrome --- */
+  .browser-frame {
+    max-width: 1200px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+  }
+  .browser-bar {
+    background: #e8e8e8;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .browser-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ccc;
+  }
+  .browser-dot:nth-child(1) { background: #ff5f57; }
+  .browser-dot:nth-child(2) { background: #ffbd2e; }
+  .browser-dot:nth-child(3) { background: #28ca41; }
+  .browser-url {
+    margin-left: 12px;
+    background: #fff;
+    border-radius: 6px;
+    padding: 6px 16px;
+    font-size: 12px;
+    color: #666;
+    flex: 1;
+    max-width: 400px;
+  }
+
+  /* --- Shared nav --- */
+  .site-nav {
+    background: #4a8b7f;
+    padding: 0 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .site-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+  .site-nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .site-nav-links li a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+  }
+  .site-nav-links li a.active-link {
+    color: #fff;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 2px;
+  }
+
+  /* --- Page sections (hidden/shown) --- */
+  .pattern-section {
+    display: none;
+  }
+  .pattern-section.visible {
+    display: block;
+  }
+
+  /* --- Fake content below hero --- */
+  .fake-content {
+    padding: 40px;
+    background: #f7f7f3;
+    border-top: 1px solid #e8e5de;
+  }
+  .fake-content h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+    font-weight: 600;
+  }
+  .fake-content .month-label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #666;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid #c75b3a;
+  }
+  .activity-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    padding: 16px 0;
+    border-bottom: 1px solid #e8e5de;
+  }
+  .activity-date {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a1a;
+    min-width: 50px;
+    line-height: 1;
+  }
+  .activity-info h4 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .activity-info p {
+    font-size: 13px;
+    color: #666;
+  }
+
+  /* ============================================
+     PATTERN A: Current (split, as-is)
+     ============================================ */
+  .hero-current {
+    display: flex;
+    align-items: center;
+    padding: 60px 40px;
+    min-height: 420px;
+    background: #fff;
+    gap: 40px;
+  }
+  .hero-current .hero-text {
+    flex: 1;
+  }
+  .hero-current .hero-label {
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #7bab9e;
+    margin-bottom: 12px;
+  }
+  .hero-current .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+  }
+  .hero-current .hero-subtitle {
+    font-size: 16px;
+    color: #666;
+    line-height: 1.6;
+  }
+  .hero-current .hero-image {
+    flex: 1;
+    max-width: 50%;
+  }
+  .hero-current .hero-image img {
+    width: 100%;
+    height: 320px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  }
+
+  /* ============================================
+     PATTERN B: Tight split with color band
+     ============================================ */
+  .hero-tight {
+    display: flex;
+    align-items: stretch;
+    background: #f0ebe4;
+    min-height: 280px;
+  }
+  .hero-tight .hero-text {
+    flex: 1;
+    padding: 48px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-tight .hero-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #4a8b7f;
+    margin-bottom: 12px;
+  }
+  .hero-tight .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    line-height: 1.2;
+  }
+  .hero-tight .hero-subtitle {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+    max-width: 420px;
+  }
+  .hero-tight .hero-image {
+    flex: 0 0 45%;
+    overflow: hidden;
+  }
+  .hero-tight .hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* ============================================
+     PATTERN C: Text first, image below
+     ============================================ */
+  .hero-textfirst {
+    background: #fff;
+  }
+  .hero-textfirst .hero-text {
+    padding: 48px 40px 32px;
+  }
+  .hero-textfirst .hero-breadcrumbs {
+    font-size: 13px;
+    color: #999;
+    margin-bottom: 16px;
+  }
+  .hero-textfirst .hero-breadcrumbs a {
+    color: #4a8b7f;
+    text-decoration: none;
+  }
+  .hero-textfirst .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: #1a1a1a;
+    line-height: 1.2;
+  }
+  .hero-textfirst .hero-subtitle {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    max-width: 600px;
+  }
+  .hero-textfirst .hero-image {
+    padding: 0 40px 0;
+  }
+  .hero-textfirst .hero-image img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+  }
+
+  /* ============================================
+     PATTERN D: Compact minimal
+     ============================================ */
+  .hero-compact {
+    background: #4a8b7f;
+    padding: 32px 40px;
+  }
+  .hero-compact .hero-breadcrumbs {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+  }
+  .hero-compact .hero-breadcrumbs a {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+  }
+  .hero-compact .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+  }
+  .hero-compact .hero-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.75);
+    margin-top: 6px;
+    line-height: 1.5;
+  }
+
+  /* ============================================
+     PATTERN E: Overlay (full-bleed + dark gradient)
+     ============================================ */
+  .hero-overlay {
+    position: relative;
+    min-height: 340px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-overlay img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .hero-overlay .hero-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0.05) 100%);
+  }
+  .hero-overlay .hero-text {
+    position: relative;
+    z-index: 2;
+    padding: 40px;
+  }
+  .hero-overlay .hero-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 8px;
+  }
+  .hero-overlay .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 6px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  }
+  .hero-overlay .hero-subtitle {
+    font-size: 15px;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.5;
+    max-width: 500px;
+  }
+
+  /* --- Label tags --- */
+  .pattern-label {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0;
+    margin-left: 12px;
+  }
+  .label-current { background: #e8e5de; color: #666; }
+  .label-recommended { background: #d4edda; color: #155724; }
+  .label-alternative { background: #fff3cd; color: #856404; }
+  .label-caution { background: #f8d7da; color: #721c24; }
+</style>
+</head>
+<body>
+
+<div class="controls">
+  <h1>Hero Patterns</h1>
+  <button class="active" onclick="show('current', this)">A. Huidig</button>
+  <button onclick="show('tight', this)">B. Strakke split</button>
+  <button onclick="show('textfirst', this)">C. Tekst eerst</button>
+  <button onclick="show('compact', this)">D. Compact</button>
+  <button onclick="show('overlay', this)">E. Overlay</button>
+  <div class="pattern-note" id="pattern-note">
+    Jullie huidige aanpak. Werkt functioneel, maar veel lege ruimte links en het beeld voelt losstaand.
+  </div>
+</div>
+
+<div class="browser-frame">
+  <div class="browser-bar">
+    <div class="browser-dot"></div>
+    <div class="browser-dot"></div>
+    <div class="browser-dot"></div>
+    <div class="browser-url">deharmonie.be/activiteiten</div>
+  </div>
+
+  <!-- Shared nav -->
+  <nav class="site-nav">
+    <div class="site-logo">De Harmonie</div>
+    <ul class="site-nav-links">
+      <li><a href="#" class="active-link">Activiteiten</a></li>
+      <li><a href="#">Restaurant & Menu</a></li>
+      <li><a href="#">Diensten</a></li>
+      <li><a href="#">Over ons</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Français</a></li>
+    </ul>
+  </nav>
+
+  <!-- PATTERN A: Current -->
+  <div class="pattern-section visible" id="section-current">
+    <div class="hero-current">
+      <div class="hero-text">
+        <div class="hero-label">Activiteiten</div>
+        <h1 class="hero-title">Altijd iets te beleven</h1>
+        <p class="hero-subtitle">Van bewegen tot knutselen — bekijk wat er op het programma staat.</p>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=600&fit=crop" alt="Senioren aan het spelen" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PATTERN B: Tight split with color band -->
+  <div class="pattern-section" id="section-tight">
+    <div class="hero-tight">
+      <div class="hero-text">
+        <div class="hero-label">Activiteiten</div>
+        <h1 class="hero-title">Altijd iets te beleven</h1>
+        <p class="hero-subtitle">Van bewegen tot knutselen — bekijk wat er op het programma staat.</p>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=600&fit=crop" alt="Senioren aan het spelen" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PATTERN C: Text first, image below -->
+  <div class="pattern-section" id="section-textfirst">
+    <div class="hero-textfirst">
+      <div class="hero-text">
+        <div class="hero-breadcrumbs"><a href="#">Home</a> / Activiteiten</div>
+        <h1 class="hero-title">Altijd iets te beleven</h1>
+        <p class="hero-subtitle">Van bewegen tot knutselen — bekijk wat er op het programma staat.</p>
+      </div>
+      <div class="hero-image">
+        <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=600&fit=crop" alt="Senioren aan het spelen" />
+      </div>
+    </div>
+  </div>
+
+  <!-- PATTERN D: Compact minimal -->
+  <div class="pattern-section" id="section-compact">
+    <div class="hero-compact">
+      <div class="hero-breadcrumbs"><a href="#">Home</a> / Activiteiten</div>
+      <h1 class="hero-title">Altijd iets te beleven</h1>
+      <p class="hero-subtitle">Van bewegen tot knutselen — bekijk wat er op het programma staat.</p>
+    </div>
+  </div>
+
+  <!-- PATTERN E: Full-bleed overlay -->
+  <div class="pattern-section" id="section-overlay">
+    <div class="hero-overlay">
+      <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800&h=600&fit=crop" alt="Senioren aan het spelen" />
+      <div class="hero-gradient"></div>
+      <div class="hero-text">
+        <div class="hero-label">Activiteiten</div>
+        <h1 class="hero-title">Altijd iets te beleven</h1>
+        <p class="hero-subtitle">Van bewegen tot knutselen — bekijk wat er op het programma staat.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared fake content below -->
+  <div class="fake-content">
+    <div class="month-label">Maart 2026</div>
+    <div class="activity-row">
+      <div class="activity-date">26</div>
+      <div class="activity-info">
+        <h4>Conversatietafel Spaans</h4>
+        <p>Donderdag, 10:00 – 12:00 · De Harmonie</p>
+      </div>
+    </div>
+    <div class="activity-row">
+      <div class="activity-date">27</div>
+      <div class="activity-info">
+        <h4>Yoga op stoel</h4>
+        <p>Vrijdag, 14:00 – 15:00 · De Harmonie</p>
+      </div>
+    </div>
+    <div class="activity-row">
+      <div class="activity-date">28</div>
+      <div class="activity-info">
+        <h4>Kookatelier</h4>
+        <p>Zaterdag, 10:00 – 13:00 · De Harmonie</p>
+      </div>
+    </div>
+    <div class="activity-row">
+      <div class="activity-date">31</div>
+      <div class="activity-info">
+        <h4>Bingo</h4>
+        <p>Dinsdag, 14:00 – 16:00 · De Harmonie</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div style="text-align: center; padding: 32px; color: #999; font-size: 12px;">
+  Prototype: subpage hero patronen voor De Harmonie — Maart 2026
+</div>
+
+<script>
+const notes = {
+  current: 'Jullie huidige aanpak. Werkt functioneel, maar veel lege ruimte links en het beeld voelt losstaand door de rounded corners + shadow.',
+  tight: 'Strakker: minder hoogte, beeld loopt door tot de rand, warme achtergrondkleur verbindt tekst en beeld. Goed leesbaar, voelt intentioneel.',
+  textfirst: 'Tekst eerst, beeld als ondersteuning. Beste leesbaarheid, geen contrast-issues. Beeld verdient z\'n plek door nabijheid bij content.',
+  compact: 'Minimaal: titel + breadcrumbs op een kleurband. Snelste naar de content. Geen beeld, maar je kunt altijd een foto in de content zelf plaatsen.',
+  overlay: 'Dramatisch maar risicovol. Contrast hangt af van het beeld. Moeilijker accessible te maken. Niet aanbevolen voor senioren-publiek.'
+};
+
+function show(pattern, btn) {
+  document.querySelectorAll('.pattern-section').forEach(s => s.classList.remove('visible'));
+  document.getElementById('section-' + pattern).classList.add('visible');
+  document.querySelectorAll('.controls button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('pattern-note').textContent = notes[pattern];
+}
+</script>
+</body>
+</html>

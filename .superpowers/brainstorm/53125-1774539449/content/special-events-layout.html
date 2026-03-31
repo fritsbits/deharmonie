@@ -1,0 +1,128 @@
+<h2>Special events section — how should it look?</h2>
+<p class="subtitle">These are upcoming one-off activities (no template_id). 3 upcoming events shown. Goal: "exciting things happen here — something might be perfect for you."</p>
+
+<div class="cards">
+
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 1.5rem; background: #eef5f1; border-bottom: 1px solid #e8e0d8;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem;">
+        <div style="background: white; border-radius: 10px; overflow: hidden; border: 1px solid #e8e0d8;">
+          <div style="height: 90px; background: #d4e8df;"></div>
+          <div style="padding: 0.85rem;">
+            <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #81b59c; margin-bottom: 0.25rem;">15 april</div>
+            <div style="font-size: 0.9rem; font-weight: 800; color: #2c2826; line-height: 1.2; margin-bottom: 0.25rem;">Uitstap Gent</div>
+            <div style="font-size: 0.72rem; color: #706662; margin-bottom: 0.6rem;">10u · Vertrek aan de deur</div>
+            <div style="font-size: 0.75rem; font-weight: 700; color: #4679bc;">Meer info →</div>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 10px; overflow: hidden; border: 1px solid #e8e0d8;">
+          <div style="height: 90px; background: #f3dbd5;"></div>
+          <div style="padding: 0.85rem;">
+            <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #81b59c; margin-bottom: 0.25rem;">22 april</div>
+            <div style="font-size: 0.9rem; font-weight: 800; color: #2c2826; line-height: 1.2; margin-bottom: 0.25rem;">Paasfeest</div>
+            <div style="font-size: 0.72rem; color: #706662; margin-bottom: 0.6rem;">12u · Eetzaal</div>
+            <div style="font-size: 0.75rem; font-weight: 700; color: #4679bc;">Meer info →</div>
+          </div>
+        </div>
+        <div style="background: white; border-radius: 10px; overflow: hidden; border: 1px solid #e8e0d8;">
+          <div style="height: 90px; background: #d5e0f0;"></div>
+          <div style="padding: 0.85rem;">
+            <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #81b59c; margin-bottom: 0.25rem;">3 mei</div>
+            <div style="font-size: 0.9rem; font-weight: 800; color: #2c2826; line-height: 1.2; margin-bottom: 0.25rem;">Muzieknamiddag</div>
+            <div style="font-size: 0.72rem; color: #706662; margin-bottom: 0.6rem;">14u · Feestzaal</div>
+            <div style="font-size: 0.75rem; font-weight: 700; color: #4679bc;">Meer info →</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Equal cards (3 col)</h3>
+      <p>Three equal cards with photo placeholder, date, title, time/location, link. Clean and symmetrical. Works well when all 3 events are equally worth highlighting.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 1.5rem; background: #eef5f1; border-bottom: 1px solid #e8e0d8;">
+      <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+        <!-- Featured -->
+        <div style="background: white; border-radius: 10px; overflow: hidden; border: 1px solid #e8e0d8;">
+          <div style="height: 130px; background: #d4e8df;"></div>
+          <div style="padding: 1rem;">
+            <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #81b59c; margin-bottom: 0.3rem;">15 april · Uitstap</div>
+            <div style="font-size: 1.1rem; font-weight: 800; color: #2c2826; line-height: 1.2; margin-bottom: 0.3rem;">Uitstap naar Gent</div>
+            <div style="font-size: 0.8rem; color: #706662; margin-bottom: 0.75rem;">Een dagje uit met het hele gezelschap. We vertrekken aan de deur en ontdekken Gent samen.</div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: #4679bc;">Meer info →</div>
+          </div>
+        </div>
+        <!-- Smaller two -->
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="background: white; border-radius: 10px; overflow: hidden; border: 1px solid #e8e0d8; flex: 1;">
+            <div style="height: 55px; background: #f3dbd5;"></div>
+            <div style="padding: 0.75rem;">
+              <div style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #81b59c; margin-bottom: 0.2rem;">22 april</div>
+              <div style="font-size: 0.8rem; font-weight: 800; color: #2c2826; line-height: 1.2;">Paasfeest</div>
+              <div style="font-size: 0.7rem; font-weight: 700; color: #4679bc; margin-top: 0.3rem;">→</div>
+            </div>
+          </div>
+          <div style="background: white; border-radius: 10px; overflow: hidden; border: 1px solid #e8e0d8; flex: 1;">
+            <div style="height: 55px; background: #d5e0f0;"></div>
+            <div style="padding: 0.75rem;">
+              <div style="font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #81b59c; margin-bottom: 0.2rem;">3 mei</div>
+              <div style="font-size: 0.8rem; font-weight: 800; color: #2c2826; line-height: 1.2;">Muzieknamiddag</div>
+              <div style="font-size: 0.7rem; font-weight: 700; color: #4679bc; margin-top: 0.3rem;">→</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Featured + two smaller</h3>
+      <p>The nearest event gets a big card with description. Next two are smaller. Creates hierarchy — feels editorial. Best when there's always one standout event to highlight.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 1.5rem; background: #eef5f1; border-bottom: 1px solid #e8e0d8;">
+      <div style="display: flex; flex-direction: column; gap: 0; border: 1px solid #e8e0d8; border-radius: 10px; overflow: hidden; background: white;">
+        <div style="display: flex; align-items: stretch; border-bottom: 1px solid #e8e0d8;">
+          <div style="width: 100px; background: #d4e8df; flex-shrink: 0;"></div>
+          <div style="padding: 1rem; flex: 1;">
+            <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #81b59c; margin-bottom: 0.2rem;">15 april · 10u</div>
+            <div style="font-size: 1rem; font-weight: 800; color: #2c2826; margin-bottom: 0.2rem;">Uitstap naar Gent</div>
+            <div style="font-size: 0.8rem; color: #706662;">Vertrek aan de deur · € 12</div>
+          </div>
+          <div style="padding: 1rem; display: flex; align-items: center;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: #4679bc;">→</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: stretch; border-bottom: 1px solid #e8e0d8;">
+          <div style="width: 100px; background: #f3dbd5; flex-shrink: 0;"></div>
+          <div style="padding: 1rem; flex: 1;">
+            <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #81b59c; margin-bottom: 0.2rem;">22 april · 12u</div>
+            <div style="font-size: 1rem; font-weight: 800; color: #2c2826; margin-bottom: 0.2rem;">Paasfeest</div>
+            <div style="font-size: 0.8rem; color: #706662;">Eetzaal · € 20</div>
+          </div>
+          <div style="padding: 1rem; display: flex; align-items: center;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: #4679bc;">→</span>
+          </div>
+        </div>
+        <div style="display: flex; align-items: stretch;">
+          <div style="width: 100px; background: #d5e0f0; flex-shrink: 0;"></div>
+          <div style="padding: 1rem; flex: 1;">
+            <div style="font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.06em; color: #81b59c; margin-bottom: 0.2rem;">3 mei · 14u</div>
+            <div style="font-size: 1rem; font-weight: 800; color: #2c2826; margin-bottom: 0.2rem;">Muzieknamiddag</div>
+            <div style="font-size: 0.8rem; color: #706662;">Feestzaal · Gratis</div>
+          </div>
+          <div style="padding: 1rem; display: flex; align-items: center;">
+            <span style="font-size: 0.8rem; font-weight: 700; color: #4679bc;">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Horizontal rows with photo strip</h3>
+      <p>Stacked rows, each with a colored photo band on the left, date/title/meta, and arrow. Compact, mobile-friendly, shows price. Feels more like the agenda section but warmer.</p>
+    </div>
+  </div>
+
+</div>

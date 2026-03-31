@@ -1,0 +1,288 @@
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito Sans', 'Source Sans 3', sans-serif; background: #f0eeec; }
+
+  .section-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; }
+  .value-primary { font-size: 1.125rem; line-height: 1.6; color: #2c2826; }
+  .value-muted { font-size: 0.875rem; color: #706662; line-height: 1.4; }
+
+  .mock-wrap { max-width: 680px; padding: 0 1.5rem 2rem; }
+  h2.approach-label { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #9b9491; margin-bottom: 1rem; margin-top: 0.25rem; }
+
+  /* ── OPTION A: Icon tiles, like activity detail ── */
+  .option-a .field-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #e8e4e1;
+  }
+  .option-a .field-row:last-child { border-bottom: none; }
+  .option-a .icon-tile {
+    width: 48px; height: 48px;
+    background: rgba(129,181,156,0.18);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .option-a .field-label {
+    font-size: 0.7rem; font-weight: 800; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #81b59c;
+    font-family: 'Nunito Sans', sans-serif;
+    margin-bottom: 0.25rem;
+  }
+  .option-a .phone-value {
+    font-size: 1.5rem; font-weight: 900; color: #2c2826;
+    font-family: 'Nunito Sans', sans-serif; line-height: 1.1;
+  }
+  .option-a .email-row { display: flex; flex-direction: column; gap: 0.4rem; }
+  .option-a .email-item .email-purpose { font-size: 0.8rem; color: #706662; }
+  .option-a .email-item .email-link { font-size: 1rem; color: #4679bc; }
+
+  /* ── OPTION B: h2 with icon left of heading ── */
+  .option-b .field-block {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #e8e4e1;
+  }
+  .option-b .field-block:last-child { border-bottom: none; }
+  .option-b .heading-row {
+    display: flex; align-items: center; gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+  .option-b .icon-pill {
+    width: 36px; height: 36px;
+    background: rgba(70,121,188,0.12);
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .option-b h2 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1.25rem; font-weight: 800; color: #2c2826;
+    line-height: 1.1;
+  }
+  .option-b .phone-value {
+    font-size: 1.75rem; font-weight: 900; color: #2c2826;
+    font-family: 'Nunito Sans', sans-serif; line-height: 1.1;
+  }
+  .option-b .email-item { margin-bottom: 0.5rem; }
+  .option-b .email-item .email-purpose { font-size: 0.8rem; color: #706662; margin-bottom: 0.05rem; }
+  .option-b .email-item .email-link { font-size: 1rem; color: #4679bc; }
+
+  /* ── OPTION C: Card-per-section, 2-col grid ── */
+  .option-c .fields-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.875rem;
+  }
+  .option-c .field-card {
+    background: white;
+    border-radius: 10px;
+    padding: 1.25rem 1.375rem;
+    border: 1px solid #e0dbd8;
+  }
+  .option-c .field-card.phone-card {
+    grid-column: span 2;
+    background: white;
+    border-left: 4px solid #eb6643;
+  }
+  .option-c .field-card.email-card {
+    grid-column: span 2;
+  }
+  .option-c .heading-row {
+    display: flex; align-items: center; gap: 0.625rem;
+    margin-bottom: 0.625rem;
+  }
+  .option-c .icon-chip {
+    width: 32px; height: 32px;
+    background: rgba(129,181,156,0.18);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .option-c .phone-card .icon-chip {
+    background: rgba(235,102,67,0.12);
+  }
+  .option-c h2 {
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 1.0625rem; font-weight: 800; color: #2c2826; line-height: 1.1;
+  }
+  .option-c .phone-value {
+    font-size: 1.875rem; font-weight: 900; color: #2c2826;
+    font-family: 'Nunito Sans', sans-serif; line-height: 1.1;
+  }
+  .option-c .email-cols { display: flex; gap: 2rem; }
+  .option-c .email-item { flex: 1; }
+  .option-c .email-item .email-purpose { font-size: 0.75rem; color: #706662; margin-bottom: 0.1rem; }
+  .option-c .email-item .email-link { font-size: 0.9375rem; color: #4679bc; }
+</style>
+
+<h2 style="font-family:'Nunito Sans',sans-serif;font-size:1.375rem;font-weight:900;color:#2c2826;margin-bottom:0.25rem;">Contact info layout</h2>
+<p class="subtitle">Drie richtingen voor de informatieblokken — elk gebruikt h2-koppen met iconen. Klik om te selecteren.</p>
+
+<div class="cards" style="margin-top:1.5rem;">
+
+  <!-- OPTION A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;background:#fbfaf9;">
+      <div class="mock-wrap" style="padding-top:1.5rem;">
+        <h2 class="approach-label">A — Compact icon-rijen (zoals activiteitsdetail)</h2>
+        <div class="option-a" style="background:white;border-radius:8px;padding:0 1.25rem;">
+          <!-- Adres -->
+          <div class="field-row">
+            <div class="icon-tile">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div>
+              <p class="field-label">Adres</p>
+              <p class="value-primary">Antwerpsesteenweg 24<br>1000 Brussel</p>
+            </div>
+          </div>
+          <!-- Openingsuren -->
+          <div class="field-row">
+            <div class="icon-tile">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <p class="field-label">Openingsuren</p>
+              <p class="value-primary">Ma–Vr: 10:00–16:30<br>Za: 10:00–14:00</p>
+            </div>
+          </div>
+          <!-- Telefoon -->
+          <div class="field-row">
+            <div class="icon-tile">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.71 3.39 2 2 0 0 1 3.68 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            </div>
+            <div>
+              <p class="field-label">Telefoon</p>
+              <p class="phone-value">02/203.28.48</p>
+            </div>
+          </div>
+          <!-- Email -->
+          <div class="field-row">
+            <div class="icon-tile">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div>
+              <p class="field-label">Email</p>
+              <div class="email-row">
+                <div class="email-item"><p class="email-purpose">Algemeen</p><p class="email-link">info@deharmonie.be</p></div>
+                <div class="email-item"><p class="email-purpose">Animatie & activiteiten</p><p class="email-link">animatie@deharmonie.be</p></div>
+                <div class="email-item"><p class="email-purpose">Diensten</p><p class="email-link">diensten@deharmonie.be</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Compact icon-rijen</h3>
+      <p>Zelfde patroon als de activiteitspagina. Klein icoon-tegel links, klein label erboven, inhoud eronder. Samenhangend met de rest van de site.</p>
+    </div>
+  </div>
+
+  <!-- OPTION B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;background:#fbfaf9;">
+      <div class="mock-wrap" style="padding-top:1.5rem;">
+        <h2 class="approach-label">B — h2-kopjes met icoon naast de heading</h2>
+        <div class="option-b" style="background:white;border-radius:8px;padding:0 1.25rem;">
+          <!-- Adres -->
+          <div class="field-block">
+            <div class="heading-row">
+              <div class="icon-pill"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4679bc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <h2>Adres</h2>
+            </div>
+            <p class="value-primary" style="padding-left:0;">Antwerpsesteenweg 24<br>1000 Brussel</p>
+          </div>
+          <!-- Openingsuren -->
+          <div class="field-block">
+            <div class="heading-row">
+              <div class="icon-pill"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4679bc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+              <h2>Openingsuren</h2>
+            </div>
+            <p class="value-primary">Ma–Vr: 10:00–16:30<br>Za: 10:00–14:00</p>
+          </div>
+          <!-- Telefoon -->
+          <div class="field-block">
+            <div class="heading-row">
+              <div class="icon-pill"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4679bc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.71 3.39 2 2 0 0 1 3.68 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+              <h2>Telefoon</h2>
+            </div>
+            <p class="phone-value">02/203.28.48</p>
+          </div>
+          <!-- Email -->
+          <div class="field-block">
+            <div class="heading-row">
+              <div class="icon-pill"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#4679bc" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+              <h2>Email</h2>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:0.5rem;">
+              <div class="email-item"><p class="email-purpose">Algemeen</p><p class="email-link">info@deharmonie.be</p></div>
+              <div class="email-item"><p class="email-purpose">Animatie & activiteiten</p><p class="email-link">animatie@deharmonie.be</p></div>
+              <div class="email-item"><p class="email-purpose">Diensten</p><p class="email-link">diensten@deharmonie.be</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>h2-koppen naast icoon</h3>
+      <p>Duidelijke koppen — icoon staat naast de h2 als visueel anker. Meer visueel gewicht per sectie. Rustiger dan A omdat het label groter is maar minder elementen tegelijk.</p>
+    </div>
+  </div>
+
+  <!-- OPTION C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;background:#fbfaf9;">
+      <div class="mock-wrap" style="padding-top:1.5rem;max-width:100%;">
+        <h2 class="approach-label">C — Kaarten per sectie (2-kolom grid)</h2>
+        <div class="option-c">
+          <div class="fields-grid">
+            <!-- Adres -->
+            <div class="field-card">
+              <div class="heading-row">
+                <div class="icon-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <h2>Adres</h2>
+              </div>
+              <p class="value-primary" style="font-size:1rem;">Antwerpsesteenweg 24<br>1000 Brussel</p>
+            </div>
+            <!-- Openingsuren -->
+            <div class="field-card">
+              <div class="heading-row">
+                <div class="icon-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                <h2>Openingsuren</h2>
+              </div>
+              <p class="value-primary" style="font-size:1rem;">Ma–Vr: 10:00–16:30<br>Za: 10:00–14:00</p>
+            </div>
+            <!-- Telefoon: full-width with orange accent -->
+            <div class="field-card phone-card">
+              <div class="heading-row">
+                <div class="icon-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#eb6643" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.71 3.39 2 2 0 0 1 3.68 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.64a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+                <h2>Telefoon</h2>
+              </div>
+              <p class="phone-value">02/203.28.48</p>
+            </div>
+            <!-- Email: full-width, 3-col email layout -->
+            <div class="field-card email-card">
+              <div class="heading-row">
+                <div class="icon-chip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+                <h2>Email</h2>
+              </div>
+              <div class="email-cols">
+                <div class="email-item"><p class="email-purpose">Algemeen</p><p class="email-link">info@deharmonie.be</p></div>
+                <div class="email-item"><p class="email-purpose">Animatie & activiteiten</p><p class="email-link">animatie@deharmonie.be</p></div>
+                <div class="email-item"><p class="email-purpose">Diensten</p><p class="email-link">diensten@deharmonie.be</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>Kaarten per sectie</h3>
+      <p>Elke info-blok krijgt een eigen kaart. Telefoon valt op met oranje accent en volle breedte. E-mails staan naast elkaar. Meest visuele structuur, maar ook meest afwijkend van de rest van de site.</p>
+    </div>
+  </div>
+
+</div>

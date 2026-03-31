@@ -58,19 +58,16 @@ class RegistrationFormTest extends TestCase
             ->assertHasErrors(['naam', 'email']);
     }
 
-    public function test_fully_booked_activity_shows_notice_on_detail_page(): void
+    public function test_activity_detail_page_shows_contact_info_not_form(): void
     {
-        $activiteit = Activiteit::factory()->create([
-            'status' => 'gepubliceerd',
-            'max_deelnemers' => 1,
-        ]);
-        Deelnameverzoek::factory()->create(['activiteit_id' => $activiteit->id]);
+        $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
 
         $response = $this->get(route('nl.activiteiten.show', $activiteit->slug));
 
         $response->assertStatus(200);
-        $response->assertSee(__('activities.fully_booked'));
         $response->assertDontSee(__('forms.submit'));
+        $response->assertSee('02');
+        $response->assertSee('info@deharmonie.be');
     }
 
     public function test_honeypot_spam_field_blocks_submission(): void

@@ -12,4 +12,10 @@ return [
     'phone' => 'Telefoon',
     'map' => 'Kaart',
     'site_tagline' => 'Dienstencentrum · Restaurant · Buurtwerk',
+    'building_exterior_alt' => 'Het gebouw van De Harmonie aan de Antwerpsesteenweg',
+    'reception_alt' => 'Onthaal en bezoekers binnen bij De Harmonie',
+    'terrace_alt' => 'Bezoekers op het terras buiten bij De Harmonie',
+    'email_general' => 'Algemeen',
+    'email_activities' => 'Animatie & activiteiten',
+    'email_services' => 'Diensten',
 ];

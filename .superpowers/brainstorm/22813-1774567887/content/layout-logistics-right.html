@@ -1,0 +1,262 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,700;6..12,800;6..12,900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --blue: #4679bc;
+    --green: #81b59c;
+    --green-tint-bg: rgba(129,181,156,0.14);
+    --green-section: #eef5f1;
+    --orange: #eb6643;
+    --dark: #2c2826;
+    --muted: #706662;
+    --bg: #fbfaf9;
+    --gray: #e5e0db;
+    --font-sans: 'Nunito Sans', sans-serif;
+    --font-body: 'Source Sans 3', sans-serif;
+  }
+  body { font-family: var(--font-body); }
+
+  .page-demo {
+    border: 1px solid var(--gray);
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 14px;
+  }
+
+  /* Nav bar */
+  .demo-nav {
+    background: var(--blue);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .demo-nav-logo {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    color: white;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+  }
+  .demo-nav-links {
+    display: flex;
+    gap: 1.25rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    font-family: var(--font-sans);
+  }
+
+  /* Shared atoms */
+  .back-link {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--blue);
+    text-decoration: none;
+    font-family: var(--font-sans);
+  }
+  .eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    font-family: var(--font-sans);
+    margin: 0.6rem 0 0.25rem;
+  }
+  .activity-h1 {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    color: var(--dark);
+    text-transform: uppercase;
+    line-height: 1.05;
+    margin: 0 0 0.2rem;
+  }
+  .alt-lang { font-size: 0.8rem; color: var(--muted); margin: 0; }
+
+  /* E4 logistics item */
+  .logistic-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    margin-bottom: 0.6rem;
+  }
+  .logistic-box {
+    width: 40px;
+    height: 40px;
+    background: var(--green-tint-bg);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .logistic-label {
+    font-size: 0.62rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--green);
+    margin: 0 0 0.15rem;
+    font-family: var(--font-sans);
+  }
+  .logistic-value { font-size: 0.95rem; font-weight: 700; color: var(--dark); margin: 0; line-height: 1.2; }
+  .logistic-sub   { font-size: 0.82rem; color: var(--muted); margin: 0; }
+  .badge { display: inline-block; background: var(--green); color: white; font-size: 0.65rem; font-weight: 700; padding: 0.15rem 0.5rem; border-radius: 4px; font-family: var(--font-sans); }
+
+  /* Description + form area */
+  .content-area { background: var(--green-section); padding: 1.25rem 1.5rem 1.5rem; }
+  .description-text { font-size: 0.85rem; color: var(--dark); line-height: 1.6; max-width: 55ch; margin: 0 0 1rem; }
+  .form-card {
+    background: white;
+    border: 1px solid var(--gray);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    max-width: 420px;
+  }
+  .form-field { margin-bottom: 0.6rem; }
+  .form-label { font-size: 0.78rem; color: var(--dark); display: block; margin-bottom: 0.2rem; font-weight: 600; }
+  .form-input { width: 100%; border: 1px solid var(--gray); border-radius: 4px; padding: 0.35rem 0.5rem; font-size: 0.82rem; color: var(--dark); box-sizing: border-box; background: var(--bg); }
+  .form-btn { width: 100%; background: var(--orange); color: white; border: none; border-radius: 4px; padding: 0.5rem; font-size: 0.85rem; font-weight: 700; font-family: var(--font-sans); margin-top: 0.25rem; cursor: pointer; }
+</style>
+
+<h2>Logistics as a right column — two layout options</h2>
+<p class="subtitle">Title on the left, E4-style logistics stacked vertically on the right. Pick which feels better.</p>
+
+<div class="split" style="gap: 1.5rem; align-items: flex-start;">
+
+  <!-- Option 1: Header split — logistics right of title -->
+  <div class="mockup" data-choice="right-header" onclick="toggleSelect(this)" style="cursor:pointer; flex:1;">
+    <div class="mockup-header" style="font-size:0.8rem;">Option 1 — Logistics beside title (in header)</div>
+    <div class="mockup-body" style="padding:0;">
+      <div class="page-demo">
+        <div class="demo-nav">
+          <span class="demo-nav-logo">DE HARMONIE</span>
+          <div class="demo-nav-links"><span>Activiteiten</span><span>Menu</span><span>Diensten</span><span>Contact</span></div>
+        </div>
+        <!-- Header band -->
+        <div style="background:white; padding:1rem 1.5rem 1.25rem;">
+          <a class="back-link">← Terug naar alle activiteiten</a>
+          <div style="display:flex; gap:2rem; align-items:flex-start; margin-top:0.5rem;">
+            <!-- Left: title -->
+            <div style="flex:1; min-width:0;">
+              <p class="eyebrow">Activiteit</p>
+              <div class="activity-h1" style="font-size:1.5rem;">Conversatietafel Spaans</div>
+              <p class="alt-lang">Table de conversation Espagnole</p>
+            </div>
+            <!-- Right: logistics -->
+            <div style="flex-shrink:0; padding-left:1.5rem; border-left:1px solid var(--gray);">
+              <div class="logistic-item">
+                <div class="logistic-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <div>
+                  <p class="logistic-label">Datum</p>
+                  <p class="logistic-value">Do 27 maart 2025</p>
+                  <p class="logistic-sub">10:00 – 12:00</p>
+                </div>
+              </div>
+              <div class="logistic-item">
+                <div class="logistic-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <div>
+                  <p class="logistic-label">Prijs</p>
+                  <span class="badge">Gratis</span>
+                </div>
+              </div>
+              <div class="logistic-item" style="margin-bottom:0;">
+                <div class="logistic-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <p class="logistic-label">Locatie</p>
+                  <p class="logistic-value">De Harmonie</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Content -->
+        <div class="content-area">
+          <p class="description-text">Hola! Iedereen die wat Spaans wil oefenen is welkom. Gewoon door met elkaar te babbelen. We leren van elkaar en op het gemak. Bienvenido!</p>
+          <div class="form-card">
+            <div class="form-field"><label class="form-label">Naam *</label><input class="form-input" disabled></div>
+            <div class="form-field"><label class="form-label">E-mailadres</label><input class="form-input" disabled></div>
+            <div class="form-field"><label class="form-label">Telefoonnummer (optioneel)</label><input class="form-input" disabled></div>
+            <button class="form-btn">Inschrijven</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:0.8rem;color:#666;margin-top:0.5rem;">Title left, logistics right — separated by a vertical divider. Header stays compact. Logistics align with the title's top.</p>
+  </div>
+
+  <!-- Option 2: Current strip below + E4 right of content -->
+  <div class="mockup" data-choice="right-content" onclick="toggleSelect(this)" style="cursor:pointer; flex:1;">
+    <div class="mockup-header" style="font-size:0.8rem;">Option 2 — Logistics beside description (in content area)</div>
+    <div class="mockup-body" style="padding:0;">
+      <div class="page-demo">
+        <div class="demo-nav">
+          <span class="demo-nav-logo">DE HARMONIE</span>
+          <div class="demo-nav-links"><span>Activiteiten</span><span>Menu</span><span>Diensten</span><span>Contact</span></div>
+        </div>
+        <!-- Header band — title only, clean -->
+        <div style="background:white; padding:1rem 1.5rem 1.25rem;">
+          <a class="back-link">← Terug naar alle activiteiten</a>
+          <p class="eyebrow">Activiteit</p>
+          <div class="activity-h1" style="font-size:1.6rem;">Conversatietafel Spaans</div>
+          <p class="alt-lang">Table de conversation Espagnole</p>
+        </div>
+        <!-- Content: description left, logistics right -->
+        <div class="content-area">
+          <div style="display:flex; gap:2rem; align-items:flex-start; margin-bottom:1rem;">
+            <!-- Left: description + form -->
+            <div style="flex:1; min-width:0;">
+              <p class="description-text" style="margin-bottom:1rem;">Hola! Iedereen die wat Spaans wil oefenen is welkom. Gewoon door met elkaar te babbelen. We leren van elkaar en op het gemak. Bienvenido!</p>
+              <div class="form-card">
+                <div class="form-field"><label class="form-label">Naam *</label><input class="form-input" disabled></div>
+                <div class="form-field"><label class="form-label">E-mailadres</label><input class="form-input" disabled></div>
+                <div class="form-field"><label class="form-label">Telefoonnummer (optioneel)</label><input class="form-input" disabled></div>
+                <button class="form-btn">Inschrijven</button>
+              </div>
+            </div>
+            <!-- Right: logistics -->
+            <div style="flex-shrink:0; width:180px;">
+              <div class="logistic-item">
+                <div class="logistic-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                </div>
+                <div>
+                  <p class="logistic-label">Datum</p>
+                  <p class="logistic-value">Do 27 maart 2025</p>
+                  <p class="logistic-sub">10:00 – 12:00</p>
+                </div>
+              </div>
+              <div class="logistic-item">
+                <div class="logistic-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                </div>
+                <div>
+                  <p class="logistic-label">Prijs</p>
+                  <span class="badge">Gratis</span>
+                </div>
+              </div>
+              <div class="logistic-item" style="margin-bottom:0;">
+                <div class="logistic-box">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#81b59c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div>
+                  <p class="logistic-label">Locatie</p>
+                  <p class="logistic-value">De Harmonie</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:0.8rem;color:#666;margin-top:0.5rem;">Header is title-only — clean. Logistics move into the green content area, floating right of the description. Sticky sidebar territory again but without a CTA.</p>
+  </div>
+
+</div>

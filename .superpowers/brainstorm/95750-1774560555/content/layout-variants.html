@@ -1,0 +1,100 @@
+<h2>Reeksen — Which layout direction?</h2>
+<p class="subtitle">4 themed paper cards (Bewegen · Creatief · Praten & Leren · Samen). Which arrangement feels right?</p>
+
+<div class="cards">
+
+  <!-- VARIANT A -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 1.5rem; background: #fff8f5; border-bottom: 1px solid #e8e0d8;">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div style="background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(-2deg); border-top: 3px solid #eb6643;">
+          <p style="font-size: 0.65rem; font-weight: 800; color: #2c2826; margin: 0 0 0.3rem;">🏃 Bewegen</p>
+          <p style="font-size: 0.55rem; color: #706662; margin: 0; line-height: 1.4;">Zumba · Pilates<br>Stoel-gym · Line Dance</p>
+        </div>
+        <div style="background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(1.5deg); margin-top: 0.75rem; border-top: 3px solid #4679bc;">
+          <p style="font-size: 0.65rem; font-weight: 800; color: #2c2826; margin: 0 0 0.3rem;">💬 Praten & Leren</p>
+          <p style="font-size: 0.55rem; color: #706662; margin: 0; line-height: 1.4;">4× Conversatietafel<br>Geheugen · Digitaal</p>
+        </div>
+        <div style="background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(1deg); margin-top: -0.5rem; border-top: 3px solid #81b59c;">
+          <p style="font-size: 0.65rem; font-weight: 800; color: #2c2826; margin: 0 0 0.3rem;">✂️ Creatief</p>
+          <p style="font-size: 0.55rem; color: #706662; margin: 0; line-height: 1.4;">Diamond Painting<br>Naai · Creativiteit</p>
+        </div>
+        <div style="background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(-1.8deg); margin-top: 0.4rem; border-top: 3px solid #d4956a;">
+          <p style="font-size: 0.65rem; font-weight: 800; color: #2c2826; margin: 0 0 0.3rem;">🎉 Samen</p>
+          <p style="font-size: 0.55rem; color: #706662; margin: 0; line-height: 1.4;">Bingo · Verjaardagsfeest<br>Uitstap · Boodschappen</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — 2×2 Pinboard</h3>
+      <p>Four equally-weighted cards in a grid, each slightly rotated. Like papers pinned to a noticeboard. Balanced and readable — the closest to the menu page aesthetic.</p>
+    </div>
+  </div>
+
+  <!-- VARIANT B -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 1.5rem; background: #fff8f5; border-bottom: 1px solid #e8e0d8;">
+      <div style="display: flex; gap: 0.75rem; align-items: flex-start; overflow: hidden;">
+        <div style="flex: 1; background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(-1.5deg); margin-top: 1.25rem; border-top: 3px solid #eb6643;">
+          <p style="font-size: 0.6rem; font-weight: 800; color: #2c2826; margin: 0 0 0.25rem;">🏃 Bewegen</p>
+          <p style="font-size: 0.5rem; color: #706662; margin: 0; line-height: 1.4;">Zumba · Pilates<br>Stoel-gym · Line Dance</p>
+        </div>
+        <div style="flex: 1; background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(2deg); border-top: 3px solid #81b59c;">
+          <p style="font-size: 0.6rem; font-weight: 800; color: #2c2826; margin: 0 0 0.25rem;">✂️ Creatief</p>
+          <p style="font-size: 0.5rem; color: #706662; margin: 0; line-height: 1.4;">Diamond Painting<br>Naai · Creativiteit</p>
+        </div>
+        <div style="flex: 1; background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(-0.8deg); margin-top: 1.75rem; border-top: 3px solid #4679bc;">
+          <p style="font-size: 0.6rem; font-weight: 800; color: #2c2826; margin: 0 0 0.25rem;">💬 Praten & Leren</p>
+          <p style="font-size: 0.5rem; color: #706662; margin: 0; line-height: 1.4;">4× Conversatietafel<br>Geheugen · Digitaal</p>
+        </div>
+        <div style="flex: 1; background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(1.8deg); margin-top: 0.25rem; border-top: 3px solid #d4956a;">
+          <p style="font-size: 0.6rem; font-weight: 800; color: #2c2826; margin: 0 0 0.25rem;">🎉 Samen</p>
+          <p style="font-size: 0.5rem; color: #706662; margin: 0; line-height: 1.4;">Bingo · Verjaardagsfeest<br>Uitstap · Boodschappen</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Staggered Row</h3>
+      <p>All four cards in a horizontal row with alternating heights. More casual and loose — like cards dropped on a table. Works well as a visual impression at a glance.</p>
+    </div>
+  </div>
+
+  <!-- VARIANT C -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding: 1.5rem; background: #fff8f5; border-bottom: 1px solid #e8e0d8;">
+      <div style="display: grid; grid-template-columns: 3fr 2fr; gap: 0.75rem;">
+        <!-- featured -->
+        <div style="background: white; border-radius: 3px; padding: 0.85rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(-1.2deg); border-top: 3px solid #4679bc; display: flex; gap: 0.75rem;">
+          <div style="flex: 1;">
+            <p style="font-size: 0.65rem; font-weight: 800; color: #2c2826; margin: 0 0 0.2rem;">💬 Praten & Leren</p>
+            <p style="font-size: 0.5rem; color: #706662; margin: 0; line-height: 1.4; font-style: italic;">Vier talen aan tafel — altijd iets nieuws.</p>
+          </div>
+          <div style="flex: 1; border-left: 1px dashed #e4dbd3; padding-left: 0.6rem;">
+            <p style="font-size: 0.48rem; color: #2c2826; margin: 0; line-height: 1.6;">Conv. NL<br>Conv. Spaans<br>Conv. Engels<br>Conv. Italiaans<br>Geheugen<br>Digitaal</p>
+          </div>
+        </div>
+        <!-- side -->
+        <div style="background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(2deg); margin-top: 0.5rem; border-top: 3px solid #eb6643;">
+          <p style="font-size: 0.6rem; font-weight: 800; color: #2c2826; margin: 0 0 0.2rem;">🏃 Bewegen</p>
+          <p style="font-size: 0.5rem; color: #706662; margin: 0; line-height: 1.4;">Zumba · Pilates<br>Stoel-gym · Line Dance</p>
+        </div>
+        <!-- bottom row -->
+        <div style="grid-column: 1 / 3; display: flex; gap: 0.75rem; margin-top: 0.25rem;">
+          <div style="flex: 1; background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(1.4deg); border-top: 3px solid #81b59c;">
+            <p style="font-size: 0.6rem; font-weight: 800; color: #2c2826; margin: 0 0 0.2rem;">✂️ Creatief</p>
+            <p style="font-size: 0.5rem; color: #706662; margin: 0; line-height: 1.4;">Diamond Painting · Naai · Creativiteit</p>
+          </div>
+          <div style="flex: 1; background: white; border-radius: 3px; padding: 0.75rem; box-shadow: 3px 3px 8px rgba(44,40,38,0.12); transform: rotate(-2deg); margin-top: 0.5rem; border-top: 3px solid #d4956a;">
+            <p style="font-size: 0.6rem; font-weight: 800; color: #2c2826; margin: 0 0 0.2rem;">🎉 Samen</p>
+            <p style="font-size: 0.5rem; color: #706662; margin: 0; line-height: 1.4;">Bingo · Verjaardagsfeest · Uitstap</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Featured + row</h3>
+      <p>"Praten & Leren" gets a wide featured card (most activities, most surprising). Bewegen beside it. Creatief and Samen below. Creates editorial hierarchy — one thing you're pulled into first.</p>
+    </div>
+  </div>
+
+</div>

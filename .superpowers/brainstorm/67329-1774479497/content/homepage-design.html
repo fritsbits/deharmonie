@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homepage Design — De Harmonie</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Nunito Sans', system-ui, sans-serif; background: #f5f4f2; color: #2c2826; }
+
+  /* Annotation overlays */
+  .annotation {
+    position: absolute; top: 8px; right: 8px;
+    background: #eb6643; color: white; font-size: 11px; font-weight: 700;
+    padding: 3px 8px; border-radius: 3px; letter-spacing: 0.05em;
+    text-transform: uppercase; z-index: 10;
+  }
+  .section-label {
+    font-size: 10px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #eb6643; margin-bottom: 6px; display: block;
+  }
+
+  /* Scale wrapper */
+  .page-wrap {
+    max-width: 860px; margin: 24px auto; background: white;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.12); border-radius: 8px; overflow: hidden;
+  }
+
+  /* NAV */
+  .mock-nav {
+    background: #4679bc; padding: 0 28px; height: 52px;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 13px; color: white; font-weight: 600;
+  }
+  .mock-nav .logo { font-weight: 900; font-size: 15px; letter-spacing: -0.01em; }
+  .mock-nav .links { display: flex; gap: 20px; opacity: 0.9; }
+  .mock-nav .lang { opacity: 0.7; font-size: 12px; }
+
+  /* HERO */
+  .hero {
+    position: relative; background: #fbfaf9;
+    display: flex; align-items: stretch; min-height: 340px; overflow: hidden;
+  }
+  .hero-copy {
+    flex: 1; padding: 48px 40px; display: flex; flex-direction: column; justify-content: center;
+  }
+  .hero-eyebrow {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase;
+    color: #eb6643; margin-bottom: 12px;
+  }
+  .hero-h1 {
+    font-size: 38px; font-weight: 900; line-height: 1.05; color: #2c2826;
+    margin-bottom: 10px;
+  }
+  .hero-sub {
+    font-size: 16px; color: #706662; line-height: 1.5; margin-bottom: 24px; max-width: 380px;
+  }
+  .hero-ctas { display: flex; gap: 10px; flex-wrap: wrap; }
+  .btn-primary {
+    background: #eb6643; color: white; padding: 10px 20px;
+    border-radius: 6px; font-weight: 700; font-size: 13px; text-decoration: none;
+  }
+  .btn-secondary {
+    background: transparent; color: #4679bc; padding: 10px 20px;
+    border-radius: 6px; font-weight: 700; font-size: 13px;
+    border: 2px solid #4679bc; text-decoration: none;
+  }
+  .hero-photo {
+    flex: 0 0 42%; background: #d4c9bc;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="340"><rect width="300" height="340" fill="%23c9bdb1"/><text x="150" y="175" text-anchor="middle" fill="%23a09080" font-size="14" font-family="sans-serif">photo-groep-tafel.webp</text></svg>');
+    background-size: cover; background-position: center;
+  }
+
+  /* PHOTO STRIP */
+  .photo-strip {
+    display: flex; height: 130px; overflow: hidden;
+  }
+  .photo-strip div {
+    flex: 1; background: #c9bdb1;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: #8a7a70; font-weight: 600; border-right: 2px solid white;
+  }
+  .photo-strip div:last-child { border-right: none; }
+
+  /* MENU PREVIEW */
+  .menu-preview {
+    position: relative; background: #fff8f5; padding: 32px 40px; border-top: 3px solid #eb6643;
+  }
+  .menu-preview-inner {
+    display: flex; gap: 16px; align-items: stretch; margin-top: 16px;
+  }
+  .menu-day {
+    flex: 1; background: white; border-radius: 8px; padding: 16px 18px;
+    border: 1px solid #e8e0d8; position: relative;
+  }
+  .menu-day-name {
+    font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;
+    color: #706662; margin-bottom: 6px;
+  }
+  .menu-dish {
+    font-size: 15px; font-weight: 700; color: #2c2826; line-height: 1.3; margin-bottom: 8px;
+  }
+  .menu-detail {
+    font-size: 12px; color: #706662; margin-bottom: 10px;
+  }
+  .menu-price {
+    font-size: 18px; font-weight: 900; color: #eb6643; font-family: 'Nunito Sans', sans-serif;
+  }
+  .menu-today-badge {
+    position: absolute; top: -10px; left: 16px;
+    background: #eb6643; color: white; font-size: 10px; font-weight: 800;
+    padding: 2px 8px; border-radius: 10px; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .menu-link {
+    display: inline-block; margin-top: 14px; font-size: 13px; font-weight: 700;
+    color: #4679bc; text-decoration: underline;
+  }
+
+  /* ACTIVITIES */
+  .activities {
+    position: relative; background: white; padding: 40px 40px;
+  }
+  .section-header {
+    display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 20px;
+  }
+  .section-title {
+    font-size: 22px; font-weight: 900; color: #2c2826;
+  }
+  .section-more {
+    font-size: 13px; font-weight: 700; color: #81b59c; text-decoration: underline;
+  }
+  .activity-cards { display: flex; gap: 14px; }
+  .activity-card {
+    flex: 1; border: 1px solid #e8e0d8; border-radius: 8px; padding: 16px;
+    background: #fbfaf9;
+  }
+  .activity-date {
+    font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em;
+    color: #eb6643; margin-bottom: 6px;
+  }
+  .activity-title {
+    font-size: 15px; font-weight: 800; color: #2c2826; margin-bottom: 4px; line-height: 1.2;
+  }
+  .activity-meta {
+    font-size: 12px; color: #706662; margin-bottom: 12px;
+  }
+  .activity-btn {
+    font-size: 12px; font-weight: 700; color: #4679bc; text-decoration: underline;
+  }
+
+  /* WAT WE DOEN */
+  .wat-we-doen {
+    position: relative; background: #f2f6fb; padding: 40px 40px;
+  }
+  .service-cards { display: flex; gap: 14px; margin-top: 20px; }
+  .service-card {
+    flex: 1; background: white; border-radius: 8px; padding: 20px 18px;
+    border-bottom: 3px solid var(--accent, #eb6643);
+  }
+  .service-icon {
+    font-size: 22px; margin-bottom: 10px;
+  }
+  .service-title {
+    font-size: 14px; font-weight: 900; color: #2c2826; margin-bottom: 6px;
+  }
+  .service-desc {
+    font-size: 12px; color: #706662; line-height: 1.5; margin-bottom: 10px;
+  }
+  .service-price {
+    font-size: 13px; font-weight: 800; color: #eb6643;
+  }
+  .service-link {
+    font-size: 12px; font-weight: 700; color: #4679bc; text-decoration: underline;
+  }
+
+  /* PRACTICAL */
+  .practical {
+    position: relative; background: #fbfaf9; padding: 32px 40px;
+    display: flex; gap: 40px; align-items: center; border-top: 1px solid #e8e0d8;
+  }
+  .practical-item { flex: 1; }
+  .practical-label {
+    font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em;
+    color: #706662; margin-bottom: 4px;
+  }
+  .practical-value {
+    font-size: 14px; font-weight: 600; color: #2c2826; line-height: 1.4;
+  }
+  .practical-value a { color: #4679bc; text-decoration: none; font-weight: 700; }
+
+  /* FOOTER */
+  .mock-footer {
+    background: #4679bc; padding: 20px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .mock-footer .logo { color: white; font-weight: 900; font-size: 14px; }
+  .mock-footer .partners { display: flex; gap: 12px; }
+  .mock-footer .partner-logo {
+    width: 48px; height: 24px; background: rgba(255,255,255,0.2);
+    border-radius: 3px;
+  }
+  .mock-footer .lang { color: rgba(255,255,255,0.7); font-size: 12px; font-weight: 600; }
+
+  /* NEW badge */
+  .new-badge {
+    display: inline-block; background: #81b59c; color: white;
+    font-size: 10px; font-weight: 800; padding: 1px 7px; border-radius: 3px;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-left: 8px;
+    vertical-align: middle;
+  }
+  .changed-badge {
+    display: inline-block; background: #eb6643; color: white;
+    font-size: 10px; font-weight: 800; padding: 1px 7px; border-radius: 3px;
+    text-transform: uppercase; letter-spacing: 0.06em; margin-left: 8px;
+    vertical-align: middle;
+  }
+</style>
+</head>
+<body>
+<div style="background:#2c2826;color:white;text-align:center;padding:8px 16px;font-size:12px;font-weight:700;letter-spacing:0.05em;">
+  HOMEPAGE MOCKUP — <span style="color:#eb6643">ORANJE</span> = nieuw of gewijzigd &nbsp;·&nbsp; <span style="color:#81b59c">GROEN</span> = nieuw blok
+</div>
+
+<div class="page-wrap">
+
+  <!-- NAV -->
+  <div class="mock-nav">
+    <span class="logo">De Harmonie</span>
+    <span class="links">Activiteiten · Restaurant &amp; Menu · Diensten · Over ons · Contact</span>
+    <span class="lang">NL | FR</span>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <span class="annotation changed-badge" style="position:absolute;top:10px;left:10px;z-index:10;">GEWIJZIGD</span>
+    <div class="hero-copy">
+      <div class="hero-eyebrow">Noordwijk · Brussel · Al 50 jaar</div>
+      <div class="hero-h1">Eet mee.<br>Doe mee.<br>Kom langs.</div>
+      <div class="hero-sub">Het kloppend hart van de Noordwijk. Elke dag een warm onthaal, een maaltijd en activiteiten voor iedereen uit de buurt.</div>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="#">Bekijk activiteiten</a>
+        <a class="btn-secondary" href="#">Weekmenu →</a>
+      </div>
+    </div>
+    <div class="hero-photo"></div>
+  </div>
+
+  <!-- PHOTO STRIP -->
+  <div class="photo-strip">
+    <div>foto 1</div>
+    <div>foto 2</div>
+    <div>foto 3</div>
+  </div>
+
+  <!-- MENU PREVIEW -->
+  <div class="menu-preview">
+    <span class="annotation" style="position:absolute;top:10px;right:10px;">NIEUW</span>
+    <span class="section-label">🍽 Restaurant &amp; Menu</span>
+    <div class="section-header" style="margin-bottom:0;">
+      <div class="section-title">Vandaag &amp; morgen aan tafel</div>
+    </div>
+    <div class="menu-preview-inner">
+      <div class="menu-day">
+        <div class="menu-today-badge">Vandaag</div>
+        <div class="menu-day-name">Maandag 23/03</div>
+        <div class="menu-dish">Stoofvlees met kroketjes</div>
+        <div class="menu-detail">Soep van de dag inbegrepen</div>
+        <div class="menu-price">€ 9</div>
+      </div>
+      <div class="menu-day">
+        <div class="menu-day-name">Dinsdag 24/03</div>
+        <div class="menu-dish">Chicon gratin met puree</div>
+        <div class="menu-detail">Soep van de dag inbegrepen</div>
+        <div class="menu-price">€ 9</div>
+      </div>
+    </div>
+    <a class="menu-link" href="#">Volledig weekmenu bekijken →</a>
+  </div>
+
+  <!-- ACTIVITIES -->
+  <div class="activities">
+    <span class="annotation" style="position:absolute;top:10px;right:10px;">GEWIJZIGD</span>
+    <div class="section-header">
+      <div>
+        <span class="section-label">📅 Activiteiten</span>
+        <div class="section-title">Komende activiteiten</div>
+      </div>
+      <a class="section-more" href="#">Alle activiteiten →</a>
+    </div>
+    <div class="activity-cards">
+      <div class="activity-card">
+        <div class="activity-date">Di 25/03</div>
+        <div class="activity-title">Spaanse conversatietafel</div>
+        <div class="activity-meta">10:00 – 12:00 · De Harmonie</div>
+        <a class="activity-btn" href="#">Inschrijven →</a>
+      </div>
+      <div class="activity-card">
+        <div class="activity-date">Wo 26/03</div>
+        <div class="activity-title">Naaiworkshop</div>
+        <div class="activity-meta">13:30 – 16:00 · De Harmonie</div>
+        <a class="activity-btn" href="#">Inschrijven →</a>
+      </div>
+      <div class="activity-card">
+        <div class="activity-date">Do 27/03</div>
+        <div class="activity-title">Country Line Dance</div>
+        <div class="activity-meta">14:00 – 16:00 · De Harmonie</div>
+        <a class="activity-btn" href="#">Inschrijven →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- WAT WE DOEN -->
+  <div class="wat-we-doen">
+    <span class="annotation" style="position:absolute;top:10px;right:10px;">GEWIJZIGD</span>
+    <span class="section-label">Wat we doen</span>
+    <div class="section-title">Voor iedereen uit de buurt</div>
+    <div class="service-cards">
+      <div class="service-card" style="--accent:#eb6643;">
+        <div class="service-icon">🍽</div>
+        <div class="service-title">Samen aan tafel</div>
+        <div class="service-desc">Elke dag een warme maaltijd in ons sociaal restaurant. Takeaway en thuisbezorging mogelijk.</div>
+        <div class="service-price">Vanaf € 9</div><br>
+        <a class="service-link" href="#">Meer over het restaurant →</a>
+      </div>
+      <div class="service-card" style="--accent:#81b59c;">
+        <div class="service-icon">🎨</div>
+        <div class="service-title">Activiteiten &amp; workshops</div>
+        <div class="service-desc">Van Italiaans leren tot country line dance. Elke week iets nieuws om bij te leren of gewoon te genieten.</div>
+        <br>
+        <a class="service-link" href="#">Bekijk agenda →</a>
+      </div>
+      <div class="service-card" style="--accent:#4679bc;">
+        <div class="service-icon">🏠</div>
+        <div class="service-title">Bij u thuis</div>
+        <div class="service-desc">Poetsen, boodschappen, vervoer, klusjes en maaltijden aan huis. Zodat u thuis kan blijven wonen.</div>
+        <br>
+        <a class="service-link" href="#">Bekijk thuisdiensten →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRACTICAL -->
+  <div class="practical">
+    <div class="practical-item">
+      <div class="practical-label">Adres</div>
+      <div class="practical-value">Antwerpsesteenweg 24<br>1000 Brussel</div>
+    </div>
+    <div class="practical-item">
+      <div class="practical-label">Openingsuren</div>
+      <div class="practical-value">Ma–vr: 10:00–16:30<br>Za: 10:00–14:00</div>
+    </div>
+    <div class="practical-item">
+      <div class="practical-label">Contact</div>
+      <div class="practical-value"><a href="#">02/203.28.48</a><br><a href="#">info@deharmonie.be</a></div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="mock-footer">
+    <span class="logo">De Harmonie</span>
+    <div class="partners">
+      <div class="partner-logo"></div>
+      <div class="partner-logo"></div>
+      <div class="partner-logo"></div>
+      <div class="partner-logo"></div>
+    </div>
+    <span class="lang">NL | FR</span>
+  </div>
+
+</div>
+
+<div style="max-width:860px;margin:16px auto;padding:0 8px;font-size:12px;color:#706662;line-height:1.6;">
+  <strong>Wat verandert:</strong>
+  Hero copy → "Eet mee. Doe mee. Kom langs." + 2 CTA-knoppen ·
+  Nieuw menu preview blok (vandaag + morgen, prijs) ·
+  Activiteiten → 3 kaartjes in plaats van ingegraven lijst ·
+  3 grote sectie-blokken → compacte servicekaarten ·
+  Praktische info → compacte balk onderaan
+</div>
+</body>
+</html>

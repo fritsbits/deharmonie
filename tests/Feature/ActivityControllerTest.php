@@ -93,15 +93,15 @@ class ActivityControllerTest extends TestCase
         $response->assertDontSee('Inschrijvingsformulier');
     }
 
-    public function test_activity_detail_shows_registration_form_for_published(): void
+    public function test_activity_detail_shows_contact_cta_for_published(): void
     {
         $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
         $response = $this->get('/activiteiten/'.$activiteit->slug);
         $response->assertStatus(200);
-        $response->assertSee('formulier'); // registration form is shown
+        $response->assertSee('0220328048'); // phone link in CTA
     }
 
-    public function test_activity_detail_shows_full_message_when_at_capacity(): void
+    public function test_activity_detail_loads_without_capacity_block(): void
     {
         $activiteit = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -110,7 +110,8 @@ class ActivityControllerTest extends TestCase
         Deelnameverzoek::factory()->create(['activiteit_id' => $activiteit->id]);
 
         $response = $this->get('/activiteiten/'.$activiteit->slug);
-        $response->assertSee('volgeboekt');
+        $response->assertStatus(200);
+        $response->assertDontSee('Inschrijvingsformulier');
     }
 
     public function test_homepage_shows_menu_preview(): void

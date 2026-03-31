@@ -61,7 +61,7 @@ return [
     // Contact
     'contact_eyebrow' => 'Contact',
     'contact_heading' => 'Kom eens langs',
-    'contact_lead' => 'U bent altijd welkom aan de Antwerpsesteenweg 24 in Brussel.',
+    'contact_lead' => 'Je bent altijd welkom aan de Antwerpsesteenweg 24 in Brussel.',
 
     // Over ons
     'over_ons_title' => 'Over ons',
@@ -73,8 +73,8 @@ return [
     'over_ons_verhaal_p1' => 'Wat begon als een kleine ontmoetingsplek is uitgegroeid tot het kloppende hart van de Noordwijk. Elke dag komen mensen langs — voor een warme maaltijd, een activiteit, of gewoon om even bij te praten.',
     'over_ons_verhaal_p2' => 'De deur staat altijd open. Voor iedereen. Of je nu elke week meekomt, iets nieuws wil proberen, of voor het eerst binnenstapt — je bent welkom.',
     'over_ons_verhaal_p3' => 'In de Noordwijk wonen mensen uit tientallen landen. Dat zie je bij ons terug: aan tafel, in de keuken, in het team. Diversiteit is geen slogan bij De Harmonie. Het is gewoon hoe het hier is.',
-    'over_ons_quotes_eyebrow' => 'Wat bezoekers zeggen',
-    'over_ons_quotes_heading' => 'Mensen vertellen',
+    'over_ons_quotes_eyebrow' => 'Ervaringen',
+    'over_ons_quotes_heading' => 'De buurt aan het woord',
     'over_ons_team_eyebrow' => 'Het team',
     'over_ons_team_heading' => 'De mensen achter De Harmonie',
     'over_ons_team_lead' => 'Van de keuken tot het onthaal — ons team staat elke dag voor je klaar. Een divers gezelschap dat één ding gemeen heeft: echte betrokkenheid.',

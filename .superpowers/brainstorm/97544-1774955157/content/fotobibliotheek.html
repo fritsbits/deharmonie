@@ -1,0 +1,257 @@
+<h2>Fotobibliotheek — De Harmonie</h2>
+<p class="subtitle">Overzicht van alle beschikbare foto's, gesorteerd op gebruik. Klik foto's aan om ze te markeren.</p>
+
+<style>
+.foto-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+.foto-item { border-radius: 8px; overflow: hidden; border: 2px solid transparent; cursor: pointer; background: #f5f5f5; transition: border-color 0.15s, box-shadow 0.15s; }
+.foto-item:hover { border-color: #aaa; }
+.foto-item.selected { border-color: #4679bc; box-shadow: 0 0 0 3px rgba(70,121,188,0.25); }
+.foto-item img { width: 100%; height: 140px; object-fit: cover; display: block; }
+.foto-meta { padding: 0.5rem 0.625rem 0.625rem; }
+.foto-name { font-size: 0.75rem; font-weight: 700; color: #2c2826; font-family: monospace; word-break: break-all; }
+.foto-info { font-size: 0.7rem; color: #706662; margin-top: 2px; }
+.foto-badge { display: inline-block; font-size: 0.65rem; font-weight: 700; padding: 1px 6px; border-radius: 99px; margin-top: 4px; }
+.badge-used { background: #d8ece5; color: #3a7a5e; }
+.badge-unused { background: #f5e8e2; color: #a0401e; }
+.badge-issue { background: #fff3cd; color: #856404; }
+.section-label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #706662; margin: 2rem 0 0.75rem; padding-bottom: 0.375rem; border-bottom: 1px solid #e8e0d8; }
+</style>
+
+<div class="section-label">In gebruik op de site</div>
+<div class="foto-grid">
+
+  <div class="foto-item" data-choice="groep-tafel" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-groep-tafel.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-groep-tafel.webp</div>
+      <div class="foto-info">960×640 · 63 KB</div>
+      <span class="foto-badge badge-used">Homepage strip · Weekmenu</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="party" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-party.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-party.webp</div>
+      <div class="foto-info">700×933 · 148 KB</div>
+      <span class="foto-badge badge-used">Homepage strip · Overzicht: Vier mee</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="groep-actief" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-groep-actief.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-groep-actief.webp</div>
+      <div class="foto-info">960×640 · 42 KB</div>
+      <span class="foto-badge badge-used">Homepage strip · Overzicht: Beweeg mee</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="thumbsup" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-thumbsup.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-thumbsup.webp</div>
+      <div class="foto-info">portret · 38 KB</div>
+      <span class="foto-badge badge-used">Homepage: openingsuren</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="samen" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-samen.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-samen.webp</div>
+      <div class="foto-info">116 KB</div>
+      <span class="foto-badge badge-used">Homepage: openingsuren · Overzicht: Praat &amp; leer</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="feest-2" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-feest-2.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-feest-2.webp</div>
+      <div class="foto-info">2048×2048 · 636 KB</div>
+      <span class="foto-badge badge-issue">⚠ te groot · Homepage + Overzicht + Weekmenu (3×!)</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="gebouw" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-gebouw.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-gebouw.webp</div>
+      <div class="foto-info">1100×861 · 142 KB</div>
+      <span class="foto-badge badge-used">Homepage: gebouw</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="visitors-2" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-visitors-2.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-visitors-2.webp</div>
+      <div class="foto-info">33 KB</div>
+      <span class="foto-badge badge-used">Overzicht: Maak iets</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="buiten-event" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-buiten-event.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-buiten-event.webp</div>
+      <div class="foto-info">525×700 · 91 KB</div>
+      <span class="foto-badge badge-issue">⚠ laag res · Overzicht: Bijzondere momenten</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="cake" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-cake.jpg" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-cake.jpg</div>
+      <div class="foto-info">2048×1365 · 623 KB</div>
+      <span class="foto-badge badge-issue">⚠ nog .jpg · Overzicht: Bijzondere momenten</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="vervoer" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-vervoer.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-vervoer.webp</div>
+      <div class="foto-info">2048×1365 · 173 KB</div>
+      <span class="foto-badge badge-used">Diensten: vervoer</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="onthaal" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-onthaal.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-onthaal.webp</div>
+      <div class="foto-info">960×640 · 69 KB</div>
+      <span class="foto-badge badge-used">Diensten: onthaal</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="keuken-chefs" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-keuken-chefs.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-keuken-chefs.webp</div>
+      <div class="foto-info">960×640 · 62 KB</div>
+      <span class="foto-badge badge-used">Diensten: restaurant</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="grote-kuis" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/grote-kuis.jpg" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">grote-kuis.jpg</div>
+      <div class="foto-info">⚠ nog .jpg</div>
+      <span class="foto-badge badge-issue">⚠ nog .jpg · Diensten: Grote Kuis</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="chef-taart" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-chef-taart.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-chef-taart.webp</div>
+      <div class="foto-info">600×600 · 27 KB</div>
+      <span class="foto-badge badge-issue">⚠ laag res · Weekmenu</span>
+    </div>
+  </div>
+
+</div>
+
+<div class="section-label">Beschikbaar — nog niet gebruikt</div>
+<div class="foto-grid">
+
+  <div class="foto-item" data-choice="restaurant-vol" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-restaurant-vol.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-restaurant-vol.webp</div>
+      <div class="foto-info">100 KB</div>
+      <span class="foto-badge badge-unused">Niet in gebruik</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="begeleiding-klas" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-begeleiding-klas.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-begeleiding-klas.webp</div>
+      <div class="foto-info">1100×733 · 57 KB</div>
+      <span class="foto-badge badge-unused">Niet in gebruik</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="restaurant-bediening" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-restaurant-bediening.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-restaurant-bediening.webp</div>
+      <div class="foto-info">48 KB</div>
+      <span class="foto-badge badge-unused">Niet in gebruik</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="restaurant-bord" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-restaurant-bord.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-restaurant-bord.webp</div>
+      <div class="foto-info">41 KB</div>
+      <span class="foto-badge badge-unused">Niet in gebruik</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="keuken-taart" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-keuken-taart.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-keuken-taart.webp</div>
+      <div class="foto-info">720×480 · 28 KB</div>
+      <span class="foto-badge badge-unused">Niet in gebruik</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="buiten-activiteit" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-buiten-activiteit.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-buiten-activiteit.webp</div>
+      <div class="foto-info">2048×1366 · 176 KB</div>
+      <span class="foto-badge badge-unused">Niet in gebruik</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="begeleiding" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-begeleiding.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-begeleiding.webp</div>
+      <div class="foto-info">2048×1365 · 145 KB</div>
+      <span class="foto-badge badge-unused">Niet in gebruik</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="klerenwinkel" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-klerenwinkel.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-klerenwinkel.webp</div>
+      <div class="foto-info">2048×1365 · 129 KB</div>
+      <span class="foto-badge badge-unused">Niet in gebruik</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="visitors-1" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-visitors-1.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-visitors-1.webp</div>
+      <div class="foto-info">32 KB</div>
+      <span class="foto-badge badge-unused">Niet in gebruik</span>
+    </div>
+  </div>
+
+  <div class="foto-item" data-choice="bloemen" onclick="toggleSelect(this)">
+    <img src="https://deharmonie.test/images/photo-bloemen.webp" loading="lazy" alt="">
+    <div class="foto-meta">
+      <div class="foto-name">photo-bloemen.webp</div>
+      <div class="foto-info">1536×2048 · 322 KB</div>
+      <span class="foto-badge badge-unused">Nieuw — nog niet gebruikt</span>
+    </div>
+  </div>
+
+</div>
+
+<p style="font-size:0.8rem; color:#888; margin-top:1.5rem;">
+  <strong>⚠ Problemen gevonden:</strong> photo-feest-2 is 636KB en wordt 3× geladen · photo-cake.jpg en grote-kuis.jpg zijn nog geen .webp · photo-buiten-event en photo-chef-taart hebben te lage resolutie · sommige .jpg-originelen staan nog naast hun .webp-versie
+</p>

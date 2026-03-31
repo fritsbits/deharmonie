@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Over ons v2</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', 'Helvetica Neue', sans-serif; background: #f0f0f0; color: #2c2826; font-size: 16px; }
+
+  .page { max-width: 900px; margin: 2rem auto; background: white; box-shadow: 0 4px 32px rgba(0,0,0,0.12); border-radius: 4px; overflow: hidden; }
+  .label-bar { background: #2c2826; color: #aaa; font-size: 11px; font-family: monospace; padding: 6px 16px; letter-spacing: 0.1em; }
+
+  /* NAV */
+  .nav { background: #4679bc; padding: 0 2rem; display: flex; align-items: center; justify-content: space-between; height: 52px; }
+  .nav-logo { color: white; font-weight: 800; font-size: 1rem; font-family: 'Nunito Sans', sans-serif; letter-spacing: 0.03em; }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { color: rgba(255,255,255,0.85); font-size: 0.8rem; font-family: 'Nunito Sans', sans-serif; text-decoration: none; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; }
+  .nav-links a.active { color: white; border-bottom: 2px solid rgba(255,255,255,0.6); padding-bottom: 2px; }
+
+  /* HERO */
+  .hero { background: white; padding: 3.5rem 2.5rem 3rem; border-bottom: 1px solid #e8e5e2; }
+  .eyebrow { font-family: 'Nunito Sans', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #4679bc; margin-bottom: 0.75rem; }
+  .eyebrow.green { color: #81b59c; }
+  .hero h1 { font-family: 'Nunito Sans', sans-serif; font-size: 2.5rem; font-weight: 900; line-height: 1.1; color: #2c2826; margin-bottom: 1rem; }
+  .hero-lead { font-size: 1.2rem; color: #706662; line-height: 1.5; max-width: 520px; }
+  /* Short, punchy — just place + longevity. No story yet. */
+
+  /* MISSION STORY */
+  .mission { background: #fbfaf9; padding: 4rem 2.5rem; }
+  .section-label { font-family: 'Nunito Sans', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #81b59c; margin-bottom: 0.75rem; }
+  .mission h2 { font-family: 'Nunito Sans', sans-serif; font-size: 1.75rem; font-weight: 900; color: #2c2826; margin-bottom: 2rem; line-height: 1.2; }
+  .mission-grid { display: flex; gap: 3rem; align-items: flex-start; }
+  .mission-text { flex: 0 0 60%; }
+  .mission-text p { font-size: 1.0625rem; line-height: 1.75; color: #2c2826; margin-bottom: 1.25rem; }
+  .mission-text p:last-child { margin-bottom: 0; }
+  .mission-photo { flex: 0 0 37%; border-radius: 3px; overflow: hidden; aspect-ratio: 3/4; background: #c8d8c4; display: flex; align-items: center; justify-content: center; }
+  .mission-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .photo-placeholder { color: #81b59c; font-size: 0.75rem; font-family: monospace; text-align: center; padding: 1rem; display: flex; flex-direction: column; gap: 6px; align-items: center; }
+
+  /* PHOTO STRIP */
+  .photo-strip { display: flex; height: 260px; overflow: hidden; }
+  .photo-strip-item { flex: 1; overflow: hidden; position: relative; }
+  .photo-strip-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .strip-placeholder { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 0.7rem; font-family: monospace; color: rgba(255,255,255,0.7); }
+
+  /* VISITOR VOICES */
+  .voices { background: #eef2f8; padding: 4rem 2.5rem; }
+  .voices-header { margin-bottom: 2.5rem; }
+  .voices-header h2 { font-family: 'Nunito Sans', sans-serif; font-size: 1.5rem; font-weight: 900; color: #2c2826; margin-top: 0.5rem; }
+  .quotes-grid { display: flex; gap: 1.5rem; }
+  .quote-card { flex: 1; background: white; border-radius: 4px; padding: 1.5rem; border: 1px solid rgba(70,121,188,0.12); }
+  .stars { color: #eb6643; font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 0.05em; }
+  .quote-text { font-size: 1rem; line-height: 1.65; color: #2c2826; font-style: italic; margin-bottom: 1rem; }
+  .quote-author { font-family: 'Nunito Sans', sans-serif; font-size: 0.8rem; font-weight: 700; color: #706662; text-transform: uppercase; letter-spacing: 0.06em; }
+  .quote-lang { display: inline-block; font-size: 0.65rem; background: #eef2f8; color: #4679bc; padding: 1px 5px; border-radius: 2px; margin-left: 4px; font-family: monospace; font-style: normal; vertical-align: middle; }
+
+  /* TEAM */
+  .team-ref { background: #fbfaf9; padding: 3.5rem 2.5rem; border-top: 1px solid #e8e5e2; }
+  .team-ref h2 { font-family: 'Nunito Sans', sans-serif; font-size: 1.375rem; font-weight: 900; color: #2c2826; margin: 0.5rem 0 0.75rem; }
+  .team-ref p { font-size: 1.0625rem; color: #706662; line-height: 1.65; margin-bottom: 1.5rem; max-width: 480px; }
+  .team-link { display: inline-block; font-family: 'Nunito Sans', sans-serif; font-size: 0.875rem; font-weight: 700; color: #4679bc; text-decoration: none; border: 1.5px solid #4679bc; padding: 0.6rem 1.25rem; border-radius: 3px; letter-spacing: 0.03em; }
+
+  /* CTA BAND */
+  .cta-band { background: #4679bc; padding: 3.5rem 2.5rem; text-align: center; }
+  .cta-band h2 { font-family: 'Nunito Sans', sans-serif; font-size: 1.625rem; font-weight: 900; color: white; margin-bottom: 0.5rem; }
+  .cta-band p { color: rgba(255,255,255,0.85); font-size: 1.0625rem; margin-bottom: 2rem; }
+  .cta-btn { display: inline-block; background: #eb6643; color: white; font-family: 'Nunito Sans', sans-serif; font-weight: 800; font-size: 0.9rem; padding: 0.85rem 2rem; border-radius: 3px; text-decoration: none; letter-spacing: 0.04em; text-transform: uppercase; }
+
+  /* FOOTER hint */
+  .footer { background: #4679bc; padding: 1rem 2.5rem; opacity: 0.4; }
+  .footer p { color: white; font-size: 0.75rem; font-family: monospace; }
+
+  /* change annotations */
+  .changed { outline: 2px dashed #eb6643; outline-offset: 4px; position: relative; }
+  .change-tag { position: absolute; top: -18px; left: 0; background: #eb6643; color: white; font-size: 9px; font-family: monospace; padding: 2px 5px; border-radius: 2px; white-space: nowrap; z-index: 10; }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="label-bar">Over ons v2 — 3 changes from v1 (orange outlines)</div>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-logo">De Harmonie</div>
+    <div class="nav-links">
+      <a href="#">Activiteiten</a>
+      <a href="#">Restaurant</a>
+      <a href="#">Diensten</a>
+      <a href="#" class="active">Over ons</a>
+      <a href="#">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO — CHANGED: shorter lead, no overlap with mission story -->
+  <div class="hero">
+    <div class="eyebrow">Over De Harmonie</div>
+    <h1>Vijftig jaar hart<br>voor de Noordwijk</h1>
+    <div style="position:relative; display:inline-block;">
+      <div class="change-tag">↓ changed: shorter, no overlap</div>
+      <p class="hero-lead changed" style="outline-offset: 8px;">Een buurtplek in Brussel waar mensen al 50 jaar samenkomen.</p>
+    </div>
+  </div>
+
+  <!-- MISSION STORY — CHANGED: opens differently, no repeat of hero -->
+  <div class="mission">
+    <div class="section-label">Ons verhaal</div>
+    <h2>Een thuis in de Noordwijk</h2>
+    <div class="mission-grid">
+      <div class="mission-text changed" style="position:relative;">
+        <div class="change-tag">↓ changed: opens on warmth/texture, not on "50 jaar + senioren"</div>
+        <p>Wat begon als een kleine ontmoetingsplek is uitgegroeid tot het kloppende hart van de Noordwijk. Elke dag komen mensen langs — voor een warme maaltijd, een activiteit, of gewoon om even bij te praten.</p>
+        <p>De deur staat altijd open. Voor iedereen. Of je nu elke week meeeet, iets nieuws wil proberen, of voor het eerst binnenstapt — je bent welkom.</p>
+        <p>In de Noordwijk wonen mensen uit tientallen landen. Dat zie je bij ons terug: aan tafel, in de keuken, in het team. Diversiteit is geen slogan bij De Harmonie. Het is gewoon hoe het hier is.</p>
+      </div>
+      <div class="mission-photo">
+        <img src="/images/photo-groep-tafel.webp" alt="Bezoekers aan tafel" onerror="this.style.display='none'">
+        <div class="photo-placeholder">📷 photo-groep-tafel.webp</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PHOTO STRIP -->
+  <div class="photo-strip">
+    <div class="photo-strip-item" style="background: #a8c4a0;">
+      <img src="/images/photo-samen.webp" alt="" onerror="this.style.display='none'">
+      <div class="strip-placeholder">photo-samen</div>
+    </div>
+    <div class="photo-strip-item" style="background: #8daa86;">
+      <img src="/images/photo-buiten-event.webp" alt="" onerror="this.style.display='none'">
+      <div class="strip-placeholder">photo-buiten-event</div>
+    </div>
+    <div class="photo-strip-item" style="background: #72907a;">
+      <img src="/images/photo-groep-actief.webp" alt="" onerror="this.style.display='none'">
+      <div class="strip-placeholder">photo-groep-actief</div>
+    </div>
+  </div>
+
+  <!-- VISITOR VOICES — CHANGED: quotes in original language only, no translation -->
+  <div class="voices">
+    <div class="voices-header">
+      <div class="eyebrow">Wat bezoekers zeggen</div>
+    </div>
+    <div class="quotes-grid changed" style="position:relative;">
+      <div class="change-tag">↓ changed: original language per reviewer, no translation</div>
+      <div class="quote-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote-text">"Hier wordt met veel moed en inzet elke dag gewerkt. Ook met allerlei activiteiten kunnen mensen zich amuseren of iets bijleren."</div>
+        <div class="quote-author">— Josiane C. <span class="quote-lang">NL</span></div>
+      </div>
+      <div class="quote-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote-text">"Un accueil hors du commun. Ils sont des piliers du quartier."</div>
+        <div class="quote-author">— Marc P. <span class="quote-lang">FR</span></div>
+      </div>
+      <div class="quote-card">
+        <div class="stars">★★★★★</div>
+        <div class="quote-text">"Comme d'habitude accueil super chaleureux. On s'y sent bien."</div>
+        <div class="quote-author">— Hélène-Christine A. <span class="quote-lang">FR</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TEAM REFERENCE — CHANGED: no name pills, just text + link -->
+  <div class="team-ref">
+    <div class="eyebrow green">Het team</div>
+    <h2 class="changed" style="position:relative;">
+      <span class="change-tag">↓ changed: no name pills</span>
+      De mensen achter De Harmonie
+    </h2>
+    <p>Van de keuken tot het onthaal — ons team staat elke dag voor je klaar. Een divers gezelschap dat één ding gemeen heeft: echte betrokkenheid.</p>
+    <a class="team-link" href="#">Ontmoet het team →</a>
+  </div>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <h2>Benieuwd hoe het eruitziet?</h2>
+    <p>Kom gerust langs. We zijn er elke weekdag.</p>
+    <a class="cta-btn" href="#">Neem contact op</a>
+  </div>
+
+  <div class="footer"><p>footer (unchanged)</p></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<h2>Fotomapping — finaal overzicht ✓</h2>
+<p class="subtitle">Alle keuzes bevestigd. Klaar voor implementatie.</p>
+
+<style>
+.page-block { background: white; border-radius: 10px; border: 1px solid #e8e0d8; margin-bottom: 1.5rem; overflow: hidden; }
+.page-header { padding: 0.75rem 1.25rem; background: #2c2826; color: white; font-family: sans-serif; font-weight: 700; font-size: 0.875rem; display: flex; align-items: center; gap: 0.75rem; }
+.page-url { font-size: 0.7rem; opacity: 0.6; font-weight: 400; font-family: monospace; }
+.section-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #706662; padding: 0.5rem 0.875rem 0.25rem; border-top: 1px solid #f0e8e0; }
+.slot-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(165px, 1fr)); gap: 0.625rem; padding: 0.625rem 0.875rem 0.875rem; }
+.slot { border-radius: 6px; overflow: hidden; border: 2px solid #d8ece5; }
+.slot img { width: 100%; height: 108px; object-fit: cover; display: block; }
+.slot-body { padding: 0.35rem 0.5rem 0.45rem; }
+.slot-label { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: #3a7a5e; margin-bottom: 1px; }
+.slot-file { font-size: 0.67rem; font-family: monospace; color: #2c2826; word-break: break-all; }
+.slot-note { font-size: 0.63rem; color: #706662; margin-top: 1px; }
+.new { border-color: #4679bc; }
+.new .slot-label { color: #2a5090; }
+.warn { border-color: #eb6643; }
+.warn .slot-label { color: #b34a2d; }
+</style>
+
+<!-- HOMEPAGE -->
+<div class="page-block">
+  <div class="page-header"><span>Homepage</span><span class="page-url">/</span></div>
+  <div class="section-label">Hero + foto strip</div>
+  <div class="slot-grid">
+    <div class="slot"><img src="https://deharmonie.test/images/illustration-header.png" alt=""><div class="slot-body"><div class="slot-label">Hero</div><div class="slot-file">illustration-header.png</div></div></div>
+    <div class="slot"><img src="https://deharmonie.test/images/photo-groep-tafel.webp" alt=""><div class="slot-body"><div class="slot-label">Strip 1</div><div class="slot-file">photo-groep-tafel.webp</div></div></div>
+    <div class="slot"><img src="https://deharmonie.test/images/photo-party.webp" alt=""><div class="slot-body"><div class="slot-label">Strip 2</div><div class="slot-file">photo-party.webp</div></div></div>
+    <div class="slot"><img src="https://deharmonie.test/images/photo-groep-actief.webp" alt=""><div class="slot-body"><div class="slot-label">Strip 3</div><div class="slot-file">photo-groep-actief.webp</div></div></div>
+  </div>
+  <div class="section-label">Openingsuren + gebouw</div>
+  <div class="slot-grid">
+    <div class="slot"><img src="https://deharmonie.test/images/photo-thumbsup.webp" alt=""><div class="slot-body"><div class="slot-label">Openingsuren 1</div><div class="slot-file">photo-thumbsup.webp</div></div></div>
+    <div class="slot"><img src="https://deharmonie.test/images/photo-samen.webp" alt=""><div class="slot-body"><div class="slot-label">Openingsuren 2</div><div class="slot-file">photo-samen.webp</div></div></div>
+    <div class="slot new"><img src="https://deharmonie.test/images/photo-visitors-2.webp" alt=""><div class="slot-body"><div class="slot-label">Openingsuren 3 ★</div><div class="slot-file">photo-visitors-2.webp</div><div class="slot-note">Was: photo-feest-2</div></div></div>
+    <div class="slot new"><img src="http://localhost:56800/481072436_1039282111573716_2573563843874455296_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Gebouw ★</div><div class="slot-file">→ photo-gebouw.webp</div><div class="slot-note">Vervangt bestaand gebouwfoto</div></div></div>
+  </div>
+</div>
+
+<!-- ACTIVITEITEN OVERZICHT -->
+<div class="page-block">
+  <div class="page-header"><span>Activiteiten overzicht</span><span class="page-url">/activiteiten</span></div>
+  <div class="section-label">Themakaarten</div>
+  <div class="slot-grid">
+    <div class="slot new"><img src="https://deharmonie.test/images/photo-petanque.jpg" alt=""><div class="slot-body"><div class="slot-label">Beweeg mee ★</div><div class="slot-file">photo-petanque.jpg → .webp</div><div class="slot-note">Was: photo-groep-actief</div></div></div>
+    <div class="slot new"><img src="http://localhost:56800/482028050_1046909067477687_126727110874941287_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Maak iets ★</div><div class="slot-file">→ photo-handwerk.webp</div><div class="slot-note">Was: photo-visitors-2</div></div></div>
+    <div class="slot"><img src="https://deharmonie.test/images/photo-samen.webp" alt=""><div class="slot-body"><div class="slot-label">Praat & leer</div><div class="slot-file">photo-samen.webp</div></div></div>
+    <div class="slot"><img src="https://deharmonie.test/images/photo-party.webp" alt=""><div class="slot-body"><div class="slot-label">Vier mee</div><div class="slot-file">photo-party.webp</div></div></div>
+  </div>
+  <div class="section-label">Bijzondere momenten</div>
+  <div class="slot-grid">
+    <div class="slot new"><img src="http://localhost:56800/481665227_1044615937707000_1068418230202194301_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Groot (spans 2 rijen) ★</div><div class="slot-file">→ photo-uitstap.webp</div><div class="slot-note">Was: photo-feest-2</div></div></div>
+    <div class="slot new"><img src="http://localhost:56800/483510180_1050352053800055_1523109867317250034_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Midden boven ★</div><div class="slot-file">→ photo-muzikanten.webp</div><div class="slot-note">Was: photo-buiten-event ✗</div></div></div>
+    <div class="slot new"><img src="http://localhost:56800/482218580_1048435923991668_1324350017231061311_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Midden onder ★</div><div class="slot-file">→ photo-verjaardag.webp</div><div class="slot-note">Was: photo-cake.jpg</div></div></div>
+  </div>
+</div>
+
+<!-- DIENSTEN -->
+<div class="page-block">
+  <div class="page-header"><span>Diensten</span><span class="page-url">/diensten</span></div>
+  <div class="slot-grid">
+    <div class="slot new"><img src="http://localhost:56800/484524442_1052041683631092_723256461942461732_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Vervoer ★</div><div class="slot-file">→ photo-harmonie-bus.webp</div><div class="slot-note">Medewerker helpt bezoeker in bus — menselijker</div></div></div>
+    <div class="slot"><img src="https://deharmonie.test/images/photo-onthaal.webp" alt=""><div class="slot-body"><div class="slot-label">Onthaal</div><div class="slot-file">photo-onthaal.webp</div></div></div>
+    <div class="slot"><img src="https://deharmonie.test/images/photo-keuken-chefs.webp" alt=""><div class="slot-body"><div class="slot-label">Restaurant</div><div class="slot-file">photo-keuken-chefs.webp</div></div></div>
+    <div class="slot warn"><img src="https://deharmonie.test/images/grote-kuis.jpg" alt=""><div class="slot-body"><div class="slot-label">Grote Kuis ⚠ jpg→webp</div><div class="slot-file">grote-kuis.jpg → .webp</div></div></div>
+  </div>
+</div>
+
+<!-- WEEKMENU -->
+<div class="page-block">
+  <div class="page-header"><span>Weekmenu</span><span class="page-url">/weekmenu</span></div>
+  <div class="slot-grid">
+    <div class="slot new"><img src="http://localhost:56800/484750962_1053730803462180_4663615693931062014_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Foto 1 ★</div><div class="slot-file">→ photo-chef-taart-2.webp</div><div class="slot-note">Was: photo-chef-taart (600px te laag)</div></div></div>
+    <div class="slot new"><img src="https://deharmonie.test/images/photo-restaurant-bord.webp" alt=""><div class="slot-body"><div class="slot-label">Foto 2 ★</div><div class="slot-file">photo-restaurant-bord.webp</div><div class="slot-note">Was: photo-groep-tafel</div></div></div>
+    <div class="slot warn"><img src="https://deharmonie.test/images/photo-feest-2.webp" alt=""><div class="slot-body"><div class="slot-label">Foto 3 ⚠ optimaliseren</div><div class="slot-file">photo-feest-2.webp</div><div class="slot-note">636KB → herexporteren naar ~120KB</div></div></div>
+  </div>
+</div>
+
+<!-- OVER ONS -->
+<div class="page-block">
+  <div class="page-header"><span>Over ons</span><span class="page-url">/over-ons — in opbouw</span></div>
+  <div class="section-label">Sfeerfoto's (bovenkant — geen rechtse afbeelding in sectie 2)</div>
+  <div class="slot-grid">
+    <div class="slot new"><img src="http://localhost:56800/483963718_1049655307203063_7868760229345822322_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Sfeer 1 ★</div><div class="slot-file">→ photo-gemeenschap.webp</div></div></div>
+    <div class="slot new"><img src="http://localhost:56800/484023936_1048307644004496_3444805199936742840_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Sfeer 2 ★</div><div class="slot-file">→ photo-krijtbord.webp</div></div></div>
+  </div>
+  <div class="section-label">Het team (onderkant)</div>
+  <div class="slot-grid">
+    <div class="slot new"><img src="http://localhost:56800/482345577_1048641877304406_4982695947235288809_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Team ★</div><div class="slot-file">→ photo-keukenteam.webp</div><div class="slot-note">Volledig keukenteam (4 chefs)</div></div></div>
+    <div class="slot new"><img src="http://localhost:56800/484935823_1053730410128886_2048083724632229545_n.jpg" alt=""><div class="slot-body"><div class="slot-label">Team 2 ★</div><div class="slot-file">→ photo-verjaardag-team.webp</div><div class="slot-note">Medewerker met taart</div></div></div>
+  </div>
+</div>
+
+<div style="background:#eef5f1;border-radius:8px;padding:1rem;margin-top:0.5rem;font-size:0.78rem;color:#2c2826;">
+  <strong>Samenvatting nieuwe bestanden (9 te kopiëren vanuit Downloads + 1 van Webflow):</strong><br>
+  photo-gebouw · photo-petanque · photo-handwerk · photo-uitstap · photo-muzikanten · photo-verjaardag · photo-harmonie-bus · photo-chef-taart-2 · photo-gemeenschap · photo-krijtbord · photo-keukenteam · photo-verjaardag-team<br><br>
+  <strong>Optimalisaties:</strong> alle naar .webp, max 1200px breed, ~80% kwaliteit · photo-feest-2 herexporteren van 636KB → ~120KB · grote-kuis.jpg converteren
+</div>

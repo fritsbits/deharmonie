@@ -12,4 +12,10 @@ return [
     'phone' => 'Téléphone',
     'map' => 'Carte',
     'site_tagline' => 'Centre de services · Restaurant · Travail de quartier',
+    'building_exterior_alt' => 'Le bâtiment de De Harmonie sur la Antwerpsesteenweg',
+    'reception_alt' => 'Accueil et visiteurs à l\'intérieur de De Harmonie',
+    'terrace_alt' => 'Visiteurs sur la terrasse extérieure de De Harmonie',
+    'email_general' => 'Général',
+    'email_activities' => 'Animation & activités',
+    'email_services' => 'Services',
 ];

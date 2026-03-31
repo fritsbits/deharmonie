@@ -1,0 +1,338 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,700;6..12,800;6..12,900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --orange: #eb6643; --orange-tint: #fff8f5;
+    --green:  #81b59c; --green-tint:  #eef5f1;
+    --blue:   #4679bc; --blue-tint:   #eef2f8;
+    --dark: #2c2826; --muted: #706662; --bg: #fbfaf9;
+    --font-sans: 'Nunito Sans', sans-serif;
+    --font-body: 'Source Sans 3', sans-serif;
+  }
+  body { font-family: var(--font-body); background: #f5f0eb; }
+
+  /* ---- shared card shell ---- */
+  .card {
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    box-shadow: 0 2px 8px rgba(44,40,38,.08), 0 8px 28px rgba(44,40,38,.10);
+    flex: 1;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 4px 16px rgba(44,40,38,.12), 0 16px 40px rgba(44,40,38,.14); }
+
+  /* ---- card header ---- */
+  .card-header {
+    position: relative;
+    height: 160px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  /* big decorative icon — clipped/tilted */
+  .card-icon {
+    position: absolute;
+    opacity: 1;
+  }
+
+  /* date */
+  .card-date-day {
+    font-family: var(--font-sans);
+    font-weight: 900;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: white;
+    display: block;
+    position: relative;
+    z-index: 2;
+  }
+  .card-date-month {
+    font-family: var(--font-sans);
+    font-weight: 800;
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.75);
+    display: block;
+    margin-top: 0.1rem;
+    position: relative;
+    z-index: 2;
+  }
+  .card-date-wrap { display: flex; flex-direction: column; }
+
+  /* ---- card body ---- */
+  .card-body {
+    background: white;
+    padding: 1rem 1.25rem 1.4rem;
+  }
+  .card-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin: 0 0 0.3rem;
+  }
+  .card-title {
+    font-family: var(--font-sans);
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.2;
+    margin: 0 0 0.35rem;
+  }
+  .card-meta {
+    font-size: 1rem;
+    color: var(--muted);
+    margin: 0;
+    font-weight: 600;
+  }
+
+  .row { display: flex; gap: 1rem; }
+
+  /* calendar SVG icon helper */
+  svg.icon { display: block; }
+</style>
+
+<h2>Activity card redesign — 3 variations</h2>
+<p class="subtitle">Full brand color header · Big tilted clipped icon in tint · White content · Bigger text</p>
+
+<!-- ═══════════════════════════════════════════════════════
+     VARIATION A — icon bottom-right, partially clipped, large
+     ═══════════════════════════════════════════════════════ -->
+<div class="cards" style="flex-direction: column; gap: 2rem;">
+
+  <div class="option" data-choice="var-a" onclick="toggleSelect(this)" style="flex-direction: column; align-items: stretch;">
+    <div class="letter">A</div>
+    <div class="content" style="width: 100%;">
+      <h3>A — Icon bottom-right, large &amp; rotated (+15°), date anchored left</h3>
+      <div class="row" style="margin-top: 0.75rem;">
+
+        <!-- Orange card -->
+        <a class="card" href="#">
+          <div class="card-header" style="background: var(--orange);">
+            <!-- tinted calendar icon, rotated, clipped at bottom-right -->
+            <svg class="card-icon" style="width: 160px; height: 160px; bottom: -30px; right: -20px; transform: rotate(15deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--orange-tint)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div class="card-date-wrap">
+              <span class="card-date-day">27</span>
+              <span class="card-date-month">MRT.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-eyebrow" style="color: var(--orange);">Vandaag</p>
+            <h3 class="card-title">Nederlandse conversatietafel</h3>
+            <p class="card-meta">10:30 · De Harmonie</p>
+          </div>
+        </a>
+
+        <!-- Green card -->
+        <a class="card" href="#">
+          <div class="card-header" style="background: var(--green);">
+            <svg class="card-icon" style="width: 160px; height: 160px; bottom: -30px; right: -20px; transform: rotate(15deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--green-tint)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div class="card-date-wrap">
+              <span class="card-date-day">27</span>
+              <span class="card-date-month">MRT.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-eyebrow" style="color: var(--green);">Vandaag</p>
+            <h3 class="card-title">Zumba</h3>
+            <p class="card-meta">14:00 · De Harmonie</p>
+          </div>
+        </a>
+
+        <!-- Blue card -->
+        <a class="card" href="#">
+          <div class="card-header" style="background: var(--blue);">
+            <svg class="card-icon" style="width: 160px; height: 160px; bottom: -30px; right: -20px; transform: rotate(15deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--blue-tint)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div class="card-date-wrap">
+              <span class="card-date-day">29</span>
+              <span class="card-date-month">MRT.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-eyebrow" style="color: var(--blue);">Zondag</p>
+            <h3 class="card-title">VOORSTELLING : "Le Mariage de Figaro" (Parc)</h3>
+            <p class="card-meta">15:00 · Théâtre du Parc, Parc Royal</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       VARIATION B — icon centred large behind date, strong tint fill
+       ═══════════════════════════════════════════════════════ -->
+  <div class="option" data-choice="var-b" onclick="toggleSelect(this)" style="flex-direction: column; align-items: stretch;">
+    <div class="letter">B</div>
+    <div class="content" style="width: 100%;">
+      <h3>B — Icon centred behind date, filled tint shape</h3>
+      <div class="row" style="margin-top: 0.75rem;">
+
+        <a class="card" href="#">
+          <div class="card-header" style="background: var(--orange); align-items: center; justify-content: center;">
+            <svg class="card-icon" style="width: 180px; height: 180px; top: 50%; left: 50%; transform: translate(-50%,-52%) rotate(-10deg); opacity: 0.25;"
+                 viewBox="0 0 24 24" fill="var(--orange-tint)" stroke="var(--orange-tint)" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div class="card-date-wrap" style="align-items: center; position: relative; z-index: 2;">
+              <span class="card-date-day" style="font-size: 4.5rem;">27</span>
+              <span class="card-date-month">MRT.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-eyebrow" style="color: var(--orange);">Vandaag</p>
+            <h3 class="card-title">Nederlandse conversatietafel</h3>
+            <p class="card-meta">10:30 · De Harmonie</p>
+          </div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="card-header" style="background: var(--green); align-items: center; justify-content: center;">
+            <svg class="card-icon" style="width: 180px; height: 180px; top: 50%; left: 50%; transform: translate(-50%,-52%) rotate(-10deg); opacity: 0.25;"
+                 viewBox="0 0 24 24" fill="var(--green-tint)" stroke="var(--green-tint)" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div class="card-date-wrap" style="align-items: center; position: relative; z-index: 2;">
+              <span class="card-date-day" style="font-size: 4.5rem;">27</span>
+              <span class="card-date-month">MRT.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-eyebrow" style="color: var(--green);">Vandaag</p>
+            <h3 class="card-title">Zumba</h3>
+            <p class="card-meta">14:00 · De Harmonie</p>
+          </div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="card-header" style="background: var(--blue); align-items: center; justify-content: center;">
+            <svg class="card-icon" style="width: 180px; height: 180px; top: 50%; left: 50%; transform: translate(-50%,-52%) rotate(-10deg); opacity: 0.25;"
+                 viewBox="0 0 24 24" fill="var(--blue-tint)" stroke="var(--blue-tint)" stroke-width="0.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div class="card-date-wrap" style="align-items: center; position: relative; z-index: 2;">
+              <span class="card-date-day" style="font-size: 4.5rem;">29</span>
+              <span class="card-date-month">MRT.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-eyebrow" style="color: var(--blue);">Zondag</p>
+            <h3 class="card-title">VOORSTELLING : "Le Mariage de Figaro" (Parc)</h3>
+            <p class="card-meta">15:00 · Théâtre du Parc, Parc Royal</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       VARIATION C — icon top-right, stroked outline, very large
+       ═══════════════════════════════════════════════════════ -->
+  <div class="option" data-choice="var-c" onclick="toggleSelect(this)" style="flex-direction: column; align-items: stretch;">
+    <div class="letter">C</div>
+    <div class="content" style="width: 100%;">
+      <h3>C — Icon top-right, outline stroke in solid tint, date bottom-left</h3>
+      <div class="row" style="margin-top: 0.75rem;">
+
+        <a class="card" href="#">
+          <div class="card-header" style="background: var(--orange);">
+            <svg class="card-icon" style="width: 130px; height: 130px; top: -15px; right: -15px; transform: rotate(20deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="rgba(255,248,245,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div class="card-date-wrap">
+              <span class="card-date-day">27</span>
+              <span class="card-date-month">MRT.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-eyebrow" style="color: var(--orange);">Vandaag</p>
+            <h3 class="card-title">Nederlandse conversatietafel</h3>
+            <p class="card-meta">10:30 · De Harmonie</p>
+          </div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="card-header" style="background: var(--green);">
+            <svg class="card-icon" style="width: 130px; height: 130px; top: -15px; right: -15px; transform: rotate(20deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="rgba(238,245,241,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div class="card-date-wrap">
+              <span class="card-date-day">27</span>
+              <span class="card-date-month">MRT.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-eyebrow" style="color: var(--green);">Vandaag</p>
+            <h3 class="card-title">Zumba</h3>
+            <p class="card-meta">14:00 · De Harmonie</p>
+          </div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="card-header" style="background: var(--blue);">
+            <svg class="card-icon" style="width: 130px; height: 130px; top: -15px; right: -15px; transform: rotate(20deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="rgba(238,242,248,0.45)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="4" width="18" height="18" rx="2"/>
+              <line x1="16" y1="2" x2="16" y2="6"/>
+              <line x1="8" y1="2" x2="8" y2="6"/>
+              <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <div class="card-date-wrap">
+              <span class="card-date-day">29</span>
+              <span class="card-date-month">MRT.</span>
+            </div>
+          </div>
+          <div class="card-body">
+            <p class="card-eyebrow" style="color: var(--blue);">Zondag</p>
+            <h3 class="card-title">VOORSTELLING : "Le Mariage de Figaro" (Parc)</h3>
+            <p class="card-meta">15:00 · Théâtre du Parc, Parc Royal</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+</div>

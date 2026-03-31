@@ -1,0 +1,286 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,700;6..12,800;6..12,900&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange:#eb6643; --orange-tint:#fff8f5; --orange-mid:rgba(235,102,67,0.18);
+  --green:#81b59c;  --green-tint:#eef5f1;  --green-mid:rgba(129,181,156,0.2);
+  --blue:#4679bc;   --blue-tint:#eef2f8;   --blue-mid:rgba(70,121,188,0.18);
+  --dark:#2c2826; --muted:#706662; --bg:#fbfaf9;
+  --sans:'Nunito Sans',sans-serif; --body:'Source Sans 3',sans-serif;
+}
+body{font-family:var(--body);background:#f0ebe5;}
+
+/* Card shell */
+.card{border-radius:12px;overflow:hidden;text-decoration:none;display:block;
+  box-shadow:0 2px 8px rgba(44,40,38,.09),0 8px 28px rgba(44,40,38,.11);flex:1;
+  transition:transform .14s ease,box-shadow .14s ease;}
+.card:hover{transform:translateY(-3px);box-shadow:0 4px 14px rgba(44,40,38,.13),0 16px 40px rgba(44,40,38,.14);}
+
+/* Header */
+.ch{position:relative;height:160px;overflow:hidden;}
+
+/* Decorative icon — clipped */
+.deco{position:absolute;pointer-events:none;}
+
+/* Date styles */
+.date-big-wrap{position:absolute;bottom:1.1rem;left:1.25rem;z-index:2;}
+.date-big-day{font-family:var(--sans);font-weight:900;font-size:3.75rem;line-height:1;color:white;display:block;}
+.date-big-mon{font-family:var(--sans);font-weight:800;font-size:0.75rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);display:block;margin-top:1px;}
+
+.date-pill{position:absolute;top:0.9rem;left:1rem;z-index:2;background:rgba(0,0,0,.22);backdrop-filter:blur(6px);border-radius:6px;padding:.25rem .6rem;display:flex;align-items:baseline;gap:.3rem;}
+.date-pill-day{font-family:var(--sans);font-weight:900;font-size:1.2rem;color:white;line-height:1;}
+.date-pill-mon{font-family:var(--sans);font-weight:800;font-size:0.62rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.8);}
+
+.date-tag{position:absolute;bottom:.9rem;right:1rem;z-index:2;background:rgba(255,255,255,.22);border-radius:6px;padding:.3rem .7rem;text-align:center;}
+.date-tag-day{font-family:var(--sans);font-weight:900;font-size:1.75rem;color:white;line-height:1;display:block;}
+.date-tag-mon{font-family:var(--sans);font-weight:800;font-size:0.6rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.75);display:block;}
+
+/* Card body */
+.cb{background:white;padding:1rem 1.25rem 1.4rem;}
+.cb-eye{font-family:var(--sans);font-size:.78rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em;margin:0 0 .3rem;}
+.cb-title{font-family:var(--sans);font-size:1.35rem;font-weight:900;color:var(--dark);line-height:1.2;margin:0 0 .35rem;}
+.cb-meta{font-size:1rem;color:var(--muted);margin:0;font-weight:600;}
+
+.row3{display:flex;gap:1rem;}
+.section-label{font-family:var(--sans);font-size:.7rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#999;margin:.25rem 0 .6rem;display:block;}
+
+/* SVG icons — reusable */
+svg{display:block;}
+</style>
+
+<h2>Activity cards — full playground</h2>
+<p class="subtitle">Two axes: <strong>Date display</strong> (rows) × <strong>Icon type</strong> (columns show activity-specific icons). All cards use full brand colors.</p>
+
+<!-- ══════════════════════════════════════════
+     AXIS 1 — DATE DISPLAY (4 approaches)
+     ══════════════════════════════════════════ -->
+
+<!-- DATE A: Big day number bottom-left -->
+<div class="options" style="flex-direction:column;gap:1.5rem;">
+
+  <div class="option" data-choice="date-big" onclick="toggleSelect(this)" style="flex-direction:column;align-items:stretch;">
+    <div class="letter">1</div>
+    <div class="content" style="width:100%;">
+      <h3>Date: Big number — bottom-left anchor</h3>
+      <span class="section-label">Each card uses its activity's icon: chat / dance / theatre</span>
+      <div class="row3">
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--orange);">
+            <!-- Speech bubble (conversation) — bottom-right, clipped -->
+            <svg class="deco" style="width:170px;height:170px;bottom:-35px;right:-25px;transform:rotate(12deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--orange-tint)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <div class="date-big-wrap"><span class="date-big-day">27</span><span class="date-big-mon">MRT.</span></div>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--orange);">Vandaag</p><h3 class="cb-title">Nederlandse conversatietafel</h3><p class="cb-meta">10:30 · De Harmonie</p></div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--green);">
+            <!-- Music / dance note -->
+            <svg class="deco" style="width:170px;height:170px;bottom:-35px;right:-25px;transform:rotate(12deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--green-tint)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            </svg>
+            <div class="date-big-wrap"><span class="date-big-day">27</span><span class="date-big-mon">MRT.</span></div>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--green);">Vandaag</p><h3 class="cb-title">Zumba</h3><p class="cb-meta">14:00 · De Harmonie</p></div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--blue);">
+            <!-- Theatre / star -->
+            <svg class="deco" style="width:170px;height:170px;bottom:-35px;right:-25px;transform:rotate(12deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--blue-tint)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <div class="date-big-wrap"><span class="date-big-day">29</span><span class="date-big-mon">MRT.</span></div>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--blue);">Zondag</p><h3 class="cb-title">VOORSTELLING : "Le Mariage de Figaro" (Parc)</h3><p class="cb-meta">15:00 · Théâtre du Parc</p></div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- DATE B: Small frosted pill — top-left -->
+  <div class="option" data-choice="date-pill" onclick="toggleSelect(this)" style="flex-direction:column;align-items:stretch;">
+    <div class="letter">2</div>
+    <div class="content" style="width:100%;">
+      <h3>Date: Frosted pill — top-left, icon dominates</h3>
+      <div class="row3">
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--orange);">
+            <svg class="deco" style="width:180px;height:180px;bottom:-40px;right:-30px;transform:rotate(10deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--orange-tint)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <div class="date-pill"><span class="date-pill-day">27</span><span class="date-pill-mon">MRT</span></div>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--orange);">Vandaag</p><h3 class="cb-title">Nederlandse conversatietafel</h3><p class="cb-meta">10:30 · De Harmonie</p></div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--green);">
+            <svg class="deco" style="width:180px;height:180px;bottom:-40px;right:-30px;transform:rotate(10deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--green-tint)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            </svg>
+            <div class="date-pill"><span class="date-pill-day">27</span><span class="date-pill-mon">MRT</span></div>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--green);">Vandaag</p><h3 class="cb-title">Zumba</h3><p class="cb-meta">14:00 · De Harmonie</p></div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--blue);">
+            <svg class="deco" style="width:180px;height:180px;bottom:-40px;right:-30px;transform:rotate(10deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--blue-tint)" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <div class="date-pill"><span class="date-pill-day">29</span><span class="date-pill-mon">MRT</span></div>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--blue);">Zondag</p><h3 class="cb-title">VOORSTELLING : "Le Mariage de Figaro" (Parc)</h3><p class="cb-meta">15:00 · Théâtre du Parc</p></div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- DATE C: No date in header — date in eyebrow only -->
+  <div class="option" data-choice="date-none" onclick="toggleSelect(this)" style="flex-direction:column;align-items:stretch;">
+    <div class="letter">3</div>
+    <div class="content" style="width:100%;">
+      <h3>Date: None in header — icon centred, date lives in eyebrow text</h3>
+      <div class="row3">
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--orange);display:flex;align-items:center;justify-content:center;">
+            <svg class="deco" style="width:140px;height:140px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-8deg);opacity:.28;"
+                 viewBox="0 0 24 24" fill="var(--orange-tint)" stroke="var(--orange-tint)" stroke-width=".4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--orange);">Vandaag · 27 mrt.</p><h3 class="cb-title">Nederlandse conversatietafel</h3><p class="cb-meta">10:30 · De Harmonie</p></div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--green);display:flex;align-items:center;justify-content:center;">
+            <svg class="deco" style="width:140px;height:140px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-8deg);opacity:.28;"
+                 viewBox="0 0 24 24" fill="var(--green-tint)" stroke="var(--green-tint)" stroke-width=".4" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            </svg>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--green);">Vandaag · 27 mrt.</p><h3 class="cb-title">Zumba</h3><p class="cb-meta">14:00 · De Harmonie</p></div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--blue);display:flex;align-items:center;justify-content:center;">
+            <svg class="deco" style="width:140px;height:140px;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-8deg);opacity:.28;"
+                 viewBox="0 0 24 24" fill="var(--blue-tint)" stroke="var(--blue-tint)" stroke-width=".4" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--blue);">Zondag · 29 mrt.</p><h3 class="cb-title">VOORSTELLING : "Le Mariage de Figaro" (Parc)</h3><p class="cb-meta">15:00 · Théâtre du Parc</p></div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- DATE D: Compact tag — bottom-right corner -->
+  <div class="option" data-choice="date-tag" onclick="toggleSelect(this)" style="flex-direction:column;align-items:stretch;">
+    <div class="letter">4</div>
+    <div class="content" style="width:100%;">
+      <h3>Date: Compact tag — bottom-right, icon bottom-left clipped</h3>
+      <div class="row3">
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--orange);">
+            <svg class="deco" style="width:150px;height:150px;bottom:-30px;left:-20px;transform:rotate(-12deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--orange-tint)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <div class="date-tag"><span class="date-tag-day">27</span><span class="date-tag-mon">MRT.</span></div>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--orange);">Vandaag</p><h3 class="cb-title">Nederlandse conversatietafel</h3><p class="cb-meta">10:30 · De Harmonie</p></div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--green);">
+            <svg class="deco" style="width:150px;height:150px;bottom:-30px;left:-20px;transform:rotate(-12deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--green-tint)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            </svg>
+            <div class="date-tag"><span class="date-tag-day">27</span><span class="date-tag-mon">MRT.</span></div>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--green);">Vandaag</p><h3 class="cb-title">Zumba</h3><p class="cb-meta">14:00 · De Harmonie</p></div>
+        </a>
+
+        <a class="card" href="#">
+          <div class="ch" style="background:var(--blue);">
+            <svg class="deco" style="width:150px;height:150px;bottom:-30px;left:-20px;transform:rotate(-12deg);"
+                 viewBox="0 0 24 24" fill="none" stroke="var(--blue-tint)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <div class="date-tag"><span class="date-tag-day">29</span><span class="date-tag-mon">MRT.</span></div>
+          </div>
+          <div class="cb"><p class="cb-eye" style="color:var(--blue);">Zondag</p><h3 class="cb-title">VOORSTELLING : "Le Mariage de Figaro" (Parc)</h3><p class="cb-meta">15:00 · Théâtre du Parc</p></div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- DATE E: No header at all — all content, colored left border only -->
+  <div class="option" data-choice="date-flat" onclick="toggleSelect(this)" style="flex-direction:column;align-items:stretch;">
+    <div class="letter">5</div>
+    <div class="content" style="width:100%;">
+      <h3>No image band — single card, colored accent bar top, date in body</h3>
+      <div class="row3">
+
+        <a class="card" href="#" style="border-radius:10px;overflow:hidden;">
+          <div style="height:6px;background:var(--orange);"></div>
+          <div style="background:white;padding:1.1rem 1.25rem 1.4rem;position:relative;">
+            <svg style="position:absolute;top:-10px;right:-10px;width:90px;height:90px;opacity:.12;transform:rotate(10deg);"
+                 viewBox="0 0 24 24" fill="var(--orange)" stroke="none">
+              <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <p class="cb-eye" style="color:var(--orange);margin-bottom:.25rem;">Vandaag · 27 mrt.</p>
+            <h3 class="cb-title" style="font-size:1.5rem;">Nederlandse conversatietafel</h3>
+            <p class="cb-meta" style="font-size:1.05rem;">10:30 · De Harmonie</p>
+          </div>
+        </a>
+
+        <a class="card" href="#" style="border-radius:10px;overflow:hidden;">
+          <div style="height:6px;background:var(--green);"></div>
+          <div style="background:white;padding:1.1rem 1.25rem 1.4rem;position:relative;">
+            <svg style="position:absolute;top:-10px;right:-10px;width:90px;height:90px;opacity:.12;transform:rotate(10deg);"
+                 viewBox="0 0 24 24" fill="var(--green)" stroke="none">
+              <path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/>
+            </svg>
+            <p class="cb-eye" style="color:var(--green);margin-bottom:.25rem;">Vandaag · 27 mrt.</p>
+            <h3 class="cb-title" style="font-size:1.5rem;">Zumba</h3>
+            <p class="cb-meta" style="font-size:1.05rem;">14:00 · De Harmonie</p>
+          </div>
+        </a>
+
+        <a class="card" href="#" style="border-radius:10px;overflow:hidden;">
+          <div style="height:6px;background:var(--blue);"></div>
+          <div style="background:white;padding:1.1rem 1.25rem 1.4rem;position:relative;">
+            <svg style="position:absolute;top:-10px;right:-10px;width:90px;height:90px;opacity:.12;transform:rotate(10deg);"
+                 viewBox="0 0 24 24" fill="var(--blue)" stroke="none">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <p class="cb-eye" style="color:var(--blue);margin-bottom:.25rem;">Zondag · 29 mrt.</p>
+            <h3 class="cb-title" style="font-size:1.5rem;">VOORSTELLING : "Le Mariage de Figaro"</h3>
+            <p class="cb-meta" style="font-size:1.05rem;">15:00 · Théâtre du Parc</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+</div>
