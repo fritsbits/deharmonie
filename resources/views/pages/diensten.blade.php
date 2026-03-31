@@ -149,7 +149,7 @@
 {{-- PHOTO STRIP --}}
 <div style="display: flex; height: 380px; overflow: hidden;">
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-vervoer.webp') }}"
+        <img src="{{ asset('images/photo-harmonie-bus.webp') }}"
              alt="{{ app()->getLocale() === 'fr' ? 'Service de transport' : 'Vervoersdienst' }}"
              style="width: 100%; height: 100%; object-fit: cover; display: block; object-position: center 40%;">
     </div>
@@ -207,7 +207,7 @@
         </div>
 
         <div class="diensten-intro-photo" style="flex: 0 0 44%; overflow: hidden; aspect-ratio: 3/4;">
-            <img src="{{ asset('images/grote-kuis.jpg') }}"
+            <img src="{{ asset('images/grote-kuis.webp') }}"
                  alt="{{ __('pages.grote_kuis_title') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
