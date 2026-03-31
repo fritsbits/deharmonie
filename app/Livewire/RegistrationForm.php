@@ -31,6 +31,16 @@ class RegistrationForm extends Component
 
     public bool $submitted = false;
 
+    protected function messages(): array
+    {
+        return [
+            'naam.required' => __('forms.naam_required'),
+            'naam.min' => __('forms.naam_min'),
+            'email.required' => __('forms.email_required'),
+            'email.email' => __('forms.invalid_email'),
+        ];
+    }
+
     public function submit(): void
     {
         if ($this->honeypot !== '') {
