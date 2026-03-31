@@ -8,11 +8,12 @@
     :heading="__('pages.diensten_heading')"
     :lead="__('pages.diensten_lead')"
     bg="white"
+    pb="1rem"
 />
 
 {{-- SERVICE CLUSTERS --}}
 <div style="background: #eef2f8;">
-<div style="max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 5rem;">
+<div style="max-width: 72rem; margin: 0 auto; padding: 3.5rem 1.5rem 5rem;">
 
     @php
     $clusters = app()->getLocale() === 'fr' ? [
@@ -91,17 +92,14 @@
             <div style="flex: 1; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(44,40,38,.09), 0 8px 28px rgba(44,40,38,.10);">
 
                 {{-- Coloured header --}}
-                <div style="background: {{ $cluster['color'] }}; padding: 1.25rem 1.5rem 1.5rem; position: relative; overflow: hidden; min-height: 90px;">
+                <div style="background: {{ $cluster['color'] }}; padding: 1.25rem 1.5rem 1.4rem; position: relative; overflow: hidden; min-height: 76px;">
                     {{-- icon is hardcoded SVG path data from this file's @php block — never user input --}}
-                    <svg style="position: absolute; right: -14px; bottom: -18px; width: 110px; height: 110px; opacity: 0.18; transform: rotate(12deg); pointer-events: none;"
+                    <svg style="position: absolute; right: -14px; bottom: -18px; width: 110px; height: 110px; opacity: 0.22; transform: rotate(12deg); pointer-events: none;"
                          viewBox="0 0 24 24" fill="white" stroke="none">
                         {!! $cluster['icon'] !!}
                     </svg>
-                    <p style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 900; text-transform: uppercase; letter-spacing: .12em; color: rgba(255,255,255,.75); margin: 0 0 0.2rem; position: relative; z-index: 1;">
-                        {{ $cluster['label_top'] }}
-                    </p>
-                    <p style="font-family: var(--font-sans); font-size: 1.125rem; font-weight: 900; color: white; margin: 0; position: relative; z-index: 1; line-height: 1.2;">
-                        {{ $cluster['label_main'] }}
+                    <p style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 900; color: white; margin: 0; position: relative; z-index: 1; line-height: 1.2;">
+                        {{ $cluster['label_top'] }} {{ $cluster['label_main'] }}
                     </p>
                 </div>
 
@@ -129,7 +127,7 @@
 <div style="background: #eef2f8;">
 {{-- CTA beneath services --}}
 <div style="max-width: 72rem; margin: 0 auto; padding: 0 1.5rem 5rem;">
-    <div style="border-top: 1px solid var(--color-brand-gray); padding-top: 2.5rem; display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;">
+    <div style="border-top: 1px solid #c8d4e4; padding-top: 2.5rem; display: flex; align-items: center; gap: 3rem; flex-wrap: wrap;">
         <p style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--color-brand-dark); margin: 0; flex-shrink: 0;">
             {{ app()->getLocale() === 'fr' ? 'Des questions sur nos services ?' : 'Vragen over onze diensten?' }}
         </p>
