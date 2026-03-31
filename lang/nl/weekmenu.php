@@ -30,5 +30,6 @@ return [
     'closed' => 'Gesloten',
     'special_badge' => 'Speciaal',
     'allergen_note' => 'Allergenen? Vraag aan onze kok.',
-    'print_link' => 'Afdrukken / PDF',
+    'soup_default' => 'Soep van de dag',
+    'print_link' => 'Druk af',
 ];
