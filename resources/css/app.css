@@ -31,3 +31,23 @@
     --color-brand-orange-dark: #6b2211;
     --color-brand-blue-dark: #1a2f5c;
 }
+
+/* =====================
+   Print styles — agenda
+   ===================== */
+@media print {
+    nav,
+    footer,
+    .agenda-week-nav,
+    .agenda-print-btn {
+        display: none !important;
+    }
+
+    .agenda-print-header {
+        display: block !important;
+    }
+
+    body {
+        background: white !important;
+    }
+}
