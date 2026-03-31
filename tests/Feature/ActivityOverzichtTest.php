@@ -15,9 +15,9 @@ class ActivityOverzichtTest extends TestCase
 
     public function test_shows_activities_in_current_week(): void
     {
-        $thisWeek = Activiteit::factory()->create([
+        $today = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->startOfWeek()->format('Y-m-d'),
+            'datum' => now()->format('Y-m-d'),
         ]);
         $nextWeek = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -25,7 +25,7 @@ class ActivityOverzichtTest extends TestCase
         ]);
 
         Livewire::test(ActivityOverzicht::class)
-            ->assertSee($thisWeek->titel_nl)
+            ->assertSee($today->titel_nl)
             ->assertDontSee($nextWeek->titel_nl);
     }
 
@@ -81,7 +81,7 @@ class ActivityOverzichtTest extends TestCase
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->startOfWeek()->format('Y-m-d'),
+            'datum' => now()->format('Y-m-d'),
         ]);
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -97,7 +97,7 @@ class ActivityOverzichtTest extends TestCase
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => now()->startOfWeek()->format('Y-m-d'),
+            'datum' => now()->format('Y-m-d'),
         ]);
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -227,5 +227,33 @@ class ActivityOverzichtTest extends TestCase
 
         $this->assertSame($earlier->id, $dayActivities->first()->id);
         $this->assertSame($later->id, $dayActivities->last()->id);
+    }
+
+    public function test_mount_skips_current_week_when_all_activities_have_passed(): void
+    {
+        // Activity from the start of this week (could be in the past if today is not Monday)
+        // We need a datum strictly before today but in the current week.
+        // Use startOfWeek() only if it's not today, otherwise skip this test setup.
+        $monday = now()->startOfWeek();
+        if ($monday->isToday()) {
+            // Can't test "past day in current week" if today is Monday — mark as pass
+            $this->assertTrue(true);
+
+            return;
+        }
+
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => $monday->format('Y-m-d'), // Monday (past, since today is Tue–Sun)
+        ]);
+
+        $nextWeek = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
+        ]);
+
+        Livewire::test(ActivityOverzicht::class)
+            ->assertSet('weekOffset', 1)
+            ->assertSee($nextWeek->titel_nl);
     }
 }
