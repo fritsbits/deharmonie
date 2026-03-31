@@ -98,8 +98,9 @@
                          viewBox="0 0 24 24" fill="white" stroke="none">
                         {!! $cluster['icon'] !!}
                     </svg>
-                    <p style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 900; color: white; margin: 0; position: relative; z-index: 1; line-height: 1.2;">
-                        {{ $cluster['label_top'] }} {{ $cluster['label_main'] }}
+                    <p style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 900; color: white; margin: 0; position: relative; z-index: 1; line-height: 1.25;">
+                        <span style="display: block;">{{ $cluster['label_top'] }}</span>
+                        <span style="display: block;">{{ $cluster['label_main'] }}</span>
                     </p>
                 </div>
 

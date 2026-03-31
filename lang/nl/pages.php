@@ -97,7 +97,7 @@ return [
     // Diensten
     'diensten_title' => 'Diensten',
     'diensten_eyebrow' => 'DIENSTEN',
-    'diensten_heading' => 'De Harmonie is er voor jou',
+    'diensten_heading' => 'De Harmonie is er voor u',
     'diensten_intro' => 'De Harmonie helpt senioren uit de Noordwijk in het dagelijks leven. We organiseren activiteiten en diensten in ons eigen centrum, in de buurt, maar ook bij mensen thuis.',
     'diensten_services_heading' => 'Onze diensten',
     'diensten_services' => [
