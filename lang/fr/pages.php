@@ -64,9 +64,22 @@ return [
     'contact_lead' => 'Vous êtes toujours les bienvenus au Antwerpsesteenweg 24 à Bruxelles.',
 
     // Over ons
-    'over_ons_eyebrow' => 'À propos de nous',
+    'over_ons_eyebrow' => 'À propos de De Harmonie',
     'over_ons_heading' => 'Cinquante ans au cœur du Noordwijk',
-    'over_ons_lead' => 'Depuis 50 ans, nous sommes là pour les seniors du Noordwijk à Bruxelles.',
+    'over_ons_lead' => 'Un lieu de rencontre à Bruxelles où les gens se retrouvent depuis 50 ans.',
+    'over_ons_verhaal_eyebrow' => 'Notre histoire',
+    'over_ons_verhaal_heading' => 'Un chez-soi dans le Noordwijk',
+    'over_ons_verhaal_p1' => 'Ce qui a commencé comme un petit lieu de rencontre est devenu le cœur battant du Noordwijk. Chaque jour, des gens passent — pour un repas chaud, une activité, ou simplement pour échanger quelques mots.',
+    'over_ons_verhaal_p2' => 'La porte est toujours ouverte. Pour tout le monde. Que tu cuisines avec nous chaque semaine, que tu veuilles essayer quelque chose de nouveau, ou que tu entres pour la première fois — tu es le bienvenu.',
+    'over_ons_verhaal_p3' => 'Dans le Noordwijk vivent des gens venus de dizaines de pays. Cela se voit chez nous : à table, en cuisine, dans l\'équipe. La diversité n\'est pas un slogan à De Harmonie. C\'est simplement la réalité ici.',
+    'over_ons_quotes_eyebrow' => 'Ce que disent les visiteurs',
+    'over_ons_team_eyebrow' => 'L\'équipe',
+    'over_ons_team_heading' => 'Les personnes derrière De Harmonie',
+    'over_ons_team_lead' => 'De la cuisine à l\'accueil — notre équipe est là pour toi chaque jour. Un groupe diversifié qui a une chose en commun : un engagement sincère.',
+    'over_ons_team_cta' => 'Rencontrez l\'équipe',
+    'over_ons_cta_heading' => 'Curieux de voir à quoi ça ressemble ?',
+    'over_ons_cta_lead' => 'Venez donc. Nous sommes là tous les jours de la semaine.',
+    'over_ons_cta_btn' => 'Contactez-nous',
 
     // Qui est qui
     'wie_is_wie_title' => 'Qui est qui ?',

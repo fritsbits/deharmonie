@@ -66,7 +66,20 @@ return [
     // Over ons
     'over_ons_eyebrow' => 'Over De Harmonie',
     'over_ons_heading' => 'Vijftig jaar hart voor de Noordwijk',
-    'over_ons_lead' => 'Al 50 jaar zijn wij er voor de senioren van de Noordwijk in Brussel.',
+    'over_ons_lead' => 'Een buurtplek in Brussel waar mensen al 50 jaar samenkomen.',
+    'over_ons_verhaal_eyebrow' => 'Ons verhaal',
+    'over_ons_verhaal_heading' => 'Een thuis in de Noordwijk',
+    'over_ons_verhaal_p1' => 'Wat begon als een kleine ontmoetingsplek is uitgegroeid tot het kloppende hart van de Noordwijk. Elke dag komen mensen langs — voor een warme maaltijd, een activiteit, of gewoon om even bij te praten.',
+    'over_ons_verhaal_p2' => 'De deur staat altijd open. Voor iedereen. Of je nu elke week meekomt, iets nieuws wil proberen, of voor het eerst binnenstapt — je bent welkom.',
+    'over_ons_verhaal_p3' => 'In de Noordwijk wonen mensen uit tientallen landen. Dat zie je bij ons terug: aan tafel, in de keuken, in het team. Diversiteit is geen slogan bij De Harmonie. Het is gewoon hoe het hier is.',
+    'over_ons_quotes_eyebrow' => 'Wat bezoekers zeggen',
+    'over_ons_team_eyebrow' => 'Het team',
+    'over_ons_team_heading' => 'De mensen achter De Harmonie',
+    'over_ons_team_lead' => 'Van de keuken tot het onthaal — ons team staat elke dag voor je klaar. Een divers gezelschap dat één ding gemeen heeft: echte betrokkenheid.',
+    'over_ons_team_cta' => 'Ontmoet het team',
+    'over_ons_cta_heading' => 'Benieuwd hoe het eruitziet?',
+    'over_ons_cta_lead' => 'Kom gerust langs. We zijn er elke weekdag.',
+    'over_ons_cta_btn' => 'Neem contact op',
 
     // Wie is wie
     'wie_is_wie_title' => 'Wie is wie ?',
