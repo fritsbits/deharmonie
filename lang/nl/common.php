@@ -18,5 +18,6 @@ return [
     'email_general' => 'Algemeen',
     'email_activities' => 'Animatie & activiteiten',
     'email_services' => 'Diensten',
-    'open_in_maps' => 'Open in Google Maps',
+    'open_in_maps' => 'Open in OpenStreetMap',
+    'og_default_description' => 'Lokaal dienstencentrum en sociaal restaurant in de Noordwijk, Brussel.',
 ];

@@ -73,8 +73,11 @@ class ActivityOverzicht extends Component
     #[Computed]
     public function hasNext(): bool
     {
+        $nextWeekStart = $this->activeWeekStart->copy()->addWeek();
+        $nextWeekEnd = $nextWeekStart->copy()->endOfWeek();
+
         return Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
-            ->where('datum', '>', $this->activeWeekEnd)
+            ->whereBetween('datum', [$nextWeekStart, $nextWeekEnd])
             ->exists();
     }
 

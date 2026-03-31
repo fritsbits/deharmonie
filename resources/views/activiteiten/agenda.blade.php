@@ -3,14 +3,16 @@
 
 @section('content')
 
-<x-page-hero
-    eyebrow="Agenda"
-    eyebrow-color="green"
-    :heading="__('activities.agenda_page_heading')"
-    bg="white"
-/>
+<div class="agenda-screen-only">
+    <x-page-hero
+        eyebrow="Agenda"
+        eyebrow-color="green"
+        heading="Weekplanning De Harmonie"
+        bg="white"
+    />
+</div>
 
-<div style="background: #eef5f1;">
+<div class="agenda-bg-wrapper" style="background: #eef5f1;">
     <div style="max-width: 72rem; margin: 0 auto; padding: 2rem 1.5rem 4rem;">
         <div class="agenda-paper-outer">
             <div class="agenda-paper">
@@ -22,9 +24,6 @@
 
 <style>
 .agenda-paper-outer {
-    transform: rotate(-1.5deg);
-    max-width: 680px;
-    margin: 0 auto;
 }
 .agenda-paper {
     position: relative;
@@ -62,11 +61,35 @@
 }
 
 @media print {
-    .agenda-paper-outer { transform: none !important; box-shadow: none !important; max-width: none !important; }
-    .agenda-paper { border: none !important; box-shadow: none !important; }
-    nav, footer, .agenda-print-btn { display: none !important; }
-    .agenda-print-header { display: block !important; }
-    body { background: white !important; }
+    @page { size: A4 portrait; margin: 12mm 14mm; }
+
+    /* Hide all screen chrome */
+    header, footer,
+    .agenda-card-header,
+    .agenda-print-btn { display: none !important; }
+
+    /* Strip card decoration */
+    .agenda-bg-wrapper { background: white !important; }
+    .agenda-paper-outer { transform: none !important; }
+    .agenda-paper {
+        border: none !important;
+        box-shadow: none !important;
+        overflow: visible !important;
+    }
+    .agenda-paper::before,
+    .agenda-paper::after { display: none !important; }
+
+    /* Compact body padding */
+    .agenda-body { padding: 0 0 0.5rem !important; }
+
+    /* Compact day groups */
+    .agenda-day-group { padding: 0.875rem 0 !important; }
+
+    /* Slightly larger type for paper — seniors hold paper further away */
+    .agenda-activity-title { font-size: 1.25rem !important; }
+    .agenda-activity-meta  { font-size: 1rem !important; }
+    .agenda-date-num       { font-size: 1.75rem !important; }
+    .agenda-date-label     { font-size: 0.8rem !important; letter-spacing: 0.02em !important; }
 }
 </style>
 

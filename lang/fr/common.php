@@ -18,5 +18,6 @@ return [
     'email_general' => 'Général',
     'email_activities' => 'Animation & activités',
     'email_services' => 'Services',
-    'open_in_maps' => 'Ouvrir dans Google Maps',
+    'open_in_maps' => 'Ouvrir dans OpenStreetMap',
+    'og_default_description' => 'Centre de services local et restaurant social dans le Quartier Nord, Bruxelles.',
 ];

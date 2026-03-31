@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@yield('title', 'De Harmonie') — {{ __('common.site_tagline') }}</title>
     <meta name="description" content="@yield('description', 'Lokaal dienstencentrum en sociaal restaurant in de Noordwijk, Brussel.')">
-    @if(View::hasSection('og_title'))
-    <meta property="og:title" content="@yield('og_title')">
-    <meta property="og:description" content="@yield('og_description')">
+    {{-- Open Graph --}}
     <meta property="og:type" content="website">
-    @endif
+    <meta property="og:site_name" content="De Harmonie">
+    <meta property="og:title" content="@yield('og_title', @yield('title', 'De Harmonie') . ' — ' . __('common.site_tagline'))">
+    <meta property="og:description" content="@yield('og_description', __('common.og_default_description'))">
+    <meta property="og:image" content="{{ asset('images/og-image.webp') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     <link rel="apple-touch-icon" href="{{ asset('favicon.png') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
