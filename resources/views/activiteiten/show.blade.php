@@ -113,7 +113,7 @@
 
     {{-- Description --}}
     @if ($activiteit->beschrijving)
-        <div class="mb-8" style="color: var(--color-brand-dark); font-size: 1.2rem; line-height: 1.75; max-width: 68ch;">
+        <div class="mb-8" style="color: var(--color-brand-muted); font-size: 1.3rem; line-height: 1.65; max-width: 60ch;">
             {!! $activiteit->beschrijving !!}
         </div>
     @endif
@@ -130,17 +130,15 @@
             </div>
         @else
             {{-- Register CTA --}}
-            <div style="display: flex; align-items: flex-start; gap: 0.75rem; margin-bottom: 1.5rem; max-width: 60ch;">
-                <div style="width: 52px; height: 52px; background: var(--color-brand-green); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 0.1rem;">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                </div>
-                <p style="font-size: 1.1rem; color: var(--color-brand-dark); line-height: 1.65; margin: 0;">
-                    {{ __('activities.register_cta_heading') }}
-                    <a href="tel:0220328048" class="font-semibold hover:underline" style="color: var(--color-brand-blue); white-space: nowrap;">02&nbsp;203&nbsp;28&nbsp;48</a>,
-                    <a href="mailto:info@deharmonie.be" class="hover:underline" style="color: var(--color-brand-blue);">info@deharmonie.be</a>
-                    {{ __('activities.register_cta_form_sub') }}
-                </p>
-            </div>
+            <h3 style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 900; color: var(--color-brand-dark); margin: 0 0 0.75rem; line-height: 1.2;">
+                {{ __('activities.register_cta_title') }}
+            </h3>
+            <p style="font-size: 1.1rem; color: var(--color-brand-dark); line-height: 1.65; margin: 0 0 1.5rem; max-width: 60ch;">
+                {{ __('activities.register_cta_heading') }}
+                <a href="tel:0220328048" class="font-semibold hover:underline" style="color: var(--color-brand-blue); white-space: nowrap;">02&nbsp;203&nbsp;28&nbsp;48</a>,
+                <a href="mailto:info@deharmonie.be" class="hover:underline" style="color: var(--color-brand-blue);">info@deharmonie.be</a>
+                {{ __('activities.register_cta_form_sub') }}
+            </p>
             <div class="rounded-lg p-6" id="inschrijven" x-ref="form"
                  style="border: 1px solid var(--color-brand-gray); background: white; max-width: 640px;">
                 <livewire:registration-form :activiteit="$activiteit" />
