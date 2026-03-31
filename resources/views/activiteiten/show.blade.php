@@ -13,7 +13,7 @@
 
         <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
            class="font-semibold hover:underline inline-flex items-center gap-1"
-           style="color: var(--color-brand-blue); font-size: 0.9rem;">
+           style="color: var(--color-brand-blue); font-size: 0.9rem; padding: 0.5rem 0; display: inline-block;">
             {{ __('activities.back') }}
         </a>
 
