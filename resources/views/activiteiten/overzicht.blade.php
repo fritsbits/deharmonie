@@ -13,7 +13,7 @@
 />
 
 {{-- THEMATIC CARDS --}}
-<section style="background: var(--color-brand-orange-tint); padding: 3.5rem 1.5rem 3rem;">
+<section style="background: var(--color-brand-green-tint); padding: 3.5rem 1.5rem 3rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
 
         @php
@@ -45,7 +45,7 @@
                     'photo'      => 'photo-samen.webp',
                     'rotate'     => '-1deg',
                     'margin_top' => '1.25rem',
-                    'ids'        => [1, 2, 3, 4, 6, 8],
+                    'ids'        => [1, 2, 3, 4, 6, 8, 16],
                 ],
                 [
                     'name'       => $isFr ? 'Fêtez avec nous' : 'Vier mee',
@@ -54,7 +54,7 @@
                     'photo'      => 'photo-party.webp',
                     'rotate'     => '2.2deg',
                     'margin_top' => '0.25rem',
-                    'ids'        => [9, 14, 16, 17, 18],
+                    'ids'        => [9, 17],
                 ],
             ];
         @endphp
@@ -67,7 +67,7 @@
                 <div class="theme-card-outer" style="flex: 1; transform: rotate({{ $theme['rotate'] }}); margin-top: {{ $theme['margin_top'] }};">
                 <div class="theme-card" style="background: white; border-radius: 2px; position: relative;">
                     {{-- color band --}}
-                    <div style="height: 4px; background: {{ $theme['color'] }};"></div>
+                    <div style="height: 8px; background: {{ $theme['color'] }};"></div>
 
                     {{-- photo --}}
                     <div class="theme-card-photo" style="height: 140px; overflow: hidden;">
@@ -113,7 +113,7 @@
 </section>
 
 {{-- BIJZONDERE MOMENTEN --}}
-<section style="background: var(--color-brand-green-tint); padding: 5rem 1.5rem 5.5rem;">
+<section style="background: white; padding: 5rem 1.5rem 5.5rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
         <x-eyebrow color="green" mb="0.75rem">{{ __('activities.special_moments_eyebrow') }}</x-eyebrow>
         <x-section-heading mb="0.75rem">{{ __('activities.special_moments_heading') }}</x-section-heading>
@@ -139,7 +139,7 @@
             </div>
 
             {{-- Upcoming special events — homepage-style cards --}}
-            <div style="grid-row: 1 / 3; grid-column: 3; display: flex; flex-direction: column; gap: 0.875rem; overflow: hidden;">
+            <div style="grid-row: 1 / 3; grid-column: 3; display: flex; flex-direction: column; gap: 0.875rem; padding: 4px;">
                 @php
                     $specialCardColors = [
                         ['bg' => 'var(--color-brand-green)',  'dark_tint' => '#5a8a74', 'accent' => 'var(--color-brand-green)'],

@@ -7,7 +7,7 @@
     <x-page-hero
         eyebrow="Agenda"
         eyebrow-color="green"
-        heading="Weekplanning De Harmonie"
+        :heading="__('activities.agenda_page_heading') . ' De Harmonie'"
         bg="white"
     />
 </div>
