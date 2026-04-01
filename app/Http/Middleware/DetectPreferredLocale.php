@@ -20,6 +20,11 @@ class DetectPreferredLocale
         if ($lang === 'fr') {
             $frUrl = $this->resolveEquivalentUrl($request, 'fr');
 
+            // Skip redirect if already on the target URL (prevents loops if cookies are blocked)
+            if ($request->url() === $frUrl) {
+                return $next($request)->cookie('preferred_locale', 'fr', 60 * 24 * 365);
+            }
+
             return redirect($frUrl)->cookie('preferred_locale', 'fr', 60 * 24 * 365);
         }
 

@@ -3,9 +3,9 @@
 namespace App\Livewire;
 
 use App\Models\Activiteit;
+use Illuminate\Support\Collection;
 use Livewire\Attributes\Computed;
 use Livewire\Component;
-use Illuminate\Support\Collection;
 
 class ActivityFilter extends Component
 {
@@ -17,6 +17,7 @@ class ActivityFilter extends Component
             ->orderBy('datum')
             ->orderBy('startuur')
             ->limit(5)
+            ->with('media')
             ->get();
     }
 

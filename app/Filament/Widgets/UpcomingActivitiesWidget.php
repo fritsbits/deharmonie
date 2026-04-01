@@ -16,7 +16,7 @@ class UpcomingActivitiesWidget extends BaseWidget
             ->where('datum', '<=', today()->addDays(30))
             ->count();
 
-        $open = Deelnameverzoek::where('status', 'te_contacteren')->count();
+        $open = Deelnameverzoek::count();
 
         return [
             Stat::make('Komende activiteiten (30 dagen)', $upcoming)

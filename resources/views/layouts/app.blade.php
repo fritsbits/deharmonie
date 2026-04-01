@@ -6,9 +6,10 @@
     <title>@yield('title', 'De Harmonie') — {{ __('common.site_tagline') }}</title>
     <meta name="description" content="@yield('description', 'Lokaal dienstencentrum en sociaal restaurant in de Noordwijk, Brussel.')">
     {{-- Open Graph --}}
+    @php $ogTitle = $__env->yieldContent('og_title') ?: ($__env->yieldContent('title', 'De Harmonie') . ' — ' . __('common.site_tagline')); @endphp
     <meta property="og:type" content="website">
     <meta property="og:site_name" content="De Harmonie">
-    <meta property="og:title" content="@yield('og_title', @yield('title', 'De Harmonie') . ' — ' . __('common.site_tagline'))">
+    <meta property="og:title" content="{{ $ogTitle }}">
     <meta property="og:description" content="@yield('og_description', __('common.og_default_description'))">
     <meta property="og:image" content="{{ asset('images/og-image.webp') }}">
     <meta property="og:url" content="{{ url()->current() }}">
