@@ -71,22 +71,51 @@
             </a>
         </div>
         <div class="menu-cards" style="display: flex; gap: 1rem;">
+            @php
+                $priceTag = fn($price) => '<span style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 900; color: var(--color-brand-muted); line-height: 1; white-space: nowrap; flex-shrink: 0;"><span style="font-size: 0.65em; vertical-align: baseline; margin-right: 1px;">€</span>' . $price . '</span>';
+            @endphp
             {{-- Today --}}
             @if ($menuVandaag)
             <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid #e8e0d8;">
-                <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin-bottom: 0.4rem;">{{ __('activities.date_today') }}</p>
-                <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">{{ $menuVandaag->main }}</p>
-                <p style="font-size: 1rem; color: var(--color-brand-muted); margin-bottom: 0.75rem;">{{ __('pages.home_menu_soup_included') }}</p>
-                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ {{ $menuVandaag->price }}</p>
+                <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin: 0 0 0.4rem;">{{ __('activities.date_today') }}</p>
+                @if ($menuVandaag->special_event)
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin: 0;">{{ $menuVandaag->event_label }}</p>
+                            <span style="display: inline-block; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; padding: 1px 7px; border-radius: 999px;">{{ __('weekmenu.special_badge') }}</span>
+                        </div>
+                        {!! $priceTag($menuVandaag->price) !!}
+                    </div>
+                    <p style="font-size: 1.125rem; color: var(--color-brand-muted); margin: 0; line-height: 1.6;">{!! implode('<span style="color: var(--color-brand-orange)"> · </span>', array_map('e', $menuVandaag->courses_for_locale)) !!}</p>
+                @else
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.25rem;">
+                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin: 0;">{{ $menuVandaag->main }}</p>
+                        {!! $priceTag($menuVandaag->price) !!}
+                    </div>
+                    <p style="font-size: 1.125rem; color: var(--color-brand-muted); margin: 0;">{{ __('pages.home_menu_soup_included') }}</p>
+                @endif
             </div>
             @endif
             {{-- Tomorrow --}}
             @if ($menuMorgen)
             <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid #e8e0d8;">
-                <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin-bottom: 0.4rem;">{{ __('activities.date_tomorrow') }}</p>
-                <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin-bottom: 0.25rem;">{{ $menuMorgen->main }}</p>
-                <p style="font-size: 1rem; color: var(--color-brand-muted); margin-bottom: 0.75rem;">{{ __('pages.home_menu_soup_included') }}</p>
-                <p style="font-size: 1.25rem; font-weight: 900; color: var(--color-brand-orange); font-family: var(--font-sans);">€ {{ $menuMorgen->price }}</p>
+                <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin: 0 0 0.4rem;">{{ __('activities.date_tomorrow') }}</p>
+                @if ($menuMorgen->special_event)
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem;">
+                        <div style="display: flex; align-items: center; gap: 0.5rem;">
+                            <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin: 0;">{{ $menuMorgen->event_label }}</p>
+                            <span style="display: inline-block; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; padding: 1px 7px; border-radius: 999px;">{{ __('weekmenu.special_badge') }}</span>
+                        </div>
+                        {!! $priceTag($menuMorgen->price) !!}
+                    </div>
+                    <p style="font-size: 1.125rem; color: var(--color-brand-muted); margin: 0; line-height: 1.6;">{!! implode('<span style="color: var(--color-brand-orange)"> · </span>', array_map('e', $menuMorgen->courses_for_locale)) !!}</p>
+                @else
+                    <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.25rem;">
+                        <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin: 0;">{{ $menuMorgen->main }}</p>
+                        {!! $priceTag($menuMorgen->price) !!}
+                    </div>
+                    <p style="font-size: 1.125rem; color: var(--color-brand-muted); margin: 0;">{{ __('pages.home_menu_soup_included') }}</p>
+                @endif
             </div>
             @endif
         </div>
@@ -149,7 +178,7 @@
                         </svg>
                         <div style="position: absolute; bottom: 1.1rem; left: 1.25rem; z-index: 2;">
                             <span style="font-family: var(--font-sans); font-weight: 900; font-size: 3.75rem; line-height: 1; color: white; display: block;">{{ \Carbon\Carbon::parse($activiteit->datum)->format('d') }}</span>
-                            <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.75rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); display: block; margin-top: 1px;">{{ strtoupper(\Carbon\Carbon::parse($activiteit->datum)->locale(app()->getLocale())->isoFormat('MMM')) }}</span>
+                            <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.75rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); display: block; margin-top: 1px;">{{ strtoupper(\Carbon\Carbon::parse($activiteit->datum)->locale(app()->getLocale())->isoFormat('MMMM')) }}</span>
                         </div>
                     </div>
                     {{-- White card body --}}

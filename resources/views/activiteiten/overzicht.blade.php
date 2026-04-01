@@ -182,7 +182,7 @@
                             </svg>
                             <div style="position: absolute; bottom: 0.9rem; left: 1.25rem; z-index: 2;">
                                 <span style="font-family: var(--font-sans); font-weight: 900; font-size: 3.25rem; line-height: 1; color: white; display: block;">{{ $date->format('d') }}</span>
-                                <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); display: block; margin-top: 1px;">{{ strtoupper($date->locale(app()->getLocale())->isoFormat('MMM')) }}</span>
+                                <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); display: block; margin-top: 1px;">{{ strtoupper($date->locale(app()->getLocale())->isoFormat('MMMM')) }}</span>
                             </div>
                         </div>
                         {{-- Card body --}}
