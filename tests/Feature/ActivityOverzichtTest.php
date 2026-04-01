@@ -2,11 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Livewire\ActivityOverzicht;
 use App\Models\Activiteit;
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Livewire\Livewire;
 use Tests\TestCase;
 
 class ActivityOverzichtTest extends TestCase
@@ -24,7 +22,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
+        $this->get('/activiteiten/agenda?week=0')
             ->assertSee($today->titel_nl)
             ->assertDontSee($nextWeek->titel_nl);
     }
@@ -36,7 +34,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->subDay()->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
+        $this->get('/activiteiten/agenda?week=0')
             ->assertDontSee($lastWeek->titel_nl);
     }
 
@@ -47,15 +45,14 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
+        $this->get('/activiteiten/agenda?week=0')
             ->assertSee($monday->titel_nl);
     }
 
     public function test_has_prev_false_at_initial_offset(): void
     {
-        $component = Livewire::test(ActivityOverzicht::class);
-
-        $this->assertFalse($component->get('hasPrev'));
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertDontSee(__('activities.previous_week'));
     }
 
     public function test_has_prev_true_after_navigating_forward(): void
@@ -69,9 +66,8 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $component = Livewire::test(ActivityOverzicht::class)->call('nextWeek');
-
-        $this->assertTrue($component->get('hasPrev'));
+        $this->get('/activiteiten/agenda?week=1')
+            ->assertSee(__('activities.previous_week'));
     }
 
     public function test_has_prev_false_after_navigating_forward_with_no_prior_activities(): void
@@ -82,16 +78,14 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $component = Livewire::test(ActivityOverzicht::class)->call('nextWeek');
-
-        $this->assertFalse($component->get('hasPrev'));
+        $this->get('/activiteiten/agenda?week=1')
+            ->assertDontSee(__('activities.previous_week'));
     }
 
     public function test_has_next_false_when_no_future_activities_exist(): void
     {
-        $component = Livewire::test(ActivityOverzicht::class);
-
-        $this->assertFalse($component->get('hasNext'));
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertDontSee(__('activities.next_week'));
     }
 
     public function test_has_next_true_when_future_week_has_activities(): void
@@ -105,12 +99,11 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $component = Livewire::test(ActivityOverzicht::class);
-
-        $this->assertTrue($component->get('hasNext'));
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertSee(__('activities.next_week'));
     }
 
-    public function test_next_week_jumps_to_next_activity_week(): void
+    public function test_next_week_link_points_to_week_1(): void
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -121,10 +114,8 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
-            ->assertSet('weekOffset', 0)
-            ->call('nextWeek')
-            ->assertSet('weekOffset', 1);
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertSee('week=1');
     }
 
     public function test_next_week_skips_empty_weeks_to_nearest_activity(): void
@@ -139,10 +130,9 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->addWeeks(3)->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
-            ->assertSet('weekOffset', 0)
-            ->call('nextWeek')
-            ->assertSet('weekOffset', 3);
+        // On week=0, next link should point to week=3
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertSee('week=3');
     }
 
     public function test_has_next_true_even_with_gap_weeks(): void
@@ -156,9 +146,8 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->addWeeks(3)->format('Y-m-d'),
         ]);
 
-        $this->assertTrue(
-            Livewire::test(ActivityOverzicht::class)->get('hasNext')
-        );
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertSee(__('activities.next_week'));
     }
 
     public function test_prev_week_navigates_to_previous_activity_week(): void
@@ -172,11 +161,9 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
-            ->call('nextWeek')
-            ->assertSet('weekOffset', 1)
-            ->call('prevWeek')
-            ->assertSet('weekOffset', 0);
+        // On week=1, prev link should point back to week=0
+        $this->get('/activiteiten/agenda?week=1')
+            ->assertSee('week=0');
     }
 
     public function test_prev_week_skips_empty_weeks_to_nearest_activity(): void
@@ -191,19 +178,15 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->addWeeks(3)->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
-            ->call('nextWeek') // jumps to week 3
-            ->assertSet('weekOffset', 3)
-            ->call('prevWeek') // should jump back to week 0
-            ->assertSet('weekOffset', 0);
+        // On week=3, prev link should point back to week=0
+        $this->get('/activiteiten/agenda?week=3')
+            ->assertSee('week=0');
     }
 
-    public function test_prev_week_does_nothing_at_zero(): void
+    public function test_prev_week_absent_at_zero(): void
     {
-        Livewire::test(ActivityOverzicht::class)
-            ->assertSet('weekOffset', 0)
-            ->call('prevWeek')
-            ->assertSet('weekOffset', 0);
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertDontSee(__('activities.previous_week'));
     }
 
     public function test_week_heading_is_localised_for_nl(): void
@@ -216,9 +199,8 @@ class ActivityOverzichtTest extends TestCase
             ? "{$start->day}–{$end->day} ".$start->locale('nl')->isoFormat('MMMM YYYY')
             : $start->locale('nl')->isoFormat('D MMMM').' – '.$end->locale('nl')->isoFormat('D MMMM YYYY');
 
-        $component = Livewire::test(ActivityOverzicht::class);
-
-        $this->assertSame($expected, $component->get('weekHeading'));
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertSee($expected);
     }
 
     public function test_week_heading_is_localised_for_fr(): void
@@ -231,9 +213,8 @@ class ActivityOverzichtTest extends TestCase
             ? "{$start->day}–{$end->day} ".$start->locale('fr')->isoFormat('MMMM YYYY')
             : $start->locale('fr')->isoFormat('D MMMM').' – '.$end->locale('fr')->isoFormat('D MMMM YYYY');
 
-        $component = Livewire::test(ActivityOverzicht::class);
-
-        $this->assertSame($expected, $component->get('weekHeading'));
+        $this->get('/fr/activites/agenda?week=0')
+            ->assertSee($expected);
     }
 
     public function test_cancelled_activities_appear_in_list(): void
@@ -243,7 +224,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
+        $this->get('/activiteiten/agenda?week=0')
             ->assertSee($cancelled->titel_nl);
     }
 
@@ -254,8 +235,8 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
-            ->assertSet('weekOffset', 1)
+        // No week param → should auto-jump and show next week's activity
+        $this->get('/activiteiten/agenda')
             ->assertSee($nextWeek->titel_nl);
     }
 
@@ -272,42 +253,32 @@ class ActivityOverzichtTest extends TestCase
             'titel_nl' => 'Dinsdag activiteit',
         ]);
 
-        $component = Livewire::test(ActivityOverzicht::class);
-        $grouped = $component->get('activiteiten');
-
-        $this->assertCount(2, $grouped);
-        $this->assertTrue($grouped->has($monday->datum->toDateString()));
-        $this->assertTrue($grouped->has($tuesday->datum->toDateString()));
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertSee('Maandag activiteit')
+            ->assertSee('Dinsdag activiteit');
     }
 
     public function test_activities_ordered_by_date_then_time(): void
     {
-        $later = Activiteit::factory()->create([
+        Activiteit::factory()->create([
             'status' => 'gepubliceerd',
             'datum' => now()->startOfWeek()->format('Y-m-d'),
             'startuur' => '15:00:00',
             'titel_nl' => 'Kaartspelen',
         ]);
-        $earlier = Activiteit::factory()->create([
+        Activiteit::factory()->create([
             'status' => 'gepubliceerd',
             'datum' => now()->startOfWeek()->format('Y-m-d'),
             'startuur' => '09:00:00',
             'titel_nl' => 'Aquafit',
         ]);
 
-        $component = Livewire::test(ActivityOverzicht::class);
-        $grouped = $component->get('activiteiten');
-        $dayActivities = $grouped->first();
-
-        $this->assertSame($earlier->id, $dayActivities->first()->id);
-        $this->assertSame($later->id, $dayActivities->last()->id);
+        $this->get('/activiteiten/agenda?week=0')
+            ->assertSeeInOrder(['Aquafit', 'Kaartspelen']);
     }
 
     public function test_mount_skips_current_week_when_all_activities_have_passed(): void
     {
-        // Activity from the start of this week (could be in the past if today is not Monday)
-        // We need a datum strictly before today but in the current week.
-        // Use startOfWeek() only if it's not today, otherwise skip this test setup.
         $monday = now()->startOfWeek();
         if ($monday->isToday()) {
             $this->markTestSkipped('Cannot test past-day-in-current-week when today is Monday.');
@@ -315,7 +286,7 @@ class ActivityOverzichtTest extends TestCase
 
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
-            'datum' => $monday->format('Y-m-d'), // Monday (past, since today is Tue–Sun)
+            'datum' => $monday->format('Y-m-d'),
         ]);
 
         $nextWeek = Activiteit::factory()->create([
@@ -323,8 +294,23 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        Livewire::test(ActivityOverzicht::class)
-            ->assertSet('weekOffset', 1)
+        $this->get('/activiteiten/agenda')
             ->assertSee($nextWeek->titel_nl);
+    }
+
+    public function test_visiting_specific_week_shows_that_weeks_activities(): void
+    {
+        $thisWeek = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->format('Y-m-d'),
+        ]);
+        $week2 = Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->startOfWeek()->addWeeks(2)->format('Y-m-d'),
+        ]);
+
+        $this->get('/activiteiten/agenda?week=2')
+            ->assertSee($week2->titel_nl)
+            ->assertDontSee($thisWeek->titel_nl);
     }
 }
