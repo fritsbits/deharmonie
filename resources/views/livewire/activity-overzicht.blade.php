@@ -43,7 +43,7 @@
     </div>
 
     {{-- Day sections --}}
-    <div class="agenda-body" style="padding: 0 3.25rem 2.5rem;">
+    <div class="agenda-body" style="padding: 2.5rem 3.25rem 2.5rem;">
         @php $hasAnyActivity = false; $dayIndex = 0; @endphp
 
         @for ($i = 0; $i < 7; $i++)
