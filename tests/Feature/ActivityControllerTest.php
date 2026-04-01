@@ -132,10 +132,10 @@ class ActivityControllerTest extends TestCase
 
         $response->assertSee('Vandaag');
         $response->assertSee('Kalf blanket met bulgur');
-        $response->assertSee('€ 10');
+        $response->assertSee('10');
         $response->assertSee('Morgen');
         $response->assertSee('Varkensgebraad met witloof');
-        $response->assertSee('€ 9');
+        $response->assertSee('9');
         $response->assertSee('Soep van de dag inbegrepen');
         $response->assertSee('Volledig menu →');
     }

@@ -62,12 +62,29 @@ class ActivityOverzichtTest extends TestCase
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
+            'datum' => now()->format('Y-m-d'),
+        ]);
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
         $component = Livewire::test(ActivityOverzicht::class)->call('nextWeek');
 
         $this->assertTrue($component->get('hasPrev'));
+    }
+
+    public function test_has_prev_false_after_navigating_forward_with_no_prior_activities(): void
+    {
+        // Only activity is next week — nothing to go back to
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
+        ]);
+
+        $component = Livewire::test(ActivityOverzicht::class)->call('nextWeek');
+
+        $this->assertFalse($component->get('hasPrev'));
     }
 
     public function test_has_next_false_when_no_future_activities_exist(): void
@@ -93,7 +110,7 @@ class ActivityOverzichtTest extends TestCase
         $this->assertTrue($component->get('hasNext'));
     }
 
-    public function test_next_week_increments_offset(): void
+    public function test_next_week_jumps_to_next_activity_week(): void
     {
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
@@ -110,8 +127,46 @@ class ActivityOverzichtTest extends TestCase
             ->assertSet('weekOffset', 1);
     }
 
-    public function test_prev_week_decrements_offset(): void
+    public function test_next_week_skips_empty_weeks_to_nearest_activity(): void
     {
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->format('Y-m-d'),
+        ]);
+        // Gap: weeks 1 and 2 are empty, activity is in week 3
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->addWeeks(3)->format('Y-m-d'),
+        ]);
+
+        Livewire::test(ActivityOverzicht::class)
+            ->assertSet('weekOffset', 0)
+            ->call('nextWeek')
+            ->assertSet('weekOffset', 3);
+    }
+
+    public function test_has_next_true_even_with_gap_weeks(): void
+    {
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->format('Y-m-d'),
+        ]);
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->addWeeks(3)->format('Y-m-d'),
+        ]);
+
+        $this->assertTrue(
+            Livewire::test(ActivityOverzicht::class)->get('hasNext')
+        );
+    }
+
+    public function test_prev_week_navigates_to_previous_activity_week(): void
+    {
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->format('Y-m-d'),
+        ]);
         Activiteit::factory()->create([
             'status' => 'gepubliceerd',
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
@@ -121,6 +176,25 @@ class ActivityOverzichtTest extends TestCase
             ->call('nextWeek')
             ->assertSet('weekOffset', 1)
             ->call('prevWeek')
+            ->assertSet('weekOffset', 0);
+    }
+
+    public function test_prev_week_skips_empty_weeks_to_nearest_activity(): void
+    {
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->format('Y-m-d'),
+        ]);
+        // Gap: weeks 1 and 2 are empty, activity is in week 3
+        Activiteit::factory()->create([
+            'status' => 'gepubliceerd',
+            'datum' => now()->addWeeks(3)->format('Y-m-d'),
+        ]);
+
+        Livewire::test(ActivityOverzicht::class)
+            ->call('nextWeek') // jumps to week 3
+            ->assertSet('weekOffset', 3)
+            ->call('prevWeek') // should jump back to week 0
             ->assertSet('weekOffset', 0);
     }
 

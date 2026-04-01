@@ -67,31 +67,69 @@ class ActivityOverzicht extends Component
     #[Computed]
     public function hasPrev(): bool
     {
-        return $this->weekOffset > 0;
+        if ($this->weekOffset <= 0) {
+            return false;
+        }
+
+        $currentWeekStart = Carbon::now()->startOfWeek();
+        $activeStart = $currentWeekStart->copy()->addWeeks($this->weekOffset);
+
+        return Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
+            ->where('datum', '>=', $currentWeekStart)
+            ->where('datum', '<', $activeStart)
+            ->exists();
     }
 
     #[Computed]
     public function hasNext(): bool
     {
-        $nextWeekStart = $this->activeWeekStart->copy()->addWeek();
-        $nextWeekEnd = $nextWeekStart->copy()->endOfWeek();
+        $nextWeekStart = Carbon::now()->startOfWeek()->addWeeks($this->weekOffset + 1);
 
         return Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
-            ->whereBetween('datum', [$nextWeekStart, $nextWeekEnd])
+            ->where('datum', '>=', $nextWeekStart)
             ->exists();
     }
 
     public function prevWeek(): void
     {
-        if ($this->hasPrev) {
-            $this->weekOffset--;
+        if (! $this->hasPrev) {
+            return;
+        }
+
+        $currentWeekStart = Carbon::now()->startOfWeek();
+        $activeStart = $currentWeekStart->copy()->addWeeks($this->weekOffset);
+
+        $prev = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
+            ->where('datum', '>=', $currentWeekStart)
+            ->where('datum', '<', $activeStart)
+            ->orderByDesc('datum')
+            ->first();
+
+        if ($prev) {
+            $this->weekOffset = (int) $currentWeekStart->diffInWeeks(
+                $prev->datum->copy()->startOfWeek()
+            );
         }
     }
 
     public function nextWeek(): void
     {
-        if ($this->hasNext) {
-            $this->weekOffset++;
+        if (! $this->hasNext) {
+            return;
+        }
+
+        $currentWeekStart = Carbon::now()->startOfWeek();
+        $nextWeekStart = $currentWeekStart->copy()->addWeeks($this->weekOffset + 1);
+
+        $next = Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
+            ->where('datum', '>=', $nextWeekStart)
+            ->orderBy('datum')
+            ->first();
+
+        if ($next) {
+            $this->weekOffset = (int) $currentWeekStart->diffInWeeks(
+                $next->datum->copy()->startOfWeek()
+            );
         }
     }
 
