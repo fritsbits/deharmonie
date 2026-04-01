@@ -11,7 +11,7 @@
         {{-- Print button top-right --}}
         <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
             <button onclick="window.print()" class="agenda-print-btn"
-                    style="display: inline-flex; align-items: center; gap: 0.4rem; background: white; color: #3a6b52; border: none; border-radius: 6px; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.6rem 1.25rem; cursor: pointer; white-space: nowrap;">
+                    style="display: inline-flex; align-items: center; gap: 0.4rem; background: white; color: #3a6b52; border: none; border-radius: 6px; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; padding: 0.6rem 1.25rem; cursor: pointer; white-space: nowrap;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <polyline points="6 9 6 2 18 2 18 9"/>
                     <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
@@ -21,20 +21,20 @@
             </button>
         </div>
         {{-- Eyebrow --}}
-        <div style="font-family: var(--font-sans); font-size: 0.6rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 0.3rem;">Agenda</div>
+        <div style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.65); margin-bottom: 0.4rem;">Agenda</div>
         {{-- Week heading + nav buttons --}}
         <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
-            <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 900; color: white; margin: 0; line-height: 1.1;">{{ $this->weekHeading }}</h2>
+            <h2 style="font-family: var(--font-sans); font-size: 2.25rem; font-weight: 900; color: white; margin: 0; line-height: 1.1;">{{ $this->weekHeading }}</h2>
             <div style="display: flex; gap: 0.6rem; align-items: center;">
                 @if ($this->hasPrev)
                     <button wire:click="prevWeek" aria-label="{{ __('activities.previous_week') }}"
-                            style="background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.6rem 1.25rem; border-radius: 999px; cursor: pointer; white-space: nowrap;">
+                            style="background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 1rem; font-weight: 700; padding: 0.6rem 1.25rem; border-radius: 999px; cursor: pointer; white-space: nowrap;">
                         ← {{ __('activities.previous_week') }}
                     </button>
                 @endif
                 @if ($this->hasNext)
                     <button wire:click="nextWeek" aria-label="{{ __('activities.next_week') }}"
-                            style="background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.6rem 1.25rem; border-radius: 999px; cursor: pointer; white-space: nowrap;">
+                            style="background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 1rem; font-weight: 700; padding: 0.6rem 1.25rem; border-radius: 999px; cursor: pointer; white-space: nowrap;">
                         {{ __('activities.next_week') }} →
                     </button>
                 @endif
@@ -68,10 +68,10 @@
             @php $dayIndex++; @endphp
 
             {{-- Day group --}}
-            <div class="agenda-day-group" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem 0;">
+            <div class="agenda-day-group" style="display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem 0;">
 
                 {{-- Day badge --}}
-                <div style="padding-top: 0.3rem; flex-shrink: 0;">
+                <div style="width: 140px; flex-shrink: 0;">
                     <span class="agenda-date-label" style="display: inline-block; background: var(--color-brand-green-tint); color: var(--color-brand-green-dark); font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.25rem 0.75rem; border-radius: 999px; white-space: nowrap; opacity: {{ $isPast ? '0.55' : '1' }};">{{ $dayLabel }}</span>
                 </div>
 
