@@ -6,12 +6,12 @@
         <span style="font-size: 1.25rem; font-weight: 700; color: var(--color-brand-muted);">{{ $this->weekHeading }}</span>
     </div>
 
-    {{-- Dark green card header --}}
-    <div class="agenda-card-header" style="background: var(--color-brand-green-mid); padding: 2.25rem 3.25rem;">
+    {{-- Dark green card header — hardcoded hex avoids missing CSS var from build --}}
+    <div class="agenda-card-header" style="background: #3a6b52; padding: 2.25rem 3.25rem;">
         {{-- Print button top-right --}}
         <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
             <button onclick="window.print()" class="agenda-print-btn"
-                    style="display: inline-flex; align-items: center; gap: 0.4rem; background: white; color: var(--color-brand-green-mid); border: none; border-radius: 6px; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.6rem 1.25rem; cursor: pointer; white-space: nowrap;">
+                    style="display: inline-flex; align-items: center; gap: 0.4rem; background: white; color: #3a6b52; border: none; border-radius: 6px; font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; padding: 0.6rem 1.25rem; cursor: pointer; white-space: nowrap;">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <polyline points="6 9 6 2 18 2 18 9"/>
                     <path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/>
@@ -52,10 +52,7 @@
                 $dateKey       = $day->toDateString();
                 $dayActivities = $this->activiteiten->get($dateKey, collect());
                 $isPast        = $day->isPast() && ! $day->isToday();
-                $monthAbbr     = mb_strtoupper(rtrim($day->locale($locale)->isoFormat('MMM'), '.'));
-                $dateNumColor  = $isPast ? 'var(--color-brand-muted)' : 'var(--color-brand-dark)';
-                $dividerColor  = $isPast ? '#dde8e3' : '#bcd6ca';
-                $headingColor  = $isPast ? 'var(--color-brand-muted)' : 'var(--color-brand-dark)';
+                $dayLabel      = mb_strtoupper($day->locale($locale)->isoFormat('dddd'));
             @endphp
 
             @if ($dayActivities->isEmpty())
@@ -66,18 +63,16 @@
 
             {{-- Divider between days --}}
             @if ($dayIndex > 0)
-                <div style="height: 1px; background: rgba(160,195,180,0.4);"></div>
+                <div style="height: 1px; background: rgba(160,195,180,0.35);"></div>
             @endif
             @php $dayIndex++; @endphp
 
             {{-- Day group --}}
-            <div class="agenda-day-group" style="display: flex; align-items: flex-start; padding: 1.75rem 0;">
+            <div class="agenda-day-group" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem 0;">
 
-                {{-- Date lockup --}}
-                <div style="width: 108px; flex-shrink: 0; text-align: right; padding-right: 1rem; border-right: 2px solid {{ $dividerColor }}; margin-right: 1.5rem;">
-                    <span class="agenda-date-label" style="display: block; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: {{ $headingColor }}; margin-bottom: 0.15rem;">{{ mb_strtoupper($day->locale($locale)->isoFormat('dddd')) }}</span>
-                    <span class="agenda-date-num" style="display: block; font-family: var(--font-sans); font-size: 2.25rem; font-weight: 900; line-height: 0.95; color: {{ $dateNumColor }};">{{ $day->day }}</span>
-                    <span class="agenda-date-label" style="display: block; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-brand-muted); margin-top: 0.2rem;">{{ $monthAbbr }}</span>
+                {{-- Day badge --}}
+                <div style="padding-top: 0.3rem; flex-shrink: 0;">
+                    <span class="agenda-date-label" style="display: inline-block; background: var(--color-brand-green-tint); color: var(--color-brand-green-dark); font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.25rem 0.75rem; border-radius: 999px; white-space: nowrap; opacity: {{ $isPast ? '0.55' : '1' }};">{{ $dayLabel }}</span>
                 </div>
 
                 {{-- Activities --}}
@@ -85,8 +80,8 @@
                     @foreach ($dayActivities as $activiteit)
                         @php
                             $cancelled  = $activiteit->status->value === 'geannuleerd';
-                            $titleColor = $cancelled ? '#9e9690' : 'var(--color-brand-dark)';
-                            $metaColor  = $cancelled ? '#c8c0bc' : 'var(--color-brand-muted)';
+                            $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-dark)';
+                            $metaColor  = $isPast || $cancelled ? '#c8c0bc' : 'var(--color-brand-muted)';
 
                             $timeStr = substr($activiteit->startuur, 0, 5);
                             if ($activiteit->einduur) {
