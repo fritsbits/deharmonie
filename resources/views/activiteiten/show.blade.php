@@ -101,7 +101,7 @@
 <div style="background: var(--color-brand-green-tint);">
 <div style="max-width: 72rem; margin: 0 auto; padding: 2.5rem 1.5rem 4rem;">
 
-    {{-- Description --}}
+    {{-- Description: raw HTML from Filament RichEditor — admin-authored only, no user input reaches this field --}}
     @if ($activiteit->beschrijving)
         <div class="mb-8" style="color: var(--color-brand-muted); font-size: 1.3rem; line-height: 1.65; max-width: 60ch;">
             {!! $activiteit->beschrijving !!}

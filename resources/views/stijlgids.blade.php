@@ -321,7 +321,7 @@
             <div style="display: flex; align-items: flex-start; gap: 0.75rem;">
                 <img src="{{ asset('images/icon-check.svg') }}" alt="" style="width: 1.5rem; height: 1.5rem; margin-top: 2px; flex-shrink: 0;">
                 <p style="font-size: 1.125rem; line-height: 1.5; color: var(--color-brand-dark); margin: 0;">
-                    <strong>Activiteiten &amp; diensten</strong> in ons centrum en bij u thuis.<br>
+                    <strong>Activiteiten &amp; diensten</strong> in ons centrum en bij je thuis.<br>
                     <span style="color: var(--color-brand-muted);">Services &amp; activités chez nous et chez vous.</span>
                 </p>
             </div>
