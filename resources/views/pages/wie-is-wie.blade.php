@@ -10,6 +10,28 @@
     bg="white"
 />
 
+{{-- PHOTO STRIP --}}
+<div style="display: flex; height: 320px; overflow: hidden;">
+    <div style="flex: 1; overflow: hidden;">
+        <img src="{{ asset('images/photo-contact-onthaal.webp') }}"
+             alt="{{ app()->getLocale() === 'fr' ? 'L\'équipe d\'accueil de De Harmonie' : 'Onthaalteam van De Harmonie' }}"
+             loading="lazy"
+             style="width: 100%; height: 100%; object-fit: cover; display: block; object-position: center 30%;">
+    </div>
+    <div style="flex: 1; overflow: hidden;">
+        <img src="{{ asset('images/photo-keukenteam.webp') }}"
+             alt="{{ app()->getLocale() === 'fr' ? 'L\'équipe de cuisine' : 'Het keukenteam' }}"
+             loading="lazy"
+             style="width: 100%; height: 100%; object-fit: cover; display: block;">
+    </div>
+    <div style="flex: 1; overflow: hidden;">
+        <img src="{{ asset('images/photo-verjaardag-team.webp') }}"
+             alt="{{ app()->getLocale() === 'fr' ? 'L\'équipe fête un anniversaire' : 'Team viert een verjaardag' }}"
+             loading="lazy"
+             style="width: 100%; height: 100%; object-fit: cover; display: block; object-position: center 40%;">
+    </div>
+</div>
+
 @php
     $staf = $categorieen->where('volgorde', '<=', 8)->values();
     $governance = $categorieen->where('volgorde', '>', 8)->values();
