@@ -27,23 +27,36 @@ class ActivityOverzicht extends Component
         }
     }
 
+    private function weekStart(): Carbon
+    {
+        return Carbon::now()->startOfWeek()->addWeeks($this->weekOffset);
+    }
+
+    private function weekEnd(): Carbon
+    {
+        return $this->weekStart()->endOfWeek();
+    }
+
     #[Computed]
     public function activeWeekStart(): Carbon
     {
-        return Carbon::now()->startOfWeek()->addWeeks($this->weekOffset);
+        return $this->weekStart();
     }
 
     #[Computed]
     public function activeWeekEnd(): Carbon
     {
-        return $this->activeWeekStart->copy()->endOfWeek();
+        return $this->weekEnd();
     }
 
     #[Computed]
     public function activiteiten(): Collection
     {
+        $start = $this->weekStart();
+        $end   = $this->weekEnd();
+
         return Activiteit::whereIn('status', ['gepubliceerd', 'geannuleerd'])
-            ->whereBetween('datum', [$this->activeWeekStart, $this->activeWeekEnd])
+            ->whereBetween('datum', [$start, $end])
             ->orderBy('datum')
             ->orderBy('startuur')
             ->get()
@@ -53,8 +66,8 @@ class ActivityOverzicht extends Component
     #[Computed]
     public function weekHeading(): string
     {
-        $start = $this->activeWeekStart;
-        $end = $this->activeWeekEnd;
+        $start  = $this->weekStart();
+        $end    = $this->weekEnd();
         $locale = app()->getLocale();
 
         if ($start->month === $end->month) {
