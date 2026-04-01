@@ -68,10 +68,10 @@
             @php $dayIndex++; @endphp
 
             {{-- Day group --}}
-            <div class="agenda-day-group" style="display: flex; align-items: center; gap: 1.5rem; padding: 1.5rem 0;">
+            <div class="agenda-day-group" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem 0;">
 
-                {{-- Day badge --}}
-                <div style="width: 140px; flex-shrink: 0;">
+                {{-- Day badge — min-height matches one title line so badge centers with first activity --}}
+                <div style="width: 140px; flex-shrink: 0; display: flex; align-items: center; min-height: calc(1.375rem * 1.3);">
                     <span class="agenda-date-label" style="display: inline-block; background: var(--color-brand-green-tint); color: var(--color-brand-green-dark); font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.25rem 0.75rem; border-radius: 999px; white-space: nowrap; opacity: {{ $isPast ? '0.55' : '1' }};">{{ $dayLabel }}</span>
                 </div>
 
