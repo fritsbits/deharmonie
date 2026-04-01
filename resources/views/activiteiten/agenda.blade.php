@@ -176,6 +176,9 @@
     .agenda-card-header,
     .agenda-print-btn { display: none !important; }
 
+    /* Show print-only date subtitle and left-align it flush with the heading */
+    .agenda-print-header { display: block !important; padding: 0 0 0.25rem !important; margin-top: -0.5rem; }
+
     /* Strip card decoration and collapse spacing so date subtitle sits under h1 */
     .agenda-screen-only section { padding-bottom: 0 !important; }
     .agenda-bg-wrapper { background: white !important; padding-top: 0 !important; }
