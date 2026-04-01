@@ -38,5 +38,5 @@ Route::prefix('fr')->middleware('locale:fr')->group(function () {
     Route::get('/qui-est-qui', [PageController::class, 'wieIsWie'])->name('fr.wie-is-wie');
 });
 
-// Stijlgids (internal design system reference — not linked publicly)
-Route::middleware('locale:nl')->get('/stijlgids', fn () => view('stijlgids'))->name('stijlgids');
+// Stijlgids (internal design system reference — auth required)
+Route::middleware(['locale:nl', 'auth'])->get('/stijlgids', fn () => view('stijlgids'))->name('stijlgids');
