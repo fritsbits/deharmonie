@@ -90,7 +90,7 @@
                                 @foreach ($dayActivities as $activiteit)
                                     @php
                                         $cancelled  = $activiteit->status->value === 'geannuleerd';
-                                        $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-green)';
+                                        $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-green-dark)';
                                         $metaColor  = $isPast || $cancelled ? '#c8c0bc' : 'var(--color-brand-muted)';
 
                                         $timeStr = substr($activiteit->startuur, 0, 5);
