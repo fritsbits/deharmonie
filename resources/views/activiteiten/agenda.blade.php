@@ -172,6 +172,47 @@
     .agenda-paper-outer { transform: none !important; }
 }
 
+.agenda-activity {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    padding: 0.625rem 2.25rem 0.625rem 0.75rem;
+    margin-left: -0.75rem;
+    margin-right: -0.75rem;
+    border-radius: 6px;
+    transition: background-color 160ms ease;
+}
+.agenda-activity::after {
+    content: '→';
+    position: absolute;
+    top: 50%;
+    right: 0.75rem;
+    transform: translateY(-50%) translateX(-4px);
+    opacity: 0;
+    color: var(--color-brand-blue);
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    font-weight: 700;
+    transition: opacity 160ms ease, transform 160ms ease;
+    pointer-events: none;
+}
+.agenda-activity:hover,
+.agenda-activity:focus-visible {
+    background-color: rgba(129, 181, 156, 0.10);
+}
+.agenda-activity:hover::after,
+.agenda-activity:focus-visible::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+}
+.agenda-activity:focus-visible {
+    outline: 2px solid var(--color-brand-green-dark);
+    outline-offset: 2px;
+}
+.agenda-activity--cancelled {
+    opacity: 0.6;
+}
+
 @@media print {
     @@page { size: A4 portrait; margin: 12mm 14mm; }
 
@@ -202,10 +243,23 @@
     .agenda-day-group { padding: 0.875rem 0 !important; }
 
     /* Slightly larger type for paper — seniors hold paper further away */
-    .agenda-activity-title { font-size: 1.25rem !important; }
+    .agenda-activity-title { font-size: 1.25rem !important; color: var(--color-brand-dark) !important; }
     .agenda-activity-meta  { font-size: 1rem !important; }
     .agenda-date-num       { font-size: 1.75rem !important; }
     .agenda-date-label     { font-size: 0.8rem !important; letter-spacing: 0.02em !important; }
+
+    /* Strip link affordances so print matches the pre-link layout */
+    .agenda-activity {
+        padding: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        background: none !important;
+        border-radius: 0 !important;
+        opacity: 1 !important;
+    }
+    .agenda-activity::after {
+        display: none !important;
+    }
 }
 </style>
 
