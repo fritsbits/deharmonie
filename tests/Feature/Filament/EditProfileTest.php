@@ -97,4 +97,25 @@ class EditProfileTest extends TestCase
 
         $this->assertSame($originalHash, $admin->refresh()->password);
     }
+
+    public function test_mismatched_confirmation_blocks_change(): void
+    {
+        $this->seed(AdminUserSeeder::class);
+        $admin = $this->adminUser();
+        $admin->password = Hash::make('old-password-123');
+        $admin->save();
+        $originalHash = $admin->password;
+
+        Livewire::actingAs($admin)
+            ->test(EditProfile::class)
+            ->fillForm([
+                'currentPassword' => 'old-password-123',
+                'password' => 'NewStrongPass!99',
+                'passwordConfirmation' => 'DifferentPass!99',
+            ])
+            ->call('save')
+            ->assertHasFormErrors(['password']);
+
+        $this->assertSame($originalHash, $admin->refresh()->password);
+    }
 }
