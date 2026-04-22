@@ -5,6 +5,7 @@ namespace Tests\Feature\Filament;
 use App\Filament\Pages\EditProfile;
 use App\Models\User;
 use Database\Seeders\AdminUserSeeder;
+use Filament\Notifications\Notification;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Livewire\Livewire;
@@ -54,6 +55,32 @@ class EditProfileTest extends TestCase
 
         $admin->refresh();
         $this->assertTrue(Hash::check('NewStrongPass!99', $admin->password));
+    }
+
+    public function test_successful_save_dispatches_persistent_confirmation_notification(): void
+    {
+        $this->seed(AdminUserSeeder::class);
+        $admin = $this->adminUser();
+        $admin->password = Hash::make('old-password-123');
+        $admin->save();
+
+        Livewire::actingAs($admin)
+            ->test(EditProfile::class)
+            ->fillForm([
+                'currentPassword' => 'old-password-123',
+                'password' => 'NewStrongPass!99',
+                'passwordConfirmation' => 'NewStrongPass!99',
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        Notification::assertNotified(
+            Notification::make()
+                ->success()
+                ->title('Wachtwoord bijgewerkt')
+                ->body('Je nieuwe wachtwoord is opgeslagen. Log opnieuw in om te bevestigen dat het werkt.')
+                ->persistent()
+        );
     }
 
     public function test_wrong_current_password_blocks_change(): void

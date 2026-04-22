@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use Filament\Auth\Pages\EditProfile as BaseEditProfile;
+use Filament\Notifications\Notification;
 use Filament\Schemas\Components\Component;
 use Filament\Schemas\Schema;
 
@@ -31,5 +32,14 @@ class EditProfile extends BaseEditProfile
     protected function getPasswordConfirmationFormComponent(): Component
     {
         return parent::getPasswordConfirmationFormComponent()->visible(true);
+    }
+
+    protected function getSavedNotification(): ?Notification
+    {
+        return Notification::make()
+            ->success()
+            ->title('Wachtwoord bijgewerkt')
+            ->body('Je nieuwe wachtwoord is opgeslagen. Log opnieuw in om te bevestigen dat het werkt.')
+            ->persistent();
     }
 }
