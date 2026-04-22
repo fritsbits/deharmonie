@@ -106,23 +106,40 @@
                                         }
                                         $metaStr = implode(' · ', $metaParts);
 
-                                        // Theme-based icon (outline; matches the mapping in index.blade.php)
+                                        // Theme-based icon silhouette — same solid-fill treatment as the homepage cards.
+                                        // Solid Heroicons for the four primary themes; closed-path outlines fill fine as silhouettes for the rest.
                                         $t = strtolower($activiteit->titel);
-                                        $iconChatOutline  = '<path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"/>';
-                                        $iconMusicOutline = '<path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z"/>';
-                                        $iconStarOutline  = '<path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/>';
-                                        $iconBoltOutline  = '<path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/>';
+                                        $iconChat     = '<path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 0 1-3.476.383.39.39 0 0 0-.297.17l-2.755 4.133a.75.75 0 0 1-1.248 0l-2.755-4.133a.39.39 0 0 0-.297-.17 48.9 48.9 0 0 1-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97Z" clip-rule="evenodd"/>';
+                                        $iconMusic    = '<path fill-rule="evenodd" d="M19.952 1.651a.75.75 0 0 1 .298.599V16.303a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.403-4.909l2.311-.66a1.5 1.5 0 0 0 1.088-1.442V6.994l-9 2.572v9.737a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.402-4.909l2.31-.66a1.5 1.5 0 0 0 1.088-1.442V5.25a.75.75 0 0 1 .544-.721l10.5-3a.75.75 0 0 1 .658.122Z" clip-rule="evenodd"/>';
+                                        $iconStar     = '<path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/>';
+                                        $iconBolt     = '<path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.268a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .895-.143Z" clip-rule="evenodd"/>';
+                                        $iconFood     = '<path d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007Z" fill="currentColor" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>';
+                                        $iconGame     = '<path d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z" fill="currentColor"/>';
+                                        $iconInfo     = '<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd" fill="currentColor"/>';
+                                        $iconWorkshop = '<path fill-rule="evenodd" d="M12 2.25a.75.75 0 0 1 .75.75v.75a.75.75 0 0 1-1.5 0V3a.75.75 0 0 1 .75-.75ZM7.5 12a4.5 4.5 0 1 1 5.585 4.362l-.09.022a.75.75 0 0 0-.574.584 3.751 3.751 0 0 1-7.416-.67.75.75 0 0 0-.75-.75H3.75a.75.75 0 0 1 0-1.5h.75a.75.75 0 0 0 .745-.667A4.5 4.5 0 0 1 7.5 12Zm-.04 4.002a6 6 0 0 1 3.84-9.712A.75.75 0 0 0 12 5.55a.75.75 0 0 0 .7-1.24A6 6 0 0 1 18 12a6.003 6.003 0 0 1-5.542 5.98.75.75 0 0 0-.534.22l-.53.53a.75.75 0 0 1-1.06 0l-.53-.53a.75.75 0 0 0-.53-.22A6 6 0 0 1 7.46 16.002Zm2.04 4.748h4.5a.75.75 0 0 1 0 1.5h-4.5a.75.75 0 0 1 0-1.5Z" clip-rule="evenodd" fill="currentColor"/>';
+                                        $iconArt      = '<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd" fill="currentColor"/>';
 
-                                        if (str_contains($t, 'conversat') || str_contains($t, 'tafel') || str_contains($t, 'praat')) {
-                                            $icon = $iconChatOutline;
+                                        // Order matters: specific keywords before broader ones.
+                                        if (str_contains($t, 'gouter') || str_contains($t, 'goûter') || str_contains($t, 'ontbijt') || str_contains($t, 'brunch') || str_contains($t, 'lunch') || str_contains($t, 'dîner') || str_contains($t, 'diner') || str_contains($t, 'souper') || str_contains($t, 'buffet') || str_contains($t, 'aperitief') || str_contains($t, 'apéro') || str_contains($t, 'apero') || str_contains($t, 'koffie') || str_contains($t, 'café') || str_contains($t, 'cafe')) {
+                                            $icon = $iconFood;
+                                        } elseif (str_contains($t, 'jeu') || str_contains($t, 'spel') || str_contains($t, 'domino') || str_contains($t, 'scrabble') || str_contains($t, 'bingo') || str_contains($t, 'schaak') || str_contains($t, 'quiz') || str_contains($t, 'kaart')) {
+                                            $icon = $iconGame;
+                                        } elseif (str_contains($t, 'infopunt') || str_contains($t, 'infopoint') || str_contains($t, 'spreekuur') || str_contains($t, 'permanentie') || str_contains($t, 'loket') || str_contains($t, 'adviseur')) {
+                                            $icon = $iconInfo;
+                                        } elseif (str_contains($t, 'expo') || str_contains($t, 'tentoon') || str_contains($t, 'museum') || str_contains($t, 'kunst')) {
+                                            $icon = $iconArt;
+                                        } elseif (str_contains($t, 'atelier') || str_contains($t, 'workshop') || str_contains($t, 'cursus') || str_contains($t, 'geheugen') || str_contains($t, 'mémoire') || str_contains($t, 'memoire')) {
+                                            $icon = $iconWorkshop;
+                                        } elseif (str_contains($t, 'conversat') || str_contains($t, 'tafel') || str_contains($t, 'praat')) {
+                                            $icon = $iconChat;
                                         } elseif (str_contains($t, 'zumba') || str_contains($t, 'dans') || str_contains($t, 'muziek') || str_contains($t, 'concert')) {
-                                            $icon = $iconMusicOutline;
+                                            $icon = $iconMusic;
                                         } elseif (str_contains($t, 'voorstelling') || str_contains($t, 'theater') || str_contains($t, 'théâtre') || str_contains($t, 'film')) {
-                                            $icon = $iconStarOutline;
-                                        } elseif (str_contains($t, 'yoga') || str_contains($t, 'sport') || str_contains($t, 'fitness') || str_contains($t, 'bewegen') || str_contains($t, 'gym')) {
-                                            $icon = $iconBoltOutline;
+                                            $icon = $iconStar;
+                                        } elseif (str_contains($t, 'yoga') || str_contains($t, 'sport') || str_contains($t, 'fitness') || str_contains($t, 'bewegen') || str_contains($t, 'gym') || str_contains($t, 'wandel') || str_contains($t, 'marche')) {
+                                            $icon = $iconBolt;
                                         } else {
-                                            $fallbacks = [$iconChatOutline, $iconMusicOutline, $iconStarOutline];
+                                            $fallbacks = [$iconChat, $iconMusic, $iconStar];
                                             $icon = $fallbacks[abs(crc32($activiteit->slug)) % 3];
                                         }
                                     @endphp
@@ -131,7 +148,7 @@
                                        href="{{ route($locale . '.activiteiten.show', $activiteit->slug) }}"
                                        style="{{ $loop->first ? '' : 'margin-top: 0.625rem;' }}">
                                         <span class="agenda-activity-icon" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+                                            <svg viewBox="0 0 24 24" fill="#5a8a74" stroke="none" width="72" height="72" style="position: absolute; bottom: -10px; right: -6px; transform: rotate(12deg); pointer-events: none;">
                                                 {!! $icon !!}
                                             </svg>
                                         </span>
@@ -213,14 +230,12 @@
 }
 .agenda-activity-icon {
     flex-shrink: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    position: relative;
+    overflow: hidden;
     width: 3.5rem;
     height: 3.5rem;
     border-radius: 10px;
-    background: var(--color-brand-green-tint);
-    color: var(--color-brand-green-mid);
+    background: var(--color-brand-green);
 }
 .agenda-activity-body {
     flex: 1;
