@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
@@ -32,6 +33,28 @@ class Activiteit extends Model implements HasMedia
         'status' => ActiviteitStatus::class,
         'interesse' => Interesse::class,
     ];
+
+    protected static function booted(): void
+    {
+        static::creating(function (Activiteit $activiteit): void {
+            if (empty($activiteit->slug)) {
+                $activiteit->slug = static::generateUniqueSlug($activiteit->titel_nl);
+            }
+        });
+    }
+
+    public static function generateUniqueSlug(string $title): string
+    {
+        $base = Str::slug($title);
+        $slug = $base;
+        $i = 1;
+
+        while (static::where('slug', $slug)->exists()) {
+            $slug = $base.'-'.(++$i);
+        }
+
+        return $slug;
+    }
 
     public function template(): BelongsTo
     {

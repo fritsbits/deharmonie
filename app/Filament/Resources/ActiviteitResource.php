@@ -17,11 +17,9 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
-use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Support\Str;
 
 class ActiviteitResource extends Resource
 {
@@ -45,12 +43,7 @@ class ActiviteitResource extends Resource
                     TextInput::make('titel_nl')
                         ->label('Titel (NL)')
                         ->required()
-                        ->maxLength(255)
-                        ->live(onBlur: true)
-                        ->afterStateUpdated(fn ($state, Set $set, string $operation) => $operation === 'create'
-                                ? $set('slug', Str::slug($state))
-                                : null
-                        ),
+                        ->maxLength(255),
                     RichEditor::make('beschrijving_nl')
                         ->label('Beschrijving (NL)')
                         ->toolbarButtons(['bold', 'bulletList', 'link']),
@@ -69,12 +62,6 @@ class ActiviteitResource extends Resource
                         ->label('Remarque / Message d\'annulation (FR)'),
                 ]),
             ])->columnSpanFull(),
-
-            TextInput::make('slug')
-                ->required()
-                ->unique(ignoreRecord: true)
-                ->maxLength(255)
-                ->hidden(),
 
             DatePicker::make('datum')
                 ->label('Datum')
