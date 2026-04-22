@@ -118,4 +118,15 @@ class EditProfileTest extends TestCase
 
         $this->assertSame($originalHash, $admin->refresh()->password);
     }
+
+    public function test_non_admin_user_cannot_access_profile_page(): void
+    {
+        $nonAdmin = User::factory()->create([
+            'email' => 'someone-else@example.test',
+        ]);
+
+        $response = $this->actingAs($nonAdmin)->get('/admin/profile');
+
+        $response->assertStatus(403);
+    }
 }
