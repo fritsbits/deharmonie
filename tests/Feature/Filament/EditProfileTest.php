@@ -24,4 +24,11 @@ class EditProfileTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_profile_page_redirects_guest_to_login(): void
+    {
+        $response = $this->get('/admin/profile');
+
+        $response->assertRedirect('/admin/login');
+    }
 }
