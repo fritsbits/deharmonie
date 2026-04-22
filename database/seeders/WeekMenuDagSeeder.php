@@ -12,7 +12,7 @@ class WeekMenuDagSeeder extends Seeder
         $data = json_decode(file_get_contents(resource_path('data/weekmenu.json')), true);
 
         foreach ($data['days'] as $day) {
-            WeekMenuDag::updateOrCreate(
+            WeekMenuDag::firstOrCreate(
                 ['date' => $day['date']],
                 [
                     'closed' => $day['closed'],

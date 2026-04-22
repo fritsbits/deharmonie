@@ -24,6 +24,16 @@ php artisan view:clear && php artisan cache:clear
 The site is served by Laravel Herd at `https://deharmonie.test` (HTTPS with self-signed cert).
 Database: MySQL via DBngin at `/tmp/mysql_3306.sock`, port 3306, no password.
 
+## Content workflow — CMS is the source of truth
+
+After the initial seed, the team adds new activiteiten, templates, and weekmenu-dagen through the Filament admin at `/admin`. The seeders in `database/seeders/` are **insert-only** (`insertOrIgnore` for activiteiten, `firstOrCreate` for templates and weekmenu) — they never overwrite rows the CMS has created or edited. This matters because:
+
+- Running `db:seed` on production against real admin data is safe: no overwrites, no data loss.
+- If you want to propagate a change from `activities.csv` / `weekmenu.json` to an env that already has that slug/date, you must either (a) delete the row via CMS first, or (b) edit it through CMS directly. Re-seeding alone won't do it.
+- Forge auto-deploys only run `migrate --force`. A one-off data migration (see `2026_04_22_150240_sync_activiteit_and_weekmenu_data`) can invoke the seeders to load an initial dataset, but once stamped in `migrations` it won't run again.
+
+**For future bulk imports**: write a new one-off data migration with the same pattern (guarded with `app()->runningUnitTests()` so feature tests keep their clean slate), not a permanent deploy-script seeder call.
+
 ## Architecture
 
 **Laravel 13 + Filament 4 + Livewire 3**

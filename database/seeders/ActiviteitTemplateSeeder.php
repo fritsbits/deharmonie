@@ -207,7 +207,7 @@ class ActiviteitTemplateSeeder extends Seeder
         ];
 
         foreach ($templates as $data) {
-            ActiviteitTemplate::updateOrCreate(
+            ActiviteitTemplate::firstOrCreate(
                 ['titel_nl' => $data['titel_nl']],
                 array_merge($data, [
                     'reeks_start' => $start,
