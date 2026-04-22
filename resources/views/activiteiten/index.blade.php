@@ -27,10 +27,12 @@
             </p>
             <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
                 <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
+                   class="press-scale"
                    style="background: var(--color-brand-blue); color: white; padding: 0.75rem 1.5rem; border-radius: 6px; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; text-decoration: none;">
                     {{ __('pages.home_hero_cta_menu') }}
                 </a>
                 <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
+                   class="press-scale"
                    style="background: transparent; color: var(--color-brand-blue); padding: 0.75rem 1.5rem; border-radius: 6px; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; text-decoration: none; border: 2px solid var(--color-brand-blue);">
                     {{ __('pages.home_hero_cta_activities') }}
                 </a>
@@ -66,17 +68,18 @@
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
             <x-section-heading>{{ __('pages.home_menu_preview_heading') }}</x-section-heading>
             <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
+               class="press-scale"
                style="background: var(--color-brand-orange); color: white; padding: 0.5rem 1.25rem; border-radius: 999px; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
                 {{ __('pages.home_menu_link') }}
             </a>
         </div>
         <div class="menu-cards" style="display: flex; gap: 1rem;">
             @php
-                $priceTag = fn($price) => '<span style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 900; color: var(--color-brand-muted); line-height: 1; white-space: nowrap; flex-shrink: 0;"><span style="font-size: 0.65em; vertical-align: baseline; margin-right: 1px;">€</span>' . $price . '</span>';
+                $priceTag = fn($price) => '<span class="tabular-nums" style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 900; color: var(--color-brand-muted); line-height: 1; white-space: nowrap; flex-shrink: 0;"><span style="font-size: 0.65em; vertical-align: baseline; margin-right: 1px;">€</span>' . $price . '</span>';
             @endphp
             {{-- Today --}}
             @if ($menuVandaag)
-            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid #e8e0d8;">
+            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; box-shadow: 0 1px 2px rgba(44,40,38,.04), 0 2px 10px rgba(44,40,38,.06), inset 0 0 0 1px rgba(44,40,38,.04);">
                 <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin: 0 0 0.4rem;">{{ __('activities.date_today') }}</p>
                 @if ($menuVandaag->special_event)
                     <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem;">
@@ -98,7 +101,7 @@
             @endif
             {{-- Tomorrow --}}
             @if ($menuMorgen)
-            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; border: 1px solid #e8e0d8;">
+            <div style="flex: 1; background: white; border-radius: 8px; padding: 1.5rem 1.75rem; box-shadow: 0 1px 2px rgba(44,40,38,.04), 0 2px 10px rgba(44,40,38,.06), inset 0 0 0 1px rgba(44,40,38,.04);">
                 <p style="font-size: 0.875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-brand-orange); margin: 0 0 0.4rem;">{{ __('activities.date_tomorrow') }}</p>
                 @if ($menuMorgen->special_event)
                     <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem;">
@@ -132,6 +135,7 @@
                 <x-section-heading>{{ __('pages.home_activities_heading') }}</x-section-heading>
             </div>
             <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}"
+               class="press-scale"
                style="background: var(--color-brand-green); color: white; padding: 0.5rem 1.25rem; border-radius: 999px; font-family: var(--font-sans); font-weight: 700; font-size: 1rem; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
                 {{ __('activities.all') }} →
             </a>
@@ -177,7 +181,7 @@
                             {!! $icon !!}
                         </svg>
                         <div style="position: absolute; bottom: 1.1rem; left: 1.25rem; z-index: 2;">
-                            <span style="font-family: var(--font-sans); font-weight: 900; font-size: 3.75rem; line-height: 1; color: white; display: block;">{{ \Carbon\Carbon::parse($activiteit->datum)->format('d') }}</span>
+                            <span class="tabular-nums" style="font-family: var(--font-sans); font-weight: 900; font-size: 3.75rem; line-height: 1; color: white; display: block;">{{ \Carbon\Carbon::parse($activiteit->datum)->format('d') }}</span>
                             <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.75rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); display: block; margin-top: 1px;">{{ strtoupper(\Carbon\Carbon::parse($activiteit->datum)->locale(app()->getLocale())->isoFormat('MMMM')) }}</span>
                         </div>
                     </div>
@@ -193,7 +197,7 @@
                             @endif
                         </h3>
                         <p style="font-size: 1.05rem; color: var(--color-brand-muted); margin: 0; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
-                            {{ substr($activiteit->startuur, 0, 5) }}<span style="display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: {{ $cc['accent'] }}; flex-shrink: 0;"></span>{{ $activiteit->locatie }}
+                            <span class="tabular-nums">{{ substr($activiteit->startuur, 0, 5) }}</span><span style="display: inline-block; width: 5px; height: 5px; border-radius: 50%; background: {{ $cc['accent'] }}; flex-shrink: 0;"></span>{{ $activiteit->locatie }}
                         </p>
                     </div>
                 </a>
@@ -243,7 +247,7 @@
     <div style="max-width: 72rem; margin: 0 auto; display: flex; gap: 4rem; align-items: center;">
 
         {{-- Building photo --}}
-        <div class="contact-photo" style="flex: 0 0 300px; height: 260px; overflow: hidden; border-radius: 12px;">
+        <div class="contact-photo img-outline" style="flex: 0 0 300px; height: 260px; overflow: hidden; border-radius: 12px; position: relative;">
             <img src="{{ asset('images/photo-gebouw.webp') }}" alt="Het gebouw van De Harmonie"
                  loading="lazy"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
@@ -273,7 +277,7 @@
                     {{ __('pages.home_practical_contact_label') }}
                 </p>
                 <p style="font-size: 1.125rem; line-height: 1.6;">
-                    <a href="tel:0220328048" style="font-weight: 700; color: var(--color-brand-blue); text-decoration: underline;">02/203.28.48</a><br>
+                    <a href="tel:0220328048" class="tabular-nums" style="font-weight: 700; color: var(--color-brand-blue); text-decoration: underline;">02/203.28.48</a><br>
                     <a href="mailto:info@deharmonie.be" style="color: var(--color-brand-blue); text-decoration: underline;">info@deharmonie.be</a>
                 </p>
             </div>

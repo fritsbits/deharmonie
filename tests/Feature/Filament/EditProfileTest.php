@@ -2,9 +2,12 @@
 
 namespace Tests\Feature\Filament;
 
+use App\Filament\Pages\EditProfile;
 use App\Models\User;
 use Database\Seeders\AdminUserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Hash;
+use Livewire\Livewire;
 use Tests\TestCase;
 
 class EditProfileTest extends TestCase
@@ -30,5 +33,26 @@ class EditProfileTest extends TestCase
         $response = $this->get('/admin/profile');
 
         $response->assertRedirect('/admin/login');
+    }
+
+    public function test_admin_can_change_password_with_valid_current_password(): void
+    {
+        $this->seed(AdminUserSeeder::class);
+        $admin = $this->adminUser();
+        $admin->password = Hash::make('old-password-123');
+        $admin->save();
+
+        Livewire::actingAs($admin)
+            ->test(EditProfile::class)
+            ->fillForm([
+                'currentPassword' => 'old-password-123',
+                'password' => 'NewStrongPass!99',
+                'passwordConfirmation' => 'NewStrongPass!99',
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $admin->refresh();
+        $this->assertTrue(Hash::check('NewStrongPass!99', $admin->password));
     }
 }

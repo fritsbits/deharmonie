@@ -23,13 +23,15 @@
 
             <div style="display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1.75rem;">
                 <a href="tel:0220328048"
+                   class="tabular-nums"
                    style="font-size: 1rem; color: white; opacity: 0.85; text-decoration: underline; text-underline-offset: 3px;">02 203 28 48</a>
                 <a href="mailto:info@deharmonie.be"
                    style="font-size: 1rem; color: white; opacity: 0.85; text-decoration: underline; text-underline-offset: 3px;">info@deharmonie.be</a>
             </div>
 
             <a href="https://www.facebook.com/deharmoniebrussel/" target="_blank" rel="noopener"
-               style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 999px; background: rgba(255,255,255,0.12); color: white; text-decoration: none; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 700; transition: background 0.15s;"
+               class="press-scale"
+               style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 999px; background: rgba(255,255,255,0.12); color: white; text-decoration: none; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 700; transition: background 0.15s, transform 0.12s ease;"
                onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>

@@ -26,7 +26,7 @@
                 {{-- Dark green card header --}}
                 <div class="agenda-card-header" style="background: #3a6b52; padding: 2.25rem 3.25rem;">
                     <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
-                        <button onclick="window.print()" class="agenda-print-btn"
+                        <button onclick="window.print()" class="agenda-print-btn press-scale"
                                 style="display: inline-flex; align-items: center; gap: 0.4rem; background: white; color: #3a6b52; border: none; border-radius: 6px; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; padding: 0.6rem 1.25rem; cursor: pointer; white-space: nowrap;">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                                 <polyline points="6 9 6 2 18 2 18 9"/>
@@ -42,12 +42,14 @@
                         <div style="display: flex; gap: 0.6rem; align-items: center;">
                             @if ($hasPrev)
                                 <a href="{{ route($agendaRoute, ['week' => $prevWeek]) }}" aria-label="{{ __('activities.previous_week') }}"
+                                        class="press-scale"
                                         style="display: inline-block; background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 1rem; font-weight: 700; padding: 0.6rem 1.25rem; border-radius: 999px; cursor: pointer; white-space: nowrap; text-decoration: none;">
                                     ← {{ __('activities.previous_week') }}
                                 </a>
                             @endif
                             @if ($hasNext)
                                 <a href="{{ route($agendaRoute, ['week' => $nextWeek]) }}" aria-label="{{ __('activities.next_week') }}"
+                                        class="press-scale"
                                         style="display: inline-block; background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 1rem; font-weight: 700; padding: 0.6rem 1.25rem; border-radius: 999px; cursor: pointer; white-space: nowrap; text-decoration: none;">
                                     {{ __('activities.next_week') }} →
                                 </a>
@@ -112,7 +114,7 @@
                                                 <x-badge type="geannuleerd" />
                                             @endif
                                         </div>
-                                        <p class="agenda-activity-meta" style="font-size: 1.0625rem; color: {{ $metaColor }}; margin: 0.25rem 0 0; font-family: var(--font-body);">{{ $metaStr }}</p>
+                                        <p class="agenda-activity-meta tabular-nums" style="font-size: 1.0625rem; color: {{ $metaColor }}; margin: 0.25rem 0 0; font-family: var(--font-body);">{{ $metaStr }}</p>
                                     </div>
                                 @endforeach
                             </div>

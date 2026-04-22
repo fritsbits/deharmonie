@@ -58,7 +58,7 @@
                         @if ($diff === 0){{ __('activities.date_today') }} &middot; @elseif ($diff === 1){{ __('activities.date_tomorrow') }} &middot; @endif
                         {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('dddd D MMMM YYYY')) }}
                     </p>
-                    <p style="font-size: 1rem; color: var(--color-brand-muted); margin: 0;">
+                    <p class="tabular-nums" style="font-size: 1rem; color: var(--color-brand-muted); margin: 0;">
                         {{ substr($activiteit->startuur, 0, 5) }}@if ($activiteit->einduur) &ndash; {{ substr($activiteit->einduur, 0, 5) }}@endif
                     </p>
                 </div>
@@ -74,7 +74,7 @@
                     @if (!$activiteit->prijs || $activiteit->prijs == 0)
                         <p style="font-weight: 700; font-size: 1.2rem; color: var(--color-brand-dark); margin: 0; line-height: 1.2;">{{ __('activities.badge_gratis') }}</p>
                     @else
-                        <span style="font-weight: 700; font-size: 1.2rem; color: var(--color-brand-dark);">
+                        <span class="tabular-nums" style="font-weight: 700; font-size: 1.2rem; color: var(--color-brand-dark);">
                             {{ $activiteit->getPrijsLabel(app()->getLocale()) }}
                         </span>
                     @endif
@@ -116,7 +116,7 @@
         </h3>
         <p style="font-size: 1.1rem; color: var(--color-brand-dark); line-height: 1.65; max-width: 60ch; margin: 0;">
             {{ __('activities.register_cta_heading') }}
-            <a href="tel:0220328048" class="font-semibold hover:underline" style="color: var(--color-brand-blue); white-space: nowrap;">02&nbsp;203&nbsp;28&nbsp;48</a>,
+            <a href="tel:0220328048" class="font-semibold hover:underline tabular-nums" style="color: var(--color-brand-blue); white-space: nowrap;">02&nbsp;203&nbsp;28&nbsp;48</a>,
             <a href="mailto:info@deharmonie.be" class="hover:underline" style="color: var(--color-brand-blue);">info@deharmonie.be</a>.
         </p>
     @elseif ($activiteit->status->value === 'geannuleerd')

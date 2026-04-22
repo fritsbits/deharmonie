@@ -13,7 +13,7 @@
                style="display: flex; align-items: center; gap: 1rem; padding: 0.65rem 0; text-decoration: none; opacity: {{ $activiteit->status->value === 'geannuleerd' ? '0.85' : '1' }}; {{ !$loop->last ? 'border-bottom: 1px solid rgba(216,211,210,0.7);' : '' }}">
 
                 {{-- Thumbnail --}}
-                <div style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; background-color: {{ $thumbColor }};">
+                <div class="img-outline" style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; background-color: {{ $thumbColor }}; position: relative;">
                     @if ($activiteit->getFirstMediaUrl('afbeelding'))
                         <img src="{{ $activiteit->getFirstMediaUrl('afbeelding') }}"
                              alt="{{ $activiteit->titel }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
@@ -42,10 +42,7 @@
                     </div>
                     <p style="font-size: 1rem; margin: 0.25rem 0 0; color: var(--color-brand-muted);">
                         <x-relative-date :datum="$activiteit->datum" />
-                        {{ __('activities.at') }} {{ substr($activiteit->startuur, 0, 5) }}
-                        @if ($activiteit->einduur)
-                            &ndash; {{ substr($activiteit->einduur, 0, 5) }}
-                        @endif
+                        {{ __('activities.at') }} <span class="tabular-nums">{{ substr($activiteit->startuur, 0, 5) }}@if ($activiteit->einduur)&ndash;{{ substr($activiteit->einduur, 0, 5) }}@endif</span>
                         <span style="color: var(--color-brand-gray-dark);">&middot;</span> {{ $activiteit->locatie }}
                     </p>
                 </div>

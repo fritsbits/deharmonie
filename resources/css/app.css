@@ -1,10 +1,45 @@
 @import 'tailwindcss';
 
+/* Crisper text on macOS — kept to root so it applies everywhere */
+html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+/* Headings stay short — balance them so line breaks don't leave orphans */
+h1, h2, h3 {
+    text-wrap: balance;
+}
+
+/* Body paragraphs avoid single-word last lines */
+p {
+    text-wrap: pretty;
+}
+
 /* Global focus styles — keyboard navigation */
 *:focus-visible {
     outline: 2px solid var(--color-brand-orange);
     outline-offset: 2px;
     border-radius: 2px;
+}
+
+/* Dynamic numbers — prevent layout shift from variable-width digits */
+.tabular-nums {
+    font-variant-numeric: tabular-nums;
+}
+
+/* Subtle image edge — makes photos feel like they sit on the page instead of bleeding into it */
+.img-outline {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+/* Tactile feedback on press — scale only on :active so we don't compete with hover transforms */
+.press-scale {
+    transition: transform 0.12s ease;
+}
+.press-scale:active {
+    transform: scale(0.96);
 }
 
 @theme {
