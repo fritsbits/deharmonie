@@ -24,9 +24,9 @@ Use Filament's built-in panel-level `->profile()` feature with a custom `EditPro
 
 Extends `Filament\Auth\Pages\EditProfile`. Overrides `form(Schema $schema): Schema` to define three fields:
 
-- **Current password** — `TextInput::make('current_password')`, `->password()`, `->required()`, `->currentPassword()` (verifies against the authenticated user's hash), `->dehydrated(false)` (not persisted).
-- **New password** — `TextInput::make('password')`, `->password()`, `->required()`, `->rule(Password::default())`, `->confirmed()`, `->revealable()`.
-- **New password confirmation** — `TextInput::make('password_confirmation')`, `->password()`, `->required()`, `->dehydrated(false)`, `->revealable()`.
+- **Current password** — `currentPassword` field (camelCase is required by Filament's base class), `->password()`, `->required()`, `->currentPassword()` (verifies against the authenticated user's hash), `->dehydrated(false)` (not persisted).
+- **New password** — `password` field, `->password()`, `->required()`, `->rule(Password::default())`, `->same('passwordConfirmation')`, `->revealable()`.
+- **New password confirmation** — `passwordConfirmation` field (camelCase mandated by parent's `same()` rule), `->password()`, `->required()`, `->dehydrated(false)`, `->revealable()`.
 
 Hashing is handled automatically by the `password => hashed` cast on `User`; no manual `Hash::make` needed.
 
