@@ -175,6 +175,36 @@ class ActiviteitTemplateSeeder extends Seeder
                 'prijs' => 1.00,
                 'interesse' => Interesse::Activiteiten,
             ],
+            [
+                'titel_nl' => 'Sociale infopunt',
+                'titel_fr' => 'Point d\'info sociale',
+                'dag_van_de_week' => 3,
+                'startuur' => '11:00:00',
+                'einduur' => '14:00:00',
+                'locatie' => 'De Harmonie',
+                'prijs' => null,
+                'interesse' => Interesse::Diensten,
+            ],
+            [
+                'titel_nl' => 'Jeu de Tables: Dominos',
+                'titel_fr' => 'Jeu de Tables: Dominos',
+                'dag_van_de_week' => 5,
+                'startuur' => '13:30:00',
+                'einduur' => '16:00:00',
+                'locatie' => 'De Harmonie',
+                'prijs' => null,
+                'interesse' => Interesse::Activiteiten,
+            ],
+            [
+                'titel_nl' => 'Jeu de Tables: Jacquet',
+                'titel_fr' => 'Jeu de Tables: Jacquet',
+                'dag_van_de_week' => 1,
+                'startuur' => '13:30:00',
+                'einduur' => '16:00:00',
+                'locatie' => 'De Harmonie',
+                'prijs' => null,
+                'interesse' => Interesse::Activiteiten,
+            ],
         ];
 
         foreach ($templates as $data) {

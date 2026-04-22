@@ -60,8 +60,8 @@ class ActiviteitSeeder extends Seeder
                 default => ActiviteitStatus::Concept,
             };
 
-            $titelNl = trim($data['Name'] ?? '');
-            $titelFr = trim($data['Name FR'] ?? '');
+            $titelNl = $this->stripEmoji(trim($data['Name'] ?? ''));
+            $titelFr = $this->stripEmoji(trim($data['Name FR'] ?? ''));
             if ($titelFr === '') {
                 $titelFr = $titelNl;
             }
@@ -125,10 +125,16 @@ class ActiviteitSeeder extends Seeder
         $this->command->info("Linked {$linked} activities to templates.");
     }
 
+    private function stripEmoji(string $title): string
+    {
+        $title = preg_replace('/[\x{1F000}-\x{1FFFF}]|[\x{2600}-\x{27BF}]|[\x{FE00}-\x{FEFF}]|\x{200D}/u', '', $title);
+
+        return trim(preg_replace('/\s+/', ' ', $title));
+    }
+
     private function normalizeTitle(string $title): string
     {
-        // Strip emojis (broad unicode ranges)
-        $title = preg_replace('/[\x{1F000}-\x{1FFFF}]|[\x{2600}-\x{27BF}]|[\x{FE00}-\x{FEFF}]|\x{200D}/u', '', $title);
+        $title = $this->stripEmoji($title);
         // Strip "NIEUW : " prefix
         $title = preg_replace('/^nieuw\s*:\s*/i', '', $title);
         // Strip " Copy N" or " copie N" suffixes
