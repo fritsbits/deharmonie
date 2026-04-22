@@ -90,7 +90,7 @@
                                 @foreach ($dayActivities as $activiteit)
                                     @php
                                         $cancelled  = $activiteit->status->value === 'geannuleerd';
-                                        $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-blue)';
+                                        $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-green-mid)';
                                         $metaColor  = $isPast || $cancelled ? '#c8c0bc' : 'var(--color-brand-muted)';
 
                                         $timeStr = substr($activiteit->startuur, 0, 5);
@@ -187,13 +187,12 @@
     position: absolute;
     top: 50%;
     right: 0.75rem;
-    transform: translateY(-50%) translateX(-4px);
-    opacity: 0;
-    color: var(--color-brand-blue);
+    transform: translateY(-50%) translateX(0);
+    color: var(--color-brand-green-mid);
     font-family: var(--font-sans);
     font-size: 1.25rem;
     font-weight: 700;
-    transition: opacity 160ms ease, transform 160ms ease;
+    transition: transform 160ms ease;
     pointer-events: none;
 }
 .agenda-activity:hover,
@@ -202,8 +201,7 @@
 }
 .agenda-activity:hover::after,
 .agenda-activity:focus-visible::after {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
+    transform: translateY(-50%) translateX(4px);
 }
 .agenda-activity:focus-visible {
     outline: 2px solid var(--color-brand-green-dark);
