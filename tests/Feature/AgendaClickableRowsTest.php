@@ -30,7 +30,7 @@ class AgendaClickableRowsTest extends TestCase
     {
         $cancelled = Activiteit::factory()->create([
             'status' => 'geannuleerd',
-            'datum' => now()->addDay()->format('Y-m-d'),
+            'datum' => now()->startOfWeek()->addDay()->format('Y-m-d'),
         ]);
 
         $response = $this->get('/activiteiten/agenda?week=0');
