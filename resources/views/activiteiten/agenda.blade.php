@@ -60,7 +60,16 @@
 
                 {{-- Day sections --}}
                 <div class="agenda-body" style="padding: 2.5rem 3.25rem 2.5rem;">
-                    @php $hasAnyActivity = false; $dayIndex = 0; @endphp
+                    @php
+                        $hasAnyActivity = false;
+                        $dayIndex = 0;
+                        $agendaColorIndex = 0;
+                        $agendaColors = [
+                            ['bg' => 'var(--color-brand-orange)', 'icon' => '#b34a2d'],
+                            ['bg' => 'var(--color-brand-blue)',   'icon' => '#2f5490'],
+                            ['bg' => 'var(--color-brand-green)',  'icon' => '#5a8a74'],
+                        ];
+                    @endphp
 
                     @for ($i = 0; $i < 7; $i++)
                         @php
@@ -89,6 +98,8 @@
                             <div style="flex: 1; min-width: 0;">
                                 @foreach ($dayActivities as $activiteit)
                                     @php
+                                        $ac = $agendaColors[$agendaColorIndex % 3];
+                                        $agendaColorIndex++;
                                         $cancelled  = $activiteit->status->value === 'geannuleerd';
                                         $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-green-dark)';
                                         $metaColor  = $isPast || $cancelled ? '#c8c0bc' : 'var(--color-brand-muted)';
@@ -147,8 +158,8 @@
                                     <a class="agenda-activity{{ $cancelled ? ' agenda-activity--cancelled' : '' }}"
                                        href="{{ route($locale . '.activiteiten.show', $activiteit->slug) }}"
                                        style="{{ $loop->first ? '' : 'margin-top: 0.625rem;' }}">
-                                        <span class="agenda-activity-icon" aria-hidden="true">
-                                            <svg viewBox="0 0 24 24" fill="#5a8a74" stroke="none" width="72" height="72" style="position: absolute; bottom: -10px; right: -6px; transform: rotate(12deg); pointer-events: none;">
+                                        <span class="agenda-activity-icon" aria-hidden="true" style="background: {{ $ac['bg'] }};">
+                                            <svg viewBox="0 0 24 24" fill="{{ $ac['icon'] }}" stroke="none" width="80" height="80" style="position: absolute; bottom: -12px; right: -10px; transform: rotate(12deg); pointer-events: none;">
                                                 {!! $icon !!}
                                             </svg>
                                         </span>
@@ -232,10 +243,9 @@
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
-    width: 3.5rem;
+    width: 5rem;
     height: 3.5rem;
     border-radius: 10px;
-    background: var(--color-brand-green);
 }
 .agenda-activity-body {
     flex: 1;
