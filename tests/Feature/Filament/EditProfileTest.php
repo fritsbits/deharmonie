@@ -55,4 +55,25 @@ class EditProfileTest extends TestCase
         $admin->refresh();
         $this->assertTrue(Hash::check('NewStrongPass!99', $admin->password));
     }
+
+    public function test_wrong_current_password_blocks_change(): void
+    {
+        $this->seed(AdminUserSeeder::class);
+        $admin = $this->adminUser();
+        $admin->password = Hash::make('old-password-123');
+        $admin->save();
+        $originalHash = $admin->password;
+
+        Livewire::actingAs($admin)
+            ->test(EditProfile::class)
+            ->fillForm([
+                'currentPassword' => 'wrong-password',
+                'password' => 'NewStrongPass!99',
+                'passwordConfirmation' => 'NewStrongPass!99',
+            ])
+            ->call('save')
+            ->assertHasFormErrors(['currentPassword']);
+
+        $this->assertSame($originalHash, $admin->refresh()->password);
+    }
 }
