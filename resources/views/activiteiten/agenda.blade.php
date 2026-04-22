@@ -105,18 +105,45 @@
                                             $metaParts[] = $activiteit->getPrijsLabel($locale);
                                         }
                                         $metaStr = implode(' · ', $metaParts);
+
+                                        // Theme-based icon (outline; matches the mapping in index.blade.php)
+                                        $t = strtolower($activiteit->titel);
+                                        $iconChatOutline  = '<path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z"/>';
+                                        $iconMusicOutline = '<path stroke-linecap="round" stroke-linejoin="round" d="m9 9 10.5-3m0 6.553v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 1 1-.99-3.467l2.31-.66a2.25 2.25 0 0 0 1.632-2.163Zm0 0V2.25L9 5.25v10.303m0 0v3.75a2.25 2.25 0 0 1-1.632 2.163l-1.32.377a1.803 1.803 0 0 1-.99-3.467l2.31-.66A2.25 2.25 0 0 0 9 15.553Z"/>';
+                                        $iconStarOutline  = '<path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z"/>';
+                                        $iconBoltOutline  = '<path stroke-linecap="round" stroke-linejoin="round" d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"/>';
+
+                                        if (str_contains($t, 'conversat') || str_contains($t, 'tafel') || str_contains($t, 'praat')) {
+                                            $icon = $iconChatOutline;
+                                        } elseif (str_contains($t, 'zumba') || str_contains($t, 'dans') || str_contains($t, 'muziek') || str_contains($t, 'concert')) {
+                                            $icon = $iconMusicOutline;
+                                        } elseif (str_contains($t, 'voorstelling') || str_contains($t, 'theater') || str_contains($t, 'théâtre') || str_contains($t, 'film')) {
+                                            $icon = $iconStarOutline;
+                                        } elseif (str_contains($t, 'yoga') || str_contains($t, 'sport') || str_contains($t, 'fitness') || str_contains($t, 'bewegen') || str_contains($t, 'gym')) {
+                                            $icon = $iconBoltOutline;
+                                        } else {
+                                            $fallbacks = [$iconChatOutline, $iconMusicOutline, $iconStarOutline];
+                                            $icon = $fallbacks[abs(crc32($activiteit->slug)) % 3];
+                                        }
                                     @endphp
 
                                     <a class="agenda-activity{{ $cancelled ? ' agenda-activity--cancelled' : '' }}"
                                        href="{{ route($locale . '.activiteiten.show', $activiteit->slug) }}"
                                        style="{{ $loop->first ? '' : 'margin-top: 0.625rem;' }}">
-                                        <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
-                                            <span class="agenda-activity-title" style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 700; color: {{ $titleColor }}; line-height: 1.3;">{{ $activiteit->titel }}</span>
-                                            @if ($cancelled)
-                                                <x-badge type="geannuleerd" />
-                                            @endif
-                                        </div>
-                                        <p class="agenda-activity-meta tabular-nums" style="font-size: 1.0625rem; color: {{ $metaColor }}; margin: 0.25rem 0 0; font-family: var(--font-body);">{{ $metaStr }}</p>
+                                        <span class="agenda-activity-icon" aria-hidden="true">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="26" height="26">
+                                                {!! $icon !!}
+                                            </svg>
+                                        </span>
+                                        <span class="agenda-activity-body">
+                                            <span style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+                                                <span class="agenda-activity-title" style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 700; color: {{ $titleColor }}; line-height: 1.3;">{{ $activiteit->titel }}</span>
+                                                @if ($cancelled)
+                                                    <x-badge type="geannuleerd" />
+                                                @endif
+                                            </span>
+                                            <span class="agenda-activity-meta tabular-nums" style="display: block; font-size: 1.0625rem; color: {{ $metaColor }}; margin: 0.25rem 0 0; font-family: var(--font-body);">{{ $metaStr }}</span>
+                                        </span>
                                     </a>
                                 @endforeach
                             </div>
@@ -173,7 +200,9 @@
 }
 
 .agenda-activity {
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     position: relative;
     text-decoration: none;
     padding: 0.625rem 2.25rem 0.625rem 0.75rem;
@@ -181,6 +210,22 @@
     margin-right: -0.75rem;
     border-radius: 6px;
     transition: background-color 160ms ease;
+}
+.agenda-activity-icon {
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 10px;
+    background: var(--color-brand-green-tint);
+    color: var(--color-brand-green-mid);
+}
+.agenda-activity-body {
+    flex: 1;
+    min-width: 0;
+    display: block;
 }
 .agenda-activity::after {
     content: '→';
@@ -256,6 +301,9 @@
         opacity: 1 !important;
     }
     .agenda-activity::after {
+        display: none !important;
+    }
+    .agenda-activity-icon {
         display: none !important;
     }
 }
