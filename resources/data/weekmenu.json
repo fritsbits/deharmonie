@@ -1,134 +1,184 @@
 {
   "week": {
-    "nl": "23 – 28 maart 2026",
-    "fr": "23 – 28 mars 2026"
+    "nl": "20 – 25 april 2026",
+    "fr": "20 – 25 avril 2026"
   },
   "days": [
     {
-      "date": "2026-03-23",
+      "date": "2026-04-20",
       "closed": false,
       "closed_label_nl": null,
       "closed_label_fr": null,
       "special_event": false,
       "price": 9,
-      "nl": { "soup": "Soep van de dag", "main": "Stoofvlees met Sla en Kroketjes", "courses": [] },
-      "fr": { "soup": "Potage du jour", "main": "Carbonnades, Frites et Salade", "courses": [] }
+      "nl": { "soup": "Soep van de dag", "main": "Gebraden Kip met Frietjes, Mayonaise en Sla", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Poulet Rôti avec Frites, Mayonnaise et Salade", "courses": [] }
     },
     {
-      "date": "2026-03-24",
+      "date": "2026-04-21",
       "closed": false,
       "closed_label_nl": null,
       "closed_label_fr": null,
       "special_event": false,
       "price": 9,
-      "nl": { "soup": "Soep van de dag", "main": "Chicon Gratin met Puree", "courses": [] },
-      "fr": { "soup": "Potage du jour", "main": "Chicon Gratin avec Purée", "courses": [] }
+      "nl": { "soup": "Soep van de dag", "main": "Lasagne met Spinazie", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Lasagne aux Épinards", "courses": [] }
     },
     {
-      "date": "2026-03-25",
+      "date": "2026-04-22",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": true,
+      "price": 10,
+      "nl": {
+        "event_label": "Verjaardagsfeest April",
+        "soup": null,
+        "main": null,
+        "courses": ["Soep van de dag", "Griekse Mezze"]
+      },
+      "fr": {
+        "event_label": "Fête d'Anniversaire Avril",
+        "soup": null,
+        "main": null,
+        "courses": ["Potage du jour", "Mezze Grecque"]
+      }
+    },
+    {
+      "date": "2026-04-23",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Gehaktbrood met Wortelen, Ajuinsaus en Aardappelen", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Pain de Viande avec Carottes, Sauce à l'Oignon et Pommes de Terre", "courses": [] }
+    },
+    {
+      "date": "2026-04-24",
       "closed": false,
       "closed_label_nl": null,
       "closed_label_fr": null,
       "special_event": false,
       "price": 10,
-      "nl": { "soup": "Soep van de dag", "main": "Rog in Botersaus met Kappers en Aardappelen", "courses": [] },
-      "fr": { "soup": "Potage du jour", "main": "Raie au Beurre avec Câpres et Pommes de Terre", "courses": [] }
+      "nl": { "soup": "Soep van de dag", "main": "Pasta met Scampi in Currysaus met Ananas", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Pâtes avec Scampis à la sauce Curry avec Ananas", "courses": [] }
     },
     {
-      "date": "2026-03-26",
+      "date": "2026-04-25",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 8,
+      "nl": { "soup": "Soep van de dag", "main": "Hamburger Jockey-Club met Sla en Aardappelen", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Hamburger Jockey-Club avec Salade et Pommes de Terre", "courses": [] }
+    },
+    {
+      "date": "2026-04-27",
       "closed": false,
       "closed_label_nl": null,
       "closed_label_fr": null,
       "special_event": false,
       "price": 9,
-      "nl": { "soup": "Soep van de dag", "main": "Keuze van Vlees met groene kool Stoemp", "courses": [] },
-      "fr": { "soup": "Potage du jour", "main": "Choix de Viande avec Stoump Chou vert", "courses": [] }
+      "nl": { "soup": "Soep van de dag", "main": "Koninginnenhapje met Frietjes", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Bouchées à la Reine avec Frites", "courses": [] }
     },
     {
-      "date": "2026-03-27",
+      "date": "2026-04-28",
       "closed": false,
       "closed_label_nl": null,
       "closed_label_fr": null,
       "special_event": false,
       "price": 9,
-      "nl": { "soup": "Soep van de dag", "main": "Spaghetti met Forestière Saus", "courses": [] },
-      "fr": { "soup": "Potage du jour", "main": "Spaghetti Sauce Forestière", "courses": [] }
+      "nl": { "soup": "Soep van de dag", "main": "Witte en Zwarte Pens met Rode Kool en Aardappelen", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Boudin Noir et Blanc avec Chou Rouge et Pommes de Terre", "courses": [] }
     },
     {
-      "date": "2026-03-28",
+      "date": "2026-04-29",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Spaghetti Bolognaise", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Spaghetti Bolognaise", "courses": [] }
+    },
+    {
+      "date": "2026-04-30",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Kabeljauw Fiorentina met Rijst", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Cabillaud à la Florentine avec Riz", "courses": [] }
+    },
+    {
+      "date": "2026-05-01",
       "closed": true,
-      "closed_label_nl": "Gesloten",
-      "closed_label_fr": "Fermé",
+      "closed_label_nl": "Gesloten — Feest van de Arbeid",
+      "closed_label_fr": "Fermé — Fête du Travail",
       "special_event": false,
       "price": null,
       "nl": { "soup": null, "main": null, "courses": [] },
       "fr": { "soup": null, "main": null, "courses": [] }
     },
     {
-      "date": "2026-03-30",
-      "closed": false,
-      "closed_label_nl": null,
-      "closed_label_fr": null,
-      "special_event": false,
-      "price": 10,
-      "nl": { "soup": "Soep van de dag", "main": "Kalf blanket met Bulgur", "courses": [] },
-      "fr": { "soup": "Potage du jour", "main": "Blanquette de veau avec Boulgour", "courses": [] }
-    },
-    {
-      "date": "2026-03-31",
-      "closed": false,
-      "closed_label_nl": null,
-      "closed_label_fr": null,
-      "special_event": false,
-      "price": 9,
-      "nl": { "soup": "Soep van de dag", "main": "Varkensgebraad met gestoofd Witloof en Aardappelen", "courses": [] },
-      "fr": { "soup": "Potage du jour", "main": "Rôti de Porc avec Chicon Braisé et Pommes de Terre", "courses": [] }
-    },
-    {
-      "date": "2026-04-01",
-      "closed": false,
-      "closed_label_nl": null,
-      "closed_label_fr": null,
-      "special_event": false,
-      "price": 9,
-      "nl": { "soup": "Soep van de dag", "main": "Parmentier met Erwtjes en Wortelen", "courses": [] },
-      "fr": { "soup": "Potage du jour", "main": "Hachis Parmentier au Petits Pois et Carottes", "courses": [] }
-    },
-    {
-      "date": "2026-04-02",
-      "closed": false,
-      "closed_label_nl": null,
-      "closed_label_fr": null,
-      "special_event": true,
-      "price": 20,
-      "nl": {
-        "event_label": "Paasmenu",
-        "soup": null,
-        "main": null,
-        "courses": ["Kir Royal", "Scampi met look", "Eendenborst", "Gestoofd Witloof", "Duo van IJs op Lente wijze"]
-      },
-      "fr": {
-        "event_label": "Menu de Pâques",
-        "soup": null,
-        "main": null,
-        "courses": ["Kir Royal", "Scampi à l'Ail", "Magret de Canard", "Chicons Braisés et pdt Rissolées", "Duo de Glace Printanière"]
-      }
-    },
-    {
-      "date": "2026-04-03",
-      "closed": false,
-      "closed_label_nl": null,
-      "closed_label_fr": null,
-      "special_event": false,
-      "price": 10,
-      "nl": { "soup": "Soep van de dag", "main": "Witte Vis met Aardappelsla en princesseboontjes", "courses": [] },
-      "fr": { "soup": "Potage du jour", "main": "Poisson Blanc avec une salade de Pommes de terre et princesse", "courses": [] }
-    },
-    {
-      "date": "2026-04-04",
+      "date": "2026-05-02",
       "closed": true,
-      "closed_label_nl": "Gesloten",
-      "closed_label_fr": "Fermé",
+      "closed_label_nl": "Gesloten — Brugdag",
+      "closed_label_fr": "Fermé — Pont",
+      "special_event": false,
+      "price": null,
+      "nl": { "soup": null, "main": null, "courses": [] },
+      "fr": { "soup": null, "main": null, "courses": [] }
+    },
+    {
+      "date": "2026-05-05",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 8,
+      "nl": { "soup": "Soep van de dag", "main": "Worst met Stoemp met Spruiten", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Saucisse avec Stoemp aux Choux de Bruxelles", "courses": [] }
+    },
+    {
+      "date": "2026-05-06",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Kalfsblanket met Rijst", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Blanquette de Veau avec Riz", "courses": [] }
+    },
+    {
+      "date": "2026-05-08",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Ossobuco van Kalkoen en Griekse Pasta", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Osso Bucco de Dinde et Pâtes Grecques", "courses": [] }
+    },
+    {
+      "date": "2026-05-09",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Fish Stick met Tartaarsaus, Aardappelen en Cressonette", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Fish Stick à la Sauce Tartare, Pommes de Terre et Cressonette", "courses": [] }
+    },
+    {
+      "date": "2026-05-14",
+      "closed": true,
+      "closed_label_nl": "Gesloten — O.L.V. Hemelvaart",
+      "closed_label_fr": "Fermé — Ascension",
       "special_event": false,
       "price": null,
       "nl": { "soup": null, "main": null, "courses": [] },
