@@ -90,7 +90,7 @@
                                 @foreach ($dayActivities as $activiteit)
                                     @php
                                         $cancelled  = $activiteit->status->value === 'geannuleerd';
-                                        $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-dark)';
+                                        $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-blue)';
                                         $metaColor  = $isPast || $cancelled ? '#c8c0bc' : 'var(--color-brand-muted)';
 
                                         $timeStr = substr($activiteit->startuur, 0, 5);
@@ -107,7 +107,9 @@
                                         $metaStr = implode(' · ', $metaParts);
                                     @endphp
 
-                                    <div class="agenda-activity" style="{{ $loop->first ? '' : 'margin-top: 1.25rem;' }}">
+                                    <a class="agenda-activity{{ $cancelled ? ' agenda-activity--cancelled' : '' }}"
+                                       href="{{ route($locale . '.activiteiten.show', $activiteit->slug) }}"
+                                       style="{{ $loop->first ? '' : 'margin-top: 0.625rem;' }}">
                                         <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
                                             <span class="agenda-activity-title" style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 700; color: {{ $titleColor }}; line-height: 1.3;">{{ $activiteit->titel }}</span>
                                             @if ($cancelled)
@@ -115,7 +117,7 @@
                                             @endif
                                         </div>
                                         <p class="agenda-activity-meta tabular-nums" style="font-size: 1.0625rem; color: {{ $metaColor }}; margin: 0.25rem 0 0; font-family: var(--font-body);">{{ $metaStr }}</p>
-                                    </div>
+                                    </a>
                                 @endforeach
                             </div>
                         </div>
