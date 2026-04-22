@@ -7,7 +7,6 @@ use App\Models\Activiteit;
 use App\Models\ActiviteitTemplate;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ActiviteitSeeder extends Seeder
 {
@@ -17,10 +16,6 @@ class ActiviteitSeeder extends Seeder
 
         $handle = fopen($csvPath, 'r');
         $headers = array_map('trim', fgetcsv($handle, 0, ',', '"', ''));
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        Activiteit::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $rows = [];
 
@@ -87,12 +82,13 @@ class ActiviteitSeeder extends Seeder
 
         fclose($handle);
 
+        $inserted = 0;
         foreach (array_chunk($rows, 100) as $chunk) {
-
-            Activiteit::insert($chunk);
+            $inserted += Activiteit::insertOrIgnore($chunk);
         }
 
-        $this->command->info('Imported '.count($rows).' activities from CSV.');
+        $skipped = count($rows) - $inserted;
+        $this->command?->info("Imported {$inserted} new activities from CSV ({$skipped} already existed, skipped).");
 
         $this->linkTemplateSessions();
     }
@@ -122,7 +118,7 @@ class ActiviteitSeeder extends Seeder
             }
         });
 
-        $this->command->info("Linked {$linked} activities to templates.");
+        $this->command?->info("Linked {$linked} activities to templates.");
     }
 
     private function stripEmoji(string $title): string

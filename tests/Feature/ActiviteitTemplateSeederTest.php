@@ -13,11 +13,11 @@ class ActiviteitTemplateSeederTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_seeder_creates_eighteen_templates(): void
+    public function test_seeder_creates_nineteen_templates(): void
     {
         $this->seed(ActiviteitTemplateSeeder::class);
 
-        $this->assertSame(18, ActiviteitTemplate::count());
+        $this->assertSame(19, ActiviteitTemplate::count());
     }
 
     public function test_country_line_dance_template_has_correct_data(): void
@@ -50,7 +50,7 @@ class ActiviteitTemplateSeederTest extends TestCase
         $this->seed(ActiviteitTemplateSeeder::class);
         $this->seed(ActiviteitTemplateSeeder::class);
 
-        $this->assertSame(18, ActiviteitTemplate::count());
+        $this->assertSame(19, ActiviteitTemplate::count());
     }
 
     public function test_no_existing_activities_are_linked_to_templates(): void

@@ -5,22 +5,11 @@ namespace Database\Seeders;
 use App\Enums\Interesse;
 use App\Models\ActiviteitTemplate;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class ActiviteitTemplateSeeder extends Seeder
 {
     public function run(): void
     {
-        if (DB::getDriverName() === 'mysql') {
-            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        }
-
-        ActiviteitTemplate::truncate();
-
-        if (DB::getDriverName() === 'mysql') {
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        }
-
         $start = today();
         $einde = today()->addMonths(3);
 
@@ -186,6 +175,16 @@ class ActiviteitTemplateSeeder extends Seeder
                 'interesse' => Interesse::Diensten,
             ],
             [
+                'titel_nl' => 'Maandelijks verjaardagsfeest',
+                'titel_fr' => 'Fête d\'anniversaire mensuelle',
+                'dag_van_de_week' => 3,
+                'startuur' => '14:00:00',
+                'einduur' => null,
+                'locatie' => 'De Harmonie',
+                'prijs' => null,
+                'interesse' => Interesse::Activiteiten,
+            ],
+            [
                 'titel_nl' => 'Jeu de Tables: Dominos',
                 'titel_fr' => 'Jeu de Tables: Dominos',
                 'dag_van_de_week' => 5,
@@ -208,12 +207,15 @@ class ActiviteitTemplateSeeder extends Seeder
         ];
 
         foreach ($templates as $data) {
-            ActiviteitTemplate::create(array_merge($data, [
-                'reeks_start' => $start,
-                'reeks_einde' => $einde,
-            ]));
+            ActiviteitTemplate::updateOrCreate(
+                ['titel_nl' => $data['titel_nl']],
+                array_merge($data, [
+                    'reeks_start' => $start,
+                    'reeks_einde' => $einde,
+                ])
+            );
         }
 
-        $this->command->info('Seeded '.count($templates).' activity templates.');
+        $this->command?->info('Seeded '.count($templates).' activity templates.');
     }
 }
