@@ -145,12 +145,13 @@ class ActiviteitResource extends Resource
         return $table
             ->defaultGroup(
                 Group::make('week_start')
+                    ->titlePrefixedWithLabel(false)
                     ->getKeyFromRecordUsing(fn (Activiteit $a) => $a->datum->copy()->startOfWeek()->toDateString())
                     ->getTitleFromRecordUsing(function (Activiteit $a): string {
                         $start = $a->datum->copy()->startOfWeek()->locale('nl');
                         $end = $a->datum->copy()->endOfWeek()->locale('nl');
 
-                        return 'WEEK VAN '.strtoupper($start->isoFormat('D MMMM').' – '.$end->isoFormat('D MMMM YYYY'));
+                        return $start->isoFormat('D MMMM').' – '.$end->isoFormat('D MMMM');
                     })
                     ->orderQueryUsing(fn ($query, $direction) => $query->orderBy('datum', $direction))
                     ->scopeQueryByKeyUsing(fn ($query, $key) => $query->whereBetween('datum', [

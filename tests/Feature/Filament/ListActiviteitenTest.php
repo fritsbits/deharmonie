@@ -39,8 +39,10 @@ class ListActiviteitenTest extends TestCase
             ->test(ListActiviteiten::class)
             ->assertSuccessful()
             ->assertCanSeeTableRecords([$activiteit])
-            ->assertSee('Zumba woensdag')
-            ->assertSee('WEEK VAN');
+            ->assertSee('Zumba woensdag');
+        // Group header shows the localized week range (e.g. "27 juni – 3 juli").
+        $weekStart = $wednesday->copy()->startOfWeek()->locale('nl');
+        $component->assertSee($weekStart->isoFormat('D MMMM'));
 
         // The table is configured with a week_start Group as default.
         $table = $component->instance()->getTable();
