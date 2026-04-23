@@ -75,14 +75,8 @@ class ActiviteitResource extends Resource
                                     ->default('De Harmonie')
                                     ->required()
                                     ->maxLength(255),
-                                Toggle::make('has_notice_nl')
-                                    ->label('Voeg opmerking of annuleringsmelding toe')
-                                    ->live()
-                                    ->dehydrated(false)
-                                    ->default(fn (?Activiteit $record): bool => filled($record?->notice_nl)),
                                 Textarea::make('notice_nl')
-                                    ->label('Opmerking / annuleringsmelding')
-                                    ->visible(fn (Get $get): bool => (bool) $get('has_notice_nl')),
+                                    ->label('Opmerking / annuleringsmelding'),
                             ]),
                             Tab::make('Français')->schema([
                                 TextInput::make('titel_fr')
@@ -97,14 +91,8 @@ class ActiviteitResource extends Resource
                                     ->default('De Harmonie')
                                     ->required()
                                     ->maxLength(255),
-                                Toggle::make('has_notice_fr')
-                                    ->label('Ajouter une remarque ou message d\'annulation')
-                                    ->live()
-                                    ->dehydrated(false)
-                                    ->default(fn (?Activiteit $record): bool => filled($record?->notice_fr)),
                                 Textarea::make('notice_fr')
-                                    ->label('Remarque / message d\'annulation')
-                                    ->visible(fn (Get $get): bool => (bool) $get('has_notice_fr')),
+                                    ->label('Remarque / message d\'annulation'),
                             ]),
                         ]),
                     ]),
