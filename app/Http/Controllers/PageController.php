@@ -59,7 +59,7 @@ class PageController extends Controller
 
     public function wieIsWie(): View
     {
-        $categorieen = TeamCategorie::with(['leden' => fn ($q) => $q->orderBy('volgorde')])
+        $categorieen = TeamCategorie::with(['leden' => fn ($q) => $q->orderBy('naam')])
             ->orderBy('volgorde')
             ->get();
 

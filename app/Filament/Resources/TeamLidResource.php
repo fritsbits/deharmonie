@@ -22,7 +22,9 @@ class TeamLidResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-user-group';
 
-    protected static ?string $navigationLabel = 'Teamleden';
+    protected static ?string $navigationLabel = 'Wie is wie';
+
+    protected static ?int $navigationSort = 4;
 
     protected static ?string $modelLabel = 'Teamlid';
 
@@ -52,11 +54,6 @@ class TeamLidResource extends Resource
                 ->required()
                 ->columnSpanFull(),
 
-            TextInput::make('volgorde')
-                ->label('Volgorde')
-                ->numeric()
-                ->default(0)
-                ->columnSpanFull(),
         ]);
     }
 
@@ -73,11 +70,8 @@ class TeamLidResource extends Resource
                 Tables\Columns\TextColumn::make('categorie.naam_nl')
                     ->label('Categorie')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('volgorde')
-                    ->label('Volgorde')
-                    ->sortable(),
             ])
-            ->defaultSort('team_categorie_id')
+            ->defaultSort('naam')
             ->filters([
                 Tables\Filters\SelectFilter::make('team_categorie_id')
                     ->label('Categorie')
