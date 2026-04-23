@@ -27,9 +27,9 @@ Reframe the admin around a single "Activiteiten" resource whose layout mirrors t
 
 ## Approach
 
-Single resource: `ActiviteitResource`. Two new fields on `Activiteit`: `soort` (`vast | speciaal`) and `subcategorie` (15 cases under 4 hoofdcategorieën). The admin index uses Filament 4's standard `Tables\Table` with native `Group::make('week_start')` to render a week-grouped layout, plus a single `ViewColumn` for the rich icon+title+badges+meta cell — staying inside Filament idioms instead of building a custom Livewire page. Two header buttons — `[+ Vaste activiteit]` and `[+ Speciaal moment]` — drive the create flow and pre-set `soort`. Reuse is handled by a `Kopieer naar...` row action, with bulk date generation as part of both the create and copy flows.
+Single resource: `ActiviteitResource`. Two new fields on `Activiteit`: `soort` (`vast | speciaal`) and `categorie` (8 cases — the Resoo umbrella organisation's standard activity types). The admin index uses Filament 4's standard `Tables\Table` with native `Group::make('week_start')` to render a week-grouped layout, plus a single `ViewColumn` for the rich icon+title+badges+meta cell — staying inside Filament idioms instead of building a custom Livewire page. Two header buttons — `[+ Vaste activiteit]` and `[+ Speciaal moment]` — drive the create flow and pre-set `soort`. Reuse is handled by a `Kopieer naar...` row action, with bulk date generation as part of both the create and copy flows.
 
-`ActiviteitTemplate` model, table, and resource are removed. The frontend overzicht page derives its theme cards by querying distinct `Activiteit` titles where `soort = vast` and grouping by `categorie`, instead of reading from templates by hardcoded IDs.
+`ActiviteitTemplate` model, table, and resource are removed. The frontend overzicht page reduces from 4 themed cards to 3 highlight sections ("Beweeg mee", "Maak & leer mee", "Ontmoet & beleef mee"), each bundling a few of the 8 categorieën and showing 4–5 highlighted recurring activities + a "meer →" link. Section grouping is a presentation concern (lives in the blade), not a database concept.
 
 ## Components
 
@@ -38,7 +38,7 @@ Single resource: `ActiviteitResource`. Two new fields on `Activiteit`: `soort` (
 **`Activiteit` table — add columns:**
 
 - `soort` enum, NOT NULL, no default — `'vast'` or `'speciaal'`. Drives where the activity surfaces on the public site.
-- `subcategorie` enum, NOT NULL, no default — one of 15 values (see Subcategorie enum below). Drives the agenda icon. Hoofdcategorie (theme grouping on the overzicht page) is derived from subcategorie via `Subcategorie::hoofd()` — not stored separately.
+- `categorie` enum, NOT NULL, no default — one of 8 values (see Categorie enum below). Drives the agenda icon and the section grouping on the public overzicht page.
 
 **`Activiteit` table — drop columns:**
 
@@ -64,47 +64,32 @@ case Speciaal = 'speciaal';
 
 Implements `HasLabel` for Filament. Labels: "Vast" / "Speciaal".
 
-**New enum: `App\Enums\Hoofdcategorie`**
+**New enum: `App\Enums\Categorie`**
 
-```php
-case Beweeg = 'beweeg';
-case Maak = 'maak';
-case Praat = 'praat';
-case Vier = 'vier';
-```
+8 cases, the Resoo umbrella organisation's standard activity types. Each case implements `HasLabel` (NL via `getLabel()`, FR via `labelFr()`), and exposes `icon(): string` (SVG path) and `section(): string` (which of the three public-overzicht highlight sections this categorie belongs to: `'beweeg' | 'maak_leer' | 'ontmoet_beleef'`).
 
-Implements `HasLabel` and `HasColor`. Defines the four theme groupings on the public overzicht page. Stored nowhere; derived from `Subcategorie::hoofd()`.
+| Categorie          | Section          | NL label            | FR label              | Icon          |
+|--------------------|------------------|---------------------|-----------------------|---------------|
+| `sport_beweging`   | beweeg           | Sport & beweging    | Sport & mouvement     | bolt          |
+| `creatief`         | maak_leer        | Creatief            | Créatif               | sparkles      |
+| `bijleren`         | maak_leer        | Bijleren            | Apprendre             | brein         |
+| `ontmoeting`       | ontmoet_beleef   | Ontmoeting          | Rencontre             | tekstballon   |
+| `spelletjes`       | ontmoet_beleef   | Spelletjes          | Jeux                  | dobbelstenen  |
+| `culinair`         | ontmoet_beleef   | Culinair            | Culinaire             | bestek        |
+| `film_muziek`      | ontmoet_beleef   | Film & muziek       | Cinéma & musique      | muzieknoot    |
+| `op_uitstap`       | ontmoet_beleef   | Op uitstap          | En sortie             | voetafdruk    |
 
-| Hoofdcategorie | NL label    | FR label             | Color         |
-|----------------|-------------|----------------------|---------------|
-| Beweeg         | Beweeg mee  | Bougez avec nous     | brand-orange  |
-| Maak           | Maak iets   | Créez ensemble       | brand-green   |
-| Praat          | Praat & leer| Parlez & apprenez    | brand-blue    |
-| Vier           | Vier mee    | Fêtez avec nous      | warm-tan (#d4956a) |
+The 3 sections (presentation only — not a separate enum or column):
 
-**New enum: `App\Enums\Subcategorie`**
+| Section value     | NL heading              | FR heading                     |
+|-------------------|-------------------------|--------------------------------|
+| `beweeg`          | Beweeg mee              | Bougez avec nous               |
+| `maak_leer`       | Maak & leer mee         | Créez & apprenez avec nous     |
+| `ontmoet_beleef`  | Ontmoet & beleef mee    | Rencontrez & vivez avec nous   |
 
-15 cases, grouped by hoofdcategorie (Beweeg 3 + Maak 4 + Praat 4 + Vier 4). Each case implements `HasLabel` (NL+FR via `getLabel()` and `labelFr()`), and exposes `hoofd(): Hoofdcategorie` and `icon(): string` (SVG path).
+Section labels, taglines, photos, colors, and rotation/decoration metadata live inline in the overzicht blade (same pattern as the current `$themes` array). The blade looks up activities by section by calling `$activiteit->categorie->section()`.
 
-| Subcategorie         | Hoofd  | NL label              | FR label                  | Icon            |
-|----------------------|--------|-----------------------|---------------------------|-----------------|
-| `dans`               | Beweeg | Dans                  | Danse                     | dansend figuur  |
-| `gym_fitness`        | Beweeg | Gym & fitness         | Gym & fitness             | bolt            |
-| `wandeling`          | Beweeg | Wandeling             | Promenade                 | voetafdruk      |
-| `handwerk`           | Maak   | Handwerk              | Travaux manuels           | naald & draad   |
-| `creatief_atelier`   | Maak   | Creatief atelier      | Atelier créatif           | sparkles        |
-| `koken`              | Maak   | Koken & confituur     | Cuisine & confiture       | kookpot         |
-| `digitaal_atelier`   | Maak   | Digitaal atelier      | Atelier numérique         | laptop          |
-| `conversatietafel`   | Praat  | Conversatietafel      | Table de conversation     | tekstballon     |
-| `geheugen_brein`     | Praat  | Geheugen & brein      | Mémoire & cerveau         | brein           |
-| `info_spreekuur`     | Praat  | Info & spreekuur      | Info & permanence         | info-cirkel     |
-| `cultuur_museum`     | Praat  | Cultuur & museum      | Culture & musée           | kaderlijst      |
-| `spelletjes`         | Vier   | Spelletjes            | Jeux                      | dobbelstenen    |
-| `feest`              | Vier   | Feest & verjaardag    | Fête & anniversaire       | ster            |
-| `muziek_concert`     | Vier   | Muziek & concert      | Musique & concert         | muzieknoot      |
-| `eten_drinken`       | Vier   | Eten & drinken        | Repas & boissons          | bestek          |
-
-Icon SVGs: 9 are reused from the existing `agenda.blade.php` keyword set (chat, music, star, bolt, food, game, info, sparkles, kaderlijst). 6 new icons need to be added: dans, voetafdruk, naald, kookpot, laptop, brein. All lifted from Heroicons solid set where available; for icons not in Heroicons (naald & draad), use a close-fit alternative or a custom SVG. The icon library lives in `App\Support\SubcategorieIcons` as a `match` returning SVG path strings, so it can be referenced from both the enum and the views.
+Icon SVGs: 8 needed, all lifted from the existing 15-icon working set in the previous spec revision. 7 are reused as-is from `agenda.blade.php` (bolt, sparkles, chat-bubble = tekstballon, dice = dobbelstenen, food = bestek (cutlery), music = muzieknoot). 1 (brein for Bijleren) and 1 (voetafdruk for Op uitstap) come from Heroicons solid (light-bulb and map-pin respectively, as close-fits). The icon library lives in `App\Support\CategorieIcons` as a `match` returning SVG path strings, so it can be referenced from both the enum and the views.
 
 ### 2. Admin — `ActiviteitResource` index
 
@@ -128,12 +113,12 @@ Use Filament's standard `Tables\Table` with the native `Group` API to produce a 
 
 **Columns:**
 
-- `ViewColumn::make('rich')` — custom blade view (`resources/views/filament/tables/columns/activiteit-rich-cell.blade.php`) renders: subcategorie icon (filled with hoofdcategorie color) + title + soort/status badges + meta line (date, time, location). One column doing the visual work; everything else stays as standard Filament columns or is absorbed into this cell. The view is a small, focused blade — orders of magnitude less code than a full Livewire page.
+- `ViewColumn::make('rich')` — custom blade view (`resources/views/filament/tables/columns/activiteit-rich-cell.blade.php`) renders: categorie icon + title + soort/status badges + meta line (date, time, location). One column doing the visual work; everything else stays as standard Filament columns or is absorbed into this cell. The view is a small, focused blade — orders of magnitude less code than a full Livewire page.
 
 **Filters** (Filament `SelectFilter` instances on the table):
 
 - Periode: `Filter::make('periode')` with a custom form — options "Deze week" (default), "Komende 4 weken", "Deze maand", "Alles vanaf vandaag", "Archief". Default selection is "Komende 4 weken" so the begeleider sees the planning horizon.
-- Hoofdcategorie: `SelectFilter::make('hoofdcategorie')` with options from `Hoofdcategorie::cases()`; query callback uses `whereIn('subcategorie', $hoofd->subs())`.
+- Categorie: `SelectFilter::make('categorie')` with options from `Categorie::cases()`.
 - Soort: `SelectFilter::make('soort')` with vast/speciaal options.
 - Status: `SelectFilter::make('status')` with concept/gepubliceerd/geannuleerd options.
 
@@ -159,7 +144,7 @@ Single form, used by both create flows and edit. The `soort` field is hidden but
 **Sections in form:**
 
 - **Talen tabs** (NL / FR): titel, beschrijving, opmerking — unchanged from current
-- **Subcategorie**: required dropdown, 15 options grouped by hoofdcategorie (Filament `Select::make()->options()` with grouped array). Each option shows its own icon as a prefix so the begeleider sees the visual that will appear on the agenda.
+- **Categorie**: required dropdown, 8 options (Filament `Select::make()->options()`). Each option's label includes its icon's name in parentheses so the begeleider knows which visual will appear on the agenda.
 - **Wanneer**:
   - Datum (single date picker)
   - Startuur, Einduur
@@ -191,7 +176,7 @@ Soort blijft: vast / speciaal (gelijk aan origineel)
 Categorie blijft: <origineel>
 ```
 
-Always copies title (NL+FR), subcategorie, soort, max_deelnemers. Foto is copied by re-attaching the same media (Spatie Media Library copy). Unchecked fields revert to defaults (or empty for opmerking).
+Always copies title (NL+FR), categorie, soort, max_deelnemers. Foto is copied by re-attaching the same media (Spatie Media Library copy). Unchecked fields revert to defaults (or empty for opmerking).
 
 Status of all copies defaults to `concept` (so the user reviews before publishing).
 
@@ -205,14 +190,14 @@ $bijzondereActiviteiten = Activiteit::whereNull('template_id')->...
 
 **After:**
 ```php
-// One row per distinct title within each hoofdcategorie, picked from upcoming vaste activiteiten.
+// One row per distinct title within each section, picked from upcoming vaste activiteiten.
 $vasteAanbod = Activiteit::query()
     ->where('soort', Soort::Vast)
     ->where('datum', '>=', today())
     ->where('status', ActiviteitStatus::Gepubliceerd)
     ->orderBy('datum')
     ->get()
-    ->groupBy(fn ($a) => $a->subcategorie->hoofd()->value)
+    ->groupBy(fn ($a) => $a->categorie->section())
     ->map(fn ($acts) => $acts->unique('titel_nl')->values());
 
 $bijzondereActiviteiten = Activiteit::query()
@@ -224,15 +209,14 @@ $bijzondereActiviteiten = Activiteit::query()
     ->get();
 ```
 
-In `overzicht.blade.php`: the four hardcoded `$themes` arrays keep their decorative metadata (photo, tagline, rotation, color) but read their list of activities from `$vasteAanbod[$hoofdcategorie->value]` instead of `$reeksen->only($theme['ids'])`. The hardcoded ID lists disappear.
+In `overzicht.blade.php`: the four hardcoded `$themes` arrays are reduced to **three** `$sections` arrays — Beweeg mee, Maak & leer mee, Ontmoet & beleef mee. Each keeps its decorative metadata (photo, tagline, rotation, color) and reads its list of activities from `$vasteAanbod[$section_id]` (where `$section_id` is `'beweeg'`, `'maak_leer'`, or `'ontmoet_beleef'`). Each section shows up to 5 highlighted recurring titles + a "en meer →" link to the agenda. The hardcoded template-ID lists disappear.
 
 ### 6. Frontend — `agenda.blade.php`
 
 The ~150-line keyword-matching block (lines ~120–155) is replaced by:
 
 ```php
-$icon = $activiteit->subcategorie->icon();
-$iconColor = $activiteit->subcategorie->hoofd()->color();
+$icon = $activiteit->categorie->icon();
 ```
 
 Same visual output, deterministic source.
@@ -256,18 +240,18 @@ Same visual output, deterministic source.
 Single migration file `XXXX_XX_XX_activiteiten_soort_and_categorie.php` performs in order:
 
 1. Add `soort` enum column, nullable (temporary).
-2. Add `subcategorie` enum column, nullable (temporary).
+2. Add `categorie` enum column, nullable (temporary).
 3. Backfill `soort`:
    - `template_id IS NULL` → `'speciaal'`
    - `template_id IS NOT NULL` → `'vast'`
-4. Backfill `subcategorie` from an inline title→subcategorie map. Two passes:
-   - **Pass A — exact map for the 19 existing templates** (Zumba → `dans`, Bingo → `spelletjes`, Geheugenatelier → `geheugen_brein`, etc.). All vaste activiteiten inherit the subcategorie of their template.
-   - **Pass B — keyword match for speciale momenten.** Match the same keyword sets the agenda blade currently uses (museum/expo → `cultuur_museum`, wandeling/balade → `wandeling`, festival/concert → `muziek_concert`, etc.). Anything that doesn't match falls back to `cultuur_museum` (the most catch-all bucket for one-off events) and is flagged for manual review.
-5. Make `soort` and `subcategorie` NOT NULL.
+4. Backfill `categorie` from an inline title→categorie map. Two passes:
+   - **Pass A — exact map for the 19 existing templates** (Zumba → `sport_beweging`, Bingo → `spelletjes`, Geheugenatelier → `bijleren`, Conversatietafel * → `ontmoeting`, etc.). All vaste activiteiten inherit the categorie of their template.
+   - **Pass B — keyword match for speciale momenten.** Museum/expo/tentoon → `op_uitstap`; wandel/balade/marche → `op_uitstap`; festival/concert/musette → `film_muziek`; documentaire/film/theater/voorstelling → `film_muziek`; brunch/buffet/aperitief/koffie/confituur → `culinair`; feest/verjaardag/inhuldiging → `ontmoeting`; atelier/workshop/haken/naai/diamond → `creatief`; spel/jeu/scrabble/bingo → `spelletjes`; geheugen/digitaal/cursus → `bijleren`; conversatie/startbabbel → `ontmoeting`; zumba/dans/gym/pilates/yoga → `sport_beweging`. Anything that doesn't match falls back to `ontmoeting` (the most catch-all bucket for one-off events) and is flagged for manual review.
+5. Make `soort` and `categorie` NOT NULL.
 6. Drop FK and `template_id` column from `activiteiten`.
 7. Drop `activiteit_templates` table.
 
-Backfill mapping tables (template-title → subcategorie, and keyword → subcategorie) live inside the migration file as inline arrays; one-shot, never reused.
+Backfill mapping tables (template-title → categorie, and keyword → categorie) live inside the migration file as inline arrays; one-shot, never reused.
 
 After the migration ships and runs in prod, the admin reviews any rows where the keyword fallback fired (logged during migration to `storage/logs/categorie-backfill.log` with each affected activiteit ID + title) and corrects them via the admin.
 
@@ -279,10 +263,10 @@ Feature tests in `tests/Feature/`:
 - **`ActiviteitCreateSpeciaalTest`** — creates one row, `soort = speciaal`, no bulk options shown.
 - **`ActiviteitKopieerTest`** — copies an activity to specific dates and to "elke X t/m Y"; asserts new rows exist with correct fields, status = concept, foto re-attached.
 - **`ActiviteitBulkEditTest`** — selects 3 Zumba's, updates description, asserts all 3 are updated and other Zumba's are not.
-- **`OverzichtPaginaTest`** — seeds vaste activiteiten across all 4 hoofdcategorieën + a few speciale, asserts the 4 thema-kaarten group correctly via `subcategorie->hoofd()` and the bijzondere momenten section shows the speciale rows.
-- **`AgendaIconTest`** — asserts `Subcategorie::dans->icon()` returns the dans SVG, `Subcategorie::bingo... → spelletjes` returns the dobbelstenen SVG, etc., for all 15 subcategorieën; asserts the agenda blade renders the right icon for a known activity.
-- **`HoofdcategorieDerivationTest`** — asserts every `Subcategorie` case has a `hoofd()` that returns one of the four `Hoofdcategorie` cases (no orphans, no nulls).
-- **`MigratieBackfillTest`** — seeds the pre-migration schema with the existing 19 templates and a sample of speciale activiteiten, runs the migration, asserts soort + subcategorie are correctly set per the title→subcategorie map, the templates table is gone, and the fallback log captured the speciale momenten that hit the catch-all.
+- **`OverzichtPaginaTest`** — seeds vaste activiteiten across all 8 categorieën + a few speciale, asserts the 3 sections group correctly via `Categorie::section()` and the bijzondere momenten section shows the speciale rows.
+- **`AgendaIconTest`** — asserts `Categorie::SportBeweging->icon()` returns the bolt SVG, `Categorie::Spelletjes->icon()` returns the dobbelstenen SVG, etc., for all 8 categorieën; asserts the agenda blade renders the right icon for a known activity.
+- **`CategorieSectionTest`** — asserts every `Categorie` case has a `section()` returning one of `'beweeg'`, `'maak_leer'`, or `'ontmoet_beleef'` (no orphans, no nulls).
+- **`MigratieBackfillTest`** — seeds the pre-migration schema with the existing 19 templates and a sample of speciale activiteiten, runs the migration, asserts soort + categorie are correctly set per the title→categorie map, the templates table is gone, and the fallback log captured the speciale momenten that hit the catch-all.
 
 The existing `ActiviteitenSeeder` is updated to set `soort` and `categorie` on every seeded row. The `ActiviteitTemplateSeeder` is deleted.
 

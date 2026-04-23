@@ -2,9 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Replace the two-resource (Activiteiten + Reeksen) admin with one Activiteiten resource that mirrors the public agenda layout, driven by a `soort` field (vast/speciaal) and a 15-value `subcategorie` field that determines the icon and theme grouping.
+> **AMENDMENT (2026-04-23, mid-execution):** The categorisation model switched from "4 hoofdcategorieën + 15 subcategorieën" to **8 flat Resoo-standard categorieën + 3 presentation sections**. The previously-implemented Task 1 (`Hoofdcategorie` enum) was reverted and is removed from this plan. **Trust the spec (`docs/superpowers/specs/2026-04-23-activiteiten-admin-redesign-design.md`) over any stale wording in this file** — the spec is the source of truth. Tasks below have been amended inline; numbering is preserved (Task 1 is gone, no renumbering) so existing TaskList references stay valid.
 
-**Architecture:** Drop `ActiviteitTemplate` and `template_id`. Add `soort` and `subcategorie` columns to `activiteiten`. Two new enums (`Soort`, `Subcategorie`) + a derived `Hoofdcategorie` enum (groups subcategorieën for the public theme cards). The Filament admin uses the standard `Tables\Table` with native `Group::make('week_start')` for the week-by-week layout and a single `ViewColumn` for the rich icon+title+meta cell — staying inside Filament idioms. The public `overzicht.blade.php` and `agenda.blade.php` switch from template-based and keyword-based logic to enum-driven lookups.
+**Goal:** Replace the two-resource (Activiteiten + Reeksen) admin with one Activiteiten resource that mirrors the public agenda layout, driven by a `soort` field (vast/speciaal) and a 8-value `categorie` field (Resoo umbrella org's standard activity types) that determines the icon and overzicht-page section grouping.
+
+**Architecture:** Drop `ActiviteitTemplate` and `template_id`. Add `soort` and `categorie` columns to `activiteiten`. Two new enums (`Soort`, `Categorie`). `Categorie` exposes a `section()` method returning one of three section identifiers (`'beweeg'`, `'maak_leer'`, `'ontmoet_beleef'`) used for grouping on the public overzicht page. The Filament admin uses the standard `Tables\Table` with native `Group::make('week_start')` for the week-by-week layout and a single `ViewColumn` for the rich icon+title+meta cell — staying inside Filament idioms. The public `overzicht.blade.php` and `agenda.blade.php` switch from template-based and keyword-based logic to enum-driven lookups.
 
 **Tech Stack:** Laravel 13, Filament 4, Livewire 3, PHPUnit 12, Pint, Spatie Media Library 11
 
@@ -76,7 +78,14 @@ Expected output: 19 templates with their IDs. Save this output — it's the sour
 
 ---
 
-### Task 1: `Hoofdcategorie` enum
+### Task 1: REMOVED (was: Hoofdcategorie enum)
+
+This task was implemented in commit `e34f624`, then reverted in `9883b54` after the categorisation model changed (see top-of-file amendment). Skip directly to Task 2.
+
+<details>
+<summary>Original Task 1 content (no longer applies)</summary>
+
+### Original Task 1: `Hoofdcategorie` enum
 
 **Files:**
 - Create: `app/Enums/Hoofdcategorie.php`
@@ -200,6 +209,8 @@ git commit -m "feat: add Hoofdcategorie enum (4 themes for activity grouping)
 
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
 ```
+
+</details>
 
 ---
 
