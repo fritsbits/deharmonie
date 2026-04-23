@@ -26,6 +26,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -53,131 +54,133 @@ class ActiviteitResource extends Resource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema->components([
-            Tabs::make('Talen')->tabs([
-                Tab::make('Nederlands')->schema([
-                    TextInput::make('titel_nl')
-                        ->label('Titel')
-                        ->required()
-                        ->maxLength(255),
-                    RichEditor::make('beschrijving_nl')
-                        ->label('Beschrijving')
-                        ->toolbarButtons(['bold', 'bulletList', 'link']),
-                    TextInput::make('locatie_nl')
-                        ->label('Locatie')
-                        ->default('De Harmonie')
-                        ->required()
-                        ->maxLength(255),
-                    Toggle::make('has_notice_nl')
-                        ->label('Voeg opmerking of annuleringsmelding toe')
-                        ->live()
-                        ->dehydrated(false)
-                        ->default(fn (?Activiteit $record): bool => filled($record?->notice_nl)),
-                    Textarea::make('notice_nl')
-                        ->label('Opmerking / annuleringsmelding')
-                        ->visible(fn (Get $get): bool => (bool) $get('has_notice_nl')),
-                ]),
-                Tab::make('Français')->schema([
-                    TextInput::make('titel_fr')
-                        ->label('Titre')
-                        ->required()
-                        ->maxLength(255),
-                    RichEditor::make('beschrijving_fr')
-                        ->label('Description')
-                        ->toolbarButtons(['bold', 'bulletList', 'link']),
-                    TextInput::make('locatie_fr')
-                        ->label('Lieu')
-                        ->default('De Harmonie')
-                        ->required()
-                        ->maxLength(255),
-                    Toggle::make('has_notice_fr')
-                        ->label('Ajouter une remarque ou message d\'annulation')
-                        ->live()
-                        ->dehydrated(false)
-                        ->default(fn (?Activiteit $record): bool => filled($record?->notice_fr)),
-                    Textarea::make('notice_fr')
-                        ->label('Remarque / message d\'annulation')
-                        ->visible(fn (Get $get): bool => (bool) $get('has_notice_fr')),
-                ]),
-            ])->columnSpanFull(),
-
-            Section::make('Wat')
-                ->description('Categorie en publicatie-status')
-                ->aside()
-                ->compact()
-                ->schema([
-                    Select::make('categorie')
-                        ->label('Categorie')
-                        ->placeholder('Kies een categorie')
-                        ->options(collect(Categorie::cases())->mapWithKeys(fn ($c) => [$c->value => $c->getLabel()])->all())
-                        ->required(),
-
-                    Radio::make('status')
-                        ->label('Status')
-                        ->options(ActiviteitStatus::class)
-                        ->default(ActiviteitStatus::Gepubliceerd)
-                        ->required()
-                        ->inline()
-                        ->inlineLabel(false),
-                ])
-                ->columns(2)
-                ->columnSpanFull(),
-
-            Section::make('Wanneer')
-                ->description('Datum en uren van de activiteit')
-                ->aside()
-                ->compact()
-                ->schema([
-                    Grid::make(4)->schema([
-                        DatePicker::make('datum')
-                            ->label('Datum')
-                            ->required()
-                            ->columnSpan(2),
-                        TimePicker::make('startuur')
-                            ->label('Startuur')
-                            ->required()
-                            ->seconds(false),
-                        TimePicker::make('einduur')
-                            ->label('Einduur')
-                            ->seconds(false),
+        return $schema
+            ->columns(3)
+            ->components([
+                // Main column — content (titel, beschrijving, locatie, opmerking) per taal
+                Group::make()
+                    ->columnSpan(2)
+                    ->schema([
+                        Section::make()
+                            ->schema([
+                                Tabs::make('Talen')->tabs([
+                                    Tab::make('Nederlands')->schema([
+                                        TextInput::make('titel_nl')
+                                            ->label('Titel')
+                                            ->required()
+                                            ->maxLength(255),
+                                        RichEditor::make('beschrijving_nl')
+                                            ->label('Beschrijving')
+                                            ->toolbarButtons(['bold', 'bulletList', 'link']),
+                                        TextInput::make('locatie_nl')
+                                            ->label('Locatie')
+                                            ->default('De Harmonie')
+                                            ->required()
+                                            ->maxLength(255),
+                                        Toggle::make('has_notice_nl')
+                                            ->label('Voeg opmerking of annuleringsmelding toe')
+                                            ->live()
+                                            ->dehydrated(false)
+                                            ->default(fn (?Activiteit $record): bool => filled($record?->notice_nl)),
+                                        Textarea::make('notice_nl')
+                                            ->label('Opmerking / annuleringsmelding')
+                                            ->visible(fn (Get $get): bool => (bool) $get('has_notice_nl')),
+                                    ]),
+                                    Tab::make('Français')->schema([
+                                        TextInput::make('titel_fr')
+                                            ->label('Titre')
+                                            ->required()
+                                            ->maxLength(255),
+                                        RichEditor::make('beschrijving_fr')
+                                            ->label('Description')
+                                            ->toolbarButtons(['bold', 'bulletList', 'link']),
+                                        TextInput::make('locatie_fr')
+                                            ->label('Lieu')
+                                            ->default('De Harmonie')
+                                            ->required()
+                                            ->maxLength(255),
+                                        Toggle::make('has_notice_fr')
+                                            ->label('Ajouter une remarque ou message d\'annulation')
+                                            ->live()
+                                            ->dehydrated(false)
+                                            ->default(fn (?Activiteit $record): bool => filled($record?->notice_fr)),
+                                        Textarea::make('notice_fr')
+                                            ->label('Remarque / message d\'annulation')
+                                            ->visible(fn (Get $get): bool => (bool) $get('has_notice_fr')),
+                                    ]),
+                                ]),
+                            ]),
                     ]),
-                ])
-                ->columnSpanFull(),
 
-            Section::make('Praktisch')
-                ->description('Prijs en maximum aantal deelnemers')
-                ->aside()
-                ->compact()
-                ->schema([
-                    TextInput::make('prijs')
-                        ->label('Prijs')
-                        ->prefix('€')
-                        ->numeric()
-                        ->helperText('Leeg laten = gratis'),
+                // Right sidebar — settings (status, categorie, wanneer, praktisch)
+                Group::make()
+                    ->columnSpan(1)
+                    ->schema([
+                        Section::make('Status')
+                            ->compact()
+                            ->schema([
+                                Radio::make('status')
+                                    ->hiddenLabel()
+                                    ->options(ActiviteitStatus::class)
+                                    ->default(ActiviteitStatus::Gepubliceerd)
+                                    ->required(),
+                            ]),
 
-                    TextInput::make('max_deelnemers')
-                        ->label('Max deelnemers')
-                        ->integer()
-                        ->helperText('Leeg laten = onbeperkt'),
-                ])
-                ->columns(2)
-                ->columnSpanFull(),
+                        Section::make('Categorie')
+                            ->compact()
+                            ->schema([
+                                Select::make('categorie')
+                                    ->hiddenLabel()
+                                    ->placeholder('Kies een categorie')
+                                    ->options(collect(Categorie::cases())->mapWithKeys(fn ($c) => [$c->value => $c->getLabel()])->all())
+                                    ->required(),
+                            ]),
 
-            Hidden::make('soort_query')
-                ->default(fn (): string => request()->query('soort', '')),
+                        Section::make('Wanneer')
+                            ->compact()
+                            ->schema([
+                                DatePicker::make('datum')
+                                    ->label('Datum')
+                                    ->required(),
+                                Grid::make(2)->schema([
+                                    TimePicker::make('startuur')
+                                        ->label('Startuur')
+                                        ->required()
+                                        ->seconds(false),
+                                    TimePicker::make('einduur')
+                                        ->label('Einduur')
+                                        ->seconds(false),
+                                ]),
+                                Toggle::make('herhaal_wekelijks')
+                                    ->label('Plan automatisch in: elke week tot...')
+                                    ->live()
+                                    ->dehydrated(false)
+                                    ->visible(fn (Get $get, string $operation): bool => $operation === 'create' && $get('soort_query') === 'vast'),
+                                DatePicker::make('herhaal_t_m')
+                                    ->label('Tot en met')
+                                    ->dehydrated(false)
+                                    ->required(fn (Get $get): bool => (bool) $get('herhaal_wekelijks'))
+                                    ->visible(fn (Get $get, string $operation): bool => $operation === 'create' && (bool) $get('herhaal_wekelijks')),
+                            ]),
 
-            Toggle::make('herhaal_wekelijks')
-                ->label('Plan automatisch in: elke week tot...')
-                ->live()
-                ->dehydrated(false)
-                ->visible(fn (Get $get, string $operation): bool => $operation === 'create' && $get('soort_query') === 'vast'),
+                        Section::make('Praktisch')
+                            ->compact()
+                            ->schema([
+                                TextInput::make('prijs')
+                                    ->label('Prijs')
+                                    ->prefix('€')
+                                    ->numeric()
+                                    ->helperText('Leeg laten = gratis'),
+                                TextInput::make('max_deelnemers')
+                                    ->label('Max deelnemers')
+                                    ->integer()
+                                    ->helperText('Leeg laten = onbeperkt'),
+                            ]),
 
-            DatePicker::make('herhaal_t_m')
-                ->label('Tot en met')
-                ->dehydrated(false)
-                ->required(fn (Get $get): bool => (bool) $get('herhaal_wekelijks'))
-                ->visible(fn (Get $get, string $operation): bool => $operation === 'create' && (bool) $get('herhaal_wekelijks')),
-        ]);
+                        Hidden::make('soort_query')
+                            ->default(fn (): string => request()->query('soort', '')),
+                    ]),
+            ]);
     }
 
     public static function table(Table $table): Table

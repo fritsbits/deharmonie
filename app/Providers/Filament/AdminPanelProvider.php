@@ -62,6 +62,32 @@ class AdminPanelProvider extends PanelProvider
     color: white !important;
     border-color: rgba(255,255,255,0.45) !important;
 }
+
+/* Tabs — switch from pill style to clear underline tabs */
+.fi-tabs {
+    border-bottom: 1px solid #e5e7eb;
+    gap: 0;
+    padding: 0 0.5rem;
+}
+.fi-tabs-tab {
+    border-radius: 0 !important;
+    background: transparent !important;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -1px;
+    padding: 0.875rem 1.25rem !important;
+    font-weight: 600;
+    color: #706662 !important;
+}
+.fi-tabs-tab:hover {
+    color: #2c2826 !important;
+    background: transparent !important;
+}
+.fi-tabs-tab.fi-active,
+.fi-tabs-tab[aria-selected="true"] {
+    border-bottom-color: var(--color-brand-orange, #eb6643) !important;
+    color: var(--color-brand-orange, #eb6643) !important;
+    background: transparent !important;
+}
 </style>
 <script>
     /* Force the sidebar collapsed on every page load. The toggle button still
