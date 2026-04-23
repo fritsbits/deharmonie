@@ -30,7 +30,6 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
-use Filament\Schemas\Components\Utilities\Get as SchemaGet;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
@@ -76,7 +75,7 @@ class ActiviteitResource extends Resource
                         ->default(fn (?Activiteit $record): bool => filled($record?->notice_nl)),
                     Textarea::make('notice_nl')
                         ->label('Opmerking / annuleringsmelding')
-                        ->visible(fn (SchemaGet $get): bool => (bool) $get('has_notice_nl')),
+                        ->visible(fn (Get $get): bool => (bool) $get('has_notice_nl')),
                 ]),
                 Tab::make('Français')->schema([
                     TextInput::make('titel_fr')
@@ -98,7 +97,7 @@ class ActiviteitResource extends Resource
                         ->default(fn (?Activiteit $record): bool => filled($record?->notice_fr)),
                     Textarea::make('notice_fr')
                         ->label('Remarque / message d\'annulation')
-                        ->visible(fn (SchemaGet $get): bool => (bool) $get('has_notice_fr')),
+                        ->visible(fn (Get $get): bool => (bool) $get('has_notice_fr')),
                 ]),
             ])->columnSpanFull(),
 
