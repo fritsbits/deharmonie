@@ -27,7 +27,7 @@ Reframe the admin around a single "Activiteiten" resource whose layout mirrors t
 
 ## Approach
 
-Single resource: `ActiviteitResource`. Two new fields on `Activiteit`: `soort` (`vast | speciaal`) and `categorie` (`beweeg | maak | praat | vier`). The admin index becomes a custom Livewire page that renders the same week-grouped, day-sectioned layout as the public agenda. Two header buttons — `[+ Vaste activiteit]` and `[+ Speciaal moment]` — drive the create flow and pre-set `soort`. Reuse is handled by a `Kopieer naar...` action on existing activities, with bulk date generation as part of both the create and copy flows.
+Single resource: `ActiviteitResource`. Two new fields on `Activiteit`: `soort` (`vast | speciaal`) and `subcategorie` (15 cases under 4 hoofdcategorieën). The admin index uses Filament 4's standard `Tables\Table` with native `Group::make('week_start')` to render a week-grouped layout, plus a single `ViewColumn` for the rich icon+title+badges+meta cell — staying inside Filament idioms instead of building a custom Livewire page. Two header buttons — `[+ Vaste activiteit]` and `[+ Speciaal moment]` — drive the create flow and pre-set `soort`. Reuse is handled by a `Kopieer naar...` row action, with bulk date generation as part of both the create and copy flows.
 
 `ActiviteitTemplate` model, table, and resource are removed. The frontend overzicht page derives its theme cards by querying distinct `Activiteit` titles where `soort = vast` and grouping by `categorie`, instead of reading from templates by hardcoded IDs.
 
@@ -108,47 +108,49 @@ Icon SVGs: 9 are reused from the existing `agenda.blade.php` keyword set (chat, 
 
 ### 2. Admin — `ActiviteitResource` index
 
-Replace the default Filament table with a custom list page rendered as a Livewire component. The page lives at `App\Filament\Resources\ActiviteitResource\Pages\ListActiviteiten` and uses Filament's `Page` chrome (header, breadcrumbs, actions) but renders a custom Blade view in the content slot.
+Use Filament's standard `Tables\Table` with the native `Group` API to produce a week-grouped, day-ordered listing. No custom Livewire page, no custom blade view — staying within Filament idioms keeps bulk actions, row actions, filters, pagination, dark mode, accessibility, and Filament-version compatibility working out of the box.
 
-**Header actions** (top-right of the page):
+**Header actions** (top-right of the page) — defined on `ListActiviteiten extends ListRecords` via `getHeaderActions()`:
 
-- `[+ Vaste activiteit]` — primary button, opens create form with `soort = vast` pre-set
-- `[+ Speciaal moment]` — secondary button, opens create form with `soort = speciaal` pre-set
+- `[+ Vaste activiteit]` — primary `CreateAction` with `->url(fn () => static::getResource()::getUrl('create', ['soort' => 'vast']))`
+- `[+ Speciaal moment]` — secondary `CreateAction` with `->url(fn () => static::getResource()::getUrl('create', ['soort' => 'speciaal']))`
 
-**Filters** (above the list):
+**Default group** (set on the table, no group dropdown needed for the user — call `->groupsOnly()` to hide the group switcher):
 
-- Periode: deze week (default) / volgende 4 weken / deze maand / alles vanaf vandaag / archief
-- Hoofdcategorie: alle / Beweeg / Maak / Praat / Vier (filtering on hoofd is done by `whereIn('subcategorie', $hoofd->subs())`)
-- Soort: alle / vast / speciaal
-- Status: alle / concept / gepubliceerd / geannuleerd
-
-**List body:** week-grouped, day-sectioned, mirroring `agenda.blade.php`:
-
-```
-─── WEEK VAN 27 APRIL – 3 MEI ───
-
-MAANDAG     [icon] Creativiteit workshop      14:00 · De Harmonie
-            [icon] Conversatietafel Italiaans 14:30 · De Harmonie
-
-DINSDAG     [icon] Zumba                      14:00 · De Harmonie
-            [geannuleerd] [icon] Uitstap museum 13:00 · Brussel ⭐speciaal
-
-WOENSDAG    [icon] Bingo                      14:00 · De Harmonie
+```php
+->defaultGroup(
+    Group::make('week_start')
+        ->getKeyFromRecordUsing(fn (Activiteit $a) => $a->datum->copy()->startOfWeek()->toDateString())
+        ->getTitleFromRecordUsing(fn (Activiteit $a) => 'WEEK VAN ' . $a->datum->copy()->startOfWeek()->locale('nl')->isoFormat('D MMMM') . ' – ' . $a->datum->copy()->endOfWeek()->locale('nl')->isoFormat('D MMMM YYYY'))
+        ->collapsible()
+)
 ```
 
-- Icon comes from `subcategorie->icon()`, colored from `subcategorie->hoofd()->color()` (so the four hoofdcategorieën each get their consistent brand color across all their subs).
-- Cancelled activities: muted, with `[geannuleerd]` badge.
-- Speciale momenten: small `⭐ speciaal` badge to distinguish at a glance.
-- Concept activities: greyed background, `[concept]` badge.
-- Click anywhere on a row → navigates to edit page.
-- Each row has a row-level menu (kebab): Bewerken / Kopieer naar... / Annuleren / Verwijderen.
+**Columns:**
 
-**Bulk actions** (visible when ≥1 row selected via checkbox):
+- `ViewColumn::make('rich')` — custom blade view (`resources/views/filament/tables/columns/activiteit-rich-cell.blade.php`) renders: subcategorie icon (filled with hoofdcategorie color) + title + soort/status badges + meta line (date, time, location). One column doing the visual work; everything else stays as standard Filament columns or is absorbed into this cell. The view is a small, focused blade — orders of magnitude less code than a full Livewire page.
 
-- Publiceer
-- Annuleer
-- Verwijder
-- Bewerk gemeenschappelijke velden (small bulk-edit form for title/description/price — handles the "tikfout in alle Zumba's" case)
+**Filters** (Filament `SelectFilter` instances on the table):
+
+- Periode: `Filter::make('periode')` with a custom form — options "Deze week" (default), "Komende 4 weken", "Deze maand", "Alles vanaf vandaag", "Archief". Default selection is "Komende 4 weken" so the begeleider sees the planning horizon.
+- Hoofdcategorie: `SelectFilter::make('hoofdcategorie')` with options from `Hoofdcategorie::cases()`; query callback uses `whereIn('subcategorie', $hoofd->subs())`.
+- Soort: `SelectFilter::make('soort')` with vast/speciaal options.
+- Status: `SelectFilter::make('status')` with concept/gepubliceerd/geannuleerd options.
+
+**Row actions** (Filament `Tables\Actions\ActionGroup` per row):
+
+- `EditAction` — default
+- `Action::make('kopieer')` — opens the kopieer-form (see Section 4)
+- `Action::make('annuleer')` — sets status to geannuleerd
+
+**Bulk actions** (Filament `BulkActionGroup` on the table):
+
+- `BulkAction::make('publish')` — sets status to gepubliceerd
+- `BulkAction::make('cancel')` — sets status to geannuleerd
+- `BulkAction::make('bulk_edit')` — opens a form with optional fields (beschrijving NL/FR, locatie, prijs); only filled fields are applied. Handles the "tikfout in alle Zumba's" case.
+- `DeleteBulkAction`
+
+**Trade-off accepted:** the admin presentation is tabular within each week-group rather than the public agenda's day-card layout. The information architecture (week-grouped, chronological, icon + title + meta per row) still matches the public agenda — just rendered as Filament rows instead of cards. This is a deliberate "good enough WYSIWYG" choice in exchange for staying inside Filament idioms.
 
 ### 3. Admin — Create / Edit form
 

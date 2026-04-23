@@ -4,7 +4,7 @@
 
 **Goal:** Replace the two-resource (Activiteiten + Reeksen) admin with one Activiteiten resource that mirrors the public agenda layout, driven by a `soort` field (vast/speciaal) and a 15-value `subcategorie` field that determines the icon and theme grouping.
 
-**Architecture:** Drop `ActiviteitTemplate` and `template_id`. Add `soort` and `subcategorie` columns to `activiteiten`. Two new enums (`Soort`, `Subcategorie`) + a derived `Hoofdcategorie` enum (groups subcategorieën for the public theme cards). Custom Filament list page renders the agenda week-by-day. The public `overzicht.blade.php` and `agenda.blade.php` switch from template-based and keyword-based logic to enum-driven lookups.
+**Architecture:** Drop `ActiviteitTemplate` and `template_id`. Add `soort` and `subcategorie` columns to `activiteiten`. Two new enums (`Soort`, `Subcategorie`) + a derived `Hoofdcategorie` enum (groups subcategorieën for the public theme cards). The Filament admin uses the standard `Tables\Table` with native `Group::make('week_start')` for the week-by-week layout and a single `ViewColumn` for the rich icon+title+meta cell — staying inside Filament idioms. The public `overzicht.blade.php` and `agenda.blade.php` switch from template-based and keyword-based logic to enum-driven lookups.
 
 **Tech Stack:** Laravel 13, Filament 4, Livewire 3, PHPUnit 12, Pint, Spatie Media Library 11
 
@@ -30,10 +30,9 @@
 | Modify | `database/factories/ActiviteitFactory.php` | Add soort + subcategorie defaults |
 | Modify | `database/seeders/ActiviteitSeeder.php` | Set soort + subcategorie per row |
 | Modify | `app/Filament/Resources/ActiviteitResource.php` | New form (subcategorie select), drop template column, add header buttons, kopieer + bulk-edit actions |
-| Modify | `app/Filament/Resources/ActiviteitResource/Pages/ListActiviteiten.php` | Custom Livewire view with week-grouped agenda layout |
-| Create | `app/Filament/Resources/ActiviteitResource/Pages/CreateVasteActiviteit.php` | Pre-sets soort=vast, shows bulk-generation toggle |
-| Modify | `app/Filament/Resources/ActiviteitResource/Pages/CreateActiviteit.php` | Pre-sets soort=speciaal (used as the speciaal create page) |
-| Create | `resources/views/filament/resources/activiteit-resource/pages/list-activiteiten.blade.php` | Week-grouped agenda layout for admin |
+| Modify | `app/Filament/Resources/ActiviteitResource/Pages/ListActiviteiten.php` | Add header create buttons (vast/speciaal) — table itself stays declared on the resource |
+| Modify | `app/Filament/Resources/ActiviteitResource/Pages/CreateActiviteit.php` | Read `?soort=` from query string; default to speciaal; bulk-generation in afterCreate |
+| Create | `resources/views/filament/tables/columns/activiteit-rich-cell.blade.php` | Single rich cell view: icon + title + badges + meta line |
 | Modify | `app/Http/Controllers/ActivityController.php` | `index()` queries by soort + subcategorie groupings |
 | Modify | `resources/views/activiteiten/overzicht.blade.php` | Theme cards read from `$vasteAanbod[hoofd]` |
 | Modify | `resources/views/activiteiten/agenda.blade.php` | Replace ~150-line keyword block with `$activiteit->subcategorie->icon()` |
@@ -1516,11 +1515,15 @@ Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
 
 ---
 
-### Task 14: Custom `ListActiviteiten` page with week-grouped layout
+### Task 14: Filament Table with week grouping + ViewColumn rich cell
 
 **Files:**
-- Modify: `app/Filament/Resources/ActiviteitResource/Pages/ListActiviteiten.php`
-- Create: `resources/views/filament/resources/activiteit-resource/pages/list-activiteiten.blade.php`
+- Modify: `app/Filament/Resources/ActiviteitResource.php` — overhaul the `table()` method
+- Modify: `app/Filament/Resources/ActiviteitResource/Pages/ListActiviteiten.php` — only adds the two header buttons
+- Create: `resources/views/filament/tables/columns/activiteit-rich-cell.blade.php`
+- Create: `tests/Feature/Filament/ListActiviteitenTest.php`
+
+This task uses the Filament 4 native `Group` and `ViewColumn` APIs. No custom Livewire page, no manually-built filter UI — bulk actions, row actions, pagination, accessibility, and dark mode all come for free.
 
 - [ ] **Step 1: Write the failing test**
 
@@ -1532,7 +1535,6 @@ Create `tests/Feature/Filament/ListActiviteitenTest.php`:
 namespace Tests\Feature\Filament;
 
 use App\Enums\ActiviteitStatus;
-use App\Enums\Soort;
 use App\Enums\Subcategorie;
 use App\Filament\Resources\ActiviteitResource\Pages\ListActiviteiten;
 use App\Models\Activiteit;
@@ -1545,34 +1547,35 @@ class ListActiviteitenTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_renders_week_grouped_layout_with_admin_login(): void
+    public function test_renders_activiteiten_with_week_group_header(): void
     {
-        $admin = User::factory()->create([
-            'email' => config('auth.admin_email'),
-        ]);
+        $admin = User::factory()->create(['email' => config('auth.admin_email')]);
+        $this->actingAs($admin);
+
+        $wednesday = now()->next('Wednesday')->startOfDay();
 
         Activiteit::factory()->vast()->create([
             'titel_nl' => 'Zumba woensdag',
             'subcategorie' => Subcategorie::Dans,
-            'datum' => now()->next('Wednesday')->toDateString(),
+            'datum' => $wednesday->toDateString(),
             'startuur' => '14:00:00',
             'status' => ActiviteitStatus::Gepubliceerd,
         ]);
-        Activiteit::factory()->speciaal()->create([
-            'titel_nl' => 'Museumbezoek vrijdag',
-            'subcategorie' => Subcategorie::CultuurMuseum,
-            'datum' => now()->next('Friday')->toDateString(),
-            'startuur' => '13:00:00',
-            'status' => ActiviteitStatus::Gepubliceerd,
-        ]);
 
+        Livewire::test(ListActiviteiten::class)
+            ->assertCanSeeTableRecords(Activiteit::all())
+            ->assertSee('Zumba woensdag')
+            ->assertSee('WEEK VAN');
+    }
+
+    public function test_header_actions_link_to_create_with_soort(): void
+    {
+        $admin = User::factory()->create(['email' => config('auth.admin_email')]);
         $this->actingAs($admin);
 
         Livewire::test(ListActiviteiten::class)
-            ->assertSee('Zumba woensdag')
-            ->assertSee('Museumbezoek vrijdag')
-            ->assertSee('WOENSDAG')
-            ->assertSee('VRIJDAG');
+            ->assertActionExists('createVast')
+            ->assertActionExists('createSpeciaal');
     }
 }
 ```
@@ -1583,209 +1586,150 @@ class ListActiviteitenTest extends TestCase
 php artisan test --compact tests/Feature/Filament/ListActiviteitenTest.php
 ```
 
-Expected: FAIL — the current ListActiviteiten still renders the default Filament table.
+Expected: FAIL — the table still has the old shape and the header actions don't exist yet.
 
-- [ ] **Step 3: Replace `ListActiviteiten` with a custom view-rendering page**
+- [ ] **Step 3: Overhaul `ActiviteitResource::table()`**
 
-Replace `app/Filament/Resources/ActiviteitResource/Pages/ListActiviteiten.php`:
+Replace the body of `table()` in `app/Filament/Resources/ActiviteitResource.php`:
+
+```php
+public static function table(Table $table): Table
+{
+    return $table
+        ->defaultGroup(
+            \Filament\Tables\Grouping\Group::make('week_start')
+                ->getKeyFromRecordUsing(fn (Activiteit $a) => $a->datum->copy()->startOfWeek()->toDateString())
+                ->getTitleFromRecordUsing(function (Activiteit $a): string {
+                    $start = $a->datum->copy()->startOfWeek()->locale('nl');
+                    $end = $a->datum->copy()->endOfWeek()->locale('nl');
+                    return 'WEEK VAN '.strtoupper($start->isoFormat('D MMMM').' – '.$end->isoFormat('D MMMM YYYY'));
+                })
+                ->collapsible()
+        )
+        ->groupsOnly()
+        ->defaultSort('datum', 'asc')
+        ->defaultPaginationPageOption(50)
+        ->columns([
+            \Filament\Tables\Columns\TextColumn::make('datum')
+                ->label('Dag')
+                ->formatStateUsing(fn (\Carbon\Carbon $state) => strtoupper($state->locale('nl')->isoFormat('ddd D/MM')))
+                ->sortable()
+                ->width('110px'),
+            \Filament\Tables\Columns\ViewColumn::make('rich')
+                ->label('Activiteit')
+                ->view('filament.tables.columns.activiteit-rich-cell'),
+            \Filament\Tables\Columns\TextColumn::make('startuur')
+                ->label('Tijd')
+                ->formatStateUsing(fn (?string $state) => $state ? substr($state, 0, 5) : '—')
+                ->width('80px'),
+            \Filament\Tables\Columns\TextColumn::make('locatie')
+                ->label('Locatie')
+                ->toggleable()
+                ->limit(20),
+        ])
+        ->filters([
+            \Filament\Tables\Filters\SelectFilter::make('hoofdcategorie')
+                ->label('Categorie')
+                ->options(collect(\App\Enums\Hoofdcategorie::cases())->mapWithKeys(fn ($h) => [$h->value => $h->getLabel()])->all())
+                ->query(function (\Illuminate\Database\Eloquent\Builder $query, array $data): \Illuminate\Database\Eloquent\Builder {
+                    if (empty($data['value'])) {
+                        return $query;
+                    }
+                    $hoofd = \App\Enums\Hoofdcategorie::from($data['value']);
+                    $subValues = collect(\App\Enums\Subcategorie::cases())
+                        ->filter(fn ($s) => $s->hoofd() === $hoofd)
+                        ->map(fn ($s) => $s->value)
+                        ->all();
+                    return $query->whereIn('subcategorie', $subValues);
+                }),
+            \Filament\Tables\Filters\SelectFilter::make('soort')
+                ->options(collect(\App\Enums\Soort::cases())->mapWithKeys(fn ($s) => [$s->value => $s->getLabel()])->all()),
+            \Filament\Tables\Filters\SelectFilter::make('status')
+                ->options(collect(\App\Enums\ActiviteitStatus::cases())->mapWithKeys(fn ($s) => [$s->value => $s->getLabel()])->all()),
+        ])
+        ->actions([
+            \Filament\Tables\Actions\ActionGroup::make([
+                \Filament\Tables\Actions\EditAction::make(),
+                // Kopieer + annuleer actions are added in Tasks 17-18.
+            ]),
+        ])
+        ->bulkActions([
+            // Bulk actions are added in Task 18.
+        ]);
+}
+```
+
+If the `ActiviteitResource` had a different `table()` body, replace it entirely. Note that the previous `bulkActions()` block (which used `ActiviteitStatus::Gepubliceerd` etc.) is removed here and rebuilt in Task 18 — that's intentional; leaving it in would conflict with the new declarative actions list.
+
+- [ ] **Step 4: Create the rich cell view**
+
+Create `resources/views/filament/tables/columns/activiteit-rich-cell.blade.php`:
+
+```blade
+@php
+    $activiteit = $getRecord();
+    $hoofd = $activiteit->subcategorie->hoofd();
+@endphp
+
+<div style="display: flex; align-items: center; gap: 0.625rem; min-height: 32px;">
+    <span style="display: inline-block; width: 30px; height: 30px; border-radius: 6px; background: {{ $hoofd->color() }}; flex-shrink: 0; position: relative; overflow: hidden;">
+        <svg viewBox="0 0 24 24" fill="white" stroke="none" width="20" height="20" style="position: absolute; top: 5px; left: 5px;">
+            {!! $activiteit->subcategorie->icon() !!}
+        </svg>
+    </span>
+    <span style="display: flex; flex-direction: column; min-width: 0;">
+        <span style="display: flex; align-items: center; gap: 0.4rem; font-weight: 600; line-height: 1.3;">
+            <span>{{ $activiteit->titel_nl }}</span>
+            @if ($activiteit->soort->value === 'speciaal')
+                <span style="font-size: 0.65rem; background: #efc56a; color: #5a4419; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">speciaal</span>
+            @endif
+            @if ($activiteit->status->value === 'geannuleerd')
+                <span style="font-size: 0.65rem; background: #c43; color: white; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">geannuleerd</span>
+            @endif
+            @if ($activiteit->status->value === 'concept')
+                <span style="font-size: 0.65rem; background: #ddd; color: #444; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">concept</span>
+            @endif
+        </span>
+        <span style="font-size: 0.8rem; color: #706662;">{{ $activiteit->subcategorie->getLabel() }}</span>
+    </span>
+</div>
+```
+
+- [ ] **Step 5: Add the two header create buttons in `ListActiviteiten`**
+
+Replace the body of `app/Filament/Resources/ActiviteitResource/Pages/ListActiviteiten.php`:
 
 ```php
 <?php
 
 namespace App\Filament\Resources\ActiviteitResource\Pages;
 
-use App\Enums\ActiviteitStatus;
-use App\Enums\Hoofdcategorie;
 use App\Enums\Soort;
 use App\Filament\Resources\ActiviteitResource;
-use App\Models\Activiteit;
-use Carbon\Carbon;
-use Filament\Actions\CreateAction;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
 
 class ListActiviteiten extends ListRecords
 {
     protected static string $resource = ActiviteitResource::class;
 
-    protected static string $view = 'filament.resources.activiteit-resource.pages.list-activiteiten';
-
-    public ?string $periode = 'komende_4_weken';
-
-    public ?string $hoofdcategorie = null;
-
-    public ?string $soort = null;
-
-    public ?string $status = null;
-
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make('createVast')
+            Action::make('createVast')
                 ->label('+ Vaste activiteit')
-                ->url(fn (): string => ActiviteitResource::getUrl('create', ['soort' => Soort::Vast->value]))
-                ->color('primary'),
-            CreateAction::make('createSpeciaal')
+                ->color('primary')
+                ->url(fn (): string => ActiviteitResource::getUrl('create', ['soort' => Soort::Vast->value])),
+            Action::make('createSpeciaal')
                 ->label('+ Speciaal moment')
-                ->url(fn (): string => ActiviteitResource::getUrl('create', ['soort' => Soort::Speciaal->value]))
-                ->color('gray'),
+                ->color('gray')
+                ->url(fn (): string => ActiviteitResource::getUrl('create', ['soort' => Soort::Speciaal->value])),
         ];
-    }
-
-    /**
-     * Activiteiten in the selected periode, grouped by ISO week then by date string.
-     *
-     * @return array<string, array<string, \Illuminate\Database\Eloquent\Collection>>
-     */
-    public function getGroupedActiviteiten(): array
-    {
-        [$from, $to] = $this->periodeRange();
-
-        $query = Activiteit::query()->whereBetween('datum', [$from, $to]);
-
-        if ($this->hoofdcategorie) {
-            $hoofd = Hoofdcategorie::from($this->hoofdcategorie);
-            $subValues = collect(\App\Enums\Subcategorie::cases())
-                ->filter(fn ($s) => $s->hoofd() === $hoofd)
-                ->map(fn ($s) => $s->value)
-                ->all();
-            $query->whereIn('subcategorie', $subValues);
-        }
-
-        if ($this->soort) {
-            $query->where('soort', $this->soort);
-        }
-
-        if ($this->status) {
-            $query->where('status', $this->status);
-        }
-
-        return $query
-            ->orderBy('datum')
-            ->orderBy('startuur')
-            ->get()
-            ->groupBy(fn (Activiteit $a) => $a->datum->copy()->startOfWeek()->toDateString())
-            ->map(fn ($week) => $week->groupBy(fn (Activiteit $a) => $a->datum->toDateString()))
-            ->all();
-    }
-
-    /**
-     * @return array{0: Carbon, 1: Carbon}
-     */
-    private function periodeRange(): array
-    {
-        return match ($this->periode) {
-            'deze_week' => [Carbon::now()->startOfWeek(), Carbon::now()->endOfWeek()],
-            'deze_maand' => [Carbon::now()->startOfMonth(), Carbon::now()->endOfMonth()],
-            'alles_vanaf_vandaag' => [Carbon::now()->startOfDay(), Carbon::now()->addYears(2)],
-            'archief' => [Carbon::now()->subYears(2), Carbon::now()->subDay()],
-            default => [Carbon::now()->startOfWeek(), Carbon::now()->addWeeks(4)->endOfWeek()],
-        };
     }
 }
 ```
 
-- [ ] **Step 4: Create the Blade view**
-
-Create `resources/views/filament/resources/activiteit-resource/pages/list-activiteiten.blade.php`:
-
-```blade
-<x-filament-panels::page>
-    <div style="margin-bottom: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
-        <select wire:model.live="periode" class="fi-select-input">
-            <option value="deze_week">Deze week</option>
-            <option value="komende_4_weken">Komende 4 weken</option>
-            <option value="deze_maand">Deze maand</option>
-            <option value="alles_vanaf_vandaag">Alles vanaf vandaag</option>
-            <option value="archief">Archief</option>
-        </select>
-        <select wire:model.live="hoofdcategorie" class="fi-select-input">
-            <option value="">Alle categorieën</option>
-            @foreach (\App\Enums\Hoofdcategorie::cases() as $h)
-                <option value="{{ $h->value }}">{{ $h->getLabel() }}</option>
-            @endforeach
-        </select>
-        <select wire:model.live="soort" class="fi-select-input">
-            <option value="">Alle soorten</option>
-            <option value="vast">Vast</option>
-            <option value="speciaal">Speciaal</option>
-        </select>
-        <select wire:model.live="status" class="fi-select-input">
-            <option value="">Alle statussen</option>
-            <option value="concept">Concept</option>
-            <option value="gepubliceerd">Gepubliceerd</option>
-            <option value="geannuleerd">Geannuleerd</option>
-        </select>
-    </div>
-
-    @php
-        $weeks = $this->getGroupedActiviteiten();
-    @endphp
-
-    @forelse ($weeks as $weekStart => $days)
-        @php
-            $weekStartCarbon = \Carbon\Carbon::parse($weekStart);
-            $weekEndCarbon = $weekStartCarbon->copy()->endOfWeek();
-            $heading = $weekStartCarbon->month === $weekEndCarbon->month
-                ? $weekStartCarbon->day.'–'.$weekEndCarbon->day.' '.$weekStartCarbon->locale('nl')->isoFormat('MMMM YYYY')
-                : $weekStartCarbon->locale('nl')->isoFormat('D MMMM').' – '.$weekEndCarbon->locale('nl')->isoFormat('D MMMM YYYY');
-        @endphp
-        <div style="margin-top: 1.5rem;">
-            <div style="font-family: var(--font-sans); font-size: 0.75rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; color: #6b6863; padding-bottom: 0.5rem; border-bottom: 1px solid #e4dbd3;">WEEK VAN {{ strtoupper($heading) }}</div>
-
-            @foreach ($days as $dateKey => $activiteiten)
-                @php
-                    $dayCarbon = \Carbon\Carbon::parse($dateKey);
-                    $dayLabel = strtoupper($dayCarbon->locale('nl')->isoFormat('dddd'));
-                @endphp
-                <div style="display: flex; gap: 1.5rem; padding: 0.75rem 0; border-bottom: 1px solid rgba(228,219,211,0.5);">
-                    <div style="width: 110px; flex-shrink: 0; padding-top: 0.25rem;">
-                        <span style="display: inline-block; background: #e8f0eb; color: #3a6b52; font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.7rem; border-radius: 999px;">{{ $dayLabel }}</span>
-                    </div>
-                    <div style="flex: 1; display: flex; flex-direction: column; gap: 0.5rem;">
-                        @foreach ($activiteiten as $activiteit)
-                            @php
-                                $hoofd = $activiteit->subcategorie->hoofd();
-                                $bg = $hoofd->color();
-                            @endphp
-                            <a href="{{ \App\Filament\Resources\ActiviteitResource::getUrl('edit', ['record' => $activiteit]) }}"
-                               style="display: flex; align-items: center; gap: 0.75rem; text-decoration: none; padding: 0.5rem 0.75rem; border-radius: 6px; background: rgba(0,0,0,0.02); color: inherit; opacity: {{ $activiteit->status->value === 'concept' ? '0.6' : '1' }};">
-                                <span style="display: inline-block; width: 32px; height: 32px; border-radius: 6px; background: {{ $bg }}; flex-shrink: 0; position: relative; overflow: hidden;">
-                                    <svg viewBox="0 0 24 24" fill="white" stroke="none" width="22" height="22" style="position: absolute; top: 5px; left: 5px;">
-                                        {!! $activiteit->subcategorie->icon() !!}
-                                    </svg>
-                                </span>
-                                <span style="flex: 1; min-width: 0;">
-                                    <span style="display: block; font-family: var(--font-sans); font-weight: 700; font-size: 1rem;">
-                                        {{ $activiteit->titel_nl }}
-                                        @if ($activiteit->status->value === 'geannuleerd')
-                                            <span style="font-size: 0.7rem; background: #c43;color:white; padding:1px 6px; border-radius:4px; margin-left:.4rem;">geannuleerd</span>
-                                        @endif
-                                        @if ($activiteit->soort->value === 'speciaal')
-                                            <span style="font-size: 0.7rem; background: #efc56a; color:#5a4419; padding:1px 6px; border-radius:4px; margin-left:.4rem;">speciaal</span>
-                                        @endif
-                                        @if ($activiteit->status->value === 'concept')
-                                            <span style="font-size: 0.7rem; background: #ddd; color:#444; padding:1px 6px; border-radius:4px; margin-left:.4rem;">concept</span>
-                                        @endif
-                                    </span>
-                                    <span style="display: block; font-size: 0.85rem; color: #706662;">
-                                        {{ substr($activiteit->startuur, 0, 5) }} · {{ $activiteit->locatie }}
-                                    </span>
-                                </span>
-                            </a>
-                        @endforeach
-                    </div>
-                </div>
-            @endforeach
-        </div>
-    @empty
-        <div style="padding: 3rem 0; text-align: center; color: #706662;">
-            Geen activiteiten in deze periode.
-        </div>
-    @endforelse
-</x-filament-panels::page>
-```
-
-- [ ] **Step 5: Run the test**
+- [ ] **Step 6: Run the test**
 
 ```bash
 php artisan test --compact tests/Feature/Filament/ListActiviteitenTest.php
@@ -1793,16 +1737,17 @@ php artisan test --compact tests/Feature/Filament/ListActiviteitenTest.php
 
 Expected: PASS.
 
-- [ ] **Step 6: Pint + commit**
+- [ ] **Step 7: Pint + commit**
 
 ```bash
 vendor/bin/pint --dirty --format agent
-git add app/Filament/Resources/ActiviteitResource/Pages/ListActiviteiten.php resources/views/filament/resources/activiteit-resource/pages/list-activiteiten.blade.php tests/Feature/Filament/ListActiviteitenTest.php
-git commit -m "feat: week-grouped admin list mirroring public agenda
+git add app/Filament/Resources/ActiviteitResource.php app/Filament/Resources/ActiviteitResource/Pages/ListActiviteiten.php resources/views/filament/tables/columns/activiteit-rich-cell.blade.php tests/Feature/Filament/ListActiviteitenTest.php
+git commit -m "feat: filament-native week-grouped activiteiten list
 
-Custom Filament page replaces the default table with a week +
-day-grouped layout that matches the public agenda's structure.
-Includes filters for periode, hoofdcategorie, soort, status.
+Uses Group::make + ViewColumn instead of a custom Livewire page so
+that bulk actions, row actions, pagination, accessibility, and dark
+mode keep working out of the box. The rich cell shows icon + title
++ soort/status badges + subcategorie label.
 
 Co-Authored-By: Claude Sonnet 4.6 <noreply@anthropic.com>"
 ```
@@ -2226,7 +2171,7 @@ class ActiviteitKopieerTest extends TestCase
 php artisan test --compact tests/Feature/Filament/ActiviteitKopieerTest.php
 ```
 
-Expected: PASS. (If the action lookup fails because our custom ListActiviteiten doesn't expose the standard Filament table, you'll need to plumb the table action onto the row links in the custom view. As a fallback, expose the action as a separate resource page action and adapt the test to use the edit page.)
+Expected: PASS. (`callTableAction` works directly because Task 14 uses the standard Filament table.)
 
 - [ ] **Step 4: Pint + commit**
 
@@ -2340,7 +2285,7 @@ class ActiviteitBulkEditTest extends TestCase
 php artisan test --compact tests/Feature/Filament/ActiviteitBulkEditTest.php
 ```
 
-If the bulk action call fails because our custom view doesn't expose Filament's standard checkbox-based bulk selection, plumb checkboxes into the custom blade view (one per row, bound to a `selected[]` array), then call the bulk-action method directly with the selected IDs. Update the test accordingly.
+Expected: PASS. (`callTableBulkAction` works directly because Task 14 uses the standard Filament table — checkbox selection is built in.)
 
 - [ ] **Step 4: Pint + commit**
 
@@ -2409,14 +2354,15 @@ Expected: success. Note the count of activiteiten created.
 
 Open https://deharmonie.test/admin (login required). Click **Activiteiten** in the nav. Verify:
 
-- The list shows weeks grouped by date with day labels.
-- Each activity row shows an icon matching its categorie.
-- Filters at the top change the visible rows.
+- The table shows a week-section header ("WEEK VAN ...") above the rows of each ISO week, with collapse/expand toggle.
+- Each row shows the rich cell: small colored icon block (hoofdcategorie color) + title + subcategorie label, plus any speciaal/concept/geannuleerd badge.
+- Filters (Categorie, Soort, Status) work and change the visible rows.
 - Top-right shows two buttons: `+ Vaste activiteit` and `+ Speciaal moment`.
 - "Terugkerende activiteiten" no longer appears in the navigation.
 - Clicking `+ Vaste activiteit` opens the create form with the bulk-generation toggle visible.
 - Clicking `+ Speciaal moment` opens the create form without the toggle.
-- A row's "Kopieer naar..." action is reachable from the row menu (or, if you wired it onto the link, from a button).
+- The row action menu (kebab) shows Edit + Kopieer.
+- Selecting multiple rows with checkboxes shows the bulk action menu (Publiceer / Annuleer / Bewerk gemeenschappelijke velden / Verwijder).
 
 - [ ] **Step 3: Open the public site and verify**
 
