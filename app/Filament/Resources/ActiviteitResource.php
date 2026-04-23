@@ -26,6 +26,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
@@ -56,70 +57,87 @@ class ActiviteitResource extends Resource
             Tabs::make('Talen')->tabs([
                 Tab::make('Nederlands')->schema([
                     TextInput::make('titel_nl')
-                        ->label('Titel (NL)')
+                        ->label('Titel')
                         ->required()
                         ->maxLength(255),
                     RichEditor::make('beschrijving_nl')
-                        ->label('Beschrijving (NL)')
+                        ->label('Beschrijving')
                         ->toolbarButtons(['bold', 'bulletList', 'link']),
                     Textarea::make('notice_nl')
-                        ->label('Opmerking / Annuleringsmelding (NL)'),
+                        ->label('Opmerking / annuleringsmelding'),
                     TextInput::make('locatie_nl')
-                        ->label('Locatie (NL)')
+                        ->label('Locatie')
                         ->default('De Harmonie')
                         ->required()
                         ->maxLength(255),
                 ]),
                 Tab::make('Français')->schema([
                     TextInput::make('titel_fr')
-                        ->label('Titre (FR)')
+                        ->label('Titre')
                         ->required()
                         ->maxLength(255),
                     RichEditor::make('beschrijving_fr')
-                        ->label('Description (FR)')
+                        ->label('Description')
                         ->toolbarButtons(['bold', 'bulletList', 'link']),
                     Textarea::make('notice_fr')
-                        ->label('Remarque / Message d\'annulation (FR)'),
+                        ->label('Remarque / message d\'annulation'),
                     TextInput::make('locatie_fr')
-                        ->label('Locatie (FR)')
+                        ->label('Lieu')
                         ->default('De Harmonie')
                         ->required()
                         ->maxLength(255),
                 ]),
             ])->columnSpanFull(),
 
-            Select::make('categorie')
-                ->label('Categorie')
-                ->options(collect(Categorie::cases())->mapWithKeys(fn ($c) => [$c->value => $c->getLabel()])->all())
-                ->required(),
+            Section::make('Wat')
+                ->schema([
+                    Select::make('categorie')
+                        ->label('Categorie')
+                        ->placeholder('Kies een categorie')
+                        ->options(collect(Categorie::cases())->mapWithKeys(fn ($c) => [$c->value => $c->getLabel()])->all())
+                        ->required(),
 
-            Select::make('status')
-                ->label('Status')
-                ->options(ActiviteitStatus::class)
-                ->default(ActiviteitStatus::Concept)
-                ->required(),
+                    Select::make('status')
+                        ->label('Status')
+                        ->options(ActiviteitStatus::class)
+                        ->default(ActiviteitStatus::Concept)
+                        ->required(),
+                ])
+                ->columns(2)
+                ->columnSpanFull(),
 
-            Grid::make(3)->schema([
-                DatePicker::make('datum')
-                    ->label('Datum')
-                    ->required(),
-                TimePicker::make('startuur')
-                    ->label('Startuur')
-                    ->required()
-                    ->seconds(false),
-                TimePicker::make('einduur')
-                    ->label('Einduur')
-                    ->seconds(false),
-            ])->columnSpanFull(),
+            Section::make('Wanneer')
+                ->schema([
+                    Grid::make(3)->schema([
+                        DatePicker::make('datum')
+                            ->label('Datum')
+                            ->required(),
+                        TimePicker::make('startuur')
+                            ->label('Startuur')
+                            ->required()
+                            ->seconds(false),
+                        TimePicker::make('einduur')
+                            ->label('Einduur')
+                            ->seconds(false),
+                    ]),
+                ])
+                ->columnSpanFull(),
 
-            TextInput::make('prijs')
-                ->label('Prijs (€, leeg = gratis)')
-                ->numeric()
-                ->prefix('€'),
+            Section::make('Praktisch')
+                ->schema([
+                    TextInput::make('prijs')
+                        ->label('Prijs')
+                        ->prefix('€')
+                        ->numeric()
+                        ->helperText('Leeg laten = gratis'),
 
-            TextInput::make('max_deelnemers')
-                ->label('Max deelnemers (leeg = onbeperkt)')
-                ->integer(),
+                    TextInput::make('max_deelnemers')
+                        ->label('Max deelnemers')
+                        ->integer()
+                        ->helperText('Leeg laten = onbeperkt'),
+                ])
+                ->columns(2)
+                ->columnSpanFull(),
 
             Hidden::make('soort_query')
                 ->default(fn (): string => request()->query('soort', '')),

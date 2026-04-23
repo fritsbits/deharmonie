@@ -7,11 +7,22 @@ use App\Enums\Soort;
 use App\Filament\Resources\ActiviteitResource;
 use App\Models\Activiteit;
 use Carbon\Carbon;
+use Filament\Actions\Action;
 use Filament\Resources\Pages\CreateRecord;
 
 class CreateActiviteit extends CreateRecord
 {
     protected static string $resource = ActiviteitResource::class;
+
+    protected function getCreateAnotherFormAction(): Action
+    {
+        return parent::getCreateAnotherFormAction()->label('Aanmaken & nog één maken');
+    }
+
+    protected function getCancelFormAction(): Action
+    {
+        return parent::getCancelFormAction()->link();
+    }
 
     protected function mutateFormDataBeforeCreate(array $data): array
     {
