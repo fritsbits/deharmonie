@@ -15,13 +15,10 @@
             {!! $activiteit->categorie->icon() !!}
         </svg>
     </span>
-    <span style="display: flex; flex-direction: column; min-width: 0;">
-        <span style="display: flex; align-items: center; gap: 0.4rem; font-weight: 600; line-height: 1.3;">
-            <span title="{{ $activiteit->titel_nl }}">{{ \Illuminate\Support\Str::limit($activiteit->titel_nl, 35) }}</span>
-            @if ($activiteit->soort->value === 'speciaal')
-                <span style="font-size: 0.65rem; background: #efc56a; color: #5a4419; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">speciaal</span>
-            @endif
-        </span>
-        <span style="font-size: 0.8rem; color: #706662;">{{ $activiteit->categorie->getLabel() }}</span>
+    <span style="display: flex; align-items: center; gap: 0.4rem; min-width: 0; font-weight: 600; line-height: 1.3;">
+        <span title="{{ $activiteit->titel_nl }}">{{ \Illuminate\Support\Str::limit($activiteit->titel_nl, 35) }}</span>
+        @if ($activiteit->soort->value === 'speciaal')
+            <span style="font-size: 0.65rem; background: #efc56a; color: #5a4419; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">speciaal</span>
+        @endif
     </span>
 </div>
