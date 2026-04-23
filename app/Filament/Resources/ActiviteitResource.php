@@ -3,10 +3,13 @@
 namespace App\Filament\Resources;
 
 use App\Enums\ActiviteitStatus;
+use App\Enums\Categorie;
+use App\Enums\Soort;
 use App\Filament\Resources\ActiviteitResource\Pages;
 use App\Models\Activiteit;
-use Filament\Actions\BulkAction;
-use Filament\Actions\BulkActionGroup;
+use Carbon\Carbon;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
@@ -18,7 +21,10 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
-use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
 
 class ActiviteitResource extends Resource
@@ -108,43 +114,56 @@ class ActiviteitResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                Tables\Columns\TextColumn::make('titel_nl')
-                    ->label('Titel')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('datum')
-                    ->label('Datum')
-                    ->date('d/m/Y')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('status')
-                    ->label('Status')
-                    ->badge(),
-                Tables\Columns\TextColumn::make('template.titel_nl')
-                    ->label('Reeks')
-                    ->placeholder('—')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('deelnameverzoeken_count')
-                    ->label('Inschrijvingen')
-                    ->counts('deelnameverzoeken'),
-            ])
+            ->defaultGroup(
+                Group::make('week_start')
+                    ->getKeyFromRecordUsing(fn (Activiteit $a) => $a->datum->copy()->startOfWeek()->toDateString())
+                    ->getTitleFromRecordUsing(function (Activiteit $a): string {
+                        $start = $a->datum->copy()->startOfWeek()->locale('nl');
+                        $end = $a->datum->copy()->endOfWeek()->locale('nl');
+
+                        return 'WEEK VAN '.strtoupper($start->isoFormat('D MMMM').' – '.$end->isoFormat('D MMMM YYYY'));
+                    })
+                    ->orderQueryUsing(fn ($query, $direction) => $query->orderBy('datum', $direction))
+                    ->collapsible()
+            )
+            ->groupsOnly()
             ->defaultSort('datum', 'asc')
+            ->defaultPaginationPageOption(50)
+            ->columns([
+                TextColumn::make('datum')
+                    ->label('Dag')
+                    ->formatStateUsing(fn (Carbon $state) => strtoupper($state->locale('nl')->isoFormat('ddd D/MM')))
+                    ->sortable()
+                    ->width('110px'),
+                ViewColumn::make('rich')
+                    ->label('Activiteit')
+                    ->view('filament.tables.columns.activiteit-rich-cell'),
+                TextColumn::make('startuur')
+                    ->label('Tijd')
+                    ->formatStateUsing(fn (?string $state) => $state ? substr($state, 0, 5) : '—')
+                    ->width('80px'),
+                TextColumn::make('locatie')
+                    ->label('Locatie')
+                    ->toggleable()
+                    ->limit(20),
+            ])
             ->filters([
-                Tables\Filters\SelectFilter::make('status')
-                    ->options(ActiviteitStatus::class),
+                SelectFilter::make('categorie')
+                    ->label('Categorie')
+                    ->options(collect(Categorie::cases())->mapWithKeys(fn ($c) => [$c->value => $c->getLabel()])->all()),
+                SelectFilter::make('soort')
+                    ->options(collect(Soort::cases())->mapWithKeys(fn ($s) => [$s->value => $s->getLabel()])->all()),
+                SelectFilter::make('status')
+                    ->options(collect(ActiviteitStatus::cases())->mapWithKeys(fn ($s) => [$s->value => $s->getLabel()])->all()),
+            ])
+            ->actions([
+                ActionGroup::make([
+                    EditAction::make(),
+                    // Kopieer + annuleer actions are added in Tasks 17-18.
+                ]),
             ])
             ->bulkActions([
-                BulkActionGroup::make([
-                    BulkAction::make('publish')
-                        ->label('Publiceer geselecteerde')
-                        ->action(fn ($records) => $records->each->update(['status' => ActiviteitStatus::Gepubliceerd]))
-                        ->icon('heroicon-o-check'),
-                    BulkAction::make('cancel')
-                        ->label('Annuleer geselecteerde')
-                        ->action(fn ($records) => $records->each->update(['status' => ActiviteitStatus::Geannuleerd]))
-                        ->icon('heroicon-o-x-mark')
-                        ->color('danger'),
-                ]),
+                // Bulk actions are added in Task 18.
             ]);
     }
 
