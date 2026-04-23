@@ -63,6 +63,18 @@ class AdminPanelProvider extends PanelProvider
     border-color: rgba(255,255,255,0.45) !important;
 }
 </style>
+<script>
+    /* Default to a collapsed sidebar on first visit; respect the user choice afterwards.
+       Filament persists the sidebar state in localStorage via Alpine.$persist. We pre-seed
+       the desktop key only if it has not been written yet. */
+    (function () {
+        try {
+            if (window.localStorage.getItem("isOpenDesktop") === null) {
+                window.localStorage.setItem("isOpenDesktop", "false");
+            }
+        } catch (e) { /* localStorage unavailable — ignore */ }
+    })();
+</script>
             '))
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\Filament\Pages')
