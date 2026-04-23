@@ -20,7 +20,6 @@ use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
@@ -130,13 +129,6 @@ class ActiviteitResource extends Resource
                 ->dehydrated(false)
                 ->required(fn (Get $get): bool => (bool) $get('herhaal_wekelijks'))
                 ->visible(fn (Get $get, string $operation): bool => $operation === 'create' && (bool) $get('herhaal_wekelijks')),
-
-            SpatieMediaLibraryFileUpload::make('afbeelding')
-                ->label('Afbeelding')
-                ->collection('afbeelding')
-                ->image()
-                ->imageEditor()
-                ->columnSpanFull(),
         ]);
     }
 
