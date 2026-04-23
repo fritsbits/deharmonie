@@ -24,7 +24,8 @@ class Activiteit extends Model implements HasMedia
         'beschrijving_nl', 'beschrijving_fr',
         'notice_nl', 'notice_fr',
         'datum', 'startuur', 'einduur',
-        'locatie', 'prijs', 'max_deelnemers',
+        'locatie_nl', 'locatie_fr',
+        'prijs', 'max_deelnemers',
         'status', 'interesse',
         'soort', 'categorie',
     ];
@@ -107,5 +108,12 @@ class Activiteit extends Model implements HasMedia
         $locale = app()->getLocale();
 
         return $locale === 'fr' ? $this->notice_fr : $this->notice_nl;
+    }
+
+    public function getLocatieAttribute(): string
+    {
+        $locale = app()->getLocale();
+
+        return $locale === 'fr' ? $this->locatie_fr : $this->locatie_nl;
     }
 }
