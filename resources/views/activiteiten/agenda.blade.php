@@ -92,7 +92,7 @@
                         @php $dayIndex++; @endphp
 
                         <div class="agenda-day-group" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem 0;">
-                            <div style="width: 140px; flex-shrink: 0; display: flex; align-items: center; min-height: calc(1.375rem * 1.3);">
+                            <div style="width: 140px; flex-shrink: 0; display: flex; align-items: flex-start; padding-top: 0.625rem;">
                                 <span class="agenda-date-label" style="display: inline-block; background: var(--color-brand-green-tint); color: var(--color-brand-green-dark); font-family: var(--font-sans); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.25rem 0.75rem; border-radius: 999px; white-space: nowrap; opacity: {{ $isPast ? '0.55' : '1' }};">{{ $dayLabel }}</span>
                             </div>
                             <div style="flex: 1; min-width: 0;">
