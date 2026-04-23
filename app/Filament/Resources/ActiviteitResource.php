@@ -26,7 +26,7 @@ use Filament\Forms\Components\TimePicker;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Group as LayoutGroup;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
@@ -58,7 +58,7 @@ class ActiviteitResource extends Resource
             ->columns(3)
             ->components([
                 // Main column — content (titel, beschrijving, locatie, opmerking) per taal
-                Group::make()
+                LayoutGroup::make()
                     ->columnSpan(2)
                     ->schema([
                         Section::make()
@@ -113,7 +113,7 @@ class ActiviteitResource extends Resource
                     ]),
 
                 // Right sidebar — settings (status, categorie, wanneer, praktisch)
-                Group::make()
+                LayoutGroup::make()
                     ->columnSpan(1)
                     ->schema([
                         Section::make('Status')
