@@ -3,6 +3,7 @@
 use Database\Seeders\ActiviteitSeeder;
 use Database\Seeders\WeekMenuDagSeeder;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
@@ -17,7 +18,12 @@ return new class extends Migration
 
         // ActiviteitTemplateSeeder removed in Task 7 when the template model was deleted.
         // The activiteit_templates table was dropped in Task 5.
-        (new ActiviteitSeeder)->run();
+        // Guard: only run ActiviteitSeeder once soort + categorie columns exist
+        // (they are added by a later migration; on fresh installs we skip here
+        // and let DatabaseSeeder handle it after all migrations have run).
+        if (Schema::hasColumn('activiteiten', 'soort') && Schema::hasColumn('activiteiten', 'categorie')) {
+            (new ActiviteitSeeder)->run();
+        }
         (new WeekMenuDagSeeder)->run();
     }
 

@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Enums\ActiviteitStatus;
+use App\Enums\Categorie;
+use App\Enums\Soort;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -10,8 +13,9 @@ class ActiviteitFactory extends Factory
     public function definition(): array
     {
         $titleNl = $this->faker->sentence(3);
+
         return [
-            'slug' => Str::slug($titleNl) . '-' . $this->faker->unique()->numberBetween(1, 9999),
+            'slug' => Str::slug($titleNl).'-'.$this->faker->unique()->numberBetween(1, 9999),
             'titel_nl' => $titleNl,
             'titel_fr' => $this->faker->sentence(3),
             'beschrijving_nl' => $this->faker->paragraph(),
@@ -24,7 +28,19 @@ class ActiviteitFactory extends Factory
             'locatie' => 'De Harmonie',
             'prijs' => null,
             'max_deelnemers' => null,
-            'status' => 'gepubliceerd',
+            'status' => ActiviteitStatus::Gepubliceerd,
+            'soort' => Soort::Vast,
+            'categorie' => $this->faker->randomElement(Categorie::cases()),
         ];
+    }
+
+    public function vast(): static
+    {
+        return $this->state(['soort' => Soort::Vast]);
+    }
+
+    public function speciaal(): static
+    {
+        return $this->state(['soort' => Soort::Speciaal]);
     }
 }

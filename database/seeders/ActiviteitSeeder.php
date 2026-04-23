@@ -6,9 +6,52 @@ use App\Enums\ActiviteitStatus;
 use App\Models\Activiteit;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
 
 class ActiviteitSeeder extends Seeder
 {
+    private const TEMPLATE_TO_CAT = [
+        'Sociale infopunt' => 'ontmoeting',
+        'Maandelijks verjaardagsfeest' => 'ontmoeting',
+        'Conversatietafel Spaans' => 'ontmoeting',
+        'Conversatietafel Engels' => 'ontmoeting',
+        'Conversatietafel Italiaans' => 'ontmoeting',
+        'Nederlandse conversatietafel' => 'ontmoeting',
+        'Country Line Dance' => 'sport_beweging',
+        'Geheugenatelier' => 'bijleren',
+        'Stoel-gym met Nicole' => 'sport_beweging',
+        'Digitale workshop' => 'bijleren',
+        'Bingo' => 'spelletjes',
+        'Creativiteit workshop' => 'creatief',
+        'Zumba' => 'sport_beweging',
+        'Diamond Painting Workshop met Nadia' => 'creatief',
+        'Naaiworkshop' => 'creatief',
+        'Boodschappendienst' => 'ontmoeting',
+        'Pilates & Fitness' => 'sport_beweging',
+        'Jeu de Tables: Dominos' => 'spelletjes',
+        'Jeu de Tables: Jacquet' => 'spelletjes',
+    ];
+
+    private const KEYWORD_TO_CAT = [
+        ['needles' => ['museum', 'musée', 'expo', 'tentoon', 'kunst'], 'cat' => 'op_uitstap'],
+        ['needles' => ['wandel', 'balade', 'marche'], 'cat' => 'op_uitstap'],
+        ['needles' => ['brunch', 'buffet', 'aperitief', 'apéro', 'apero', 'koffie', 'café', 'confituur', 'culinair', 'cuisine', 'gouter', 'goûter', 'ontbijt', 'lunch', 'diner', 'dîner', 'souper'], 'cat' => 'culinair'],
+        ['needles' => ['festival', 'concert', 'musette', 'klassiek'], 'cat' => 'film_muziek'],
+        ['needles' => ['documentaire', 'film', 'theater', 'théâtre', 'voorstelling', 'debat'], 'cat' => 'film_muziek'],
+        ['needles' => ['feest', 'verjaardag', 'inhuldiging', 'fête', 'fete'], 'cat' => 'ontmoeting'],
+        ['needles' => ['haken', 'naai', 'breien', 'diamond'], 'cat' => 'creatief'],
+        ['needles' => ['atelier', 'workshop'], 'cat' => 'creatief'],
+        ['needles' => ['woordspelletjes', 'scrabble', 'jeu', 'domino', 'jacquet', 'bingo', 'kaart'], 'cat' => 'spelletjes'],
+        ['needles' => ['geheugen', 'mémoire', 'brein'], 'cat' => 'bijleren'],
+        ['needles' => ['digitaal', 'numérique', 'computer', 'cursus'], 'cat' => 'bijleren'],
+        ['needles' => ['conversatie', 'startbabbel', 'praat', 'tafel'], 'cat' => 'ontmoeting'],
+        ['needles' => ['infopunt', 'spreekuur', 'permanentie', 'loket'], 'cat' => 'ontmoeting'],
+        ['needles' => ['zumba', 'dans'], 'cat' => 'sport_beweging'],
+        ['needles' => ['gym', 'pilates', 'fitness', 'yoga'], 'cat' => 'sport_beweging'],
+    ];
+
+    private const FALLBACK_CAT = 'ontmoeting';
+
     public function run(): void
     {
         $csvPath = database_path('seeders/data/activities.csv');
@@ -74,6 +117,8 @@ class ActiviteitSeeder extends Seeder
                 'locatie' => $data['Location'] !== '' ? $data['Location'] : 'De Harmonie',
                 'prijs' => $prijs,
                 'status' => $status->value,
+                'soort' => $this->resolveSoort($titelNl),
+                'categorie' => $this->resolveCategorie($titelNl),
                 'created_at' => now(),
                 'updated_at' => now(),
             ];
@@ -88,6 +133,29 @@ class ActiviteitSeeder extends Seeder
 
         $skipped = count($rows) - $inserted;
         $this->command?->info("Imported {$inserted} new activities from CSV ({$skipped} already existed, skipped).");
+    }
+
+    private function resolveSoort(string $titleNl): string
+    {
+        return array_key_exists($titleNl, self::TEMPLATE_TO_CAT) ? 'vast' : 'speciaal';
+    }
+
+    private function resolveCategorie(string $titleNl): string
+    {
+        if (isset(self::TEMPLATE_TO_CAT[$titleNl])) {
+            return self::TEMPLATE_TO_CAT[$titleNl];
+        }
+
+        $haystack = Str::lower($titleNl);
+        foreach (self::KEYWORD_TO_CAT as $rule) {
+            foreach ($rule['needles'] as $needle) {
+                if (str_contains($haystack, $needle)) {
+                    return $rule['cat'];
+                }
+            }
+        }
+
+        return self::FALLBACK_CAT;
     }
 
     private function stripEmoji(string $title): string
