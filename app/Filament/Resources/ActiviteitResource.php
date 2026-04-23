@@ -63,6 +63,11 @@ class ActiviteitResource extends Resource
                         ->toolbarButtons(['bold', 'bulletList', 'link']),
                     Textarea::make('notice_nl')
                         ->label('Opmerking / Annuleringsmelding (NL)'),
+                    TextInput::make('locatie_nl')
+                        ->label('Locatie (NL)')
+                        ->default('De Harmonie')
+                        ->required()
+                        ->maxLength(255),
                 ]),
                 Tab::make('Français')->schema([
                     TextInput::make('titel_fr')
@@ -74,6 +79,11 @@ class ActiviteitResource extends Resource
                         ->toolbarButtons(['bold', 'bulletList', 'link']),
                     Textarea::make('notice_fr')
                         ->label('Remarque / Message d\'annulation (FR)'),
+                    TextInput::make('locatie_fr')
+                        ->label('Locatie (FR)')
+                        ->default('De Harmonie')
+                        ->required()
+                        ->maxLength(255),
                 ]),
             ])->columnSpanFull(),
 
@@ -89,11 +99,6 @@ class ActiviteitResource extends Resource
             TimePicker::make('einduur')
                 ->label('Einduur')
                 ->seconds(false),
-
-            TextInput::make('locatie')
-                ->label('Locatie')
-                ->default('De Harmonie')
-                ->required(),
 
             TextInput::make('prijs')
                 ->label('Prijs (€, leeg = gratis)')
@@ -232,7 +237,8 @@ class ActiviteitResource extends Resource
                                     'datum' => $d->toDateString(),
                                     'startuur' => $record->startuur,
                                     'einduur' => $record->einduur,
-                                    'locatie' => $record->locatie,
+                                    'locatie_nl' => $record->locatie_nl,
+                                    'locatie_fr' => $record->locatie_fr,
                                     'prijs' => $record->prijs,
                                     'max_deelnemers' => $record->max_deelnemers,
                                     'status' => ActiviteitStatus::Concept,
@@ -260,7 +266,8 @@ class ActiviteitResource extends Resource
                         ->form([
                             Textarea::make('beschrijving_nl')->label('Beschrijving (NL) — leeg laten = niet wijzigen'),
                             Textarea::make('beschrijving_fr')->label('Beschrijving (FR) — leeg laten = niet wijzigen'),
-                            TextInput::make('locatie')->label('Locatie — leeg laten = niet wijzigen'),
+                            TextInput::make('locatie_nl')->label('Locatie (NL) — leeg laten = niet wijzigen'),
+                            TextInput::make('locatie_fr')->label('Locatie (FR) — leeg laten = niet wijzigen'),
                             TextInput::make('prijs')->numeric()->label('Prijs — leeg laten = niet wijzigen'),
                         ])
                         ->action(function ($records, array $data): void {

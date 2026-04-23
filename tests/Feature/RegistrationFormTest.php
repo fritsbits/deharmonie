@@ -91,7 +91,8 @@ class RegistrationFormTest extends TestCase
         $activiteit = Activiteit::factory()->create([
             'status' => 'gepubliceerd',
             'titel_nl' => 'Koken met kruiden',
-            'locatie' => 'De Harmonie',
+            'locatie_nl' => 'De Harmonie',
+            'locatie_fr' => 'De Harmonie',
         ]);
 
         Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])
@@ -109,7 +110,8 @@ class RegistrationFormTest extends TestCase
             'status' => 'gepubliceerd',
             'titel_nl' => 'Koken met kruiden',
             'titel_fr' => 'Cuisine aux herbes',
-            'locatie' => 'De Harmonie',
+            'locatie_nl' => 'De Harmonie',
+            'locatie_fr' => 'De Harmonie',
         ]);
 
         Livewire::test(RegistrationForm::class, ['activiteit' => $activiteit])

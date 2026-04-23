@@ -37,7 +37,8 @@ class ActiviteitCreateSpeciaalTest extends TestCase
                 'datum' => now()->addWeek()->toDateString(),
                 'startuur' => '14:00',
                 'einduur' => '16:00',
-                'locatie' => 'Brussel',
+                'locatie_nl' => 'Brussel',
+                'locatie_fr' => 'Brussel',
                 'categorie' => Categorie::OpUitstap->value,
                 'status' => ActiviteitStatus::Concept->value,
             ])
@@ -63,7 +64,8 @@ class ActiviteitCreateSpeciaalTest extends TestCase
                 'datum' => now()->addDays(5)->toDateString(),
                 'startuur' => '10:00',
                 'einduur' => '11:00',
-                'locatie' => 'De Harmonie',
+                'locatie_nl' => 'De Harmonie',
+                'locatie_fr' => 'De Harmonie',
                 'categorie' => Categorie::Ontmoeting->value,
                 'status' => ActiviteitStatus::Concept->value,
             ])

@@ -75,7 +75,8 @@ class ActiviteitBulkEditTest extends TestCase
             ->callTableBulkAction('bulk_edit', $zumbas->pluck('id')->all(), [
                 'beschrijving_nl' => 'nieuwe tekst',
                 'beschrijving_fr' => '',
-                'locatie' => '',
+                'locatie_nl' => '',
+                'locatie_fr' => '',
                 'prijs' => null,
             ]);
 
