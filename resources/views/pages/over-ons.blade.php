@@ -68,7 +68,7 @@
                 </div>
                 <div style="background: white; padding: 3.5rem 1.75rem 1.75rem;">
                     <p style="font-size: 1.0625rem; line-height: 1.75; font-style: italic; color: var(--color-brand-dark); margin-bottom: 1.25rem;">"Hier wordt met veel moed en inzet elke dag gewerkt. Ook met allerlei activiteiten kunnen mensen zich amuseren of iets bijleren."</p>
-                    <p style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; color: var(--color-brand-green); text-transform: uppercase; letter-spacing: 0.08em;">— Josiane C.</p>
+                    <p class="ui-label" style="color: var(--color-brand-green);">— Josiane C.</p>
                 </div>
             </div>
 
@@ -80,7 +80,7 @@
                 </div>
                 <div style="background: white; padding: 3.5rem 1.75rem 1.75rem;">
                     <p style="font-size: 1.0625rem; line-height: 1.75; font-style: italic; color: var(--color-brand-dark); margin-bottom: 1.25rem;">"Un accueil hors du commun. Ils sont des piliers du quartier."</p>
-                    <p style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; color: var(--color-brand-blue); text-transform: uppercase; letter-spacing: 0.08em;">— Marc P.</p>
+                    <p class="ui-label" style="color: var(--color-brand-blue);">— Marc P.</p>
                 </div>
             </div>
 
@@ -92,7 +92,7 @@
                 </div>
                 <div style="background: white; padding: 3.5rem 1.75rem 1.75rem;">
                     <p style="font-size: 1.0625rem; line-height: 1.75; font-style: italic; color: var(--color-brand-dark); margin-bottom: 1.25rem;">"Comme d'habitude accueil super chaleureux. On s'y sent bien."</p>
-                    <p style="font-family: var(--font-sans); font-size: 0.8rem; font-weight: 700; color: var(--color-brand-orange); text-transform: uppercase; letter-spacing: 0.08em;">— Hélène-Christine A.</p>
+                    <p class="ui-label" style="color: var(--color-brand-orange);">— Hélène-Christine A.</p>
                 </div>
             </div>
 

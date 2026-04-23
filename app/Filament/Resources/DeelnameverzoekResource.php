@@ -26,6 +26,8 @@ class DeelnameverzoekResource extends Resource
 
     protected static ?string $slug = 'deelnameverzoeken';
 
+    protected static bool $shouldRegisterNavigation = false;
+
     public static function infolist(Schema $schema): Schema
     {
         return $schema->components([

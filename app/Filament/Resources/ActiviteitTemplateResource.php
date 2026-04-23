@@ -25,15 +25,17 @@ class ActiviteitTemplateResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-arrow-path';
 
-    protected static ?string $navigationLabel = 'Reeksen';
+    protected static ?string $navigationLabel = 'Terugkerende activiteiten';
 
-    protected static ?string $modelLabel = 'Reeks';
+    protected static ?string $modelLabel = 'Terugkerende activiteit';
 
-    protected static ?string $pluralModelLabel = 'Reeksen';
+    protected static ?string $pluralModelLabel = 'Terugkerende activiteiten';
 
     protected static ?string $slug = 'reeksen';
 
-    protected static ?int $navigationSort = 2;
+    protected static \UnitEnum|string|null $navigationGroup = 'Instellingen';
+
+    protected static ?int $navigationSort = 1;
 
     public static function form(Schema $schema): Schema
     {

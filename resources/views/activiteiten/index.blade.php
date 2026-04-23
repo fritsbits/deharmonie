@@ -75,7 +75,7 @@
         </div>
         <div class="menu-cards" style="display: flex; gap: 1rem;">
             @php
-                $priceTag = fn($price) => '<span class="tabular-nums" style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 900; color: var(--color-brand-muted); line-height: 1; white-space: nowrap; flex-shrink: 0;"><span style="font-size: 0.65em; vertical-align: baseline; margin-right: 1px;">€</span>' . $price . '</span>';
+                $priceTag = fn($price) => '<span class="tabular-nums" style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 900; color: var(--color-brand-muted); line-height: 1; white-space: nowrap; flex-shrink: 0;"><span style="font-size: 0.75em; vertical-align: baseline; margin-right: 1px;">€</span>' . $price . '</span>';
             @endphp
             {{-- Today --}}
             @if ($menuVandaag)
@@ -85,7 +85,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem;">
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin: 0;">{{ $menuVandaag->event_label }}</p>
-                            <span style="display: inline-block; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; padding: 1px 7px; border-radius: 999px;">{{ __('weekmenu.special_badge') }}</span>
+                            <span style="display: inline-block; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; padding: 2px 7px; border-radius: 999px;">{{ __('weekmenu.special_badge') }}</span>
                         </div>
                         {!! $priceTag($menuVandaag->price) !!}
                     </div>
@@ -107,7 +107,7 @@
                     <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; margin-bottom: 0.35rem;">
                         <div style="display: flex; align-items: center; gap: 0.5rem;">
                             <p style="font-size: 1.5rem; font-weight: 700; color: var(--color-brand-dark); margin: 0;">{{ $menuMorgen->event_label }}</p>
-                            <span style="display: inline-block; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 0.6rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; padding: 1px 7px; border-radius: 999px;">{{ __('weekmenu.special_badge') }}</span>
+                            <span style="display: inline-block; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 0.6875rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; padding: 2px 7px; border-radius: 999px;">{{ __('weekmenu.special_badge') }}</span>
                         </div>
                         {!! $priceTag($menuMorgen->price) !!}
                     </div>
@@ -142,9 +142,9 @@
         </div>
         @php
             $cardColors = [
-                ['bg' => 'var(--color-brand-green)',  'tint' => 'var(--color-brand-green-tint)',  'dark_tint' => '#5a8a74', 'accent' => 'var(--color-brand-green)'],
-                ['bg' => 'var(--color-brand-blue)',   'tint' => 'var(--color-brand-blue-tint)',   'dark_tint' => '#2f5490', 'accent' => 'var(--color-brand-blue)'],
-                ['bg' => 'var(--color-brand-orange)', 'tint' => 'var(--color-brand-orange-tint)', 'dark_tint' => '#b34a2d', 'accent' => 'var(--color-brand-orange)'],
+                ['bg' => 'var(--color-brand-green)',  'tint' => 'var(--color-brand-green-tint)',  'dark_tint' => '#5a8a74', 'accent' => 'var(--color-brand-green)',  'label' => 'var(--color-brand-green)'],
+                ['bg' => 'var(--color-brand-blue)',   'tint' => 'var(--color-brand-blue-tint)',   'dark_tint' => '#2f5490', 'accent' => 'var(--color-brand-blue)',   'label' => '#2f5490'],
+                ['bg' => 'var(--color-brand-orange)', 'tint' => 'var(--color-brand-orange-tint)', 'dark_tint' => '#b34a2d', 'accent' => 'var(--color-brand-orange)', 'label' => '#b34a2d'],
             ];
         @endphp
         <div class="activity-cards-grid" style="display: flex; gap: 1rem;">
@@ -182,12 +182,12 @@
                         </svg>
                         <div style="position: absolute; bottom: 1.1rem; left: 1.25rem; z-index: 2;">
                             <span class="tabular-nums" style="font-family: var(--font-sans); font-weight: 900; font-size: 3.75rem; line-height: 1; color: white; display: block;">{{ \Carbon\Carbon::parse($activiteit->datum)->format('d') }}</span>
-                            <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.75rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); display: block; margin-top: 1px;">{{ strtoupper(\Carbon\Carbon::parse($activiteit->datum)->locale(app()->getLocale())->isoFormat('MMMM')) }}</span>
+                            <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.8125rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.85); display: block; margin-top: 1px;">{{ strtoupper(\Carbon\Carbon::parse($activiteit->datum)->locale(app()->getLocale())->isoFormat('MMMM')) }}</span>
                         </div>
                     </div>
                     {{-- White card body --}}
                     <div style="padding: 1rem 1.25rem 1.4rem; background: white; flex: 1; display: flex; flex-direction: column;">
-                        <p style="font-family: var(--font-sans); font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: {{ $cc['accent'] }}; margin: 0 0 0.3rem;">
+                        <p style="font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: {{ $cc['label'] }}; margin: 0 0 0.3rem;">
                             <x-relative-date :datum="$activiteit->datum" />
                         </p>
                         <h3 style="font-family: var(--font-sans); font-size: 1.5rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin: 0 0 0.35rem; flex: 1;">

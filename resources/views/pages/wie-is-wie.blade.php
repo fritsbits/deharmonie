@@ -46,13 +46,13 @@
     <div style="border-top: 1px solid var(--color-brand-border-blue); margin-bottom: 3.5rem;">
         @foreach ($staf as $categorie)
             <div class="wie-rij" style="padding: 1.25rem 0; border-bottom: 1px solid var(--color-brand-border-blue);">
-                <h4 class="wie-label" style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-blue); font-family: var(--font-sans); margin: 0; padding-top: 0.2rem;">
+                <h4 class="wie-label ui-label" style="color: var(--color-brand-blue); margin: 0; padding-top: 0.2rem;">
                     {{ $categorie->naam }}
                 </h4>
                 <div class="wie-namen">
                     @foreach ($categorie->leden as $lid)
                         <p style="font-size: 1rem; color: var(--color-brand-dark); line-height: 1.7; margin: 0;">
-                            {{ $lid->naam }}@if ($lid->titel)<span style="color: var(--color-brand-muted); font-size: 0.875rem;"> — {{ $lid->titel }}</span>@endif
+                            {{ $lid->naam }}@if ($lid->titel)<span style="color: var(--color-brand-muted); font-size: 1rem;"> — {{ $lid->titel }}</span>@endif
                         </p>
                     @endforeach
                 </div>
@@ -66,12 +66,12 @@
     <div class="bestuur-grid">
         @foreach ($governance as $categorie)
             <div>
-                <h4 style="font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-blue); font-family: var(--font-sans); margin: 0 0 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-brand-border-blue);">
+                <h4 class="ui-label" style="color: var(--color-brand-blue); margin: 0 0 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid var(--color-brand-border-blue);">
                     {{ $categorie->naam }}
                 </h4>
                 @foreach ($categorie->leden as $lid)
                     <p style="font-size: 1rem; color: var(--color-brand-dark); line-height: 1.7; margin: 0;">
-                        {{ $lid->naam }}@if ($lid->titel)<span style="color: var(--color-brand-muted); font-size: 0.875rem;"> — {{ $lid->titel }}</span>@endif
+                        {{ $lid->naam }}@if ($lid->titel)<span style="color: var(--color-brand-muted); font-size: 1rem;"> — {{ $lid->titel }}</span>@endif
                     </p>
                 @endforeach
             </div>

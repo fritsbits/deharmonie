@@ -10,7 +10,6 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
@@ -28,6 +27,8 @@ class ActiviteitResource extends Resource
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-calendar';
 
     protected static ?string $navigationLabel = 'Activiteiten';
+
+    protected static ?int $navigationSort = 1;
 
     protected static ?string $modelLabel = 'Activiteit';
 
@@ -96,12 +97,6 @@ class ActiviteitResource extends Resource
                 ->default(ActiviteitStatus::Concept)
                 ->required(),
 
-            SpatieMediaLibraryFileUpload::make('afbeelding')
-                ->label('Afbeelding')
-                ->collection('afbeelding')
-                ->image()
-                ->imageEditor()
-                ->columnSpanFull(),
         ]);
     }
 
@@ -124,11 +119,9 @@ class ActiviteitResource extends Resource
                     ->label('Reeks')
                     ->placeholder('—')
                     ->sortable(),
-                Tables\Columns\TextColumn::make('deelnameverzoeken_count')
-                    ->label('Inschrijvingen')
-                    ->counts('deelnameverzoeken'),
             ])
-            ->defaultSort('datum', 'asc')
+            ->defaultSort('datum', 'desc')
+            ->defaultPaginationPageOption(25)
             ->filters([
                 Tables\Filters\SelectFilter::make('status')
                     ->options(ActiviteitStatus::class),
