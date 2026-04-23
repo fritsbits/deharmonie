@@ -64,14 +64,13 @@ class AdminPanelProvider extends PanelProvider
 }
 </style>
 <script>
-    /* Default to a collapsed sidebar on first visit; respect the user choice afterwards.
-       Filament persists the sidebar state in localStorage via Alpine.$persist. We pre-seed
-       the desktop key only if it has not been written yet. */
+    /* Force the sidebar collapsed on every page load. The toggle button still
+       lets the user expand mid-session if they need to read labels, but the
+       next navigation snaps back to compact. Filament reads this localStorage
+       key via Alpine.$persist on every Alpine init. */
     (function () {
         try {
-            if (window.localStorage.getItem("isOpenDesktop") === null) {
-                window.localStorage.setItem("isOpenDesktop", "false");
-            }
+            window.localStorage.setItem("isOpenDesktop", "false");
         } catch (e) { /* localStorage unavailable — ignore */ }
     })();
 </script>
