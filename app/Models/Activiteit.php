@@ -3,10 +3,11 @@
 namespace App\Models;
 
 use App\Enums\ActiviteitStatus;
+use App\Enums\Categorie;
 use App\Enums\Interesse;
+use App\Enums\Soort;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
@@ -23,8 +24,9 @@ class Activiteit extends Model implements HasMedia
         'beschrijving_nl', 'beschrijving_fr',
         'notice_nl', 'notice_fr',
         'datum', 'startuur', 'einduur',
-        'locatie', 'prijs', 'max_deelnemers', 'status', 'interesse',
-        'template_id',
+        'locatie', 'prijs', 'max_deelnemers',
+        'status', 'interesse',
+        'soort', 'categorie',
     ];
 
     protected $casts = [
@@ -32,6 +34,8 @@ class Activiteit extends Model implements HasMedia
         'prijs' => 'decimal:2',
         'status' => ActiviteitStatus::class,
         'interesse' => Interesse::class,
+        'soort' => Soort::class,
+        'categorie' => Categorie::class,
     ];
 
     protected static function booted(): void
@@ -54,11 +58,6 @@ class Activiteit extends Model implements HasMedia
         }
 
         return $slug;
-    }
-
-    public function template(): BelongsTo
-    {
-        return $this->belongsTo(ActiviteitTemplate::class, 'template_id');
     }
 
     public function deelnameverzoeken(): HasMany
@@ -108,10 +107,5 @@ class Activiteit extends Model implements HasMedia
         $locale = app()->getLocale();
 
         return $locale === 'fr' ? $this->notice_fr : $this->notice_nl;
-    }
-
-    public function getInteresseThumbnailUrlAttribute(): ?string
-    {
-        return $this->interesse?->thumbnailUrl();
     }
 }
