@@ -179,7 +179,7 @@ class ActiviteitResource extends Resource
 
                         return $start->isoFormat('D MMMM').' – '.$end->isoFormat('D MMMM YYYY');
                     })
-                    ->orderQueryUsing(fn ($query, $direction) => $query->orderBy('datum', $direction))
+                    ->orderQueryUsing(fn ($query) => $query->orderBy('datum', 'desc'))
                     ->scopeQueryByKeyUsing(fn ($query, $key) => $query->whereBetween('datum', [
                         $key,
                         Carbon::parse($key)->endOfWeek()->toDateString(),
