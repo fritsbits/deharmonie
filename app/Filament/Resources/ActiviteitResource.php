@@ -90,6 +90,9 @@ class ActiviteitResource extends Resource
             ])->columnSpanFull(),
 
             Section::make('Wat')
+                ->description('Categorie en publicatie-status')
+                ->aside()
+                ->compact()
                 ->schema([
                     Select::make('categorie')
                         ->label('Categorie')
@@ -107,11 +110,15 @@ class ActiviteitResource extends Resource
                 ->columnSpanFull(),
 
             Section::make('Wanneer')
+                ->description('Datum en uren van de activiteit')
+                ->aside()
+                ->compact()
                 ->schema([
-                    Grid::make(3)->schema([
+                    Grid::make(4)->schema([
                         DatePicker::make('datum')
                             ->label('Datum')
-                            ->required(),
+                            ->required()
+                            ->columnSpan(2),
                         TimePicker::make('startuur')
                             ->label('Startuur')
                             ->required()
@@ -124,6 +131,9 @@ class ActiviteitResource extends Resource
                 ->columnSpanFull(),
 
             Section::make('Praktisch')
+                ->description('Prijs en maximum aantal deelnemers')
+                ->aside()
+                ->compact()
                 ->schema([
                     TextInput::make('prijs')
                         ->label('Prijs')

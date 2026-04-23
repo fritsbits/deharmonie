@@ -36,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->font('Nunito Sans', provider: GoogleFontProvider::class)
             ->darkMode(false)
+            ->sidebarCollapsibleOnDesktop()
             ->renderHook('panels::head.end', fn (): HtmlString => new HtmlString('
 <style>
 /* De Harmonie admin overrides */
