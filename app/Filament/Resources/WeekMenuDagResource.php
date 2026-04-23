@@ -23,7 +23,9 @@ class WeekMenuDagResource extends Resource
 
     protected static string|\BackedEnum|null $navigationIcon = 'heroicon-o-clipboard-document-list';
 
-    protected static ?string $navigationLabel = 'Weekmenu';
+    protected static ?string $navigationLabel = 'Restaurant & Menu';
+
+    protected static ?int $navigationSort = 3;
 
     protected static ?string $modelLabel = 'Menudag';
 
@@ -107,6 +109,10 @@ class WeekMenuDagResource extends Resource
                     ->label('Datum')
                     ->date('d/m/Y')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('main_nl')
+                    ->label('Gerecht (NL)')
+                    ->limit(50)
+                    ->placeholder('—'),
                 Tables\Columns\TextColumn::make('type')
                     ->label('Type')
                     ->badge()
@@ -118,12 +124,9 @@ class WeekMenuDagResource extends Resource
                 Tables\Columns\TextColumn::make('price')
                     ->label('Prijs')
                     ->formatStateUsing(fn ($state): string => $state ? '€ '.$state : '—'),
-                Tables\Columns\TextColumn::make('main_nl')
-                    ->label('Gerecht (NL)')
-                    ->limit(50)
-                    ->placeholder('—'),
             ])
-            ->defaultSort('date', 'asc')
+            ->defaultSort('date', 'desc')
+            ->defaultPaginationPageOption(25)
             ->filters([
                 Tables\Filters\Filter::make('week')
                     ->form([

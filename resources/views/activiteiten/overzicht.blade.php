@@ -81,7 +81,7 @@
                         <p style="font-family: var(--font-sans); font-size: 1.625rem; font-weight: 900; color: var(--color-brand-dark); margin: 0 0 0.25rem;">
                             {{ $theme['name'] }}
                         </p>
-                        <p style="font-size: 0.9rem; color: var(--color-brand-muted); line-height: 1.5; margin-bottom: 1rem; font-style: italic;">
+                        <p class="ui-tagline" style="margin-bottom: 1rem;">
                             {{ $theme['tagline'] }}
                         </p>
                         <ul style="list-style: none; padding: 0; border-top: 1px dashed #e4dbd3; padding-top: 0.75rem;">
@@ -142,9 +142,9 @@
             <div style="grid-row: 1 / 3; grid-column: 3; display: flex; flex-direction: column; gap: 0.875rem; padding: 4px;">
                 @php
                     $specialCardColors = [
-                        ['bg' => 'var(--color-brand-green)',  'dark_tint' => '#5a8a74', 'accent' => 'var(--color-brand-green)'],
-                        ['bg' => 'var(--color-brand-blue)',   'dark_tint' => '#2f5490', 'accent' => 'var(--color-brand-blue)'],
-                        ['bg' => 'var(--color-brand-orange)', 'dark_tint' => '#b34a2d', 'accent' => 'var(--color-brand-orange)'],
+                        ['bg' => 'var(--color-brand-green)',  'dark_tint' => '#5a8a74', 'accent' => 'var(--color-brand-green)',  'label' => 'var(--color-brand-green)', 'pill_bg' => 'rgba(129,181,156,0.15)'],
+                        ['bg' => 'var(--color-brand-blue)',   'dark_tint' => '#2f5490', 'accent' => 'var(--color-brand-blue)',   'label' => '#2f5490',                  'pill_bg' => 'rgba(70,121,188,0.12)'],
+                        ['bg' => 'var(--color-brand-orange)', 'dark_tint' => '#b34a2d', 'accent' => 'var(--color-brand-orange)', 'label' => '#b34a2d',                  'pill_bg' => 'rgba(235,102,67,0.12)'],
                     ];
                     $iconChat  = '<path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 0 1-3.476.383.39.39 0 0 0-.297.17l-2.755 4.133a.75.75 0 0 1-1.248 0l-2.755-4.133a.39.39 0 0 0-.297-.17 48.9 48.9 0 0 1-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97Z" clip-rule="evenodd"/>';
                     $iconMusic = '<path fill-rule="evenodd" d="M19.952 1.651a.75.75 0 0 1 .298.599V16.303a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.403-4.909l2.311-.66a1.5 1.5 0 0 0 1.088-1.442V6.994l-9 2.572v9.737a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.402-4.909l2.31-.66a1.5 1.5 0 0 0 1.088-1.442V5.25a.75.75 0 0 1 .544-.721l10.5-3a.75.75 0 0 1 .658.122Z" clip-rule="evenodd"/>';
@@ -175,31 +175,29 @@
                        class="special-activity-card"
                        style="display: flex; flex-direction: column; text-decoration: none; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(44,40,38,.09), 0 8px 28px rgba(44,40,38,.11); flex: 1;">
                         {{-- Colored header --}}
-                        <div style="position: relative; height: 130px; background: {{ $scc['bg'] }}; overflow: hidden; flex-shrink: 0;">
+                        <div style="position: relative; height: 148px; background: {{ $scc['bg'] }}; overflow: hidden; flex-shrink: 0;">
                             <svg style="position: absolute; width: 155px; height: 155px; bottom: -22px; right: -12px; transform: rotate(12deg); pointer-events: none;"
                                  viewBox="0 0 24 24" fill="{{ $scc['dark_tint'] }}" stroke="none">
                                 {!! $icon !!}
                             </svg>
                             <div style="position: absolute; bottom: 0.9rem; left: 1.25rem; z-index: 2;">
+                                <span style="display: inline-block; font-family: var(--font-sans); font-size: 0.625rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: white; background: rgba(255,255,255,0.22); border-radius: 999px; padding: 0.2em 0.65em; margin-bottom: 0.35rem;">{{ __('activities.coming_soon') }}</span>
                                 <span style="font-family: var(--font-sans); font-weight: 900; font-size: 3.25rem; line-height: 1; color: white; display: block;">{{ $date->format('d') }}</span>
-                                <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.7); display: block; margin-top: 1px;">{{ strtoupper($date->locale(app()->getLocale())->isoFormat('MMMM')) }}</span>
+                                <span style="font-family: var(--font-sans); font-weight: 800; font-size: 0.8125rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.85); display: block; margin-top: 1px;">{{ strtoupper($date->locale(app()->getLocale())->isoFormat('MMMM')) }}</span>
                             </div>
                         </div>
                         {{-- Card body --}}
                         <div style="padding: 0.875rem 1.25rem 1rem; background: white; flex: 1; display: flex; flex-direction: column;">
-                            <p style="font-family: var(--font-sans); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: {{ $scc['accent'] }}; margin: 0 0 0.3rem;">
-                                {{ __('activities.coming_soon') }}
-                            </p>
-                            <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.2; margin: 0 0 0.3rem;">
+                            <h3 style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1.3; margin: 0 0 0.3rem;">
                                 {{ $titel }}
                             </h3>
-                            <p style="font-size: 0.95rem; color: var(--color-brand-muted); margin: 0; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
+                            <p class="ui-meta" style="margin: 0; font-weight: 600; display: flex; align-items: center; gap: 0.4rem;">
                                 {{ $uur }}<span style="display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: {{ $scc['accent'] }}; flex-shrink: 0;"></span>{{ $activiteit->locatie }}
                             </p>
                         </div>
                     </a>
                 @empty
-                    <div style="background: white; border-radius: 12px; padding: 1.5rem; color: var(--color-brand-muted); font-size: 0.875rem; border: 1px solid #d8ece5;">
+                    <div class="ui-meta" style="background: white; border-radius: 12px; padding: 1.5rem; border: 1px solid #d8ece5;">
                         {{ __('activities.no_upcoming') }}
                     </div>
                 @endforelse
@@ -225,12 +223,12 @@
                 <p style="font-family: var(--font-sans); font-weight: 700; font-size: 1rem; color: var(--color-brand-dark); margin: 0 0 0.1rem;">
                     {{ __('activities.facebook_follow_heading') }}
                 </p>
-                <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin: 0;">
+                <p class="ui-meta" style="margin: 0;">
                     {{ __('activities.facebook_follow_body') }}
                 </p>
             </div>
             <a href="https://www.facebook.com/deharmoniebrussel/" target="_blank" rel="noopener"
-               style="font-family: var(--font-sans); font-weight: 700; font-size: 0.875rem; color: #1877f2; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
+               style="font-family: var(--font-sans); font-weight: 700; font-size: 1rem; color: #1877f2; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
                 facebook.com/deharmoniebrussel →
             </a>
         </div>

@@ -28,14 +28,14 @@
             </div>
 
             {{-- Heading --}}
-            <p style="font-family: var(--font-sans); font-weight: 900; font-size: 1.25rem; color: var(--color-brand-dark); margin: 0 0 1rem;">
+            <p style="font-family: var(--font-sans); font-weight: 900; font-size: 1.375rem; color: var(--color-brand-dark); margin: 0 0 1rem;">
                 @if (app()->getLocale() === 'fr')Vous êtes inscrit(e)&nbsp;!@else Je bent ingeschreven!@endif
             </p>
 
             {{-- Activity summary — one compact block --}}
             <div style="background: white; border-radius: 8px; padding: 0.875rem 1rem; margin-bottom: 1rem; text-align: left;">
                 <p style="font-weight: 700; font-size: 1rem; color: var(--color-brand-dark); margin: 0 0 0.3rem;">{{ $cleanTitel }}</p>
-                <p style="font-size: 0.9rem; color: var(--color-brand-muted); margin: 0;">
+                <p style="font-size: 1rem; color: var(--color-brand-muted); margin: 0;">
                     {{ ucfirst($activiteit->datum->locale(app()->getLocale())->isoFormat('dddd D MMMM')) }}
                     &middot; {{ $tijd }}
                     &middot; {{ $activiteit->locatie }}
@@ -43,7 +43,7 @@
             </div>
 
             {{-- Email note --}}
-            <p style="font-size: 0.875rem; color: var(--color-brand-muted); margin: 0;">
+            <p style="font-size: 1rem; color: var(--color-brand-muted); margin: 0;">
                 @if (app()->getLocale() === 'fr')Vous recevrez une confirmation par e-mail.@else Je ontvangt een bevestiging per e-mail.@endif
             </p>
         </div>
@@ -55,48 +55,48 @@
             </div>
 
             <div>
-                <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
+                <label for="reg-naam" class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 1rem; text-transform: uppercase;">
                     {{ __('forms.name') }}
-                    <span style="font-size: 0.7rem; font-weight: 500; color: var(--color-brand-muted); background: #ede9e6; border-radius: 3px; padding: 0.1em 0.45em; text-transform: none; letter-spacing: 0; margin-left: 0.4rem; vertical-align: middle;">{{ __('forms.required_label') }}</span>
+                    <span style="font-size: 0.875rem; font-weight: 500; color: var(--color-brand-muted); background: #ede9e6; border-radius: 3px; padding: 0.1em 0.45em; text-transform: none; letter-spacing: 0; margin-left: 0.4rem; vertical-align: middle;">{{ __('forms.required_label') }}</span>
                 </label>
-                <input type="text" wire:model="naam"
+                <input id="reg-naam" type="text" wire:model="naam"
                        class="w-full px-3 py-3 rounded focus:outline-none @error('naam') error-field @enderror"
                        style="border: 1px solid var(--color-brand-gray); background: var(--color-brand-bg); color: var(--color-brand-dark); font-size: 1.125rem; @error('naam') border-color: var(--color-brand-orange); outline: 1px solid var(--color-brand-orange); @enderror">
-                @error('naam') <p style="color: var(--color-brand-orange); font-size: 1rem; margin-top: 0.25rem;">{{ $message }}</p> @enderror
+                @error('naam') <p style="color: var(--color-brand-orange-dark); font-size: 1rem; margin-top: 0.25rem;">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
+                <label for="reg-email" class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 1rem; text-transform: uppercase;">
                     {{ __('forms.email') }}
-                    <span style="font-size: 0.7rem; font-weight: 500; color: var(--color-brand-muted); background: #ede9e6; border-radius: 3px; padding: 0.1em 0.45em; text-transform: none; letter-spacing: 0; margin-left: 0.4rem; vertical-align: middle;">{{ __('forms.required_label') }}</span>
+                    <span style="font-size: 0.875rem; font-weight: 500; color: var(--color-brand-muted); background: #ede9e6; border-radius: 3px; padding: 0.1em 0.45em; text-transform: none; letter-spacing: 0; margin-left: 0.4rem; vertical-align: middle;">{{ __('forms.required_label') }}</span>
                 </label>
-                <input type="email" wire:model="email"
+                <input id="reg-email" type="email" wire:model="email"
                        class="w-full px-3 py-3 rounded focus:outline-none @error('email') error-field @enderror"
                        style="border: 1px solid var(--color-brand-gray); background: var(--color-brand-bg); color: var(--color-brand-dark); font-size: 1.125rem; @error('email') border-color: var(--color-brand-orange); outline: 1px solid var(--color-brand-orange); @enderror">
-                @error('email') <p style="color: var(--color-brand-orange); font-size: 1rem; margin-top: 0.25rem;">{{ $message }}</p> @enderror
+                @error('email') <p style="color: var(--color-brand-orange-dark); font-size: 1rem; margin-top: 0.25rem;">{{ $message }}</p> @enderror
             </div>
 
             <div>
-                <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
+                <label for="reg-telefoon" class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 1rem; text-transform: uppercase;">
                     {{ __('forms.phone') }}
                 </label>
-                <input type="tel" wire:model="telefoon"
+                <input id="reg-telefoon" type="tel" wire:model="telefoon"
                        class="w-full px-3 py-3 rounded focus:outline-none"
                        style="border: 1px solid var(--color-brand-gray); background: var(--color-brand-bg); color: var(--color-brand-dark); font-size: 1.125rem;">
             </div>
 
             <div>
-                <label class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 0.95rem; text-transform: uppercase;">
+                <label for="reg-bericht" class="block mb-1" style="font-family: var(--font-sans); font-weight: 700; letter-spacing: 0.03em; color: var(--color-brand-dark); font-size: 1rem; text-transform: uppercase;">
                     {{ __('forms.message_label') }}
                 </label>
-                <textarea wire:model="bericht" rows="3"
+                <textarea id="reg-bericht" wire:model="bericht" rows="3"
                           class="w-full px-3 py-3 rounded focus:outline-none"
                           style="border: 1px solid var(--color-brand-gray); background: var(--color-brand-bg); color: var(--color-brand-dark); font-size: 1.125rem;"></textarea>
             </div>
 
             <button type="submit"
                     class="w-full font-bold px-5 py-3 rounded"
-                    style="background-color: var(--color-brand-green); color: white; font-family: var(--font-sans); font-size: 1rem; letter-spacing: 0.03em;"
+                    style="background-color: var(--color-brand-green); color: white; font-family: var(--font-sans); font-size: 1.125rem; letter-spacing: 0.03em;"
                     wire:loading.attr="disabled">
                 <span wire:loading.remove>{{ __('forms.submit') }}</span>
                 <span wire:loading>...</span>

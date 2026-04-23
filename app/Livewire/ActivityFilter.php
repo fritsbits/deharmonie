@@ -17,7 +17,6 @@ class ActivityFilter extends Component
             ->orderBy('datum')
             ->orderBy('startuur')
             ->limit(5)
-            ->with('media')
             ->get();
     }
 

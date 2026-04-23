@@ -39,7 +39,7 @@ return [
     'visit_us' => 'Kom eens langs',
     'overview_heading' => 'Altijd iets te beleven',
     'overview_tagline' => 'Elke week staan er vaste activiteiten op het programma — van bewegen tot knutselen en gesprekken. Daarnaast organiseren we bijzondere momenten waarvoor je je beter op voorhand inschrijft.',
-    'special_moments_intro' => 'Regelmatig organiseren we iets extra\'s — een feest, een uitstap, een themamiddag. Schrijf je in via de site of via het secretariaat.',
+    'special_moments_intro' => 'Regelmatig organiseren we iets extra\'s — een feest, een uitstap, een themamiddag. Schrijf je in via het secretariaat.',
     'facebook_follow_heading' => 'Volg De Harmonie op Facebook',
     'facebook_follow_body' => 'Foto\'s, nieuwtjes en aankondigingen van bijzondere activiteiten',
     'upcoming_activities_heading' => 'Aankomende activiteiten',

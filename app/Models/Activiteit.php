@@ -9,12 +9,10 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Str;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Activiteit extends Model implements HasMedia
+class Activiteit extends Model
 {
-    use HasFactory, InteractsWithMedia;
+    use HasFactory;
 
     protected $table = 'activiteiten';
 
@@ -82,11 +80,6 @@ class Activiteit extends Model implements HasMedia
         }
 
         return '€ '.number_format((float) $this->prijs, 2, ',', '.');
-    }
-
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('afbeelding')->singleFile();
     }
 
     public function getTitelAttribute(): string

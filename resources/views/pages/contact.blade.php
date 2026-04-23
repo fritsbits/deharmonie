@@ -63,15 +63,15 @@
                             <p class="contact-field-label">Email</p>
                             <div style="display: flex; flex-direction: column; gap: 0.5rem;">
                                 <div>
-                                    <p style="font-size: 0.8125rem; color: var(--color-brand-muted); margin-bottom: 0.05rem;">{{ __('common.email_general') }}</p>
+                                    <p class="ui-meta" style="margin-bottom: 0.05rem;">{{ __('common.email_general') }}</p>
                                     <a href="mailto:info@deharmonie.be" class="contact-email-link" style="font-size: 1rem; color: var(--color-brand-blue); text-decoration: none;">info@deharmonie.be</a>
                                 </div>
                                 <div>
-                                    <p style="font-size: 0.8125rem; color: var(--color-brand-muted); margin-bottom: 0.05rem;">{{ __('common.email_activities') }}</p>
+                                    <p class="ui-meta" style="margin-bottom: 0.05rem;">{{ __('common.email_activities') }}</p>
                                     <a href="mailto:animatie@deharmonie.be" class="contact-email-link" style="font-size: 1rem; color: var(--color-brand-blue); text-decoration: none;">animatie@deharmonie.be</a>
                                 </div>
                                 <div>
-                                    <p style="font-size: 0.8125rem; color: var(--color-brand-muted); margin-bottom: 0.05rem;">{{ __('common.email_services') }}</p>
+                                    <p class="ui-meta" style="margin-bottom: 0.05rem;">{{ __('common.email_services') }}</p>
                                     <a href="mailto:diensten@deharmonie.be" class="contact-email-link" style="font-size: 1rem; color: var(--color-brand-blue); text-decoration: none;">diensten@deharmonie.be</a>
                                 </div>
                             </div>
@@ -102,7 +102,7 @@
                         href="https://www.openstreetmap.org/?mlat=50.8578&mlon=4.3535#map=17/50.8578/4.3535"
                         target="_blank"
                         rel="noopener noreferrer"
-                        style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: none; white-space: nowrap; align-self: center; min-height: 44px; padding: 0 0.25rem;">
+                        style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: none; white-space: nowrap; align-self: center; min-height: 44px; padding: 0 0.25rem;">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                         {{ __('common.open_in_maps') }}
                     </a>
@@ -130,10 +130,10 @@
 }
 .contact-field-label {
     font-family: var(--font-sans);
-    font-size: 0.7rem;
-    font-weight: 800;
+    font-size: 0.875rem;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.07em;
     color: var(--color-brand-blue);
     margin-bottom: 0.25rem;
 }
