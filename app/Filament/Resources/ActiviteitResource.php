@@ -175,10 +175,10 @@ class ActiviteitResource extends Resource
                     ->label('Tijd')
                     ->formatStateUsing(fn (?string $state) => $state ? substr($state, 0, 5) : '—')
                     ->width('80px'),
-                TextColumn::make('locatie')
-                    ->label('Locatie')
-                    ->toggleable()
-                    ->limit(20),
+                TextColumn::make('status')
+                    ->label('Status')
+                    ->badge()
+                    ->width('110px'),
             ])
             ->filters([
                 SelectFilter::make('categorie')

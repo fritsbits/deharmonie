@@ -21,12 +21,6 @@
             @if ($activiteit->soort->value === 'speciaal')
                 <span style="font-size: 0.65rem; background: #efc56a; color: #5a4419; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">speciaal</span>
             @endif
-            @if ($activiteit->status->value === 'geannuleerd')
-                <span style="font-size: 0.65rem; background: #c43; color: white; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">geannuleerd</span>
-            @endif
-            @if ($activiteit->status->value === 'concept')
-                <span style="font-size: 0.65rem; background: #ddd; color: #444; padding: 1px 6px; border-radius: 4px; text-transform: uppercase; letter-spacing: 0.05em;">concept</span>
-            @endif
         </span>
         <span style="font-size: 0.8rem; color: #706662;">{{ $activiteit->categorie->getLabel() }}</span>
     </span>
