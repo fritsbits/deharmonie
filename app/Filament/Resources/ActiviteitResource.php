@@ -100,7 +100,7 @@ class ActiviteitResource extends Resource
                     Select::make('status')
                         ->label('Status')
                         ->options(ActiviteitStatus::class)
-                        ->default(ActiviteitStatus::Concept)
+                        ->default(ActiviteitStatus::Gepubliceerd)
                         ->required(),
                 ])
                 ->columns(2)
