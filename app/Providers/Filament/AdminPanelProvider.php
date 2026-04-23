@@ -63,6 +63,12 @@ class AdminPanelProvider extends PanelProvider
     border-color: rgba(255,255,255,0.45) !important;
 }
 
+/* RichEditor — give the description some breathing room (~5 rows) */
+.fi-fo-rich-editor .tiptap,
+.fi-fo-rich-editor [contenteditable] {
+    min-height: 8rem;
+}
+
 /* Tabs — switch from pill style to clear underline tabs */
 .fi-tabs {
     border-bottom: 1px solid #e5e7eb;
