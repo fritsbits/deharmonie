@@ -8,10 +8,13 @@ use App\Enums\Soort;
 use App\Filament\Resources\ActiviteitResource\Pages;
 use App\Models\Activiteit;
 use Carbon\Carbon;
+use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -181,7 +184,63 @@ class ActiviteitResource extends Resource
             ->actions([
                 ActionGroup::make([
                     EditAction::make(),
-                    // Kopieer + annuleer actions are added in Tasks 17-18.
+                    Action::make('kopieer')
+                        ->label('Kopieer naar...')
+                        ->icon('heroicon-o-document-duplicate')
+                        ->modalHeading(fn (Activiteit $record) => 'Kopieer "'.$record->titel_nl.'"')
+                        ->form([
+                            Radio::make('mode')
+                                ->label('Naar welke datums?')
+                                ->options([
+                                    'wekelijks' => 'Wekelijks (elke week tot een einddatum)',
+                                    'specifiek' => 'Specifieke datums',
+                                ])
+                                ->default('wekelijks')
+                                ->required()
+                                ->live(),
+                            DatePicker::make('start')
+                                ->label('Vanaf')
+                                ->required()
+                                ->visible(fn (Get $get): bool => $get('mode') === 'wekelijks'),
+                            DatePicker::make('einde')
+                                ->label('Tot en met')
+                                ->required()
+                                ->visible(fn (Get $get): bool => $get('mode') === 'wekelijks')
+                                ->after('start'),
+                            Repeater::make('datums')
+                                ->label('Datums')
+                                ->schema([
+                                    DatePicker::make('datum'),
+                                ])
+                                ->minItems(1)
+                                ->visible(fn (Get $get): bool => $get('mode') === 'specifiek'),
+                        ])
+                        ->action(function (Activiteit $record, array $data): void {
+                            $datums = $data['mode'] === 'wekelijks'
+                                ? self::buildWeeklyDates($record->datum, $data['start'], $data['einde'])
+                                : array_values(array_map(
+                                    fn ($d) => Carbon::parse($d['datum']),
+                                    array_filter($data['datums'] ?? [], fn ($d) => filled($d['datum'] ?? null)),
+                                ));
+
+                            foreach ($datums as $d) {
+                                Activiteit::create([
+                                    'titel_nl' => $record->titel_nl,
+                                    'titel_fr' => $record->titel_fr,
+                                    'beschrijving_nl' => $record->beschrijving_nl,
+                                    'beschrijving_fr' => $record->beschrijving_fr,
+                                    'datum' => $d->toDateString(),
+                                    'startuur' => $record->startuur,
+                                    'einduur' => $record->einduur,
+                                    'locatie' => $record->locatie,
+                                    'prijs' => $record->prijs,
+                                    'max_deelnemers' => $record->max_deelnemers,
+                                    'status' => ActiviteitStatus::Concept,
+                                    'soort' => $record->soort,
+                                    'categorie' => $record->categorie,
+                                ]);
+                            }
+                        }),
                 ]),
             ])
             ->bulkActions([
@@ -196,5 +255,27 @@ class ActiviteitResource extends Resource
             'create' => Pages\CreateActiviteit::route('/create'),
             'edit' => Pages\EditActiviteit::route('/{record}/edit'),
         ];
+    }
+
+    /**
+     * Returns dates on the same weekday as $anchor between $start and $einde inclusive.
+     *
+     * @return array<Carbon>
+     */
+    private static function buildWeeklyDates(Carbon $anchor, string $start, string $einde): array
+    {
+        $weekday = $anchor->dayOfWeek;
+        $cursor = Carbon::parse($start);
+        if ($cursor->dayOfWeek !== $weekday) {
+            $cursor = $cursor->next($weekday);
+        }
+        $end = Carbon::parse($einde);
+        $out = [];
+        while ($cursor->lte($end)) {
+            $out[] = $cursor->copy();
+            $cursor->addWeek();
+        }
+
+        return $out;
     }
 }
