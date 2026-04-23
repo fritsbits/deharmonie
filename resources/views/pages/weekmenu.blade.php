@@ -44,7 +44,7 @@
                                 <span style="font-family: var(--font-sans); font-size: 1.375rem; font-weight: 900; color: var(--color-brand-dark); margin-top: 0.3rem; letter-spacing: -0.01em;">€</span>
                                 <span style="font-family: var(--font-sans); font-size: 3.25rem; font-weight: 900; color: var(--color-brand-dark); letter-spacing: -0.04em; line-height: 0.9;">{{ __('weekmenu.price_value') }}</span>
                             </div>
-                            <p style="font-size: 0.9375rem; color: var(--color-brand-muted); margin: 0;">{{ __('weekmenu.price_prefix') }} — {{ __('weekmenu.price_sub') }}</p>
+                            <p class="ui-meta" style="margin: 0;">{{ __('weekmenu.price_prefix') }} — {{ __('weekmenu.price_sub') }}</p>
                         </div>
 
                         {{-- Takeaway & Delivery --}}

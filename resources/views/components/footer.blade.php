@@ -31,7 +31,7 @@
 
             <a href="https://www.facebook.com/deharmoniebrussel/" target="_blank" rel="noopener"
                class="press-scale"
-               style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 999px; background: rgba(255,255,255,0.12); color: white; text-decoration: none; font-family: var(--font-sans); font-size: 0.875rem; font-weight: 700; transition: background 0.15s, transform 0.12s ease;"
+               style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1.125rem; border-radius: 999px; background: rgba(255,255,255,0.12); color: white; text-decoration: none; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; transition: background 0.15s, transform 0.12s ease;"
                onmouseover="this.style.background='rgba(255,255,255,0.22)'" onmouseout="this.style.background='rgba(255,255,255,0.12)'">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
                     <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
@@ -42,7 +42,7 @@
 
         {{-- Right: navigation --}}
         <div>
-            <p style="font-family: var(--font-sans); font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5; margin-bottom: 1rem;">
+            <p style="font-family: var(--font-sans); font-size: 0.8125rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.6; margin-bottom: 1rem;">
                 {{ __('common.quick_links') }}
             </p>
             <div class="footer-nav-cols" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem 1.5rem;">
@@ -66,7 +66,7 @@
     {{-- Partner logos strip + bottom bar (shared darker bg) --}}
     <div style="background: rgba(0,0,0,0.1);">
         <div class="footer-partners" style="max-width: 72rem; margin: 0 auto; padding: 1.5rem 1.5rem; display: flex; align-items: center; gap: 2.5rem;">
-            <span style="font-family: var(--font-sans); font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.45; white-space: nowrap;">
+            <span style="font-family: var(--font-sans); font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.55; white-space: nowrap;">
                 {{ __('common.supported_by') }}
             </span>
             <a href="https://www.vlaanderen.be/" target="_blank" rel="noopener">
@@ -91,7 +91,7 @@
             </a>
         </div>
 
-        <div class="footer-bottom" style="max-width: 72rem; margin: 0 auto; padding: 0.85rem 1.5rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 0.8rem; border-top: 1px solid rgba(255,255,255,0.08);">
+        <div class="footer-bottom" style="max-width: 72rem; margin: 0 auto; padding: 0.85rem 1.5rem; display: flex; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 0.875rem; border-top: 1px solid rgba(255,255,255,0.08);">
             <span style="opacity: 0.45;">&copy; {{ date('Y') }} VZW Buurtwerk Noordwijk</span>
             <span style="opacity: 0.85;">
                 {{ app()->getLocale() === 'fr' ? 'Site web par' : 'Website door' }}

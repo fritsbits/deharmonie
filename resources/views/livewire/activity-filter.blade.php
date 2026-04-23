@@ -13,12 +13,7 @@
                style="display: flex; align-items: center; gap: 1rem; padding: 0.65rem 0; text-decoration: none; opacity: {{ $activiteit->status->value === 'geannuleerd' ? '0.85' : '1' }}; {{ !$loop->last ? 'border-bottom: 1px solid rgba(216,211,210,0.7);' : '' }}">
 
                 {{-- Thumbnail --}}
-                <div class="img-outline" style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; background-color: {{ $thumbColor }}; position: relative;">
-                    @if ($activiteit->getFirstMediaUrl('afbeelding'))
-                        <img src="{{ $activiteit->getFirstMediaUrl('afbeelding') }}"
-                             alt="{{ $activiteit->titel }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
-                    @endif
-                </div>
+                <div class="img-outline" style="flex-shrink: 0; width: 80px; height: 80px; border-radius: 8px; overflow: hidden; background-color: {{ $thumbColor }}; position: relative;"></div>
 
                 {{-- Content --}}
                 <div style="flex: 1; min-width: 0;">
@@ -36,7 +31,7 @@
                                 booked = ids.includes({{ $activiteit->id }});
                             "
                             x-show="booked"
-                            style="display: none; background: var(--color-brand-green); color: white; font-size: 0.75rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; font-family: var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase;">
+                            style="display: none; background: var(--color-brand-green); color: white; font-size: 0.875rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 4px; font-family: var(--font-sans); letter-spacing: 0.04em; text-transform: uppercase;">
                             {{ __('activities.booked') }}
                         </span>
                     </div>
@@ -49,7 +44,7 @@
 
             </a>
         @empty
-            <p style="padding: 2rem 0; color: var(--color-brand-muted); font-size: 0.9rem;">
+            <p style="padding: 2rem 0; color: var(--color-brand-muted); font-size: 1.0625rem;">
                 {{ __('activities.no_upcoming') }}
             </p>
         @endforelse

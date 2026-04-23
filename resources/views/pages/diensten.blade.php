@@ -178,7 +178,7 @@
                 {{ __('pages.grote_kuis_description') }}
             </p>
 
-            <p style="font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em; color: var(--color-brand-muted); margin-bottom: 0.75rem; font-family: var(--font-sans);">
+            <p class="ui-label" style="color: var(--color-brand-muted); margin-bottom: 0.75rem;">
                 {{ __('pages.grote_kuis_examples_label') }}
             </p>
             <ul style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.625rem 2rem; margin-bottom: 2rem; padding: 0; list-style: none;">

@@ -39,7 +39,7 @@ return [
     'visit_us' => 'Venez nous rendre visite',
     'overview_heading' => 'Toujours quelque chose à vivre',
     'overview_tagline' => 'Chaque semaine, des activités sont au programme — du sport à la création et aux échanges. Nous organisons aussi des moments forts pour lesquels il vaut mieux s\'inscrire à l\'avance.',
-    'special_moments_intro' => 'Régulièrement, nous organisons quelque chose de spécial — une fête, une sortie, un après-midi à thème. Inscrivez-vous via le site ou via le secrétariat.',
+    'special_moments_intro' => 'Régulièrement, nous organisons quelque chose de spécial — une fête, une sortie, un après-midi à thème. Inscrivez-vous via le secrétariat.',
     'facebook_follow_heading' => 'Suivez De Harmonie sur Facebook',
     'facebook_follow_body' => 'Photos, actualités et annonces d\'activités spéciales',
     'upcoming_activities_heading' => 'Activités à venir',
