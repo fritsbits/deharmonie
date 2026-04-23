@@ -63,12 +63,6 @@
                     @php
                         $hasAnyActivity = false;
                         $dayIndex = 0;
-                        $agendaColorIndex = 0;
-                        $agendaColors = [
-                            ['bg' => 'var(--color-brand-orange)', 'icon' => '#b34a2d'],
-                            ['bg' => 'var(--color-brand-blue)',   'icon' => '#2f5490'],
-                            ['bg' => 'var(--color-brand-green)',  'icon' => '#5a8a74'],
-                        ];
                     @endphp
 
                     @for ($i = 0; $i < 7; $i++)
@@ -98,8 +92,11 @@
                             <div style="flex: 1; min-width: 0;">
                                 @foreach ($dayActivities as $activiteit)
                                     @php
-                                        $ac = $agendaColors[$agendaColorIndex % 3];
-                                        $agendaColorIndex++;
+                                        $ac = match ($activiteit->categorie->section()) {
+                                            'beweeg'         => ['bg' => 'var(--color-brand-orange)', 'icon' => '#b34a2d'],
+                                            'maak_leer'      => ['bg' => 'var(--color-brand-green)',  'icon' => '#5a8a74'],
+                                            'ontmoet_beleef' => ['bg' => 'var(--color-brand-blue)',   'icon' => '#2f5490'],
+                                        };
                                         $cancelled  = $activiteit->status->value === 'geannuleerd';
                                         $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-green-dark)';
                                         $metaColor  = $isPast || $cancelled ? '#c8c0bc' : 'var(--color-brand-muted)';
@@ -117,42 +114,7 @@
                                         }
                                         $metaStr = implode(' · ', $metaParts);
 
-                                        // Theme-based icon silhouette — same solid-fill treatment as the homepage cards.
-                                        // Solid Heroicons for the four primary themes; closed-path outlines fill fine as silhouettes for the rest.
-                                        $t = strtolower($activiteit->titel);
-                                        $iconChat     = '<path fill-rule="evenodd" d="M4.848 2.771A49.144 49.144 0 0 1 12 2.25c2.43 0 4.817.178 7.152.52 1.978.292 3.348 2.024 3.348 3.97v6.02c0 1.946-1.37 3.678-3.348 3.97a48.901 48.901 0 0 1-3.476.383.39.39 0 0 0-.297.17l-2.755 4.133a.75.75 0 0 1-1.248 0l-2.755-4.133a.39.39 0 0 0-.297-.17 48.9 48.9 0 0 1-3.476-.384c-1.978-.29-3.348-2.024-3.348-3.97V6.741c0-1.946 1.37-3.68 3.348-3.97Z" clip-rule="evenodd"/>';
-                                        $iconMusic    = '<path fill-rule="evenodd" d="M19.952 1.651a.75.75 0 0 1 .298.599V16.303a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.403-4.909l2.311-.66a1.5 1.5 0 0 0 1.088-1.442V6.994l-9 2.572v9.737a3 3 0 0 1-2.176 2.884l-1.32.377a2.553 2.553 0 1 1-1.402-4.909l2.31-.66a1.5 1.5 0 0 0 1.088-1.442V5.25a.75.75 0 0 1 .544-.721l10.5-3a.75.75 0 0 1 .658.122Z" clip-rule="evenodd"/>';
-                                        $iconStar     = '<path fill-rule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clip-rule="evenodd"/>';
-                                        $iconBolt     = '<path fill-rule="evenodd" d="M14.615 1.595a.75.75 0 0 1 .359.852L12.982 9.75h7.268a.75.75 0 0 1 .548 1.262l-10.5 11.25a.75.75 0 0 1-1.272-.71l1.992-7.302H3.268a.75.75 0 0 1-.548-1.262l10.5-11.25a.75.75 0 0 1 .895-.143Z" clip-rule="evenodd"/>';
-                                        $iconFood     = '<path d="m11.645 20.91-.007-.003-.022-.012a15.247 15.247 0 0 1-.383-.218 25.18 25.18 0 0 1-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0 1 12 5.052 5.5 5.5 0 0 1 16.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 0 1-4.244 3.17 15.247 15.247 0 0 1-.383.219l-.022.012-.007.004-.003.001a.752.752 0 0 1-.704 0l-.003-.001Z"/>';
-                                        $iconGame     = '<path d="M3.75 6A2.25 2.25 0 0 1 6 3.75h2.25A2.25 2.25 0 0 1 10.5 6v2.25a2.25 2.25 0 0 1-2.25 2.25H6a2.25 2.25 0 0 1-2.25-2.25V6ZM3.75 15.75A2.25 2.25 0 0 1 6 13.5h2.25a2.25 2.25 0 0 1 2.25 2.25V18a2.25 2.25 0 0 1-2.25 2.25H6A2.25 2.25 0 0 1 3.75 18v-2.25ZM13.5 6a2.25 2.25 0 0 1 2.25-2.25H18A2.25 2.25 0 0 1 20.25 6v2.25A2.25 2.25 0 0 1 18 10.5h-2.25a2.25 2.25 0 0 1-2.25-2.25V6ZM13.5 15.75a2.25 2.25 0 0 1 2.25-2.25H18a2.25 2.25 0 0 1 2.25 2.25V18A2.25 2.25 0 0 1 18 20.25h-2.25A2.25 2.25 0 0 1 13.5 18v-2.25Z"/>';
-                                        $iconInfo     = '<path fill-rule="evenodd" d="M2.25 12c0-5.385 4.365-9.75 9.75-9.75s9.75 4.365 9.75 9.75-4.365 9.75-9.75 9.75S2.25 17.385 2.25 12Zm11.378-3.917c-.89-.777-2.366-.777-3.255 0a.75.75 0 0 1-.988-1.129c1.454-1.272 3.776-1.272 5.23 0 1.513 1.324 1.513 3.518 0 4.842a3.75 3.75 0 0 1-.837.552c-.676.328-1.028.774-1.028 1.152v.75a.75.75 0 0 1-1.5 0v-.75c0-1.279 1.06-2.107 1.875-2.502.182-.088.351-.199.503-.331.83-.727.83-1.857 0-2.584ZM12 18a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Z" clip-rule="evenodd"/>';
-                                        $iconWorkshop = '<path fill-rule="evenodd" d="M9 4.5a.75.75 0 0 1 .721.544l.813 2.846a3.75 3.75 0 0 0 2.576 2.576l2.846.813a.75.75 0 0 1 0 1.442l-2.846.813a3.75 3.75 0 0 0-2.576 2.576l-.813 2.846a.75.75 0 0 1-1.442 0l-.813-2.846a3.75 3.75 0 0 0-2.576-2.576l-2.846-.813a.75.75 0 0 1 0-1.442l2.846-.813A3.75 3.75 0 0 0 7.466 7.89l.813-2.846A.75.75 0 0 1 9 4.5ZM18 1.5a.75.75 0 0 1 .728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 0 1 0 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 0 1-1.456 0l-.258-1.036a2.625 2.625 0 0 0-1.91-1.91l-1.036-.258a.75.75 0 0 1 0-1.456l1.036-.258a2.625 2.625 0 0 0 1.91-1.91l.258-1.036A.75.75 0 0 1 18 1.5ZM16.5 15a.75.75 0 0 1 .712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 0 1 0 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 0 1-1.422 0l-.395-1.183a1.5 1.5 0 0 0-.948-.948l-1.183-.395a.75.75 0 0 1 0-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0 1 16.5 15Z" clip-rule="evenodd"/>';
-                                        $iconArt      = '<path fill-rule="evenodd" d="M1.5 6a2.25 2.25 0 0 1 2.25-2.25h16.5A2.25 2.25 0 0 1 22.5 6v12a2.25 2.25 0 0 1-2.25 2.25H3.75A2.25 2.25 0 0 1 1.5 18V6ZM3 16.06V18c0 .414.336.75.75.75h16.5A.75.75 0 0 0 21 18v-1.94l-2.69-2.689a1.5 1.5 0 0 0-2.12 0l-.88.879.97.97a.75.75 0 1 1-1.06 1.06l-5.16-5.159a1.5 1.5 0 0 0-2.12 0L3 16.061Zm10.125-7.81a1.125 1.125 0 1 1 2.25 0 1.125 1.125 0 0 1-2.25 0Z" clip-rule="evenodd"/>';
-
-                                        // Order matters: specific keywords before broader ones.
-                                        if (str_contains($t, 'gouter') || str_contains($t, 'goûter') || str_contains($t, 'ontbijt') || str_contains($t, 'brunch') || str_contains($t, 'lunch') || str_contains($t, 'dîner') || str_contains($t, 'diner') || str_contains($t, 'souper') || str_contains($t, 'buffet') || str_contains($t, 'aperitief') || str_contains($t, 'apéro') || str_contains($t, 'apero') || str_contains($t, 'koffie') || str_contains($t, 'café') || str_contains($t, 'cafe')) {
-                                            $icon = $iconFood;
-                                        } elseif (str_contains($t, 'jeu') || str_contains($t, 'spel') || str_contains($t, 'domino') || str_contains($t, 'scrabble') || str_contains($t, 'bingo') || str_contains($t, 'schaak') || str_contains($t, 'quiz') || str_contains($t, 'kaart')) {
-                                            $icon = $iconGame;
-                                        } elseif (str_contains($t, 'infopunt') || str_contains($t, 'infopoint') || str_contains($t, 'spreekuur') || str_contains($t, 'permanentie') || str_contains($t, 'loket') || str_contains($t, 'adviseur')) {
-                                            $icon = $iconInfo;
-                                        } elseif (str_contains($t, 'expo') || str_contains($t, 'tentoon') || str_contains($t, 'museum') || str_contains($t, 'kunst')) {
-                                            $icon = $iconArt;
-                                        } elseif (str_contains($t, 'atelier') || str_contains($t, 'workshop') || str_contains($t, 'cursus') || str_contains($t, 'geheugen') || str_contains($t, 'mémoire') || str_contains($t, 'memoire')) {
-                                            $icon = $iconWorkshop;
-                                        } elseif (str_contains($t, 'conversat') || str_contains($t, 'tafel') || str_contains($t, 'praat')) {
-                                            $icon = $iconChat;
-                                        } elseif (str_contains($t, 'zumba') || str_contains($t, 'dans') || str_contains($t, 'muziek') || str_contains($t, 'concert')) {
-                                            $icon = $iconMusic;
-                                        } elseif (str_contains($t, 'voorstelling') || str_contains($t, 'theater') || str_contains($t, 'théâtre') || str_contains($t, 'film')) {
-                                            $icon = $iconStar;
-                                        } elseif (str_contains($t, 'yoga') || str_contains($t, 'sport') || str_contains($t, 'fitness') || str_contains($t, 'bewegen') || str_contains($t, 'gym') || str_contains($t, 'wandel') || str_contains($t, 'marche')) {
-                                            $icon = $iconBolt;
-                                        } else {
-                                            $fallbacks = [$iconChat, $iconMusic, $iconStar];
-                                            $icon = $fallbacks[abs(crc32($activiteit->slug)) % 3];
-                                        }
+                                        $icon = $activiteit->categorie->icon();
                                     @endphp
 
                                     <a class="agenda-activity{{ $cancelled ? ' agenda-activity--cancelled' : '' }}"
