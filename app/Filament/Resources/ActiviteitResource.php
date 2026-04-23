@@ -126,7 +126,6 @@ class ActiviteitResource extends Resource
                     ->orderQueryUsing(fn ($query, $direction) => $query->orderBy('datum', $direction))
                     ->collapsible()
             )
-            ->groupsOnly()
             ->defaultSort('datum', 'asc')
             ->defaultPaginationPageOption(50)
             ->columns([

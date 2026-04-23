@@ -37,22 +37,15 @@ class ListActiviteitenTest extends TestCase
 
         $component = Livewire::actingAs($this->adminUser())
             ->test(ListActiviteiten::class)
-            ->assertSuccessful();
+            ->assertSuccessful()
+            ->assertCanSeeTableRecords([$activiteit])
+            ->assertSee('Zumba woensdag')
+            ->assertSee('WEEK VAN');
 
-        // The table has 1 record
-        $component->assertCountTableRecords(1);
-
-        // The table is configured with groupsOnly + week_start Group
-        $instance = $component->instance();
-        $table = $instance->getTable();
-        $this->assertTrue($table->isGroupsOnly());
+        // The table is configured with a week_start Group as default.
+        $table = $component->instance()->getTable();
         $this->assertNotNull($table->getDefaultGroup());
         $this->assertEquals('week_start', $table->getDefaultGroup()->getId());
-
-        // The group title for the activiteit starts with 'WEEK VAN'
-        $group = $table->getDefaultGroup();
-        $groupTitle = $group->getTitle($activiteit);
-        $this->assertStringStartsWith('WEEK VAN', $groupTitle);
     }
 
     public function test_header_actions_link_to_create_with_soort(): void
