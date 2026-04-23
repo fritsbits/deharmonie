@@ -159,7 +159,7 @@
                                        href="{{ route($locale . '.activiteiten.show', $activiteit->slug) }}"
                                        style="{{ $loop->first ? '' : 'margin-top: 0.625rem;' }}">
                                         <span class="agenda-activity-icon" aria-hidden="true" style="background: {{ $ac['bg'] }};">
-                                            <svg viewBox="0 0 24 24" fill="{{ $ac['icon'] }}" stroke="none" width="80" height="80" style="position: absolute; bottom: -12px; right: -10px; transform: rotate(12deg); pointer-events: none;">
+                                            <svg viewBox="0 0 24 24" fill="{{ $ac['icon'] }}" stroke="none" width="56" height="56" style="position: absolute; bottom: -8px; right: -7px; transform: rotate(12deg); pointer-events: none;">
                                                 {!! $icon !!}
                                             </svg>
                                         </span>
@@ -243,9 +243,9 @@
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
-    width: 5rem;
-    height: 3.5rem;
-    border-radius: 10px;
+    width: 3.5rem;
+    height: 2.5rem;
+    border-radius: 8px;
 }
 .agenda-activity-body {
     flex: 1;
