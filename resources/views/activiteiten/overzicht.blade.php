@@ -55,7 +55,7 @@
                 @php
                     $activiteiten = $vasteAanbod->get($section['key'], collect());
                     $total = $activiteiten->count();
-                    $shown = $activiteiten->take(5);
+                    $shown = $activiteiten->take(3);
                 @endphp
                 <div class="theme-card-outer" style="flex: 1; transform: rotate({{ $section['rotate'] }}); margin-top: {{ $section['margin_top'] }};">
                 <div class="theme-card" style="background: white; border-radius: 2px; position: relative;">
@@ -82,14 +82,14 @@
                                 @php
                                     $titel = $isFr ? ($activiteit->titel_fr ?? $activiteit->titel_nl) : $activiteit->titel_nl;
                                 @endphp
-                                <li style="{{ $loop->last && $total <= 5 ? '' : 'border-bottom: 1px solid rgba(44,40,38,0.05);' }}">
+                                <li style="{{ $loop->last && $total <= 3 ? '' : 'border-bottom: 1px solid rgba(44,40,38,0.05);' }}">
                                     <span style="display: block; font-size: 1rem; font-weight: 600; color: var(--color-brand-dark); padding: 0.35rem 0;">
                                         {{ $titel }}
                                     </span>
                                 </li>
                             @endforeach
 
-                            @if ($total > 5)
+                            @if ($total > 3)
                                 <li>
                                     <a href="{{ route(app()->getLocale() . '.activiteiten.agenda') }}"
                                        style="display: block; font-size: 0.95rem; font-weight: 700; color: var(--color-brand-green); text-decoration: none; padding: 0.5rem 0 0.25rem;">
