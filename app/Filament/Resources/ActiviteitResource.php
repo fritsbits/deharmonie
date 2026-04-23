@@ -96,6 +96,11 @@ class ActiviteitResource extends Resource
                 ->label('Max deelnemers (leeg = onbeperkt)')
                 ->integer(),
 
+            Select::make('categorie')
+                ->label('Categorie')
+                ->options(collect(Categorie::cases())->mapWithKeys(fn ($c) => [$c->value => $c->getLabel()])->all())
+                ->required(),
+
             Select::make('status')
                 ->label('Status')
                 ->options(ActiviteitStatus::class)
