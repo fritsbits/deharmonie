@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\ActiviteitStatus;
+use App\Enums\Soort;
 use App\Models\Activiteit;
 use App\Models\WeekMenuDag;
 use Carbon\Carbon;
@@ -32,19 +34,24 @@ class ActivityController extends Controller
 
     public function index(): View
     {
-        // TODO: Task 11 — Update this method to work without ActiviteitTemplate
-        // For now, return minimal data. The overview page will be refactored.
-        $reeksen = collect();
+        $vasteAanbod = Activiteit::query()
+            ->where('soort', Soort::Vast)
+            ->where('datum', '>=', today())
+            ->where('status', ActiviteitStatus::Gepubliceerd)
+            ->orderBy('datum')
+            ->get()
+            ->groupBy(fn (Activiteit $a) => $a->categorie->section())
+            ->map(fn ($acts) => $acts->unique('titel_nl')->values());
 
-        $bijzondereActiviteiten = Activiteit::where('datum', '>=', today())
-            ->where('status', 'gepubliceerd')
+        $bijzondereActiviteiten = Activiteit::query()
+            ->where('soort', Soort::Speciaal)
+            ->where('datum', '>=', today())
+            ->where('status', ActiviteitStatus::Gepubliceerd)
             ->orderBy('datum')
             ->limit(2)
             ->get();
 
-        $nextActiviteiten = collect();
-
-        return view('activiteiten.overzicht', compact('reeksen', 'bijzondereActiviteiten', 'nextActiviteiten'));
+        return view('activiteiten.overzicht', compact('vasteAanbod', 'bijzondereActiviteiten'));
     }
 
     public function agenda(Request $request): View
