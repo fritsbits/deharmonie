@@ -67,17 +67,21 @@ class ActiviteitResource extends Resource
                                 TextInput::make('titel_nl')
                                     ->label('Titel')
                                     ->required()
-                                    ->maxLength(255),
+                                    ->maxLength(255)
+                                    ->autofocus(fn (string $operation): bool => $operation === 'create'),
                                 RichEditor::make('beschrijving_nl')
                                     ->label('Beschrijving')
-                                    ->toolbarButtons(['bold', 'bulletList', 'link']),
+                                    ->toolbarButtons(['bold', 'bulletList', 'link'])
+                                    ->maxLength(5000),
                                 TextInput::make('locatie_nl')
                                     ->label('Locatie')
                                     ->default('De Harmonie')
                                     ->required()
                                     ->maxLength(255),
                                 Textarea::make('notice_nl')
-                                    ->label('Opmerking / annuleringsmelding'),
+                                    ->label('Opmerking / annuleringsmelding')
+                                    ->maxLength(2000)
+                                    ->rows(3),
                             ]),
                             Tab::make('Français')->schema([
                                 TextInput::make('titel_fr')
@@ -86,14 +90,17 @@ class ActiviteitResource extends Resource
                                     ->maxLength(255),
                                 RichEditor::make('beschrijving_fr')
                                     ->label('Description')
-                                    ->toolbarButtons(['bold', 'bulletList', 'link']),
+                                    ->toolbarButtons(['bold', 'bulletList', 'link'])
+                                    ->maxLength(5000),
                                 TextInput::make('locatie_fr')
                                     ->label('Lieu')
                                     ->default('De Harmonie')
                                     ->required()
                                     ->maxLength(255),
                                 Textarea::make('notice_fr')
-                                    ->label('Remarque / message d\'annulation'),
+                                    ->label('Remarque / message d\'annulation')
+                                    ->maxLength(2000)
+                                    ->rows(3),
                             ]),
                         ]),
                     ]),
@@ -130,7 +137,8 @@ class ActiviteitResource extends Resource
                                         ->seconds(false),
                                     TimePicker::make('einduur')
                                         ->label('Einduur')
-                                        ->seconds(false),
+                                        ->seconds(false)
+                                        ->after('startuur'),
                                 ]),
                                 Toggle::make('herhaal_wekelijks')
                                     ->label('Plan automatisch in: elke week tot...')
@@ -147,6 +155,8 @@ class ActiviteitResource extends Resource
                                     ->label('Prijs')
                                     ->prefix('€')
                                     ->numeric()
+                                    ->minValue(0)
+                                    ->step(0.01)
                                     ->helperText('Leeg laten = gratis'),
                             ]),
 
@@ -289,11 +299,11 @@ class ActiviteitResource extends Resource
                         ->label('Bewerk gemeenschappelijke velden')
                         ->icon('heroicon-o-pencil-square')
                         ->form([
-                            Textarea::make('beschrijving_nl')->label('Beschrijving (NL) — leeg laten = niet wijzigen'),
-                            Textarea::make('beschrijving_fr')->label('Beschrijving (FR) — leeg laten = niet wijzigen'),
-                            TextInput::make('locatie_nl')->label('Locatie (NL) — leeg laten = niet wijzigen'),
-                            TextInput::make('locatie_fr')->label('Locatie (FR) — leeg laten = niet wijzigen'),
-                            TextInput::make('prijs')->numeric()->label('Prijs — leeg laten = niet wijzigen'),
+                            Textarea::make('beschrijving_nl')->label('Beschrijving (NL) — leeg laten = niet wijzigen')->maxLength(5000),
+                            Textarea::make('beschrijving_fr')->label('Beschrijving (FR) — leeg laten = niet wijzigen')->maxLength(5000),
+                            TextInput::make('locatie_nl')->label('Locatie (NL) — leeg laten = niet wijzigen')->maxLength(255),
+                            TextInput::make('locatie_fr')->label('Locatie (FR) — leeg laten = niet wijzigen')->maxLength(255),
+                            TextInput::make('prijs')->numeric()->minValue(0)->step(0.01)->label('Prijs — leeg laten = niet wijzigen'),
                         ])
                         ->action(function ($records, array $data): void {
                             $update = array_filter($data, fn ($v) => $v !== null && $v !== '');
