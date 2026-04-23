@@ -37,6 +37,7 @@ use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Grouping\Group;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\DB;
 
 class ActiviteitResource extends Resource
 {
@@ -140,6 +141,7 @@ class ActiviteitResource extends Resource
                                     ->label('Tot en met')
                                     ->dehydrated(false)
                                     ->required(fn (Get $get): bool => (bool) $get('herhaal_wekelijks'))
+                                    ->after('datum')
                                     ->visible(fn (Get $get, string $operation): bool => $operation === 'create' && (bool) $get('herhaal_wekelijks')),
                                 TextInput::make('prijs')
                                     ->label('Prijs')
@@ -245,24 +247,30 @@ class ActiviteitResource extends Resource
                                     array_filter($data['datums'] ?? [], fn ($d) => filled($d['datum'] ?? null)),
                                 ));
 
-                            foreach ($datums as $d) {
-                                Activiteit::create([
-                                    'titel_nl' => $record->titel_nl,
-                                    'titel_fr' => $record->titel_fr,
-                                    'beschrijving_nl' => $record->beschrijving_nl,
-                                    'beschrijving_fr' => $record->beschrijving_fr,
-                                    'datum' => $d->toDateString(),
-                                    'startuur' => $record->startuur,
-                                    'einduur' => $record->einduur,
-                                    'locatie_nl' => $record->locatie_nl,
-                                    'locatie_fr' => $record->locatie_fr,
-                                    'prijs' => $record->prijs,
-                                    'max_deelnemers' => $record->max_deelnemers,
-                                    'status' => ActiviteitStatus::Concept,
-                                    'soort' => $record->soort,
-                                    'categorie' => $record->categorie,
-                                ]);
+                            if (empty($datums)) {
+                                return;
                             }
+
+                            DB::transaction(function () use ($record, $datums): void {
+                                foreach ($datums as $d) {
+                                    Activiteit::create([
+                                        'titel_nl' => $record->titel_nl,
+                                        'titel_fr' => $record->titel_fr,
+                                        'beschrijving_nl' => $record->beschrijving_nl,
+                                        'beschrijving_fr' => $record->beschrijving_fr,
+                                        'datum' => $d->toDateString(),
+                                        'startuur' => $record->startuur,
+                                        'einduur' => $record->einduur,
+                                        'locatie_nl' => $record->locatie_nl,
+                                        'locatie_fr' => $record->locatie_fr,
+                                        'prijs' => $record->prijs,
+                                        'max_deelnemers' => $record->max_deelnemers,
+                                        'status' => ActiviteitStatus::Concept,
+                                        'soort' => $record->soort,
+                                        'categorie' => $record->categorie,
+                                    ]);
+                                }
+                            });
                         }),
                 ]),
             ])
@@ -292,7 +300,9 @@ class ActiviteitResource extends Resource
                             if (empty($update)) {
                                 return;
                             }
-                            $records->each(fn ($r) => $r->update($update));
+                            DB::transaction(
+                                fn () => $records->each(fn ($r) => $r->update($update))
+                            );
                         }),
                     DeleteBulkAction::make(),
                 ]),

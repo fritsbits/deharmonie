@@ -78,16 +78,22 @@
                             {{ $section['tagline'] }}
                         </p>
                         <ul style="list-style: none; padding: 0; border-top: 1px dashed #e4dbd3; padding-top: 0.75rem;">
-                            @foreach ($shown as $activiteit)
+                            @forelse ($shown as $activiteit)
                                 @php
                                     $titel = $isFr ? ($activiteit->titel_fr ?? $activiteit->titel_nl) : $activiteit->titel_nl;
                                 @endphp
                                 <li style="{{ $loop->last && $total <= 3 ? '' : 'border-bottom: 1px solid rgba(44,40,38,0.05);' }}">
-                                    <span style="display: block; font-size: 1rem; font-weight: 600; color: var(--color-brand-dark); padding: 0.35rem 0;">
+                                    <span style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; font-size: 1rem; font-weight: 600; color: var(--color-brand-dark); padding: 0.35rem 0; line-height: 1.35;" title="{{ $titel }}">
                                         {{ $titel }}
                                     </span>
                                 </li>
-                            @endforeach
+                            @empty
+                                <li>
+                                    <span style="display: block; font-size: 0.95rem; color: var(--color-brand-muted); padding: 0.35rem 0; font-style: italic;">
+                                        {{ $isFr ? 'Bientôt plus à venir.' : 'Binnenkort meer te beleven.' }}
+                                    </span>
+                                </li>
+                            @endforelse
 
                             @if ($total > 3)
                                 <li>
