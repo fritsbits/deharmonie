@@ -15,6 +15,7 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Repeater;
@@ -87,28 +88,6 @@ class ActiviteitResource extends Resource
                 ]),
             ])->columnSpanFull(),
 
-            DatePicker::make('datum')
-                ->label('Datum')
-                ->required(),
-
-            TimePicker::make('startuur')
-                ->label('Startuur')
-                ->required()
-                ->seconds(false),
-
-            TimePicker::make('einduur')
-                ->label('Einduur')
-                ->seconds(false),
-
-            TextInput::make('prijs')
-                ->label('Prijs (€, leeg = gratis)')
-                ->numeric()
-                ->prefix('€'),
-
-            TextInput::make('max_deelnemers')
-                ->label('Max deelnemers (leeg = onbeperkt)')
-                ->integer(),
-
             Select::make('categorie')
                 ->label('Categorie')
                 ->options(collect(Categorie::cases())->mapWithKeys(fn ($c) => [$c->value => $c->getLabel()])->all())
@@ -119,6 +98,28 @@ class ActiviteitResource extends Resource
                 ->options(ActiviteitStatus::class)
                 ->default(ActiviteitStatus::Concept)
                 ->required(),
+
+            Grid::make(3)->schema([
+                DatePicker::make('datum')
+                    ->label('Datum')
+                    ->required(),
+                TimePicker::make('startuur')
+                    ->label('Startuur')
+                    ->required()
+                    ->seconds(false),
+                TimePicker::make('einduur')
+                    ->label('Einduur')
+                    ->seconds(false),
+            ])->columnSpanFull(),
+
+            TextInput::make('prijs')
+                ->label('Prijs (€, leeg = gratis)')
+                ->numeric()
+                ->prefix('€'),
+
+            TextInput::make('max_deelnemers')
+                ->label('Max deelnemers (leeg = onbeperkt)')
+                ->integer(),
 
             Hidden::make('soort_query')
                 ->default(fn (): string => request()->query('soort', '')),
