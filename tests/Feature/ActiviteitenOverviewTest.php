@@ -2,8 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Enums\Soort;
 use App\Models\Activiteit;
-use App\Models\ActiviteitTemplate;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -28,9 +28,8 @@ class ActiviteitenOverviewTest extends TestCase
         $response = $this->get('/activiteiten');
         $response->assertStatus(200);
         $response->assertSee('Beweeg mee');
-        $response->assertSee('Maak iets');
-        $response->assertSeeText('Praat & leer');
-        $response->assertSee('Vier mee');
+        $response->assertSee('Maak & leer mee');
+        $response->assertSee('Ontmoet & beleef mee');
     }
 
     public function test_overview_page_loads_for_fr(): void
@@ -41,18 +40,15 @@ class ActiviteitenOverviewTest extends TestCase
 
     public function test_overview_page_passes_bijzondere_activiteiten_to_view(): void
     {
-        // A special activiteit (template_id IS NULL, future date, published)
-        $special = Activiteit::factory()->create([
-            'template_id' => null,
+        // A special activiteit (soort = Speciaal, future date, published)
+        $special = Activiteit::factory()->speciaal()->create([
             'datum' => now()->addDays(5)->format('Y-m-d'),
             'status' => 'gepubliceerd',
             'titel_nl' => 'Speciale uitstap',
         ]);
 
-        // A recurring activiteit (template_id IS NOT NULL) — should NOT appear
-        $template = ActiviteitTemplate::factory()->create();
-        $recurring = Activiteit::factory()->create([
-            'template_id' => $template->id,
+        // A recurring activiteit (soort = Vast) — should NOT appear in bijzondereActiviteiten
+        $recurring = Activiteit::factory()->vast()->create([
             'datum' => now()->addDays(3)->format('Y-m-d'),
             'status' => 'gepubliceerd',
             'titel_nl' => 'Herhalende activiteit',
@@ -69,24 +65,21 @@ class ActiviteitenOverviewTest extends TestCase
 
     public function test_bijzondere_momenten_shows_upcoming_special_activities(): void
     {
-        $special = Activiteit::factory()->create([
-            'template_id' => null,
+        $special = Activiteit::factory()->speciaal()->create([
             'datum' => now()->addDays(10)->format('Y-m-d'),
             'status' => 'gepubliceerd',
             'titel_nl' => 'Zomerfeest',
         ]);
 
         // Past activity — should NOT appear
-        Activiteit::factory()->create([
-            'template_id' => null,
+        Activiteit::factory()->speciaal()->create([
             'datum' => now()->subDay()->format('Y-m-d'),
             'status' => 'gepubliceerd',
             'titel_nl' => 'Oud evenement',
         ]);
 
         // Draft — should NOT appear
-        Activiteit::factory()->create([
-            'template_id' => null,
+        Activiteit::factory()->speciaal()->create([
             'datum' => now()->addDays(3)->format('Y-m-d'),
             'status' => 'concept',
             'titel_nl' => 'Ongepubliceerd',

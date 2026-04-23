@@ -2,6 +2,8 @@
 
 namespace Tests\Feature;
 
+use App\Enums\Categorie;
+use App\Enums\Soort;
 use App\Models\Activiteit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
@@ -19,6 +21,8 @@ class ActiviteitSlugGenerationTest extends TestCase
             'startuur' => '14:30:00',
             'locatie' => 'Tour et Taxis',
             'status' => 'gepubliceerd',
+            'soort' => Soort::Speciaal,
+            'categorie' => Categorie::OpUitstap,
         ]);
 
         $this->assertSame('expo-kheops', $activiteit->slug);
@@ -33,6 +37,8 @@ class ActiviteitSlugGenerationTest extends TestCase
             'startuur' => '14:30:00',
             'locatie' => 'Tour et Taxis',
             'status' => 'gepubliceerd',
+            'soort' => Soort::Speciaal,
+            'categorie' => Categorie::OpUitstap,
         ]);
 
         $second = Activiteit::create([
@@ -42,6 +48,8 @@ class ActiviteitSlugGenerationTest extends TestCase
             'startuur' => '14:30:00',
             'locatie' => 'Tour et Taxis',
             'status' => 'gepubliceerd',
+            'soort' => Soort::Speciaal,
+            'categorie' => Categorie::OpUitstap,
         ]);
 
         $third = Activiteit::create([
@@ -51,6 +59,8 @@ class ActiviteitSlugGenerationTest extends TestCase
             'startuur' => '14:30:00',
             'locatie' => 'Tour et Taxis',
             'status' => 'gepubliceerd',
+            'soort' => Soort::Speciaal,
+            'categorie' => Categorie::OpUitstap,
         ]);
 
         $this->assertSame('expo-kheops-2', $second->slug);
@@ -67,6 +77,8 @@ class ActiviteitSlugGenerationTest extends TestCase
             'startuur' => '10:00:00',
             'locatie' => 'De Harmonie',
             'status' => 'gepubliceerd',
+            'soort' => Soort::Speciaal,
+            'categorie' => Categorie::Ontmoeting,
         ]);
 
         $this->assertSame('mijn-eigen-slug', $activiteit->slug);
