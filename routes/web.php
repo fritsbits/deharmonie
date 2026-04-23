@@ -40,3 +40,6 @@ Route::prefix('fr')->middleware('locale:fr')->group(function () {
 
 // Stijlgids (internal design system reference — auth required)
 Route::middleware(['locale:nl', 'auth'])->get('/stijlgids', fn () => view('stijlgids'))->name('stijlgids');
+
+// Categorie icon variants preview — temporary, for icon selection
+Route::get('/_dev/icon-preview', fn () => view('dev.icon-preview'));

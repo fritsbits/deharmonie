@@ -98,7 +98,7 @@
                                             'ontmoet_beleef' => ['bg' => 'var(--color-brand-blue)',   'icon' => '#2f5490'],
                                         };
                                         $cancelled  = $activiteit->status->value === 'geannuleerd';
-                                        $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-green-dark)';
+                                        $titleColor = $isPast || $cancelled ? 'var(--color-brand-muted)' : 'var(--color-brand-dark)';
                                         $metaColor  = $isPast || $cancelled ? '#c8c0bc' : 'var(--color-brand-muted)';
 
                                         $timeStr = substr($activiteit->startuur, 0, 5);
@@ -121,7 +121,7 @@
                                        href="{{ route($locale . '.activiteiten.show', $activiteit->slug) }}"
                                        style="{{ $loop->first ? '' : 'margin-top: 0.625rem;' }}">
                                         <span class="agenda-activity-icon" aria-hidden="true" style="background: {{ $ac['bg'] }};">
-                                            <svg viewBox="0 0 24 24" fill="{{ $ac['icon'] }}" stroke="none" width="56" height="56" style="position: absolute; bottom: -8px; right: -7px; transform: rotate(12deg); pointer-events: none;">
+                                            <svg viewBox="0 0 24 24" fill="{{ $ac['icon'] }}" stroke="none" width="45" height="45" style="position: absolute; bottom: -4px; right: 4px; transform: rotate(12deg); pointer-events: none;">
                                                 {!! $icon !!}
                                             </svg>
                                         </span>
