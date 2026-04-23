@@ -40,14 +40,15 @@ class OverzichtPaginaTest extends TestCase
             'status' => ActiviteitStatus::Gepubliceerd,
         ]);
 
-        // We don't assert the rendered HTML here (Task 12 fixes the view).
-        // We only assert the controller passes the right data shape.
         $response = $this->get('/activiteiten');
+        $response->assertOk();
+        $response->assertSee('Beweeg mee');
+        $response->assertSee('Maak & leer mee');
+        $response->assertSee('Ontmoet & beleef mee');
+        $response->assertSee('Zumba');
+        $response->assertSee('Naaiworkshop');
+        $response->assertSee('Bingo');
 
-        // The controller should have run without throwing. The view may still
-        // be incomplete (Task 12), so we tolerate either 200 or a server-error
-        // status as long as the page didn't crash inside the controller itself.
-        // The data-shape is verified separately:
         $controller = app(ActivityController::class);
         $reflection = new \ReflectionMethod($controller, 'index');
         $view = $reflection->invoke($controller);

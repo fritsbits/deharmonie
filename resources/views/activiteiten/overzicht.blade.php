@@ -19,59 +19,52 @@
         @php
             $isFr = app()->getLocale() === 'fr';
 
-            $themes = [
+            $sections = [
                 [
+                    'key'        => 'beweeg',
                     'name'       => $isFr ? 'Bougez avec nous' : 'Beweeg mee',
-                    'tagline'    => $isFr ? 'À votre rythme — pas besoin d\'être sportif.' : 'Op eigen tempo — je hoeft geen sportman te zijn.',
+                    'tagline'    => $isFr ? 'À votre rythme — pas besoin d\'être sportif.' : 'Op je tempo — je hoeft geen sportman te zijn.',
                     'color'      => 'var(--color-brand-orange)',
                     'photo'      => 'photo-petanque.webp',
                     'rotate'     => '-2deg',
                     'margin_top' => '0.75rem',
-                    'ids'        => [5, 7, 11, 15],
                 ],
                 [
-                    'name'       => $isFr ? 'Créez ensemble' : 'Maak iets',
-                    'tagline'    => $isFr ? 'Les mains à l\'ouvrage — calme, convivial, ensemble.' : 'Met de handen bezig — rustig, gezellig, samen.',
+                    'key'        => 'maak_leer',
+                    'name'       => $isFr ? 'Créez & apprenez avec nous' : 'Maak & leer mee',
+                    'tagline'    => $isFr ? 'Avec les mains ou la tête — tranquillement, ensemble.' : 'Met de handen of het hoofd — rustig, samen.',
                     'color'      => 'var(--color-brand-green)',
                     'photo'      => 'photo-handwerk.webp',
                     'rotate'     => '1.8deg',
                     'margin_top' => '0',
-                    'ids'        => [10, 12, 13],
                 ],
                 [
-                    'name'       => $isFr ? 'Parlez & apprenez' : 'Praat & leer',
-                    'tagline'    => $isFr ? 'Quatre langues, la mémoire, le numérique.' : 'Vier talen, het geheugen oefenen, digitaal leren.',
+                    'key'        => 'ontmoet_beleef',
+                    'name'       => $isFr ? 'Rencontrez & vivez avec nous' : 'Ontmoet & beleef mee',
+                    'tagline'    => $isFr ? 'À table, en sortie, en spectacle — toujours en compagnie.' : 'Aan tafel, op uitstap, op voorstelling — altijd gezelschap.',
                     'color'      => 'var(--color-brand-blue)',
                     'photo'      => 'photo-samen.webp',
                     'rotate'     => '-1deg',
                     'margin_top' => '1.25rem',
-                    'ids'        => [1, 2, 3, 4, 6, 8, 16],
-                ],
-                [
-                    'name'       => $isFr ? 'Fêtez avec nous' : 'Vier mee',
-                    'tagline'    => $isFr ? 'Bingo, sorties, anniversaires — toujours de la compagnie.' : 'Bingo, uitstappen, verjaardagen — altijd gezelschap.',
-                    'color'      => '#d4956a',
-                    'photo'      => 'photo-party.webp',
-                    'rotate'     => '2.2deg',
-                    'margin_top' => '0.25rem',
-                    'ids'        => [9, 17],
                 ],
             ];
         @endphp
 
         <div class="theme-cards" style="display: flex; gap: 2rem; align-items: flex-start; margin-top: 1.5rem; padding-bottom: 2rem;">
-            @foreach ($themes as $theme)
+            @foreach ($sections as $section)
                 @php
-                    $templates = $reeksen->only($theme['ids'])->values();
+                    $activiteiten = $vasteAanbod->get($section['key'], collect());
+                    $total = $activiteiten->count();
+                    $shown = $activiteiten->take(5);
                 @endphp
-                <div class="theme-card-outer" style="flex: 1; transform: rotate({{ $theme['rotate'] }}); margin-top: {{ $theme['margin_top'] }};">
+                <div class="theme-card-outer" style="flex: 1; transform: rotate({{ $section['rotate'] }}); margin-top: {{ $section['margin_top'] }};">
                 <div class="theme-card" style="background: white; border-radius: 2px; position: relative;">
                     {{-- color band --}}
-                    <div style="height: 8px; background: {{ $theme['color'] }};"></div>
+                    <div style="height: 8px; background: {{ $section['color'] }};"></div>
 
                     {{-- photo --}}
                     <div class="theme-card-photo" style="height: 140px; overflow: hidden;">
-                        <img src="{{ asset('images/' . $theme['photo']) }}" alt="{{ $theme['name'] }}"
+                        <img src="{{ asset('images/' . $section['photo']) }}" alt="{{ $section['name'] }}"
                              loading="lazy"
                              style="width: 100%; height: 100%; object-fit: cover; display: block;">
                     </div>
@@ -79,22 +72,31 @@
                     {{-- card body --}}
                     <div style="padding: 1.25rem 1.5rem 1.75rem;">
                         <p style="font-family: var(--font-sans); font-size: 1.625rem; font-weight: 900; color: var(--color-brand-dark); margin: 0 0 0.25rem;">
-                            {{ $theme['name'] }}
+                            {{ $section['name'] }}
                         </p>
                         <p style="font-size: 0.9rem; color: var(--color-brand-muted); line-height: 1.5; margin-bottom: 1rem; font-style: italic;">
-                            {{ $theme['tagline'] }}
+                            {{ $section['tagline'] }}
                         </p>
                         <ul style="list-style: none; padding: 0; border-top: 1px dashed #e4dbd3; padding-top: 0.75rem;">
-                            @foreach ($templates as $t)
+                            @foreach ($shown as $activiteit)
                                 @php
-                                    $titel = $isFr ? ($t->titel_fr ?? $t->titel_nl) : $t->titel_nl;
+                                    $titel = $isFr ? ($activiteit->titel_fr ?? $activiteit->titel_nl) : $activiteit->titel_nl;
                                 @endphp
-                                <li style="{{ $loop->last ? '' : 'border-bottom: 1px solid rgba(44,40,38,0.05);' }}">
+                                <li style="{{ $loop->last && $total <= 5 ? '' : 'border-bottom: 1px solid rgba(44,40,38,0.05);' }}">
                                     <span style="display: block; font-size: 1rem; font-weight: 600; color: var(--color-brand-dark); padding: 0.35rem 0;">
                                         {{ $titel }}
                                     </span>
                                 </li>
                             @endforeach
+
+                            @if ($total > 5)
+                                <li>
+                                    <a href="{{ route(app()->getLocale() . '.activiteiten.agenda') }}"
+                                       style="display: block; font-size: 0.95rem; font-weight: 700; color: var(--color-brand-green); text-decoration: none; padding: 0.5rem 0 0.25rem;">
+                                        {{ $isFr ? 'et plus →' : 'en meer →' }}
+                                    </a>
+                                </li>
+                            @endif
                         </ul>
                     </div>
                 </div>
