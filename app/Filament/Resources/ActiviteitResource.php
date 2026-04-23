@@ -11,15 +11,18 @@ use Carbon\Carbon;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\Toggle;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
@@ -106,6 +109,21 @@ class ActiviteitResource extends Resource
                 ->options(ActiviteitStatus::class)
                 ->default(ActiviteitStatus::Concept)
                 ->required(),
+
+            Hidden::make('soort_query')
+                ->default(fn (): string => request()->query('soort', '')),
+
+            Toggle::make('herhaal_wekelijks')
+                ->label('Plan automatisch in: elke week tot...')
+                ->live()
+                ->dehydrated(false)
+                ->visible(fn (Get $get, string $operation): bool => $operation === 'create' && $get('soort_query') === 'vast'),
+
+            DatePicker::make('herhaal_t_m')
+                ->label('Tot en met')
+                ->dehydrated(false)
+                ->required(fn (Get $get): bool => (bool) $get('herhaal_wekelijks'))
+                ->visible(fn (Get $get, string $operation): bool => $operation === 'create' && (bool) $get('herhaal_wekelijks')),
 
             SpatieMediaLibraryFileUpload::make('afbeelding')
                 ->label('Afbeelding')
