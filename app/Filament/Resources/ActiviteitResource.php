@@ -153,6 +153,10 @@ class ActiviteitResource extends Resource
                         return 'WEEK VAN '.strtoupper($start->isoFormat('D MMMM').' – '.$end->isoFormat('D MMMM YYYY'));
                     })
                     ->orderQueryUsing(fn ($query, $direction) => $query->orderBy('datum', $direction))
+                    ->scopeQueryByKeyUsing(fn ($query, $key) => $query->whereBetween('datum', [
+                        $key,
+                        Carbon::parse($key)->endOfWeek()->toDateString(),
+                    ]))
                     ->collapsible()
             )
             ->defaultSort('datum', 'asc')
