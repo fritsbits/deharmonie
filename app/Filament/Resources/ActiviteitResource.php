@@ -10,6 +10,9 @@ use App\Models\Activiteit;
 use Carbon\Carbon;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
+use Filament\Actions\BulkAction;
+use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
@@ -244,7 +247,34 @@ class ActiviteitResource extends Resource
                 ]),
             ])
             ->bulkActions([
-                // Bulk actions are added in Task 18.
+                BulkActionGroup::make([
+                    BulkAction::make('publish')
+                        ->label('Publiceer geselecteerde')
+                        ->action(fn ($records) => $records->each->update(['status' => ActiviteitStatus::Gepubliceerd]))
+                        ->icon('heroicon-o-check'),
+                    BulkAction::make('cancel')
+                        ->label('Annuleer geselecteerde')
+                        ->action(fn ($records) => $records->each->update(['status' => ActiviteitStatus::Geannuleerd]))
+                        ->icon('heroicon-o-x-mark')
+                        ->color('danger'),
+                    BulkAction::make('bulk_edit')
+                        ->label('Bewerk gemeenschappelijke velden')
+                        ->icon('heroicon-o-pencil-square')
+                        ->form([
+                            Textarea::make('beschrijving_nl')->label('Beschrijving (NL) — leeg laten = niet wijzigen'),
+                            Textarea::make('beschrijving_fr')->label('Beschrijving (FR) — leeg laten = niet wijzigen'),
+                            TextInput::make('locatie')->label('Locatie — leeg laten = niet wijzigen'),
+                            TextInput::make('prijs')->numeric()->label('Prijs — leeg laten = niet wijzigen'),
+                        ])
+                        ->action(function ($records, array $data): void {
+                            $update = array_filter($data, fn ($v) => $v !== null && $v !== '');
+                            if (empty($update)) {
+                                return;
+                            }
+                            $records->each(fn ($r) => $r->update($update));
+                        }),
+                    DeleteBulkAction::make(),
+                ]),
             ]);
     }
 
