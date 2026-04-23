@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Enums\ActiviteitStatus;
 use App\Models\Activiteit;
-use App\Models\ActiviteitTemplate;
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
@@ -89,36 +88,6 @@ class ActiviteitSeeder extends Seeder
 
         $skipped = count($rows) - $inserted;
         $this->command?->info("Imported {$inserted} new activities from CSV ({$skipped} already existed, skipped).");
-
-        $this->linkTemplateSessions();
-    }
-
-    private function linkTemplateSessions(): void
-    {
-        $templates = ActiviteitTemplate::all();
-
-        if ($templates->isEmpty()) {
-            return;
-        }
-
-        // Build a map of normalized template title → template id
-        $templateMap = $templates->mapWithKeys(fn (ActiviteitTemplate $t) => [
-            $this->normalizeTitle($t->titel_nl) => $t->id,
-        ]);
-
-        $linked = 0;
-
-        Activiteit::whereNull('template_id')->chunkById(200, function ($activiteiten) use ($templateMap, &$linked) {
-            foreach ($activiteiten as $activiteit) {
-                $normalized = $this->normalizeTitle($activiteit->titel_nl);
-                if (isset($templateMap[$normalized])) {
-                    $activiteit->update(['template_id' => $templateMap[$normalized]]);
-                    $linked++;
-                }
-            }
-        });
-
-        $this->command?->info("Linked {$linked} activities to templates.");
     }
 
     private function stripEmoji(string $title): string
@@ -126,19 +95,6 @@ class ActiviteitSeeder extends Seeder
         $title = preg_replace('/[\x{1F000}-\x{1FFFF}]|[\x{2600}-\x{27BF}]|[\x{FE00}-\x{FEFF}]|\x{200D}/u', '', $title);
 
         return trim(preg_replace('/\s+/', ' ', $title));
-    }
-
-    private function normalizeTitle(string $title): string
-    {
-        $title = $this->stripEmoji($title);
-        // Strip "NIEUW : " prefix
-        $title = preg_replace('/^nieuw\s*:\s*/i', '', $title);
-        // Strip " Copy N" or " copie N" suffixes
-        $title = preg_replace('/\s+(copy|copie)\s*\d*\s*$/i', '', $title);
-        // Strip trailing punctuation like "!"
-        $title = preg_replace('/[!?]+/', '', $title);
-
-        return strtolower(trim(preg_replace('/\s+/', ' ', $title)));
     }
 
     private function parseTime(string $value): ?string

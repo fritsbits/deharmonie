@@ -10,7 +10,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             AdminUserSeeder::class,
-            ActiviteitTemplateSeeder::class,
             ActiviteitSeeder::class,
             WeekMenuDagSeeder::class,
             TeamCategorieSeeder::class,

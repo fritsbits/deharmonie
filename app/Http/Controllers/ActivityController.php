@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Activiteit;
-use App\Models\ActiviteitTemplate;
 use App\Models\WeekMenuDag;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -33,25 +32,17 @@ class ActivityController extends Controller
 
     public function index(): View
     {
-        $reeksen = ActiviteitTemplate::orderBy('dag_van_de_week')
-            ->orderBy('startuur')
-            ->get()
-            ->keyBy('id');
+        // TODO: Task 11 — Update this method to work without ActiviteitTemplate
+        // For now, return minimal data. The overview page will be refactored.
+        $reeksen = collect();
 
-        $bijzondereActiviteiten = Activiteit::whereNull('template_id')
-            ->where('datum', '>=', today())
+        $bijzondereActiviteiten = Activiteit::where('datum', '>=', today())
             ->where('status', 'gepubliceerd')
             ->orderBy('datum')
             ->limit(2)
             ->get();
 
-        $nextActiviteiten = Activiteit::whereNotNull('template_id')
-            ->where('datum', '>=', today())
-            ->where('status', 'gepubliceerd')
-            ->orderBy('datum')
-            ->get()
-            ->groupBy('template_id')
-            ->map(fn ($group) => $group->first());
+        $nextActiviteiten = collect();
 
         return view('activiteiten.overzicht', compact('reeksen', 'bijzondereActiviteiten', 'nextActiviteiten'));
     }

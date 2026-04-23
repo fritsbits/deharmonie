@@ -1,7 +1,6 @@
 <?php
 
 use Database\Seeders\ActiviteitSeeder;
-use Database\Seeders\ActiviteitTemplateSeeder;
 use Database\Seeders\WeekMenuDagSeeder;
 use Illuminate\Database\Migrations\Migration;
 
@@ -16,7 +15,8 @@ return new class extends Migration
             return;
         }
 
-        (new ActiviteitTemplateSeeder)->run();
+        // ActiviteitTemplateSeeder removed in Task 7 when the template model was deleted.
+        // The activiteit_templates table was dropped in Task 5.
         (new ActiviteitSeeder)->run();
         (new WeekMenuDagSeeder)->run();
     }
