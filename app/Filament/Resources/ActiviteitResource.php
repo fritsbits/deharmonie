@@ -177,7 +177,7 @@ class ActiviteitResource extends Resource
                         $start = $a->datum->copy()->startOfWeek()->locale('nl');
                         $end = $a->datum->copy()->endOfWeek()->locale('nl');
 
-                        return $start->isoFormat('D MMMM').' – '.$end->isoFormat('D MMMM');
+                        return $start->isoFormat('D MMMM').' – '.$end->isoFormat('D MMMM YYYY');
                     })
                     ->orderQueryUsing(fn ($query, $direction) => $query->orderBy('datum', $direction))
                     ->scopeQueryByKeyUsing(fn ($query, $key) => $query->whereBetween('datum', [
@@ -186,7 +186,7 @@ class ActiviteitResource extends Resource
                     ]))
                     ->collapsible()
             )
-            ->defaultSort('datum', 'asc')
+            ->defaultSort('datum', 'desc')
             ->defaultPaginationPageOption(50)
             ->columns([
                 TextColumn::make('datum')
