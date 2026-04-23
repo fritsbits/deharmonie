@@ -243,9 +243,9 @@
     flex-shrink: 0;
     position: relative;
     overflow: hidden;
-    width: 3.5rem;
-    height: 2.5rem;
-    border-radius: 8px;
+    width: 5rem;
+    height: 3.5rem;
+    border-radius: 10px;
 }
 .agenda-activity-body {
     flex: 1;
