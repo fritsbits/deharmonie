@@ -1,9 +1,9 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "deharmonie/website",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "Bilingual (NL/FR) website and admin panel for De Harmonie, a community centre for seniors in Brussels.",
+    "keywords": ["laravel", "filament", "deharmonie"],
     "license": "MIT",
     "require": {
         "php": "^8.3",
