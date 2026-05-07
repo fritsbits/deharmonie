@@ -2,10 +2,14 @@
 
 namespace Tests\Feature;
 
+use App\Models\OverOnsContent;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class OverOnsPageTest extends TestCase
 {
+    use RefreshDatabase;
+
     public function test_nl_over_ons_page_renders(): void
     {
         $response = $this->get(route('nl.over-ons'));
@@ -66,5 +70,35 @@ class OverOnsPageTest extends TestCase
 
         $response->assertSee('Devenez bénévole à De Harmonie');
         $response->assertSee('En savoir plus');
+    }
+
+    public function test_impact_stats_render_from_database_in_nl(): void
+    {
+        OverOnsContent::factory()->create([
+            'impact_1_aantal' => '777',
+            'impact_1_omschrijving_nl' => 'mijn unieke NL omschrijving',
+            'impact_2_aantal' => '888',
+            'impact_3_aantal' => '999',
+        ]);
+
+        $response = $this->get(route('nl.over-ons'));
+
+        $response->assertStatus(200);
+        $response->assertSee('777');
+        $response->assertSee('888');
+        $response->assertSee('999');
+        $response->assertSee('mijn unieke NL omschrijving');
+    }
+
+    public function test_impact_stats_render_locale_specific_descriptions_in_fr(): void
+    {
+        OverOnsContent::factory()->create([
+            'impact_1_omschrijving_fr' => 'ma description FR unique',
+        ]);
+
+        $response = $this->get(route('fr.over-ons'));
+
+        $response->assertStatus(200);
+        $response->assertSee('ma description FR unique');
     }
 }

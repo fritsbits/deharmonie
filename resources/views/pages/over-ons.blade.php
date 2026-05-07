@@ -42,20 +42,20 @@
 
                         <div style="margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px dashed #e4dbd3;">
                             <x-eyebrow size="sm" color="blue" mb="0.35rem">{{ __('pages.over_ons_impact_1_label') }}</x-eyebrow>
-                            <div style="font-family: var(--font-sans); font-size: 2.75rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1; letter-spacing: -0.02em;">{{ __('pages.over_ons_impact_1_number') }}</div>
-                            <p style="font-size: 0.9375rem; color: var(--color-brand-muted); margin: 0.25rem 0 0; line-height: 1.4;">{{ __('pages.over_ons_impact_1_desc') }}</p>
+                            <div style="font-family: var(--font-sans); font-size: 2.75rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1; letter-spacing: -0.02em;">{{ $content->impact_1_aantal }}</div>
+                            <p style="font-size: 0.9375rem; color: var(--color-brand-muted); margin: 0.25rem 0 0; line-height: 1.4;">{{ $content->impactOmschrijving(1) }}</p>
                         </div>
 
                         <div style="margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px dashed #e4dbd3;">
                             <x-eyebrow size="sm" color="blue" mb="0.35rem">{{ __('pages.over_ons_impact_2_label') }}</x-eyebrow>
-                            <div style="font-family: var(--font-sans); font-size: 2.75rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1; letter-spacing: -0.02em;">{{ __('pages.over_ons_impact_2_number') }}</div>
-                            <p style="font-size: 0.9375rem; color: var(--color-brand-muted); margin: 0.25rem 0 0; line-height: 1.4;">{{ __('pages.over_ons_impact_2_desc') }}</p>
+                            <div style="font-family: var(--font-sans); font-size: 2.75rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1; letter-spacing: -0.02em;">{{ $content->impact_2_aantal }}</div>
+                            <p style="font-size: 0.9375rem; color: var(--color-brand-muted); margin: 0.25rem 0 0; line-height: 1.4;">{{ $content->impactOmschrijving(2) }}</p>
                         </div>
 
                         <div>
                             <x-eyebrow size="sm" color="blue" mb="0.35rem">{{ __('pages.over_ons_impact_3_label') }}</x-eyebrow>
-                            <div style="font-family: var(--font-sans); font-size: 2.75rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1; letter-spacing: -0.02em;">{{ __('pages.over_ons_impact_3_number') }}</div>
-                            <p style="font-size: 0.9375rem; color: var(--color-brand-muted); margin: 0.25rem 0 0; line-height: 1.4;">{{ __('pages.over_ons_impact_3_desc') }}</p>
+                            <div style="font-family: var(--font-sans); font-size: 2.75rem; font-weight: 900; color: var(--color-brand-dark); line-height: 1; letter-spacing: -0.02em;">{{ $content->impact_3_aantal }}</div>
+                            <p style="font-size: 0.9375rem; color: var(--color-brand-muted); margin: 0.25rem 0 0; line-height: 1.4;">{{ $content->impactOmschrijving(3) }}</p>
                         </div>
 
                     </div>

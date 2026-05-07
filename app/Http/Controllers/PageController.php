@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OverOnsContent;
 use App\Models\TeamCategorie;
 use App\Models\WeekMenuDag;
 use Carbon\Carbon;
@@ -47,9 +48,11 @@ class PageController extends Controller
         return view('pages.weekmenu');
     }
 
-    public function overOns()
+    public function overOns(): View
     {
-        return view('pages.over-ons');
+        return view('pages.over-ons', [
+            'content' => OverOnsContent::current(),
+        ]);
     }
 
     public function contact()
