@@ -227,21 +227,6 @@
     </div>
 </div>
 
-{{-- SERVICES — home visit focus --}}
-<section style="background-color: var(--color-brand-blue-tint); padding: 5rem 1.5rem;">
-    <div style="max-width: 72rem; margin: 0 auto;">
-        <x-eyebrow color="blue" mb="0.75rem">{{ __('nav.services') }}</x-eyebrow>
-        <x-section-heading mb="1.25rem">{{ __('pages.home_services_section_heading') }}</x-section-heading>
-        <p style="font-size: 1.125rem; line-height: 1.75; color: var(--color-brand-muted); max-width: 44rem; margin-bottom: 1.75rem;">
-            {{ __('pages.home_services_intro') }}
-        </p>
-        <a href="{{ route(app()->getLocale() . '.diensten') }}"
-           style="font-size: 1rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: underline;">
-            {{ __('pages.home_services_cta') }}
-        </a>
-    </div>
-</section>
-
 {{-- VOLUNTEER STRIP --}}
 <section style="background: var(--color-brand-green); padding: 2rem 1.5rem;">
     <div class="volunteer-strip-inner" style="max-width: 72rem; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;">

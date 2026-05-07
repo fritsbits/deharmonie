@@ -5,7 +5,7 @@
 {{-- HERO --}}
 <x-page-hero
     :eyebrow="__('pages.vrijwilligers_eyebrow')"
-    eyebrow-color="orange"
+    eyebrow-color="blue"
     :heading="__('pages.vrijwilligers_heading')"
     :lead="__('pages.vrijwilligers_lead')"
     bg="white"
@@ -97,7 +97,7 @@
                         : 'Vrijwilliger+bij+De+Harmonie';
                 @endphp
                 <a href="mailto:info@deharmonie.be?subject={{ $subject }}"
-                   style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--color-brand-orange); color: white; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; text-decoration: none; padding: 0.875rem 2rem; border-radius: 999px; transition: opacity 0.15s;"
+                   style="display: inline-flex; align-items: center; gap: 0.5rem; background: var(--color-brand-blue); color: white; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; text-decoration: none; padding: 0.875rem 2rem; border-radius: 999px; transition: opacity 0.15s;"
                    onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                         <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -109,7 +109,7 @@
 
             {{-- Right: unified role list --}}
             <div style="flex: 1; min-width: 0;">
-                <p class="ui-label" style="color: var(--color-brand-orange); margin: 0 0 0.875rem;">
+                <p class="ui-label" style="color: var(--color-brand-blue); margin: 0 0 0.875rem;">
                     {{ __('pages.vrijwilligers_what_lead_label') }}
                 </p>
                 <ul style="list-style: none; margin: 0 0 2rem; padding: 0; display: flex; flex-direction: column; gap: 0.5rem;">
@@ -118,7 +118,7 @@
                         : ['Ciné-Club', 'Conversatietafel', 'Dans & bewegen', 'Creatief atelier', 'Activiteitsdagen', __('pages.vrijwilligers_what_new')]
                     as $item)
                         <li style="display: flex; align-items: center; gap: 0.625rem; font-size: 1.125rem; color: var(--color-brand-dark); line-height: 1.5;">
-                            <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-brand-orange); flex-shrink: 0; display: block;"></span>
+                            <span style="width: 6px; height: 6px; border-radius: 50%; background: var(--color-brand-blue); flex-shrink: 0; display: block;"></span>
                             {{ $item }}
                         </li>
                     @endforeach

@@ -51,7 +51,7 @@
                     ['route' => app()->getLocale() . '.over-ons',           'label' => __('nav.over_ons')],
                     ['route' => app()->getLocale() . '.weekmenu',           'label' => __('nav.restaurant_menu')],
                     ['route' => app()->getLocale() . '.wie-is-wie',         'label' => __('nav.wie_is_wie')],
-                    ['route' => app()->getLocale() . '.diensten',           'label' => __('nav.services')],
+                    ['route' => app()->getLocale() . '.vrijwilligers',      'label' => __('nav.vrijwilligers')],
                     ['route' => app()->getLocale() . '.contact',            'label' => __('nav.contact')],
                 ] as $link)
                     <a href="{{ route($link['route']) }}"

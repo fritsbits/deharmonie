@@ -38,11 +38,6 @@ class PageController extends Controller
         return view('pages.weekmenu-print', compact('days', 'weekLabel', 'locale'));
     }
 
-    public function diensten()
-    {
-        return view('pages.diensten');
-    }
-
     public function weekmenu(): View
     {
         return view('pages.weekmenu');

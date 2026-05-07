@@ -116,7 +116,7 @@ $currentRoute = request()->route()?->getName() ?? '';
     </div>
     @if($showAboutSubnav)
     <div style="background: #3a68a8; border-top: 1px solid rgba(255,255,255,0.12);">
-        <div style="max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; display: flex; gap: 0;">
+        <div style="max-width: 72rem; margin: 0 auto; padding: 0 0.75rem; display: flex; gap: 0; overflow-x: auto;">
             @foreach ([
                 ['route' => app()->getLocale() . '.over-ons',      'label' => __('nav.over_ons')],
                 ['route' => app()->getLocale() . '.wie-is-wie',    'label' => __('nav.wie_is_wie')],
@@ -124,8 +124,8 @@ $currentRoute = request()->route()?->getName() ?? '';
             ] as $tab)
             @php $isActive = ($currentRoute === $tab['route']); @endphp
             <a href="{{ route($tab['route']) }}"
-               style="font-family: var(--font-sans); font-size: 0.875rem; font-weight: 700; color: {{ $isActive ? 'white' : 'rgba(255,255,255,0.6)' }}; text-decoration: none; padding: 0.5rem 0.75rem; border-bottom: 2px solid {{ $isActive ? 'white' : 'transparent' }}; display: inline-block; transition: color 0.15s, border-color 0.15s;"
-               onmouseover="if (!{{ $isActive ? 'true' : 'false' }}) this.style.color='rgba(255,255,255,0.85)'" onmouseout="if (!{{ $isActive ? 'true' : 'false' }}) this.style.color='rgba(255,255,255,0.6)'">
+               style="font-family: var(--font-sans); font-size: 1.125rem; font-weight: 700; color: {{ $isActive ? 'white' : 'rgba(255,255,255,0.85)' }}; text-decoration: none; padding: 0.875rem 1.25rem; border-bottom: 3px solid {{ $isActive ? 'white' : 'transparent' }}; display: inline-block; transition: color 0.15s, border-color 0.15s, background 0.15s; white-space: nowrap; background: {{ $isActive ? 'rgba(255,255,255,0.08)' : 'transparent' }};"
+               onmouseover="if (!{{ $isActive ? 'true' : 'false' }}) { this.style.color='white'; this.style.background='rgba(255,255,255,0.05)'; }" onmouseout="if (!{{ $isActive ? 'true' : 'false' }}) { this.style.color='rgba(255,255,255,0.85)'; this.style.background='transparent'; }">
                 {{ $tab['label'] }}
             </a>
             @endforeach
