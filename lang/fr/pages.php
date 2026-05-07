@@ -79,8 +79,6 @@ return [
     'over_ons_visie_waarde_1' => 'Égalité, valorisation et développement comme valeurs fondamentales de l\'organisation',
     'over_ons_visie_waarde_2' => 'Autonomie, participation et coopération comme valeurs fondamentales dans la réalisation de la mission',
     'over_ons_visie_jaarverslag_label' => 'Rapport annuel',
-    'over_ons_visie_jaarverslag_link' => 'Rapport annuel 2025',
-    'over_ons_visie_jaarverslag_size' => 'pdf, 3,8 Mo',
     'over_ons_begeleiding_heading' => 'Des questions ? Nous cherchons une solution ensemble.',
     'over_ons_begeleiding_body' => 'Que ce soit pour une pension, une aide à domicile, une hospitalisation ou une aide familiale — vous n\'avez pas à le faire seul. Notre équipe est là pour vous.',
     'over_ons_verhaal_heading' => 'Un chez-soi dans le Noordwijk',

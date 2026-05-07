@@ -92,23 +92,25 @@
             </div>
 
             {{-- Right: jaarverslag --}}
-            <div class="over-ons-visie-aside">
-                <a href="{{ asset('docs/jaarverslag-2025.pdf') }}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; background: white; border-radius: 10px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 12px rgba(44,40,38,0.07);" class="over-ons-jaarverslag-link">
-                    <div style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 8px; background: #eef2f8; display: flex; align-items: center; justify-content: center; color: var(--color-brand-blue);">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                            <polyline points="14 2 14 8 20 8"/>
-                            <line x1="16" y1="13" x2="8" y2="13"/>
-                            <line x1="16" y1="17" x2="8" y2="17"/>
-                            <polyline points="10 9 9 9 8 9"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <div class="over-ons-jaarverslag-title" style="font-size: 1rem; font-weight: 600; color: var(--color-brand-dark); line-height: 1.3;">{{ __('pages.over_ons_visie_jaarverslag_link') }}</div>
-                        <div style="font-size: 0.8125rem; color: var(--color-brand-muted); margin-top: 0.2rem;">{{ __('pages.over_ons_visie_jaarverslag_size') }}</div>
-                    </div>
-                </a>
-            </div>
+            @if ($content->getJaarverslagUrl())
+                <div class="over-ons-visie-aside">
+                    <a href="{{ $content->getJaarverslagUrl() }}" target="_blank" rel="noopener noreferrer" style="display: flex; align-items: center; gap: 1rem; text-decoration: none; background: white; border-radius: 10px; padding: 1.25rem 1.5rem; box-shadow: 0 2px 12px rgba(44,40,38,0.07);" class="over-ons-jaarverslag-link">
+                        <div style="flex-shrink: 0; width: 44px; height: 44px; border-radius: 8px; background: #eef2f8; display: flex; align-items: center; justify-content: center; color: var(--color-brand-blue);">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="over-ons-jaarverslag-title" style="font-size: 1rem; font-weight: 600; color: var(--color-brand-dark); line-height: 1.3;">{{ __('pages.over_ons_visie_jaarverslag_label') }} {{ $content->jaarverslag_jaar }}</div>
+                            <div style="font-size: 0.8125rem; color: var(--color-brand-muted); margin-top: 0.2rem;">pdf, {{ $content->getJaarverslagSize() }}</div>
+                        </div>
+                    </a>
+                </div>
+            @endif
 
         </div>
     </div>

@@ -79,8 +79,6 @@ return [
     'over_ons_visie_waarde_1' => 'Gelijk(waardig)heid, waardering en ontwikkeling als kernwaarden in de organisatie',
     'over_ons_visie_waarde_2' => 'Autonomie, participatie en samenwerking als kernwaarden in de realisatie van de missie',
     'over_ons_visie_jaarverslag_label' => 'Jaarverslag',
-    'over_ons_visie_jaarverslag_link' => 'Jaarverslag 2025',
-    'over_ons_visie_jaarverslag_size' => 'pdf, 3,8 MB',
     'over_ons_begeleiding_heading' => 'Heb je vragen? Wij zoeken samen naar een oplossing.',
     'over_ons_begeleiding_body' => 'Of het nu gaat over pensioen, hulp aan huis, een ziekenhuisopname of gezinshulp — je hoeft het niet alleen te doen. Ons team staat voor je klaar.',
     'over_ons_verhaal_heading' => 'Een thuis in de Noordwijk',
