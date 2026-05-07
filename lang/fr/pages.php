@@ -43,8 +43,10 @@ return [
     'home_photo_bloemen_alt' => 'Fleurs à De Harmonie',
 
     // Homepage volunteer strip
-    'home_vrijwilligers_heading' => 'Vous souhaitez aider à De Harmonie ?',
-    'home_vrijwilligers_cta' => 'Devenir bénévole',
+    'home_vrijwilligers_eyebrow' => 'Bénévoles',
+    'home_vrijwilligers_heading' => 'Le cœur de De Harmonie',
+    'home_vrijwilligers_lead' => "Derrière chaque activité, chaque café et chaque discussion à table se trouve quelqu'un du quartier. Curieux de découvrir qui ils sont et ce qu'ils font ?",
+    'home_vrijwilligers_cta' => 'Découvrir le bénévolat',
 
     // Homepage practical bar
     'home_practical_address_label' => 'Adresse',

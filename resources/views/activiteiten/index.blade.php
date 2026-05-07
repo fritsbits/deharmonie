@@ -228,14 +228,18 @@
 </div>
 
 {{-- VOLUNTEER STRIP --}}
-<section style="background: var(--color-brand-green); padding: 2rem 1.5rem;">
-    <div class="volunteer-strip-inner" style="max-width: 72rem; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;">
-        <p style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: var(--color-brand-dark); margin: 0; line-height: 1.3;">
+<section style="background: var(--color-brand-blue-tint); padding: 4.5rem 1.5rem;">
+    <div class="volunteer-strip-inner" style="max-width: 44rem; margin: 0 auto; text-align: center;">
+        <x-eyebrow size="sm" color="blue" mb="0.75rem">{{ __('pages.home_vrijwilligers_eyebrow') }}</x-eyebrow>
+        <h2 style="font-family: var(--font-sans); font-size: 2rem; font-weight: 900; line-height: 1.15; color: var(--color-brand-dark); margin: 0 0 1rem;">
             {{ __('pages.home_vrijwilligers_heading') }}
+        </h2>
+        <p style="font-family: var(--font-body); font-size: 1.1875rem; line-height: 1.55; color: var(--color-brand-medium); margin: 0 0 2rem;">
+            {{ __('pages.home_vrijwilligers_lead') }}
         </p>
         <a href="{{ route(app()->getLocale() . '.vrijwilligers') }}"
            class="press-scale"
-           style="background: white; color: var(--color-brand-dark); font-family: var(--font-sans); font-size: 1rem; font-weight: 700; text-decoration: none; padding: 0.75rem 1.75rem; border-radius: 999px; white-space: nowrap; flex-shrink: 0;">
+           style="display: inline-block; background: var(--color-brand-blue); color: white; font-family: var(--font-sans); font-size: 1.0625rem; font-weight: 700; text-decoration: none; padding: 0.875rem 2rem; border-radius: 999px;">
             {{ __('pages.home_vrijwilligers_cta') }}
         </a>
     </div>
@@ -297,7 +301,6 @@
     .menu-cards { flex-direction: column !important; }
     .activity-cards-grid { flex-direction: column !important; }
 .practical-grid { flex-direction: column !important; gap: 1.5rem !important; }
-    .volunteer-strip-inner { flex-direction: column !important; align-items: flex-start !important; }
     .social-proof-strip { height: 200px; }
     .social-proof-strip > div:nth-child(2),
     .social-proof-strip > div:nth-child(3) { display: none; }

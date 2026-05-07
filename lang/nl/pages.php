@@ -43,8 +43,10 @@ return [
     'home_photo_bloemen_alt' => 'Bloemen in De Harmonie',
 
     // Homepage volunteer strip
-    'home_vrijwilligers_heading' => 'Wil je meehelpen bij De Harmonie?',
-    'home_vrijwilligers_cta' => 'Word vrijwilliger',
+    'home_vrijwilligers_eyebrow' => 'Vrijwilligers',
+    'home_vrijwilligers_heading' => 'Het hart van De Harmonie',
+    'home_vrijwilligers_lead' => 'Achter elke activiteit, elke koffie en elk gesprek aan tafel staat iemand uit de buurt. Benieuwd wie zij zijn en wat ze doen?',
+    'home_vrijwilligers_cta' => 'Ontdek vrijwilligerswerk',
 
     // Homepage practical bar
     'home_practical_address_label' => 'Adres',
