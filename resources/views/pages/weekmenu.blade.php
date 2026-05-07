@@ -17,10 +17,8 @@
 
             {{-- LEFT: Weekly menu on paper --}}
             <div style="flex: 2; min-width: 0;">
-                <div class="menu-paper-outer">
-                    <div class="menu-paper" style="position: relative; background: white; border: 1px solid rgba(44,40,38,0.08); border-radius: 2px; overflow: hidden;">
-                        <livewire:week-menu />
-                    </div>
+                <div class="menu-paper" style="position: relative; background: white; border: 1px solid rgba(44,40,38,0.08); border-radius: 2px; overflow: hidden;">
+                    <livewire:week-menu />
                 </div>
             </div>
 
@@ -99,9 +97,6 @@
     text-underline-offset: 3px;
     text-decoration-thickness: 1px;
     display: block;
-}
-.menu-paper-outer {
-    transform: rotate(-1.5deg);
 }
 .menu-paper {
     box-shadow: 20px 20px 30px rgba(44,40,38,0.10);

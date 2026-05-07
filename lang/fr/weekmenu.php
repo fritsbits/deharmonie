@@ -20,7 +20,7 @@ return [
     'walkin_label' => 'Réservation',
     'walkin_value' => 'Entrez librement',
     'order_label' => 'À emporter & livraison',
-    'order_value' => 'Contactez-nous pour votre commande.',
+    'order_value' => 'Contactez-nous pour commander. Pour la livraison, nous voyons ensemble.',
     'address_cta' => 'Voir comment s\'y rendre',
     'order_subject' => 'Commande à emporter / livraison',
     'order_body' => "Bonjour,\n\nJe souhaite commander un repas pour aujourd'hui.\n\nNom : \nTéléphone : \nÀ emporter ou livraison à domicile : \nAdresse (livraison uniquement) : \nNombre de portions : \n\nCordialement,",

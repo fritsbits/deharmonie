@@ -20,7 +20,7 @@ return [
     'walkin_label' => 'Reservatie',
     'walkin_value' => 'Gewoon binnenlopen',
     'order_label' => 'Afhaal & levering',
-    'order_value' => 'Contacteer ons voor jouw bestelling.',
+    'order_value' => 'Contacteer ons om te bestellen. Levering bekijken we samen.',
     'address_cta' => 'Bekijk hoe je er geraakt',
     'order_subject' => 'Bestelling afhaal / levering',
     'order_body' => "Goedemorgen,\n\nIk wil graag een maaltijd bestellen voor vandaag.\n\nNaam: \nTelefoonnummer: \nAfhalen of levering aan huis: \nAdres (enkel bij levering): \nAantal porties: \n\nMet vriendelijke groeten,",
