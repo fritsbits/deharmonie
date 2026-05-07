@@ -1,3 +1,11 @@
+@php
+$aboutSubnavRoutes = [
+    'nl.over-ons', 'nl.wie-is-wie', 'nl.vrijwilligers',
+    'fr.over-ons', 'fr.wie-is-wie', 'fr.vrijwilligers',
+];
+$showAboutSubnav = in_array(request()->route()?->getName(), $aboutSubnavRoutes);
+$currentRoute = request()->route()?->getName() ?? '';
+@endphp
 <header style="background-color: var(--color-brand-blue); position: relative;">
     <div class="flex items-center" style="max-width: 72rem; margin: 0 auto; padding: 1.875rem 1.5rem;">
         <a href="{{ route(app()->getLocale() . '.home') }}" class="flex items-center">
@@ -13,11 +21,6 @@
                class="font-semibold hover:opacity-75 transition-opacity"
                style="color: white; font-size: 1.125rem;">
                {{ __('nav.restaurant_menu') }}
-            </a>
-            <a href="{{ route(app()->getLocale() . '.diensten') }}"
-               class="font-semibold hover:opacity-75 transition-opacity"
-               style="color: white; font-size: 1.125rem;">
-               {{ __('nav.services') }}
             </a>
             <a href="{{ route(app()->getLocale() . '.over-ons') }}"
                class="font-semibold hover:opacity-75 transition-opacity"
@@ -91,7 +94,6 @@
                  style="background-color: var(--color-brand-blue); padding: 0.5rem 1.5rem 2rem;">
                 <a href="{{ route(app()->getLocale() . '.activiteiten.index') }}" class="block font-semibold" style="color: white; padding: 1rem 0; font-size: 1.25rem; font-family: var(--font-sans); border-bottom: 1px solid rgba(255,255,255,0.15);">{{ __('nav.activities') }}</a>
                 <a href="{{ route(app()->getLocale() . '.weekmenu') }}" class="block font-semibold" style="color: white; padding: 1rem 0; font-size: 1.25rem; font-family: var(--font-sans); border-bottom: 1px solid rgba(255,255,255,0.15);">{{ __('nav.restaurant_menu') }}</a>
-                <a href="{{ route(app()->getLocale() . '.diensten') }}" class="block font-semibold" style="color: white; padding: 1rem 0; font-size: 1.25rem; font-family: var(--font-sans); border-bottom: 1px solid rgba(255,255,255,0.15);">{{ __('nav.services') }}</a>
                 <a href="{{ route(app()->getLocale() . '.over-ons') }}" class="block font-semibold" style="color: white; padding: 1rem 0; font-size: 1.25rem; font-family: var(--font-sans); border-bottom: 1px solid rgba(255,255,255,0.15);">{{ __('nav.over_ons') }}</a>
                 <a href="{{ route(app()->getLocale() . '.contact') }}" class="block font-semibold" style="color: white; padding: 1rem 0; font-size: 1.25rem; font-family: var(--font-sans);">{{ __('nav.contact') }}</a>
                 {{-- Mobile language toggle --}}
@@ -112,4 +114,22 @@
             </div>
         </div>
     </div>
+    @if($showAboutSubnav)
+    <div style="background: #3a68a8; border-top: 1px solid rgba(255,255,255,0.12);">
+        <div style="max-width: 72rem; margin: 0 auto; padding: 0 1.5rem; display: flex; gap: 0;">
+            @foreach ([
+                ['route' => app()->getLocale() . '.over-ons',      'label' => __('nav.over_ons')],
+                ['route' => app()->getLocale() . '.wie-is-wie',    'label' => __('nav.wie_is_wie')],
+                ['route' => app()->getLocale() . '.vrijwilligers', 'label' => __('nav.vrijwilligers')],
+            ] as $tab)
+            @php $isActive = ($currentRoute === $tab['route']); @endphp
+            <a href="{{ route($tab['route']) }}"
+               style="font-family: var(--font-sans); font-size: 0.875rem; font-weight: 700; color: {{ $isActive ? 'white' : 'rgba(255,255,255,0.6)' }}; text-decoration: none; padding: 0.5rem 0.75rem; border-bottom: 2px solid {{ $isActive ? 'white' : 'transparent' }}; display: inline-block; transition: color 0.15s, border-color 0.15s;"
+               onmouseover="if (!{{ $isActive ? 'true' : 'false' }}) this.style.color='rgba(255,255,255,0.85)'" onmouseout="if (!{{ $isActive ? 'true' : 'false' }}) this.style.color='rgba(255,255,255,0.6)'">
+                {{ $tab['label'] }}
+            </a>
+            @endforeach
+        </div>
+    </div>
+    @endif
 </header>

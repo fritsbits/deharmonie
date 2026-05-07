@@ -47,14 +47,14 @@ class BilingualRoutingTest extends TestCase
     {
         $response = $this->get('/fr');
         $response->assertSee('Activités');
-        $response->assertSee('Services');
+        $response->assertSee('À propos');
     }
 
     public function test_nav_shows_nl_labels_on_nl_routes(): void
     {
         $response = $this->get('/');
         $response->assertSee('Activiteiten');
-        $response->assertSee('Diensten');
+        $response->assertSee('Over ons');
     }
 
     public function test_nl_nav_shows_fr_as_link(): void
