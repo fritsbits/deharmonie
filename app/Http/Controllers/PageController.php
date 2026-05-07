@@ -57,6 +57,11 @@ class PageController extends Controller
         return view('pages.contact');
     }
 
+    public function vrijwilligers(): View
+    {
+        return view('pages.vrijwilligers');
+    }
+
     public function wieIsWie(): View
     {
         $categorieen = TeamCategorie::with(['leden' => fn ($q) => $q->orderBy('naam')])

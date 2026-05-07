@@ -21,6 +21,7 @@ Route::middleware(['locale:nl', DetectPreferredLocale::class])->group(function (
     Route::get('/diensten', [PageController::class, 'diensten'])->name('nl.diensten');
     Route::get('/over-ons', [PageController::class, 'overOns'])->name('nl.over-ons');
     Route::get('/contact', [PageController::class, 'contact'])->name('nl.contact');
+    Route::get('/vrijwilligers', [PageController::class, 'vrijwilligers'])->name('nl.vrijwilligers');
     Route::get('/wie-is-wie', [PageController::class, 'wieIsWie'])->name('nl.wie-is-wie');
 });
 
@@ -35,6 +36,7 @@ Route::prefix('fr')->middleware('locale:fr')->group(function () {
     Route::get('/services', [PageController::class, 'diensten'])->name('fr.diensten');
     Route::get('/a-propos', [PageController::class, 'overOns'])->name('fr.over-ons');
     Route::get('/contact', [PageController::class, 'contact'])->name('fr.contact');
+    Route::get('/benevoles', [PageController::class, 'vrijwilligers'])->name('fr.vrijwilligers');
     Route::get('/qui-est-qui', [PageController::class, 'wieIsWie'])->name('fr.wie-is-wie');
 });
 
