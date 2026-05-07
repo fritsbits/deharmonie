@@ -10,8 +10,6 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class OverOnsContentFactory extends Factory
 {
-    protected $model = OverOnsContent::class;
-
     public function definition(): array
     {
         return [

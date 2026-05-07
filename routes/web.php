@@ -18,7 +18,6 @@ Route::middleware(['locale:nl', DetectPreferredLocale::class])->group(function (
     Route::get('/activiteiten/{slug}', [ActivityController::class, 'show'])->name('nl.activiteiten.show');
     Route::get('/restaurant-menu', [PageController::class, 'weekmenu'])->name('nl.weekmenu');
     Route::get('/restaurant-menu/print', [PageController::class, 'weekmenuPrint'])->name('nl.weekmenu.print');
-    Route::get('/diensten', [PageController::class, 'diensten'])->name('nl.diensten');
     Route::get('/over-ons', [PageController::class, 'overOns'])->name('nl.over-ons');
     Route::get('/contact', [PageController::class, 'contact'])->name('nl.contact');
     Route::get('/vrijwilligers', [PageController::class, 'vrijwilligers'])->name('nl.vrijwilligers');
@@ -33,7 +32,6 @@ Route::prefix('fr')->middleware('locale:fr')->group(function () {
     Route::get('/activites/{slug}', [ActivityController::class, 'show'])->name('fr.activiteiten.show');
     Route::get('/restaurant-menu', [PageController::class, 'weekmenu'])->name('fr.weekmenu');
     Route::get('/restaurant-menu/print', [PageController::class, 'weekmenuPrint'])->name('fr.weekmenu.print');
-    Route::get('/services', [PageController::class, 'diensten'])->name('fr.diensten');
     Route::get('/a-propos', [PageController::class, 'overOns'])->name('fr.over-ons');
     Route::get('/contact', [PageController::class, 'contact'])->name('fr.contact');
     Route::get('/benevoles', [PageController::class, 'vrijwilligers'])->name('fr.vrijwilligers');

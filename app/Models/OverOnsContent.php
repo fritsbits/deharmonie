@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Database\Factories\OverOnsContentFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Number;
@@ -10,7 +11,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 
 class OverOnsContent extends Model implements HasMedia
 {
+    /** @use HasFactory<OverOnsContentFactory> */
     use HasFactory;
+
     use InteractsWithMedia;
 
     protected $table = 'over_ons_content';
