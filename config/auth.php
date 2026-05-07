@@ -116,4 +116,9 @@ return [
 
     'admin_email' => env('ADMIN_LOGIN_EMAIL'),
 
+    'admin_emails' => array_values(array_unique(array_filter(array_merge(
+        [env('ADMIN_LOGIN_EMAIL')],
+        array_map('trim', explode(',', (string) env('ADMIN_LOGIN_EXTRA_EMAILS', '')))
+    )))),
+
 ];
