@@ -51,4 +51,20 @@ class OverOnsPageTest extends TestCase
         $response->assertStatus(200);
         $response->assertSee(route('fr.wie-is-wie'), false);
     }
+
+    public function test_over_ons_shows_volunteer_section(): void
+    {
+        $response = $this->get(route('nl.over-ons'));
+
+        $response->assertSee('Word vrijwilliger bij De Harmonie');
+        $response->assertSee('Meer over vrijwilligerswerk');
+    }
+
+    public function test_fr_over_ons_shows_volunteer_section(): void
+    {
+        $response = $this->get(route('fr.over-ons'));
+
+        $response->assertSee('Devenez bénévole à De Harmonie');
+        $response->assertSee('En savoir plus');
+    }
 }
