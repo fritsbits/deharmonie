@@ -2,6 +2,8 @@
 
 @section('title', $activiteit->titel)
 @section('description', strip_tags($activiteit->beschrijving ?? ''))
+@section('og_type', 'article')
+@section('og_description', Str::limit(strip_tags($activiteit->beschrijving ?? __('common.og_default_description')), 200))
 
 @section('content')
 
