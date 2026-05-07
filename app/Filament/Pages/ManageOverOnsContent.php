@@ -5,7 +5,6 @@ namespace App\Filament\Pages;
 use App\Models\OverOnsContent;
 use BackedEnum;
 use Filament\Actions\Action;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
@@ -13,7 +12,6 @@ use Filament\Pages\Page;
 use Filament\Schemas\Components\Actions;
 use Filament\Schemas\Components\Form;
 use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -56,16 +54,21 @@ class ManageOverOnsContent extends Page
                     Section::make('Jaarverslag')
                         ->description('Laat het PDF-veld leeg om het jaarverslag-blok op de Over ons-pagina te verbergen.')
                         ->schema([
-                            TextInput::make('jaarverslag_jaar')
-                                ->label('Jaar')
-                                ->numeric()
-                                ->minValue(2000)
-                                ->maxValue(2100),
-                            SpatieMediaLibraryFileUpload::make('jaarverslag')
-                                ->label('PDF-bestand')
-                                ->collection('jaarverslag')
-                                ->acceptedFileTypes(['application/pdf'])
-                                ->maxSize(20480),
+                            Grid::make(['default' => 1, 'md' => 4])
+                                ->schema([
+                                    TextInput::make('jaarverslag_jaar')
+                                        ->label('Jaar')
+                                        ->numeric()
+                                        ->minValue(2000)
+                                        ->maxValue(2100)
+                                        ->columnSpan(['md' => 1]),
+                                    SpatieMediaLibraryFileUpload::make('jaarverslag')
+                                        ->label('PDF-bestand')
+                                        ->collection('jaarverslag')
+                                        ->acceptedFileTypes(['application/pdf'])
+                                        ->maxSize(20480)
+                                        ->columnSpan(['md' => 3]),
+                                ]),
                         ]),
                     Section::make('Impactcijfers')
                         ->schema([
@@ -90,25 +93,24 @@ class ManageOverOnsContent extends Page
             ->statePath('data');
     }
 
-    protected function impactColumn(int $n, string $label): Group
+    protected function impactColumn(int $n, string $label): Section
     {
-        return Group::make([
-            Placeholder::make("label_{$n}")
-                ->label('Categorie')
-                ->content($label),
-            TextInput::make("impact_{$n}_aantal")
-                ->label('Aantal')
-                ->required()
-                ->maxLength(20),
-            TextInput::make("impact_{$n}_omschrijving_nl")
-                ->label('Omschrijving (NL)')
-                ->required()
-                ->maxLength(120),
-            TextInput::make("impact_{$n}_omschrijving_fr")
-                ->label('Omschrijving (FR)')
-                ->required()
-                ->maxLength(120),
-        ]);
+        return Section::make($label)
+            ->compact()
+            ->schema([
+                TextInput::make("impact_{$n}_aantal")
+                    ->label('Aantal')
+                    ->required()
+                    ->maxLength(20),
+                TextInput::make("impact_{$n}_omschrijving_nl")
+                    ->label('Omschrijving (NL)')
+                    ->required()
+                    ->maxLength(120),
+                TextInput::make("impact_{$n}_omschrijving_fr")
+                    ->label('Omschrijving (FR)')
+                    ->required()
+                    ->maxLength(120),
+            ]);
     }
 
     public function save(): void
