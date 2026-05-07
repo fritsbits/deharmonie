@@ -7,6 +7,8 @@ use App\Models\OverOnsContent;
 use App\Models\User;
 use Database\Seeders\AdminUserSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use Livewire\Livewire;
 use Tests\TestCase;
 
@@ -99,5 +101,60 @@ class ManageOverOnsContentTest extends TestCase
                 'impact_1_aantal' => 'required',
                 'impact_1_omschrijving_nl' => 'required',
             ]);
+    }
+
+    public function test_admin_can_upload_pdf_to_jaarverslag_collection(): void
+    {
+        Storage::fake('public');
+        $this->seed(AdminUserSeeder::class);
+        OverOnsContent::factory()->create();
+
+        Livewire::actingAs($this->adminUser())
+            ->test(ManageOverOnsContent::class)
+            ->fillForm([
+                'jaarverslag' => [UploadedFile::fake()->createWithContent('verslag.pdf', "%PDF-1.4\nfake")],
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $this->assertSame(1, OverOnsContent::current()->getMedia('jaarverslag')->count());
+        $this->assertNotNull(OverOnsContent::current()->getJaarverslagUrl());
+    }
+
+    public function test_uploading_a_new_pdf_replaces_the_previous_one(): void
+    {
+        Storage::fake('public');
+        $this->seed(AdminUserSeeder::class);
+        $content = OverOnsContent::factory()->create();
+        $content->addMedia(UploadedFile::fake()->createWithContent('first.pdf', "%PDF-1.4\nfake"))
+            ->toMediaCollection('jaarverslag');
+        $this->assertSame(1, $content->fresh()->getMedia('jaarverslag')->count());
+
+        Livewire::actingAs($this->adminUser())
+            ->test(ManageOverOnsContent::class)
+            ->fillForm([
+                'jaarverslag' => [UploadedFile::fake()->createWithContent('second.pdf', "%PDF-1.4\nfake")],
+            ])
+            ->call('save')
+            ->assertHasNoFormErrors();
+
+        $media = OverOnsContent::current()->getMedia('jaarverslag');
+        $this->assertSame(1, $media->count());
+        $this->assertSame('second', $media->first()->name);
+    }
+
+    public function test_validation_rejects_non_pdf_uploads(): void
+    {
+        Storage::fake('public');
+        $this->seed(AdminUserSeeder::class);
+        OverOnsContent::factory()->create();
+
+        Livewire::actingAs($this->adminUser())
+            ->test(ManageOverOnsContent::class)
+            ->fillForm([
+                'jaarverslag' => [UploadedFile::fake()->image('not-a-pdf.jpg')],
+            ])
+            ->call('save')
+            ->assertHasFormErrors(['jaarverslag']);
     }
 }

@@ -6,6 +6,7 @@ use App\Models\OverOnsContent;
 use BackedEnum;
 use Filament\Actions\Action;
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
@@ -58,7 +59,11 @@ class ManageOverOnsContent extends Page
                                 ->numeric()
                                 ->minValue(2000)
                                 ->maxValue(2100),
-                            // SpatieMediaLibraryFileUpload added in Task 6.
+                            SpatieMediaLibraryFileUpload::make('jaarverslag')
+                                ->label('PDF-bestand')
+                                ->collection('jaarverslag')
+                                ->acceptedFileTypes(['application/pdf'])
+                                ->maxSize(20480),
                         ]),
                     Section::make('Impactcijfers')
                         ->schema([
