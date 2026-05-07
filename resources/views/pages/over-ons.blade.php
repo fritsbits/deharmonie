@@ -396,7 +396,7 @@
     .over-ons-verhaal-layout { flex-direction: column; gap: 2rem; }
     .over-ons-stats-sidebar { flex: none; width: 100%; position: static; }
     .over-ons-vrijwilligers-layout { flex-direction: column !important; gap: 2rem !important; }
-    .over-ons-vrijwilligers-img { flex: none !important; width: 100% !important; }
+    .over-ons-vrijwilligers-img { flex: none !important; width: 100% !important; height: auto !important; }
 }
 </style>
 
