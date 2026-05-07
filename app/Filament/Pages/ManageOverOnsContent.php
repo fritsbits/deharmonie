@@ -32,6 +32,8 @@ class ManageOverOnsContent extends Page
 
     protected static string|UnitEnum|null $navigationGroup = 'Inhoud';
 
+    protected static ?int $navigationSort = 3;
+
     protected static ?string $title = 'Over ons-pagina';
 
     protected static ?string $slug = 'over-ons';

@@ -47,6 +47,10 @@ class ActiviteitResource extends Resource
 
     protected static ?string $navigationLabel = 'Activiteiten';
 
+    protected static \UnitEnum|string|null $navigationGroup = 'Inhoud';
+
+    protected static ?int $navigationSort = 1;
+
     protected static ?string $modelLabel = 'Activiteit';
 
     protected static ?string $pluralModelLabel = 'Activiteiten';

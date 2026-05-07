@@ -24,6 +24,8 @@ class TeamLidResource extends Resource
 
     protected static ?string $navigationLabel = 'Wie is wie';
 
+    protected static \UnitEnum|string|null $navigationGroup = 'Inhoud';
+
     protected static ?int $navigationSort = 4;
 
     protected static ?string $modelLabel = 'Teamlid';

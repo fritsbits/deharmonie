@@ -25,7 +25,9 @@ class WeekMenuDagResource extends Resource
 
     protected static ?string $navigationLabel = 'Restaurant & Menu';
 
-    protected static ?int $navigationSort = 3;
+    protected static \UnitEnum|string|null $navigationGroup = 'Inhoud';
+
+    protected static ?int $navigationSort = 2;
 
     protected static ?string $modelLabel = 'Menudag';
 
