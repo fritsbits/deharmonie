@@ -9,4 +9,5 @@ return [
     'wie_is_wie' => 'Qui est qui',
     'vrijwilligers' => 'Bénévoles',
     'open_menu' => 'Ouvrir le menu',
+    'admin' => 'Administration',
 ];

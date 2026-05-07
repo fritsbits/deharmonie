@@ -58,6 +58,16 @@
                        style="font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: white; text-decoration: none; opacity: 0.85; padding: 0.15rem 0; transition: opacity 0.15s;"
                        onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">{{ $link['label'] }}</a>
                 @endforeach
+                @if (auth()->check() && in_array(auth()->user()->email, config('auth.admin_emails'), true))
+                    <a href="{{ url('/admin') }}"
+                       style="font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: white; text-decoration: none; opacity: 0.85; padding: 0.15rem 0; transition: opacity 0.15s; display: inline-flex; align-items: center; gap: 0.4rem;"
+                       onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.85'">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M12 2 4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6z"/>
+                        </svg>
+                        {{ __('nav.admin') }}
+                    </a>
+                @endif
             </div>
         </div>
 
