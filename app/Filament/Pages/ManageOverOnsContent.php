@@ -29,6 +29,8 @@ class ManageOverOnsContent extends Page
     /** @var array<string, mixed>|null */
     public ?array $data = [];
 
+    private ?OverOnsContent $record = null;
+
     public function mount(): void
     {
         $this->form->fill($this->getRecord()->attributesToArray());
@@ -46,6 +48,6 @@ class ManageOverOnsContent extends Page
 
     public function getRecord(): OverOnsContent
     {
-        return OverOnsContent::current();
+        return $this->record ??= OverOnsContent::current();
     }
 }
