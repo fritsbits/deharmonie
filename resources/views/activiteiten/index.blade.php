@@ -242,6 +242,20 @@
     </div>
 </section>
 
+{{-- VOLUNTEER STRIP --}}
+<section style="background: var(--color-brand-green); padding: 2rem 1.5rem;">
+    <div class="volunteer-strip-inner" style="max-width: 72rem; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 1.5rem;">
+        <p style="font-family: var(--font-sans); font-size: 1.25rem; font-weight: 800; color: white; margin: 0; line-height: 1.3;">
+            {{ __('pages.home_vrijwilligers_heading') }}
+        </p>
+        <a href="{{ route(app()->getLocale() . '.vrijwilligers') }}"
+           class="press-scale"
+           style="background: white; color: var(--color-brand-green); font-family: var(--font-sans); font-size: 1rem; font-weight: 700; text-decoration: none; padding: 0.75rem 1.75rem; border-radius: 999px; white-space: nowrap; flex-shrink: 0;">
+            {{ __('pages.home_vrijwilligers_cta') }}
+        </a>
+    </div>
+</section>
+
 {{-- PRACTICAL INFO --}}
 <section id="contact" style="background-color: var(--color-brand-bg); padding: 5rem 1.5rem 6rem;">
     <div style="max-width: 72rem; margin: 0 auto; display: flex; gap: 4rem; align-items: center;">
@@ -298,6 +312,7 @@
     .menu-cards { flex-direction: column !important; }
     .activity-cards-grid { flex-direction: column !important; }
 .practical-grid { flex-direction: column !important; gap: 1.5rem !important; }
+    .volunteer-strip-inner { flex-direction: column !important; align-items: flex-start !important; }
     .social-proof-strip { height: 200px; }
     .social-proof-strip > div:nth-child(2),
     .social-proof-strip > div:nth-child(3) { display: none; }

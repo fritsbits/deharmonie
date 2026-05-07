@@ -198,4 +198,12 @@ class ActivityControllerTest extends TestCase
         $activiteiten = $component->get('activiteiten');
         $this->assertCount(5, $activiteiten);
     }
+
+    public function test_homepage_shows_volunteer_strip(): void
+    {
+        $response = $this->get(route('nl.home'));
+
+        $response->assertSee('Wil je meehelpen bij De Harmonie?');
+        $response->assertSee('Word vrijwilliger');
+    }
 }
