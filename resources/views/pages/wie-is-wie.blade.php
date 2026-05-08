@@ -25,8 +25,8 @@
              style="width: 100%; height: 100%; object-fit: cover; display: block;">
     </div>
     <div style="flex: 1; overflow: hidden;">
-        <img src="{{ asset('images/photo-verjaardag-team.webp') }}"
-             alt="{{ app()->getLocale() === 'fr' ? 'L\'équipe fête un anniversaire' : 'Team viert een verjaardag' }}"
+        <img src="{{ asset('images/photo-restaurant-bediening.webp') }}"
+             alt="{{ app()->getLocale() === 'fr' ? 'Un membre de l\'équipe sert les visiteurs au restaurant' : 'Medewerker bedient bezoekers in het restaurant' }}"
              loading="lazy"
              style="width: 100%; height: 100%; object-fit: cover; display: block; object-position: center 40%;">
     </div>
