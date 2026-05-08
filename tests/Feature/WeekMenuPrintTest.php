@@ -23,7 +23,7 @@ class WeekMenuPrintTest extends TestCase
         Carbon::setTestNow('2026-03-23 10:00:00');
         WeekMenuDag::factory()->create(['date' => '2026-03-23']);
 
-        $response = $this->get('/restaurant-menu/print?week=0');
+        $response = $this->get('/nl/restaurant-menu/print?week=0');
 
         $response->assertStatus(200);
     }
@@ -47,7 +47,7 @@ class WeekMenuPrintTest extends TestCase
             'main_fr' => 'Carbonnades, Frites et Salade',
         ]);
 
-        $response = $this->get('/restaurant-menu/print?week=0');
+        $response = $this->get('/nl/restaurant-menu/print?week=0');
 
         $response->assertStatus(200);
         $response->assertSee('Stoofvlees met Sla en Kroketjes');
@@ -76,7 +76,7 @@ class WeekMenuPrintTest extends TestCase
         WeekMenuDag::factory()->create(['date' => '2026-03-23']);
         WeekMenuDag::factory()->closed()->create(['date' => '2026-03-28']);
 
-        $response = $this->get('/restaurant-menu/print?week=0');
+        $response = $this->get('/nl/restaurant-menu/print?week=0');
 
         $response->assertStatus(200);
         $response->assertSee('Gesloten');
@@ -102,7 +102,7 @@ class WeekMenuPrintTest extends TestCase
             'main_nl' => 'Kalf blanket met Bulgur',
         ]);
 
-        $response = $this->get('/restaurant-menu/print?week=1');
+        $response = $this->get('/nl/restaurant-menu/print?week=1');
 
         $response->assertStatus(200);
         $response->assertSee('Kalf blanket met Bulgur');
@@ -113,7 +113,7 @@ class WeekMenuPrintTest extends TestCase
         Carbon::setTestNow('2026-03-23 10:00:00');
         WeekMenuDag::factory()->create(['date' => '2026-03-23']);
 
-        $response = $this->get('/restaurant-menu/print?week=0');
+        $response = $this->get('/nl/restaurant-menu/print?week=0');
 
         $response->assertStatus(200);
         $response->assertDontSee('<nav', false);

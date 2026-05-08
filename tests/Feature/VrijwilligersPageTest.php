@@ -11,7 +11,7 @@ class VrijwilligersPageTest extends TestCase
 
     public function test_nl_volunteer_page_loads(): void
     {
-        $response = $this->get('/vrijwilligers');
+        $response = $this->get('/nl/vrijwilligers');
 
         $response->assertStatus(200);
         $response->assertSee('Word deel van ons team');
@@ -31,7 +31,7 @@ class VrijwilligersPageTest extends TestCase
 
     public function test_nl_volunteer_page_shows_activity_roles(): void
     {
-        $response = $this->get('/vrijwilligers');
+        $response = $this->get('/nl/vrijwilligers');
 
         $response->assertSee('Ciné-Club');
         $response->assertSee('Conversatietafel');
@@ -40,7 +40,7 @@ class VrijwilligersPageTest extends TestCase
 
     public function test_footer_contains_volunteer_link(): void
     {
-        $response = $this->get('/');
+        $response = $this->get('/nl');
 
         $response->assertSee('vrijwilligers');
     }
@@ -61,7 +61,7 @@ class VrijwilligersPageTest extends TestCase
 
     public function test_homepage_does_not_show_section_nav(): void
     {
-        $response = $this->get('/');
+        $response = $this->get('/nl');
 
         $response->assertDontSee('#3a68a8');
     }

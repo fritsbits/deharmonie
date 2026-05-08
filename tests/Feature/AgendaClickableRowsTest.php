@@ -17,11 +17,11 @@ class AgendaClickableRowsTest extends TestCase
             'datum' => now()->format('Y-m-d'),
         ]);
 
-        $response = $this->get('/activiteiten/agenda?week=0');
+        $response = $this->get('/nl/activiteiten/agenda?week=0');
 
         $response->assertOk();
         $response->assertSee(
-            'href="' . route('nl.activiteiten.show', $published->slug) . '"',
+            'href="'.route('nl.activiteiten.show', $published->slug).'"',
             false
         );
     }
@@ -33,11 +33,11 @@ class AgendaClickableRowsTest extends TestCase
             'datum' => now()->startOfWeek()->addDay()->format('Y-m-d'),
         ]);
 
-        $response = $this->get('/activiteiten/agenda?week=0');
+        $response = $this->get('/nl/activiteiten/agenda?week=0');
 
         $response->assertOk();
         $response->assertSee(
-            'href="' . route('nl.activiteiten.show', $cancelled->slug) . '"',
+            'href="'.route('nl.activiteiten.show', $cancelled->slug).'"',
             false
         );
     }

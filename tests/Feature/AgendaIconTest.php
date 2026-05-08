@@ -23,7 +23,7 @@ class AgendaIconTest extends TestCase
             'status' => ActiviteitStatus::Gepubliceerd,
         ]);
 
-        $response = $this->get('/activiteiten/agenda');
+        $response = $this->get('/nl/activiteiten/agenda');
 
         $response->assertOk();
         // Asserts the Sport-Beweging icon's SVG path appears in the rendered HTML.

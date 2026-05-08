@@ -13,7 +13,7 @@ class FooterAdminLinkTest extends TestCase
 
     public function test_admin_link_hidden_for_guests(): void
     {
-        $response = $this->get('/');
+        $response = $this->get('/nl');
 
         $response->assertStatus(200);
         $response->assertDontSee(url('/admin'));
@@ -25,7 +25,7 @@ class FooterAdminLinkTest extends TestCase
         $this->seed(AdminUserSeeder::class);
         $admin = User::where('email', config('auth.admin_email'))->firstOrFail();
 
-        $response = $this->actingAs($admin)->get('/');
+        $response = $this->actingAs($admin)->get('/nl');
 
         $response->assertStatus(200);
         $response->assertSee(url('/admin'));
@@ -48,7 +48,7 @@ class FooterAdminLinkTest extends TestCase
     {
         $user = User::factory()->create(['email' => 'not-an-admin@example.com']);
 
-        $response = $this->actingAs($user)->get('/');
+        $response = $this->actingAs($user)->get('/nl');
 
         $response->assertStatus(200);
         $response->assertDontSee('Beheer');

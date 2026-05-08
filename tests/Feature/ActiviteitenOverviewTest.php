@@ -13,7 +13,7 @@ class ActiviteitenOverviewTest extends TestCase
 
     public function test_agenda_page_loads_for_nl(): void
     {
-        $response = $this->get('/activiteiten/agenda');
+        $response = $this->get('/nl/activiteiten/agenda');
         $response->assertStatus(200);
     }
 
@@ -25,7 +25,7 @@ class ActiviteitenOverviewTest extends TestCase
 
     public function test_overview_page_shows_theme_names(): void
     {
-        $response = $this->get('/activiteiten');
+        $response = $this->get('/nl/activiteiten');
         $response->assertStatus(200);
         $response->assertSee('Beweeg mee');
         $response->assertSee('Maak & leer mee');
@@ -54,7 +54,7 @@ class ActiviteitenOverviewTest extends TestCase
             'titel_nl' => 'Herhalende activiteit',
         ]);
 
-        $response = $this->get('/activiteiten');
+        $response = $this->get('/nl/activiteiten');
         $response->assertStatus(200);
         $response->assertViewHas('bijzondereActiviteiten');
 
@@ -85,7 +85,7 @@ class ActiviteitenOverviewTest extends TestCase
             'titel_nl' => 'Ongepubliceerd',
         ]);
 
-        $response = $this->get('/activiteiten');
+        $response = $this->get('/nl/activiteiten');
         $response->assertStatus(200);
         $response->assertSee('Zomerfeest');
         $response->assertDontSee('Oud evenement');
@@ -94,9 +94,9 @@ class ActiviteitenOverviewTest extends TestCase
 
     public function test_agenda_cta_link_correct_for_nl(): void
     {
-        $response = $this->get('/activiteiten');
+        $response = $this->get('/nl/activiteiten');
         $response->assertStatus(200);
-        $response->assertSee('/activiteiten/agenda');
+        $response->assertSee('/nl/activiteiten/agenda');
     }
 
     public function test_agenda_cta_link_correct_for_fr(): void

@@ -22,7 +22,7 @@ class WeekMenuTest extends TestCase
 
     public function test_weekmenu_page_loads_in_nl(): void
     {
-        $response = $this->get('/restaurant-menu');
+        $response = $this->get('/nl/restaurant-menu');
 
         $response->assertStatus(200);
         $response->assertSee('Menu deze week');
@@ -49,7 +49,7 @@ class WeekMenuTest extends TestCase
             'main_fr' => 'Carbonnades, Frites et Salade',
         ]);
 
-        $response = $this->get('/restaurant-menu');
+        $response = $this->get('/nl/restaurant-menu');
 
         $response->assertStatus(200);
         $response->assertSee('Vandaag');
@@ -62,7 +62,7 @@ class WeekMenuTest extends TestCase
         WeekMenuDag::factory()->create(['date' => '2026-03-23', 'main_nl' => 'Stoofvlees met Sla en Kroketjes']);
         WeekMenuDag::factory()->create(['date' => '2026-03-24', 'main_nl' => 'Chicon Gratin met Puree']);
 
-        $response = $this->get('/restaurant-menu');
+        $response = $this->get('/nl/restaurant-menu');
 
         $response->assertStatus(200);
         $response->assertSee('Morgen');
@@ -75,7 +75,7 @@ class WeekMenuTest extends TestCase
         WeekMenuDag::factory()->create(['date' => '2026-03-23']);
         WeekMenuDag::factory()->closed()->create(['date' => '2026-03-28']);
 
-        $response = $this->get('/restaurant-menu');
+        $response = $this->get('/nl/restaurant-menu');
 
         $response->assertStatus(200);
         $response->assertDontSee('Gesloten'); // closed days are filtered out of the live component entirely
@@ -99,7 +99,7 @@ class WeekMenuTest extends TestCase
             ],
         ]);
 
-        $response = $this->get('/restaurant-menu');
+        $response = $this->get('/nl/restaurant-menu');
 
         $response->assertStatus(200);
         $response->assertSee('Paasmenu');
@@ -114,7 +114,7 @@ class WeekMenuTest extends TestCase
         WeekMenuDag::factory()->closed()->create(['date' => '2026-03-28']);
         WeekMenuDag::factory()->create(['date' => '2026-03-30', 'main_nl' => 'Kalf blanket met Bulgur']);
 
-        $response = $this->get('/restaurant-menu');
+        $response = $this->get('/nl/restaurant-menu');
 
         $response->assertStatus(200);
         $response->assertSee('Kalf blanket met Bulgur');

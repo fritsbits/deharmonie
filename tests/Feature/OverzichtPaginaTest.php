@@ -40,7 +40,7 @@ class OverzichtPaginaTest extends TestCase
             'status' => ActiviteitStatus::Gepubliceerd,
         ]);
 
-        $response = $this->get('/activiteiten');
+        $response = $this->get('/nl/activiteiten');
         $response->assertOk();
         $response->assertSee('Beweeg mee');
         $response->assertSee('Maak & leer mee');

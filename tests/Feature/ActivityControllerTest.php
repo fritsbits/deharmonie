@@ -25,7 +25,7 @@ class ActivityControllerTest extends TestCase
             'datum' => now()->format('Y-m-d'),
         ]);
 
-        $response = $this->get('/');
+        $response = $this->get('/nl');
         // Activity appears via Livewire server-side render
         $response->assertSee($gepubliceerd->titel_nl);
         $response->assertDontSee($concept->titel_nl);
@@ -48,7 +48,7 @@ class ActivityControllerTest extends TestCase
             'datum' => now()->format('Y-m-d'),
         ]);
 
-        $response = $this->get('/activiteiten/agenda');
+        $response = $this->get('/nl/activiteiten/agenda');
         $response->assertSee($geannuleerd->titel_nl);
         $response->assertSee('Geannuleerd');
     }
@@ -57,7 +57,7 @@ class ActivityControllerTest extends TestCase
     {
         Activiteit::query()->delete();
 
-        $response = $this->get('/activiteiten/agenda');
+        $response = $this->get('/nl/activiteiten/agenda');
         $response->assertSee('Geen activiteiten deze week.');
     }
 
@@ -76,7 +76,7 @@ class ActivityControllerTest extends TestCase
             'datum' => now()->startOfWeek()->subDay()->format('Y-m-d'),
         ]);
 
-        $response = $this->get('/activiteiten/agenda');
+        $response = $this->get('/nl/activiteiten/agenda');
         $response->assertSee($today->titel_nl);
         $response->assertDontSee($nextMonth->titel_nl);
         $response->assertDontSee($lastWeek->titel_nl);
@@ -88,7 +88,7 @@ class ActivityControllerTest extends TestCase
             'status' => 'geannuleerd',
             'notice_nl' => 'Deze activiteit gaat niet door.',
         ]);
-        $response = $this->get('/activiteiten/'.$activiteit->slug);
+        $response = $this->get('/nl/activiteiten/'.$activiteit->slug);
         $response->assertSee('Deze activiteit gaat niet door.');
         $response->assertDontSee('Inschrijvingsformulier');
     }
@@ -96,7 +96,7 @@ class ActivityControllerTest extends TestCase
     public function test_activity_detail_shows_contact_cta_for_published(): void
     {
         $activiteit = Activiteit::factory()->create(['status' => 'gepubliceerd']);
-        $response = $this->get('/activiteiten/'.$activiteit->slug);
+        $response = $this->get('/nl/activiteiten/'.$activiteit->slug);
         $response->assertStatus(200);
         $response->assertSee('0220328048'); // phone link in CTA
     }
@@ -109,7 +109,7 @@ class ActivityControllerTest extends TestCase
         ]);
         Deelnameverzoek::factory()->create(['activiteit_id' => $activiteit->id]);
 
-        $response = $this->get('/activiteiten/'.$activiteit->slug);
+        $response = $this->get('/nl/activiteiten/'.$activiteit->slug);
         $response->assertStatus(200);
         $response->assertDontSee('Inschrijvingsformulier');
     }
@@ -127,7 +127,7 @@ class ActivityControllerTest extends TestCase
             'price' => 9,
         ]);
 
-        $response = $this->get('/');
+        $response = $this->get('/nl');
 
         $response->assertSee('Vandaag');
         $response->assertSee('Kalf blanket met bulgur');
@@ -143,7 +143,7 @@ class ActivityControllerTest extends TestCase
     {
         WeekMenuDag::query()->delete();
 
-        $response = $this->get('/');
+        $response = $this->get('/nl');
 
         // The menu section key string is absent when no menu data exists
         $response->assertDontSee('Soep van de dag inbegrepen');
@@ -157,7 +157,7 @@ class ActivityControllerTest extends TestCase
             'price' => 8,
         ]);
 
-        $response = $this->get('/');
+        $response = $this->get('/nl');
 
         // Menu section is visible (tomorrow exists)
         $response->assertSee('Soep van de dag inbegrepen');
@@ -178,7 +178,7 @@ class ActivityControllerTest extends TestCase
             'price' => 11,
         ]);
 
-        $response = $this->get('/');
+        $response = $this->get('/nl');
 
         // Only tomorrow's menu card appears
         $response->assertSee('Open_morgen_gerecht_xyz');

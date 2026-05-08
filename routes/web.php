@@ -3,15 +3,18 @@
 use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\PageController;
-use App\Http\Middleware\DetectPreferredLocale;
+use App\Http\Middleware\SetLocale;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/set-locale/{locale}', [LocaleController::class, 'switch'])
     ->name('set-locale')
     ->where('locale', 'nl|fr');
 
-// NL routes (default, no prefix)
-Route::middleware(['locale:nl', DetectPreferredLocale::class])->group(function () {
+// Bare root: detect preferred locale and redirect to /nl or /fr
+Route::get('/', [LocaleController::class, 'detect'])->name('root');
+
+// NL routes
+Route::prefix('nl')->middleware(SetLocale::class)->group(function () {
     Route::get('/', [ActivityController::class, 'home'])->name('nl.home');
     Route::get('/activiteiten', [ActivityController::class, 'index'])->name('nl.activiteiten.index');
     Route::get('/activiteiten/agenda', [ActivityController::class, 'agenda'])->name('nl.activiteiten.agenda');
@@ -25,7 +28,7 @@ Route::middleware(['locale:nl', DetectPreferredLocale::class])->group(function (
 });
 
 // FR routes
-Route::prefix('fr')->middleware('locale:fr')->group(function () {
+Route::prefix('fr')->middleware(SetLocale::class)->group(function () {
     Route::get('/', [ActivityController::class, 'home'])->name('fr.home');
     Route::get('/activites', [ActivityController::class, 'index'])->name('fr.activiteiten.index');
     Route::get('/activites/agenda', [ActivityController::class, 'agenda'])->name('fr.activiteiten.agenda');
@@ -38,8 +41,10 @@ Route::prefix('fr')->middleware('locale:fr')->group(function () {
     Route::get('/qui-est-qui', [PageController::class, 'wieIsWie'])->name('fr.wie-is-wie');
 });
 
-// Stijlgids (internal design system reference — auth required)
-Route::middleware(['locale:nl', 'auth'])->get('/stijlgids', fn () => view('stijlgids'))->name('stijlgids');
+// Stijlgids (internal design system reference — auth required, NL only)
+Route::prefix('nl')->middleware([SetLocale::class, 'auth'])
+    ->get('/stijlgids', fn () => view('stijlgids'))
+    ->name('stijlgids');
 
 // Categorie icon variants preview — temporary, for icon selection
 Route::get('/_dev/icon-preview', fn () => view('dev.icon-preview'));

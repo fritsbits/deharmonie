@@ -22,7 +22,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSee($today->titel_nl)
             ->assertDontSee($nextWeek->titel_nl);
     }
@@ -34,7 +34,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->subDay()->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertDontSee($lastWeek->titel_nl);
     }
 
@@ -45,13 +45,13 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSee($monday->titel_nl);
     }
 
     public function test_has_prev_false_at_initial_offset(): void
     {
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertDontSee(__('activities.previous_week'));
     }
 
@@ -66,7 +66,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=1')
+        $this->get('/nl/activiteiten/agenda?week=1')
             ->assertSee(__('activities.previous_week'));
     }
 
@@ -78,13 +78,13 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=1')
+        $this->get('/nl/activiteiten/agenda?week=1')
             ->assertDontSee(__('activities.previous_week'));
     }
 
     public function test_has_next_false_when_no_future_activities_exist(): void
     {
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertDontSee(__('activities.next_week'));
     }
 
@@ -99,7 +99,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSee(__('activities.next_week'));
     }
 
@@ -114,7 +114,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSee('week=1');
     }
 
@@ -131,7 +131,7 @@ class ActivityOverzichtTest extends TestCase
         ]);
 
         // On week=0, next link should point to week=3
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSee('week=3');
     }
 
@@ -146,7 +146,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->addWeeks(3)->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSee(__('activities.next_week'));
     }
 
@@ -162,7 +162,7 @@ class ActivityOverzichtTest extends TestCase
         ]);
 
         // On week=1, prev link should point back to week=0
-        $this->get('/activiteiten/agenda?week=1')
+        $this->get('/nl/activiteiten/agenda?week=1')
             ->assertSee('week=0');
     }
 
@@ -179,13 +179,13 @@ class ActivityOverzichtTest extends TestCase
         ]);
 
         // On week=3, prev link should point back to week=0
-        $this->get('/activiteiten/agenda?week=3')
+        $this->get('/nl/activiteiten/agenda?week=3')
             ->assertSee('week=0');
     }
 
     public function test_prev_week_absent_at_zero(): void
     {
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertDontSee(__('activities.previous_week'));
     }
 
@@ -199,7 +199,7 @@ class ActivityOverzichtTest extends TestCase
             ? "{$start->day}–{$end->day} ".$start->locale('nl')->isoFormat('MMMM YYYY')
             : $start->locale('nl')->isoFormat('D MMMM').' – '.$end->locale('nl')->isoFormat('D MMMM YYYY');
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSee($expected);
     }
 
@@ -224,7 +224,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSee($cancelled->titel_nl);
     }
 
@@ -236,7 +236,7 @@ class ActivityOverzichtTest extends TestCase
         ]);
 
         // No week param → should auto-jump and show next week's activity
-        $this->get('/activiteiten/agenda')
+        $this->get('/nl/activiteiten/agenda')
             ->assertSee($nextWeek->titel_nl);
     }
 
@@ -253,7 +253,7 @@ class ActivityOverzichtTest extends TestCase
             'titel_nl' => 'Dinsdag activiteit',
         ]);
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSee('Maandag activiteit')
             ->assertSee('Dinsdag activiteit');
     }
@@ -273,7 +273,7 @@ class ActivityOverzichtTest extends TestCase
             'titel_nl' => 'Aquafit',
         ]);
 
-        $this->get('/activiteiten/agenda?week=0')
+        $this->get('/nl/activiteiten/agenda?week=0')
             ->assertSeeInOrder(['Aquafit', 'Kaartspelen']);
     }
 
@@ -294,7 +294,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeek()->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda')
+        $this->get('/nl/activiteiten/agenda')
             ->assertSee($nextWeek->titel_nl);
     }
 
@@ -309,7 +309,7 @@ class ActivityOverzichtTest extends TestCase
             'datum' => now()->startOfWeek()->addWeeks(2)->format('Y-m-d'),
         ]);
 
-        $this->get('/activiteiten/agenda?week=2')
+        $this->get('/nl/activiteiten/agenda?week=2')
             ->assertSee($week2->titel_nl)
             ->assertDontSee($thisWeek->titel_nl);
     }
