@@ -24,7 +24,8 @@ class LocaleController extends Controller
     {
         $cookie = $request->cookie('preferred_locale');
         if (in_array($cookie, ['nl', 'fr'], true)) {
-            return redirect()->route("$cookie.home");
+            return redirect()->route("$cookie.home")
+                ->cookie('preferred_locale', $cookie, 60 * 24 * 365);
         }
 
         $firstTag = explode(',', $request->header('Accept-Language', 'nl'))[0];

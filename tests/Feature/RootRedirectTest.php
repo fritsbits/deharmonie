@@ -2,13 +2,10 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class RootRedirectTest extends TestCase
 {
-    use RefreshDatabase;
-
     public function test_dutch_browser_is_redirected_to_nl_home(): void
     {
         $response = $this->withHeaders(['Accept-Language' => 'nl-BE,nl;q=0.9'])
@@ -34,6 +31,7 @@ class RootRedirectTest extends TestCase
             ->get('/');
 
         $response->assertRedirect('/nl');
+        $response->assertCookie('preferred_locale', 'nl');
     }
 
     public function test_unknown_accept_language_falls_back_to_nl(): void
