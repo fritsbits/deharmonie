@@ -80,14 +80,37 @@ class BilingualRoutingTest extends TestCase
         $response->assertSee('Facebook');
     }
 
-    public function test_old_unprefixed_url_returns_404(): void
+    public function test_unprefixed_url_without_legacy_redirect_returns_404(): void
     {
-        $this->get('/activiteiten')->assertStatus(404);
+        // /over-ons isn't on the legacy redirect list — confirms unprefixed
+        // paths without an explicit redirect still 404.
+        $this->get('/over-ons')->assertStatus(404);
     }
 
     public function test_fr_prefix_with_nl_slug_returns_404(): void
     {
         // /fr/activiteiten doesn't exist — only /fr/activites does
         $this->get('/fr/activiteiten')->assertStatus(404);
+    }
+
+    public function test_legacy_activiteiten_redirects_to_nl(): void
+    {
+        $response = $this->get('/activiteiten');
+        $response->assertStatus(301);
+        $response->assertRedirect('/nl/activiteiten');
+    }
+
+    public function test_legacy_diensten_redirects_to_nl_over_ons(): void
+    {
+        $response = $this->get('/diensten');
+        $response->assertStatus(301);
+        $response->assertRedirect('/nl/over-ons');
+    }
+
+    public function test_legacy_wie_is_wie_redirects_to_nl(): void
+    {
+        $response = $this->get('/wie-is-wie');
+        $response->assertStatus(301);
+        $response->assertRedirect('/nl/wie-is-wie');
     }
 }

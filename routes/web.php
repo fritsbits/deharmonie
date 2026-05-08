@@ -13,6 +13,11 @@ Route::get('/set-locale/{locale}', [LocaleController::class, 'switch'])
 // Bare root: detect preferred locale and redirect to /nl or /fr
 Route::get('/', [LocaleController::class, 'detect'])->name('root');
 
+// Legacy URL redirects from the previous site (www.deharmonie.be)
+Route::redirect('/activiteiten', '/nl/activiteiten', 301);
+Route::redirect('/diensten', '/nl/over-ons', 301);
+Route::redirect('/wie-is-wie', '/nl/wie-is-wie', 301);
+
 // NL routes
 Route::prefix('nl')->middleware(SetLocale::class)->group(function () {
     Route::get('/', [ActivityController::class, 'home'])->name('nl.home');
