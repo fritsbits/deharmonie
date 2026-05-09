@@ -52,7 +52,7 @@ npm run build
 
 ## Architecture notes
 
-- **Bilingual routing**: NL routes have no prefix, FR routes are prefixed with `/fr`. The `SetLocale` middleware (aliased as `locale`) takes the locale as a parameter — see `routes/web.php` and `bootstrap/app.php`.
+- **Bilingual routing**: NL and FR routes live under symmetric `/nl` and `/fr` prefixes. The bare root `/` hits `LocaleController::detect`, which redirects to the visitor's preferred locale. The `SetLocale` middleware infers the locale from the first URL segment — no parameter, no alias. See `routes/web.php`.
 - **Dutch table names**: `Activiteit` and `Deelnameverzoek` declare explicit `$table` properties because Laravel's auto-pluralisation breaks Dutch nouns.
 - **Locale-aware accessors** on the `Activiteit` model (`getTitelAttribute`, `getBeschrijvingAttribute`, `getNoticeAttribute`) return the NL or FR field based on `app()->getLocale()`.
 - **CMS is the source of truth**: seeders in `database/seeders/` are insert-only (`insertOrIgnore` / `firstOrCreate`) so re-running them never overwrites admin edits. See `CLAUDE.md` for the full content workflow.

@@ -40,11 +40,13 @@ After the initial seed, the team adds new activiteiten, templates, and weekmenu-
 
 ### Routing — bilingual NL/FR
 
-Two route groups in `routes/web.php`:
-- NL group: no prefix, `middleware('locale:nl')` → named routes like `nl.activiteiten.index`
-- FR group: `prefix('fr')`, `middleware('locale:fr')` → named routes like `fr.activiteiten.index`
+Symmetric prefixed groups in `routes/web.php`:
+- NL group: `prefix('nl')`, `middleware(SetLocale::class)` → named routes like `nl.activiteiten.index`
+- FR group: `prefix('fr')`, `middleware(SetLocale::class)` → named routes like `fr.activiteiten.index`
 
-`SetLocale` middleware is aliased as `'locale'` in `bootstrap/app.php` and takes the locale as a parameter.
+The bare root `/` hits `LocaleController::detect`, which inspects `Accept-Language` and redirects to `/nl` or `/fr`. Legacy unprefixed paths from the previous site (`/activiteiten`, `/diensten`, `/wie-is-wie`) are 301-redirected to their `/nl/...` equivalents.
+
+`SetLocale` middleware reads the first URL segment (`$request->segment(1)`) and calls `app()->setLocale()` if it's `nl` or `fr` — no parameter, no alias.
 
 ### Models
 
