@@ -183,6 +183,186 @@
       "price": null,
       "nl": { "soup": null, "main": null, "courses": [] },
       "fr": { "soup": null, "main": null, "courses": [] }
+    },
+    {
+      "date": "2026-05-11",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Scampi Diabolique met Rijst", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Scampi à la Diable avec Riz", "courses": [] }
+    },
+    {
+      "date": "2026-05-12",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Salade Niçoise", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Salade Niçoise", "courses": [] }
+    },
+    {
+      "date": "2026-05-13",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Balletjes in Tomatensaus met Frietjes", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Boulettes Sauce Tomates avec Frites", "courses": [] }
+    },
+    {
+      "date": "2026-05-15",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Fiorentine Ei met Hollandse Saus en Aardappelen", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Œuf Florentine avec Sauce Hollandaise et Pommes de Terre", "courses": [] }
+    },
+    {
+      "date": "2026-05-16",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Hachis Parmentier met Broccoli", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Hachis Parmentier avec Brocoli", "courses": [] }
+    },
+    {
+      "date": "2026-05-18",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Griekse Balletjes (Soutzoukakia) met Bulghur, Courgetten en Tomaten", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Boulettes Grecques (Soutzoukakia) avec Bulghur, Courgettes et Tomates", "courses": [] }
+    },
+    {
+      "date": "2026-05-19",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Rundstong in Madeirasaus met Puree", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Langue de Bœuf Sauce Madère avec Purée", "courses": [] }
+    },
+    {
+      "date": "2026-05-20",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": true,
+      "price": 10,
+      "nl": {
+        "event_label": "Verjaardagsfeest Stier en Tweeling",
+        "soup": null,
+        "main": null,
+        "courses": ["Soep van de dag", "Américain Préparé met Frietjes en Sla"]
+      },
+      "fr": {
+        "event_label": "Fête d'Anniversaire Taureau et Gémeaux",
+        "soup": null,
+        "main": null,
+        "courses": ["Potage du jour", "Américain Préparé avec Frites et Salade"]
+      }
+    },
+    {
+      "date": "2026-05-21",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Vis van de Dag met Kappertjes, Venkel en Aardappelen", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Poisson du Jour aux Câpres avec Fenouil et Pommes de Terre", "courses": [] }
+    },
+    {
+      "date": "2026-05-22",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Cordon-Bleu met Bloemkoolgratin en Aardappelen", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Cordon Bleu avec Gratin de Chou-fleur et Pommes de Terre", "courses": [] }
+    },
+    {
+      "date": "2026-05-23",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Konijn in Geuzesaus met Kroketjes", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Lapin à la Gueuze avec Croquettes", "courses": [] }
+    },
+    {
+      "date": "2026-05-25",
+      "closed": true,
+      "closed_label_nl": "Gesloten — Pinkstermaandag",
+      "closed_label_fr": "Fermé — Lundi de Pentecôte",
+      "special_event": false,
+      "price": null,
+      "nl": { "soup": null, "main": null, "courses": [] },
+      "fr": { "soup": null, "main": null, "courses": [] }
+    },
+    {
+      "date": "2026-05-26",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 8,
+      "nl": { "soup": "Soep van de dag", "main": "Spaghetti Bolognaise", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Spaghetti Bolognaise", "courses": [] }
+    },
+    {
+      "date": "2026-05-27",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Stoofvlees met Frietjes en Witloofsla", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Carbonnades avec Frites et Salade de Chicons", "courses": [] }
+    },
+    {
+      "date": "2026-05-28",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Vis met Stoemp van Kool, Spek en Beurre Blanc", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Poisson avec Stoemp au Chou, Lard et Beurre Blanc", "courses": [] }
+    },
+    {
+      "date": "2026-05-29",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 10,
+      "nl": { "soup": "Soep van de dag", "main": "Chiffonnade van Sla met Aardappelsalade", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Chiffonnade de Salade avec une Salade de Pommes de Terre", "courses": [] }
+    },
+    {
+      "date": "2026-05-30",
+      "closed": false,
+      "closed_label_nl": null,
+      "closed_label_fr": null,
+      "special_event": false,
+      "price": 9,
+      "nl": { "soup": "Soep van de dag", "main": "Chicon Gratin", "courses": [] },
+      "fr": { "soup": "Potage du jour", "main": "Chicon Gratin", "courses": [] }
     }
   ]
 }
