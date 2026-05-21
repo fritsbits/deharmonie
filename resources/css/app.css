@@ -72,6 +72,31 @@ p {
     transform: scale(0.96);
 }
 
+/* Alpine x-cloak — prevents flash of un-Alpine-d content before init */
+[x-cloak] { display: none !important; }
+
+/* About subnav — horizontally scrollable on mobile with a fade affordance */
+.about-subnav-track {
+    scrollbar-width: none;
+}
+.about-subnav-track::-webkit-scrollbar { display: none; }
+.about-subnav-tab { padding: 0.875rem 1.25rem; }
+.about-subnav-fade {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 2rem;
+    pointer-events: none;
+    background: linear-gradient(to right, rgba(58,104,168,0), #3a68a8);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+}
+@media (max-width: 767px) {
+    .about-subnav-tab { padding: 0.875rem 0.875rem; }
+    .about-subnav-fade { opacity: 1; }
+}
+
 @theme {
     --font-sans: 'Nunito Sans', sans-serif;
     --font-body: 'Source Sans 3', sans-serif;

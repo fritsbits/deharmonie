@@ -24,7 +24,7 @@
                 </div>
 
                 {{-- Dark green card header --}}
-                <div class="agenda-card-header" style="background: #3a6b52; padding: 2.25rem 3.25rem;">
+                <div class="agenda-card-header" style="background: #3a6b52;">
                     <div style="display: flex; justify-content: flex-end; margin-bottom: 1rem;">
                         <button onclick="window.print()" class="agenda-print-btn press-scale"
                                 style="display: inline-flex; align-items: center; gap: 0.4rem; background: white; color: #3a6b52; border: none; border-radius: 6px; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; padding: 0.6rem 1.25rem; cursor: pointer; white-space: nowrap;">
@@ -59,7 +59,7 @@
                 </div>
 
                 {{-- Day sections --}}
-                <div class="agenda-body" style="padding: 2.5rem 3.25rem 2.5rem;">
+                <div class="agenda-body">
                     @php
                         $hasAnyActivity = false;
                         $dayIndex = 0;
@@ -85,11 +85,11 @@
                         @endif
                         @php $dayIndex++; @endphp
 
-                        <div class="agenda-day-group" style="display: flex; align-items: flex-start; gap: 1.5rem; padding: 1.5rem 0;">
-                            <div style="width: 140px; flex-shrink: 0; display: flex; align-items: flex-start; padding-top: 0.625rem;">
+                        <div class="agenda-day-group">
+                            <div class="agenda-day-label-wrap">
                                 <span class="agenda-date-label" style="display: inline-block; background: var(--color-brand-green-tint); color: var(--color-brand-green-dark); font-family: var(--font-sans); font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 0.25rem 0.875rem; border-radius: 999px; white-space: nowrap; opacity: {{ $isPast ? '0.6' : '1' }};">{{ $dayLabel }}</span>
                             </div>
-                            <div style="flex: 1; min-width: 0;">
+                            <div class="agenda-day-activities" style="flex: 1; min-width: 0;">
                                 @foreach ($dayActivities as $activiteit)
                                     @php
                                         $ac = match ($activiteit->categorie->section()) {
@@ -153,6 +153,36 @@
 
 <style>
 .agenda-paper-outer {
+}
+.agenda-card-header { padding: 2.25rem 3.25rem; }
+.agenda-body { padding: 2.5rem 3.25rem; }
+.agenda-day-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+}
+.agenda-day-label-wrap {
+    width: 140px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 0.625rem;
+}
+@@media (max-width: 767px) {
+    .agenda-card-header { padding: 1.5rem 1.25rem; }
+    .agenda-body { padding: 1rem 1rem 1.5rem; }
+    .agenda-day-group {
+        flex-direction: column;
+        gap: 0.625rem;
+        padding: 1rem 0;
+    }
+    .agenda-day-label-wrap {
+        width: auto;
+        padding-top: 0;
+    }
+    .agenda-activity-title { font-size: 1.1875rem !important; overflow-wrap: anywhere; }
+    .agenda-activity-meta { font-size: 1rem !important; }
 }
 .agenda-paper {
     position: relative;

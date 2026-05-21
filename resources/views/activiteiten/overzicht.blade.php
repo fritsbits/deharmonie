@@ -238,8 +238,8 @@
                 </p>
             </div>
             <a href="https://www.facebook.com/deharmoniebrussel/" target="_blank" rel="noopener"
-               style="font-family: var(--font-sans); font-weight: 700; font-size: 0.875rem; color: #1877f2; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
-                facebook.com/deharmoniebrussel →
+               style="font-family: var(--font-sans); font-weight: 700; font-size: 0.9375rem; color: #1877f2; text-decoration: none; white-space: nowrap; flex-shrink: 0;">
+                {{ __('common.follow_us') }} →
             </a>
         </div>
     </div>

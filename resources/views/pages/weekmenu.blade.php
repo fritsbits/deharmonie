@@ -124,9 +124,26 @@
     transform-origin: bottom right;
 }
 
+/* Weekmenu paper padding — generous on desktop, compact on mobile */
+.weekmenu-header { padding: 2.25rem 3.25rem; }
+.weekmenu-body { padding: 3.25rem; }
+.weekmenu-row--highlighted {
+    margin-left: -3.25rem;
+    padding-left: calc(3.25rem - 3px);
+    border-left: 3px solid var(--color-brand-orange);
+}
+/* Prevent long single words (meal names) from forcing horizontal overflow */
+.weekmenu-body p { overflow-wrap: anywhere; }
+
 @media (max-width: 767px) {
     .menu-layout { flex-direction: column !important; gap: 2rem !important; }
     .practical-sidebar { position: static !important; min-width: 0 !important; order: -1; }
+    .weekmenu-header { padding: 1.5rem 1.25rem !important; }
+    .weekmenu-body { padding: 1.25rem !important; }
+    .weekmenu-row--highlighted {
+        margin-left: -1.25rem !important;
+        padding-left: calc(1.25rem - 3px) !important;
+    }
 }
 </style>
 
