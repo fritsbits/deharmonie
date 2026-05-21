@@ -44,7 +44,7 @@
 
 {{-- COMMUNITY PHOTO STRIP --}}
 <section style="padding: 0;">
-    <div style="display: flex; height: 320px; overflow: hidden;">
+    <div class="community-strip" style="display: flex; height: 320px; overflow: hidden;">
         <div style="flex: 1; overflow: hidden;">
             <img src="{{ asset('images/photo-groep-tafel.webp') }}" alt="{{ __('pages.home_photo_groep_tafel_alt') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
@@ -53,7 +53,7 @@
             <img src="{{ asset('images/photo-party.webp') }}" alt="{{ __('pages.home_photo_party_alt') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block; object-position: center bottom;">
         </div>
-        <div style="flex: 1; overflow: hidden;">
+        <div class="community-strip-third" style="flex: 1; overflow: hidden;">
             <img src="{{ asset('images/photo-groep-actief.webp') }}" alt="{{ __('pages.home_photo_groep_actief_alt') }}"
                  style="width: 100%; height: 100%; object-fit: cover; display: block;">
         </div>
@@ -300,9 +300,14 @@
     .hero-copy { width: 100% !important; padding: 2.5rem 1.25rem !important; }
     .menu-cards { flex-direction: column !important; }
     .activity-cards-grid { flex-direction: column !important; }
-.practical-grid { flex-direction: column !important; gap: 1.5rem !important; }
-    .social-proof-strip { height: 200px; }
-    .social-proof-strip > div:nth-child(2),
+    .practical-grid { flex-direction: column !important; gap: 1.5rem !important; }
+    /* Photo strips: drop fixed wide-short heights, let each tile use its own aspect */
+    .community-strip,
+    .social-proof-strip { height: auto !important; }
+    .community-strip > div,
+    .social-proof-strip > div { aspect-ratio: 1 / 1; }
+    /* Cap the strip at 2 photos on mobile so each one is large enough to read */
+    .community-strip-third,
     .social-proof-strip > div:nth-child(3) { display: none; }
     .contact-photo { display: none; }
 }

@@ -11,7 +11,7 @@
 />
 
 {{-- PHOTO STRIP --}}
-<div style="display: flex; height: 320px; overflow: hidden;">
+<div class="wie-photo-strip" style="display: flex; height: 320px; overflow: hidden;">
     <div style="flex: 1; overflow: hidden;">
         <img src="{{ asset('images/photo-contact-onthaal.webp') }}"
              alt="{{ app()->getLocale() === 'fr' ? 'L\'équipe d\'accueil de De Harmonie' : 'Onthaalteam van De Harmonie' }}"
@@ -86,6 +86,13 @@
 .wie-label { width: 220px; flex-shrink: 0; }
 .wie-namen { flex: 1; max-width: 680px; display: grid; grid-template-columns: 1fr 1fr; column-gap: 2.5rem; }
 .bestuur-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; padding-bottom: 1rem; }
+@media (max-width: 767px) {
+    .wie-photo-strip {
+        flex-direction: column !important;
+        height: auto !important;
+    }
+    .wie-photo-strip > div { aspect-ratio: 3 / 2; }
+}
 @media (max-width: 640px) {
     .wie-rij { flex-direction: column; gap: 0.35rem; }
     .wie-label { width: auto; }

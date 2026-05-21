@@ -12,7 +12,7 @@
 />
 
 {{-- PHOTO STRIP --}}
-<div style="display: flex; height: 260px; overflow: hidden;">
+<div class="vrijwilligers-photo-strip" style="display: flex; height: 260px; overflow: hidden;">
     <div style="flex: 1; overflow: hidden;">
         <img src="{{ asset('images/photo-gemeenschap.webp') }}" alt="{{ __('pages.vrijwilligers_photo_gemeenschap_alt') }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
@@ -133,6 +133,8 @@
 <style>
 @media (max-width: 767px) {
     .vrijwilligers-photo-third { display: none !important; }
+    .vrijwilligers-photo-strip { height: auto !important; }
+    .vrijwilligers-photo-strip > div { aspect-ratio: 1 / 1; }
     .vrijwilligers-why-cols { flex-direction: column !important; gap: 2rem !important; }
     .vrijwilligers-what-grid { flex-direction: column !important; gap: 2rem !important; }
 }

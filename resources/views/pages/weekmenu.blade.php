@@ -69,7 +69,7 @@
 </div>
 
 {{-- PHOTO STRIP --}}
-<div style="display: flex; height: 380px; overflow: hidden;">
+<div class="weekmenu-photo-strip" style="display: flex; height: 380px; overflow: hidden;">
     <div style="flex: 2; overflow: hidden;">
         <img src="{{ asset('images/photo-chef-taart-2.webp') }}" alt="{{ __('pages.weekmenu_photo_chef_taart_alt') }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; display: block;">
     </div>
@@ -143,6 +143,14 @@
     .weekmenu-row--highlighted {
         margin-left: -1.25rem !important;
         padding-left: calc(1.25rem - 3px) !important;
+    }
+    .weekmenu-photo-strip {
+        flex-direction: column !important;
+        height: auto !important;
+    }
+    .weekmenu-photo-strip > div {
+        flex: 1 !important;
+        aspect-ratio: 3 / 2;
     }
 }
 </style>

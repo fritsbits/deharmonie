@@ -11,7 +11,7 @@
 />
 
 {{-- PHOTO STRIP --}}
-<div style="display: flex; height: 260px; overflow: hidden;">
+<div class="contact-photo-strip" style="display: flex; height: 260px; overflow: hidden;">
     <div style="flex: 1; overflow: hidden;">
         <img src="{{ asset('images/photo-contact-gebouw.webp') }}" alt="{{ __('common.building_exterior_alt') }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
@@ -142,6 +142,8 @@
 
 @media (max-width: 767px) {
     .contact-photo-third { display: none !important; }
+    .contact-photo-strip { height: auto !important; }
+    .contact-photo-strip > div { aspect-ratio: 1 / 1; }
     .contact-grid { flex-direction: column !important; }
     .contact-grid > div:last-child { min-height: 280px !important; }
 }

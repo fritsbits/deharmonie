@@ -226,7 +226,7 @@
 </section>
 
 {{-- PHOTO STRIP --}}
-<div style="display: flex; height: 280px; overflow: hidden;">
+<div class="over-ons-photo-strip" style="display: flex; height: 280px; overflow: hidden;">
     <div style="flex: 1; overflow: hidden;">
         <img src="{{ asset('images/photo-samen.webp') }}" alt="{{ __('pages.over_ons_photo_samen_alt') }}" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">
     </div>
@@ -387,6 +387,8 @@
 
 @media (max-width: 767px) {
     .over-ons-photo-strip-third { display: none !important; }
+    .over-ons-photo-strip { height: auto !important; }
+    .over-ons-photo-strip > div { aspect-ratio: 1 / 1; }
     .over-ons-quotes-grid { flex-direction: column !important; }
     .over-ons-team-lead { max-width: 100% !important; }
     .over-ons-team-link { width: 100%; text-align: center; display: block !important; }
