@@ -1,10 +1,10 @@
 <div>
 {{-- ORANGE HEADER --}}
-<div style="background: var(--color-brand-orange); padding: 2.25rem 3.25rem;">
+<div class="weekmenu-header" style="background: var(--color-brand-orange);">
     <div class="ui-label" style="color: rgba(255,255,255,0.8); margin-bottom: 0.3rem;">{{ __('weekmenu.menu_label') }}</div>
-    <div style="display: flex; align-items: center; justify-content: space-between; gap: 1rem;">
+    <div class="weekmenu-header-row" style="display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap;">
         <h2 style="font-family: var(--font-sans); font-size: 1.75rem; font-weight: 900; color: white; margin: 0; line-height: 1.1;">{{ $this->weekHeading }}</h2>
-        <div style="display: flex; gap: 0.6rem; flex-shrink: 0; align-items: center;">
+        <div class="weekmenu-header-actions" style="display: flex; gap: 0.6rem; flex-shrink: 0; align-items: center; flex-wrap: wrap;">
             @if ($this->hasPrev)
                 <button wire:click="prevWeek" aria-label="{{ __('weekmenu.prev_week') }}"
                         style="background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.55); font-family: var(--font-sans); font-size: 1rem; font-weight: 700; padding: 0.3rem 0.9rem; border-radius: 999px; cursor: pointer; white-space: nowrap;">
@@ -33,7 +33,7 @@
 </div>
 
 {{-- MENU BODY --}}
-<div style="padding: 3.25rem;">
+<div class="weekmenu-body">
 
     @php $locale = app()->getLocale(); @endphp
     <div style="display: flex; flex-direction: column; gap: 1.875rem;">
@@ -66,15 +66,13 @@
                 $dividerColor = ($isHighlighted && !$isPast) ? 'var(--color-brand-orange)' : '#e8e0d8';
                 $monthAbbr    = rtrim($monthAbbr, '.');
 
-                // Highlighted row extends to paper left edge
-                $rowHighlight = $isHighlighted
-                    ? 'margin-left: -3.25rem; padding-left: calc(3.25rem - 3px); border-left: 3px solid var(--color-brand-orange);'
-                    : '';
+                // Highlighted row extends to paper left edge — see CSS in pages/weekmenu.blade.php
+                $rowClass = $isHighlighted ? 'weekmenu-row weekmenu-row--highlighted' : 'weekmenu-row';
             @endphp
 
             @if ($day->special_event)
                 {{-- SPECIAL EVENT — extends to paper edge like highlighted --}}
-                <div style="display: flex; align-items: flex-start; gap: 0; margin-left: -3.25rem; padding-left: calc(3.25rem - 3px); border-left: 3px solid var(--color-brand-orange); {{ $isPast ? 'opacity: 0.45;' : '' }}">
+                <div class="weekmenu-row weekmenu-row--highlighted" style="display: flex; align-items: flex-start; gap: 0; {{ $isPast ? 'opacity: 0.45;' : '' }}">
                     {{-- Date column --}}
                     <div style="width: 52px; flex-shrink: 0; text-align: right; padding-right: 1rem; border-right: 2px solid var(--color-brand-orange); margin-right: 1rem;">
                         <span style="font-family: var(--font-sans); font-size: 1.875rem; font-weight: 900; line-height: 1.0; display: block; color: var(--color-brand-orange);">{{ $dateNum }}</span>
@@ -102,7 +100,7 @@
 
             @else
                 {{-- STANDARD DAY --}}
-                <div style="display: flex; align-items: flex-start; gap: 0; {{ $rowHighlight }}">
+                <div class="{{ $rowClass }}" style="display: flex; align-items: flex-start; gap: 0;">
                     {{-- Date column --}}
                     <div style="width: 52px; flex-shrink: 0; text-align: right; padding-right: 1rem; border-right: 2px solid {{ $dividerColor }}; margin-right: 1rem;">
                         <span style="font-family: var(--font-sans); font-size: 1.875rem; font-weight: 900; line-height: 1.0; display: block; color: {{ $dateNumColor }};">{{ $dateNum }}</span>

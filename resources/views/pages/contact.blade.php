@@ -90,22 +90,23 @@
                     title="{{ __('common.map') }}">
                 </iframe>
                 {{-- Address row — matches left column styling --}}
-                <div class="contact-field-row" style="border-bottom: none; padding: 1.25rem 1.25rem; background: white; border-top: 1px solid var(--color-brand-gray);">
+                <div class="contact-field-row contact-address-row" style="border-bottom: none; padding: 1.25rem 1.25rem; background: white; border-top: 1px solid var(--color-brand-gray);">
                     <div class="contact-icon-tile">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4679bc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     </div>
-                    <div style="flex: 1; min-width: 0;">
+                    <div class="contact-address-body" style="flex: 1; min-width: 0;">
                         <p class="contact-field-label">{{ __('common.address') }}</p>
                         <p style="line-height: 1.6; color: var(--color-brand-dark);">Antwerpsesteenweg 24<br>1000 Brussel</p>
+                        <a
+                            class="contact-osm-link"
+                            href="https://www.openstreetmap.org/?mlat=50.8578&mlon=4.3535#map=17/50.8578/4.3535"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: none; white-space: nowrap; min-height: 44px; padding: 0 0.25rem;">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                            {{ __('common.open_in_maps') }}
+                        </a>
                     </div>
-                    <a
-                        href="https://www.openstreetmap.org/?mlat=50.8578&mlon=4.3535#map=17/50.8578/4.3535"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style="display: inline-flex; align-items: center; gap: 0.4rem; font-family: var(--font-sans); font-size: 1rem; font-weight: 700; color: var(--color-brand-blue); text-decoration: none; white-space: nowrap; align-self: center; min-height: 44px; padding: 0 0.25rem;">
-                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-                        {{ __('common.open_in_maps') }}
-                    </a>
                 </div>
             </div>
 

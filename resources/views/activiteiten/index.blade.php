@@ -65,7 +65,7 @@
 <section style="background-color: var(--color-brand-orange-tint); padding: 4rem 1.5rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
         <x-eyebrow color="orange" mb="0.75rem">{{ __('pages.home_menu_label') }}</x-eyebrow>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div class="section-heading-row" style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
             <x-section-heading>{{ __('pages.home_menu_preview_heading') }}</x-section-heading>
             <a href="{{ route(app()->getLocale() . '.weekmenu') }}"
                class="press-scale"
@@ -129,7 +129,7 @@
 {{-- UPCOMING ACTIVITIES --}}
 <section style="background-color: white; padding: 5rem 1.5rem;">
     <div style="max-width: 72rem; margin: 0 auto;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+        <div class="section-heading-row" style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
             <div>
                 <x-eyebrow mb="0.75rem">{{ __('nav.activities') }}</x-eyebrow>
                 <x-section-heading>{{ __('pages.home_activities_heading') }}</x-section-heading>
