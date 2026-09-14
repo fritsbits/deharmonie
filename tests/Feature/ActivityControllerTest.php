@@ -202,7 +202,7 @@ class ActivityControllerTest extends TestCase
     {
         $response = $this->get(route('nl.home'));
 
-        $response->assertSee('Wil je meehelpen bij De Harmonie?');
-        $response->assertSee('Word vrijwilliger');
+        $response->assertSee('Het hart van De Harmonie');
+        $response->assertSee('Ontdek vrijwilligerswerk');
     }
 }
