@@ -39,16 +39,22 @@ class Activiteit extends Model
 
     protected static function booted(): void
     {
-        static::creating(function (Activiteit $activiteit): void {
-            if (empty($activiteit->slug)) {
-                $activiteit->slug = static::generateUniqueSlug($activiteit->titel_nl);
+        static::saving(function (Activiteit $activiteit): void {
+            if (blank($activiteit->slug)) {
+                $activiteit->slug = static::generateUniqueSlug($activiteit->titel_nl, $activiteit->titel_fr);
             }
         });
     }
 
-    public static function generateUniqueSlug(string $title): string
+    /**
+     * Build a unique, never-empty slug. Titles without sluggable characters
+     * (e.g. emoji only) fall back to the French title, then to "activiteit".
+     */
+    public static function generateUniqueSlug(?string $titelNl, ?string $titelFr = null): string
     {
-        $base = Str::slug($title);
+        $base = collect([$titelNl, $titelFr])
+            ->map(fn (?string $title): string => Str::slug((string) $title))
+            ->first(fn (string $slug): bool => $slug !== '', 'activiteit');
         $slug = $base;
         $i = 1;
 
